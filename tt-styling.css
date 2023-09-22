@@ -22,7 +22,7 @@
 :root {
     --black-8: hsla(0, 0%, 0%, 0.1);
     --black-9: hsla(0, 0%, 0%, 0.06);
-    --transition-base: 0.2s cubic-bezier(0.65, 0, 0.35, 1);
+    --transition-base: 0.3s cubic-bezier(0.65, 0, 0.35, 1);
 
 }
 
@@ -104,12 +104,30 @@ h1, h2, h3, h4, h5, h6 {
     width: 0.6rem;
     margin-left: 0.1rem;
     display: inline-block;
+    background-size: contain;
     background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.93934 7.93934C5.52513 7.35355 6.47487 7.35355 7.06066 7.93934L12 12.8787L16.9393 7.93934C17.5251 7.35356 18.4749 7.35356 19.0607 7.93934C19.6464 8.52513 19.6464 9.47488 19.0607 10.0607L13.0607 16.0607C12.7794 16.342 12.3978 16.5 12 16.5C11.6022 16.5 11.2206 16.342 10.9393 16.0607L4.93934 10.0607C4.35355 9.47487 4.35355 8.52513 4.93934 7.93934Z' fill='currentColor'/%3E%3C/svg%3E");
 }
 
 .tt-navbar-link.primary:before {
-    opacity: 1;
+    content: '';
+    height: 0.6rem;
+    width: 0.6rem;
+    top:50%;
+    right: 0.5rem;
+    position: absolute;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.4247 17.3033C17.4247 18.1318 18.0962 18.8033 18.9247 18.8033C19.7531 18.8033 20.4247 18.1318 20.4247 17.3033L20.4247 4.57541C20.4247 4.17759 20.2666 3.79605 19.9853 3.51475C19.704 3.23345 19.3225 3.07541 18.9247 3.07541L6.19674 3.07541C5.36831 3.07541 4.69674 3.74698 4.69674 4.57541C4.69674 5.40384 5.36831 6.07541 6.19674 6.07541L15.3034 6.07541L3.01478 18.364C2.42899 18.9498 2.42899 19.8995 3.01478 20.4853C3.60057 21.0711 4.55031 21.0711 5.1361 20.4853L17.4247 8.19676L17.4247 17.3033Z' fill='CurrentColor'/%3E%3C/svg%3E%0A");
 }
+.tt-navbar-link.primary:after {
+    content: '';
+    height: 0.6rem;
+    width: 0.6rem;
+    margin-left: 0.1rem;
+    display: inline-block;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg width='24' height='24' viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17.4247 17.3033C17.4247 18.1318 18.0962 18.8033 18.9247 18.8033C19.7531 18.8033 20.4247 18.1318 20.4247 17.3033L20.4247 4.57541C20.4247 4.17759 20.2666 3.79605 19.9853 3.51475C19.704 3.23345 19.3225 3.07541 18.9247 3.07541L6.19674 3.07541C5.36831 3.07541 4.69674 3.74698 4.69674 4.57541C4.69674 5.40384 5.36831 6.07541 6.19674 6.07541L15.3034 6.07541L3.01478 18.364C2.42899 18.9498 2.42899 19.8995 3.01478 20.4853C3.60057 21.0711 4.55031 21.0711 5.1361 20.4853L17.4247 8.19676L17.4247 17.3033Z' fill='CurrentColor'/%3E%3C/svg%3E%0A");
+}
+
 
 
 /* BUTTONS */
