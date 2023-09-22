@@ -90,12 +90,21 @@ h1, h2, h3, h4, h5, h6 {
     -webkit-transition: var(--transition-base);
     transition: var(--transition-base);
 }
-.tt-navbar-link:hover:before {
+.tt-navbar-link:hover:before, .w--open.tt-navbar-link::before {
     opacity: 1;
     transform: scale(100%);
     border-radius: 0.6rem;
 }
 
+.tt-subnav-container > .tt-navbar-link::after {
+    content: '';
+    height: .9rem;
+    width: .9rem;
+    margin-left: .4rem;
+    display: inline-block;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.707 2.293a1 1 0 0 0-1.414 1.414L12.586 8H2a1 1 0 0 0 0 2h10.586l-4.293 4.293a1 1 0 1 0 1.414 1.414l6-6a1 1 0 0 0 0-1.414l-6-6Z' fill='%23EFE9FB'/%3E%3C/svg%3E");
+
+}
 
 
 /* BUTTONS */
