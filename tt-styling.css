@@ -76,8 +76,8 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav */
 .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before {
-    -webkit-transition: var(--transition-base);
-    transition: var(--transition-base);
+    -webkit-transition: all var(--transition-base);
+    transition: all var(--transition-base);
 }
 
 .tt-navbar-link::before {
