@@ -118,7 +118,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-navbar-link.btn-primary::after {
     content: '';
     position: absolute;
-    left: -0.6rem;
+    left: -0.9rem;
     height: 0.6rem;
     width: 0.6rem;
     display: inline-block;
@@ -129,10 +129,10 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateX(0.9rem);
 }
 .tt-navbar-link.btn-primary:hover:after {
-    transform: translateX(1.1rem);
+    transform: translateX(1.4rem);
 }
 .tt-navbar-link.btn-primary:hover .btn-primary-arrow  {
-    transform: translateX(1.1rem);
+    transform: translateX(1.3rem);
 }
 
 .btn-primary-arrow svg {
