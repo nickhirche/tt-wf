@@ -127,6 +127,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 .tt-navbar-link.btn-primary:hover:after, .tt-navbar-link.btn-primary:hover .btn-text, .tt-navbar-link.btn-primary:hover .btn-primary-arrow  {
     transform: translateX(1.1rem);
+    -webkit-transition: var(--transition-base);
+    transition: var(--transition-base);
 }
 
 
