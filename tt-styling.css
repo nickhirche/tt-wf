@@ -140,6 +140,11 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
 }
 
+.btn-burger-dots:hover {
+    transform: rotate(90deg)
+}
+
+
 /* BUTTONS */
 
 .button-tertiary::before {
