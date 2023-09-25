@@ -92,7 +92,7 @@ h1, h2, h3, h4, h5, h6 {
     transform: scale(40%);
     opacity: 0;
 }
-.tt-navbar-link:hover:before, .w--open.tt-navbar-link::before, .tt-navbar-burger::before {
+.tt-navbar-link:hover:before, .w--open.tt-navbar-link::before, .w--open.tt-navbar-burger::before, .tt-navbar-burger:hover:before {
     opacity: 1;
     transform: scale(100%);
     border-radius: 0.6rem;
