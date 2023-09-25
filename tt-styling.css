@@ -140,7 +140,7 @@ h1, h2, h3, h4, h5, h6 {
     height: 100%;
 }
 
-.tt-navbar-burger:hover svg, .w--open.tt-navbar-burger svg {
+.tt-navbar-burger:hover .btn-burger-dots, .w--open.tt-navbar-burger .btn-burger-dots {
     transform: rotate(90deg);
 }
 
