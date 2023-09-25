@@ -135,7 +135,7 @@ h1, h2, h3, h4, h5, h6 {
     transform: translateX(1.3rem);
 }
 
-.btn-primary-arrow svg {
+.btn-primary-arrow svg, .btn-burger-dots svg {
     width: 100%;
     height: 100%;
 }
