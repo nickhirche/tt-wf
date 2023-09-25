@@ -144,19 +144,19 @@ h1, h2, h3, h4, h5, h6 {
     transform: rotate(45deg);
 }
 .w--open.tt-navbar-burger .btn-burger-dots svg .dot-bottom-left {
-    transform: translate(-.1rem, .1rem)
+    transform: translate(-.05rem, .05rem)
 }
 
 .w--open.tt-navbar-burger .btn-burger-dots svg .dot-bottom-right {
-    transform: translate(.1rem, .1rem)
+    transform: translate(.05rem, .05rem)
 }
 
 .w--open.tt-navbar-burger .btn-burger-dots svg .dot-top-left {
-    transform: translate(-.1rem, -.1rem)
+    transform: translate(-.05rem, -.05rem)
 }
 
 .w--open.tt-navbar-burger .btn-burger-dots svg .dot-top-right {
-    transform: translate(.1rem, -.1rem)
+    transform: translate(.05rem, -.05rem)
 }
 
 
