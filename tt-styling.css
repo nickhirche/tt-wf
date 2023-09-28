@@ -159,15 +159,16 @@ h1, h2, h3, h4, h5, h6 {
     transform: translate(.05rem, -.05rem)
 }
 
-
-border-radius: 1.25rem;
-background: rgba(255, 255, 255, 0.95);
-box-shadow: 
-0px 0.54346px 1.4945px 0px rgba(0, 0, 0, 0.02), 
-0px 1.50259px 4.13211px 0px rgba(0, 0, 0, 0.03), 
-0px 3.61765px 9.94853px 0px rgba(0, 0, 0, 0.04), 
-0px 12px 33px 0px rgba(0, 0, 0, 0.06);
-backdrop-filter: blur(7px);
+.tt-subnav-content:before {
+backdrop-filter: blur(20px);
+content: "";
+display: block;
+height: 100%;
+width: 100%;
+position: absolute;
+left: 0;
+top: 0;
+}
 
 
 /* BUTTONS */
