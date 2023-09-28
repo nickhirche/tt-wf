@@ -75,7 +75,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Nav */
-.tt-navbar-link, .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before, .tt-navbar-burger, .tt-navbar-burger *, .tt-navbar-burger::before {
+.tt-navbar-link, .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before, .tt-navbar-burger, .tt-navbar-burger *, .tt-navbar-burger::before, .tt-subnav-link, .tt-subnav-link *, .tt-subnav-link::before, .tt-subnav-container {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
 }
