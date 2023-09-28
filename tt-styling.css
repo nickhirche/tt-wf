@@ -163,6 +163,7 @@ h1, h2, h3, h4, h5, h6 {
     width: calc(50% - 1.25rem);
 }
 
+@media (max-width: 992px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { width: 100%; max-width: 16rem;} }
 
 /* BUTTONS */
 
