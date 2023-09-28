@@ -159,15 +159,8 @@ h1, h2, h3, h4, h5, h6 {
     transform: translate(.05rem, -.05rem)
 }
 
-.tt-subnav-blur:before {
-    backdrop-filter: blur(20px);
-    content: "";
-    display: block;
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+.tt-subnav-categories._2-1-col .tt-subnav-link  {
+    width: calc(50%-1rem);
 }
 
 
