@@ -96,6 +96,7 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
     transform: scale(100%);
     border-radius: 0.6rem;
+    z-index: -1;
 }
 
 .tt-subnav > .tt-navbar-link::after {
