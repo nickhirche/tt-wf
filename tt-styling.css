@@ -1057,7 +1057,6 @@ blockquote {
     bottom: 0;
     left: .5rem;
     right: .5rem;
-    z-index: -1;
     background: conic-gradient(from 142.36deg at 61.82% 70.79%, #FF8A3B -61.87deg, #4701D9 61.87deg, #4701D9 123.75deg, #FF8A3B 236.25deg, #FF8A3B 298.12deg, #4701D9 421.87deg);
 }
 
