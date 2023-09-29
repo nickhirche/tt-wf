@@ -91,12 +91,12 @@ h1, h2, h3, h4, h5, h6 {
     border-radius: 0.4rem;
     transform: scale(40%);
     opacity: 0;
+    z-index: -1;
 }
 .tt-navbar-link:hover:before, .w--open.tt-navbar-link::before, .w--open.tt-navbar-burger::before, .tt-navbar-burger:hover:before, .tt-subnav-link:hover:before {
     opacity: 1;
     transform: scale(100%);
     border-radius: 0.6rem;
-    z-index: -1;
 }
 
 .tt-subnav > .tt-navbar-link::after {
