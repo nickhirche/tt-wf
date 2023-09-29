@@ -173,9 +173,17 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
 }
 
-.tt-subnav-image img {
+.tt-subnav-icon img {
     width: 100%;
 }
+
+.tt-subnav-icon.customer-logo img {
+    filter: grayscale(1);
+}
+.tt-subnav-link:hover .tt-subnav-icon.customer-logo img {
+    filter: grayscale(0);
+}
+
 
 /* BUTTONS */
 
