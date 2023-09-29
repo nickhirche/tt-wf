@@ -188,6 +188,10 @@ h1, h2, h3, h4, h5, h6 {
     background: white;
 }
 
+.tt-navbar-link.w--open .tt-subnav-content {
+    z-index: 4;
+}
+
 
 
 /* BUTTONS */
