@@ -204,9 +204,9 @@ h1, h2, h3, h4, h5, h6 {
 @media screen and (max-width: 767px) {
     .tt-navbar-menu {
         transform: translate(-50%) !important;
-        overflow: -moz-scrollbars-horizontal;
-        overflow-y: hidden;
-        overflow-x: auto;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: auto;
+        overflow-x: hidden;
     }
     .tt-navbar-menu .tt-navbar-link {
         font-size: 1.1rem;
