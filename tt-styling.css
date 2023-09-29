@@ -166,7 +166,7 @@ h1, h2, h3, h4, h5, h6 {
 @media (max-width: 992px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { width: 100%; max-width: 18rem;} }
 
 .tt-subnav-categories._3-col .tt-subnav-categorygroup  {
-    width: calc(1/3 - 2.5rem);
+    width: calc(100% / 3);
 }
 
 .tt-subnav-categories._3-col .tt-subnav-link  {
