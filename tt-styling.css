@@ -165,13 +165,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 992px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { width: 100%; max-width: 18rem;} }
-@media (max-width: 767px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { max-width: 0;} }
+@media (max-width: 767px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { max-width: none;} }
 
 .tt-subnav-categories._3-col .tt-subnav-categorygroup  {
     width: calc(100% / 3);
 }
 
-@media (max-width: 767px) { .tt-subnav-categories._3-col .tt-subnav-categorygroup  { width: 100%; max-width: 0;} }
+@media (max-width: 767px) { .tt-subnav-categories._3-col .tt-subnav-categorygroup  { width: 100%; max-width: none;} }
 
 .tt-subnav-categories._3-col .tt-subnav-link  {
     width: 100%;
