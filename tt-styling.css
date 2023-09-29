@@ -273,7 +273,18 @@ h1, h2, h3, h4, h5, h6 {
     }
     .tt-navbar-menu .tt-navbar-link {
         font-size: 1.1rem;
-        padding: 1rem 0.5rem;
+        padding: 1rem 1rem 1rem 0.5rem;
+    }
+    .tt-navbar-menu .tt-navbar-link div {
+        width: 100%;
+    }
+    .tt-subnav > .tt-navbar-link::after {
+        height: 0.8rem;
+        width: 0.8rem;
+        transform: rotate(-90deg);
+    }
+    .tt-subnav > .tt-navbar-link.w--open::after {
+        transform: rotate(0);
     }
 }
 
