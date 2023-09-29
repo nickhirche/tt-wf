@@ -207,6 +207,12 @@ h1, h2, h3, h4, h5, h6 {
         overflow: -moz-scrollbars-vertical;
         overflow-y: auto;
         overflow-x: hidden;
+        opacity: 0;
+        -webkit-transition: all var(--transition-base);
+        transition: all var(--transition-base);
+    }
+    .w-nav-overlay > .tt-navbar-menu {
+        opacity: 1;
     }
     .tt-navbar-menu .tt-navbar-link {
         font-size: 1.1rem;
