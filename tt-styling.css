@@ -165,10 +165,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media (max-width: 992px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { width: 100%; max-width: 18rem;} }
+@media (max-width: 767px) { .tt-subnav-categories._2-1-col .tt-subnav-link  { max-width: 0;} }
 
 .tt-subnav-categories._3-col .tt-subnav-categorygroup  {
     width: calc(100% / 3);
 }
+
+@media (max-width: 767px) { .tt-subnav-categories._3-col .tt-subnav-categorygroup  { width: 100%; max-width: 0;} }
 
 .tt-subnav-categories._3-col .tt-subnav-link  {
     width: 100%;
@@ -191,6 +194,33 @@ h1, h2, h3, h4, h5, h6 {
 .tt-subnav-container.w--open .tt-subnav-content {
     z-index: 4;
 }
+
+@media screen and (max-width: 767px) {
+    .tt-navbar-menu {
+        transform: translate(-50%) !important;
+    }
+    .tt-navbar-menu .tt-navbar-link {
+        font-size: 1.1rem;
+        padding: .8rem 1rem .8rem 0.5rem;
+    }
+    .tt-navbar-menu .tt-navbar-link div {
+        width: 100%;
+    }
+    .tt-subnav > .tt-navbar-link::after {
+        height: 0.8rem;
+        width: 0.8rem;
+        transform: rotate(-90deg);
+    }
+    .tt-subnav > .tt-navbar-link.w--open::after {
+        transform: rotate(0);
+    }
+}
+
+
+
+
+
+
 
 
 
@@ -267,26 +297,7 @@ h1, h2, h3, h4, h5, h6 {
     }    
 }
 
-@media screen and (max-width: 767px) {
-    .tt-navbar-menu {
-        transform: translate(-50%) !important;
-    }
-    .tt-navbar-menu .tt-navbar-link {
-        font-size: 1.1rem;
-        padding: 1rem 1rem 1rem 0.5rem;
-    }
-    .tt-navbar-menu .tt-navbar-link div {
-        width: 100%;
-    }
-    .tt-subnav > .tt-navbar-link::after {
-        height: 0.8rem;
-        width: 0.8rem;
-        transform: rotate(-90deg);
-    }
-    .tt-subnav > .tt-navbar-link.w--open::after {
-        transform: rotate(0);
-    }
-}
+
 
 
 
@@ -414,6 +425,14 @@ blockquote {
     }
     .three-cols-teasergroup-list, .title-link-group {
         max-width: 36rem;
+    }
+}
+@media screen and (max-width: 659px) {
+    .three-cols-teasergroup-item {
+        width: 100%;
+    }
+    .three-cols-teasergroup-list, .title-link-group {
+        max-width: none;
     }
 }
 
