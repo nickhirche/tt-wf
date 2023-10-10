@@ -308,16 +308,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Splide Slider */
 
-.splide__slide, .splide__slide .usecase-category-wrap {
+.tt-category-slider .splide__slide, .tt-category-slider .splide__slide .usecase-category-wrap {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
 }
 
-.splide__slide .is-active  {
+.tt-category-slider .splide__slide.is-active  {
     opacity: 1;
 }
 
-.splide__slide .is-active .usecase-category-wrap {
+.tt-category-slider .splide__slide.is-active .usecase-category-wrap {
     border-radius: 1rem;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .6);
     background-color: rgba(255, 255, 255, .2);
