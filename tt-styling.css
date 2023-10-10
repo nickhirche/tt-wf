@@ -313,6 +313,11 @@ h1, h2, h3, h4, h5, h6 {
     transition: all var(--transition-base);
 }
 
+.tt-category-slider .splide__slide  {
+    opacity: .6;
+    cursor: pointer;
+}
+
 .tt-category-slider .splide__slide.is-active  {
     opacity: 1;
 }
