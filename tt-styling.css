@@ -313,6 +313,10 @@ h1, h2, h3, h4, h5, h6 {
     transition: all var(--transition-base);
 }
 
+.splide__slide .is-active  {
+    opacity: 1;
+}
+
 .splide__slide .is-active .usecase-category-wrap {
     border-radius: 1rem;
     box-shadow: 0 0 0 3px rgba(255, 255, 255, .6);
