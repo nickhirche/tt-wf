@@ -318,7 +318,7 @@ h1, h2, h3, h4, h5, h6 {
     cursor: pointer;
 }
 
-.tt-category-slider .splide__slide.is-active  {
+.tt-category-slider .splide__slide.is-active, .tt-category-slider .splide__slide:hover  {
     opacity: 1;
 }
 
