@@ -1,4 +1,4 @@
-var swiper = new Swiper('.swiper-slider .swiper-plays-slider', {
+var swiper = new Swiper('.swiper-plays-slider', {
     // Default parameters
     slidesPerView: 1,
     spaceBetween: 0,
@@ -17,12 +17,12 @@ var swiper = new Swiper('.swiper-slider .swiper-plays-slider', {
     },
     // Navigation
     navigation: {
-        nextEl: ".swiper-slider .swiper-button-next.plays",
-        prevEl: ".swiper-slider .swiper-button-prev.plays",
+        nextEl: ".swiper-button-next.plays",
+        prevEl: ".swiper-button-prev.plays",
     },
 });
 
-var swiper = new Swiper('.swiper-slider .swiper-advanced-plays-slider', {
+var swiper = new Swiper('.swiper-advanced-plays-slider', {
     // Default parameters
     slidesPerView: 1,
     spaceBetween: 0,
@@ -121,3 +121,5 @@ var swiper = new Swiper('.swiper-piano-plays-slider', {
     allowTouchMove: false,
     disableOnInteraction: true,
 });
+
+swiper.controller.control = this.swiper2;
