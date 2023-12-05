@@ -346,6 +346,29 @@ h1, h2, h3, h4, h5, h6 {
 
 .tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr { display: none!important;}
 
+
+/* Marquee Slider */
+
+@keyframes scroll {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+        /* match 1 rem to gap above */
+    }
+}
+
+.scroll {
+    animation: scroll 15s linear infinite;
+}
+
+.scroll-reverse {
+    animation: scroll 15s linear infinite reverse;
+}
+
+
 /* RICHTEXTEDITOR */
 
 .article-rte a {
