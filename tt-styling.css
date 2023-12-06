@@ -416,8 +416,24 @@ ul.checklist li::before {
 }
 
 
-/* QUOTES 
+/* QUOTES  */
+.blockquote span {
+    background-color: #fff;
+    border-radius: 0.4rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0.3rem 0.4rem 0.1rem;
+    border-radius: 0.4rem;
+}
 
+.blockquote span::before {
+    content: "»";
+}
+.blockquote span::after {
+    content: "«";
+}
+
+    /*
 .quote::before, blockquote::before {
     content: "»";
     background: linear-gradient(146.12deg, #A753F1 11.67%, #7100CA 87.59%);
