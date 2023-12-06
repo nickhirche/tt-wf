@@ -349,14 +349,14 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Marquee Slider */
 
+
 @keyframes scroll {
     from {
         transform: translateX(0);
     }
 
     to {
-        transform: translateX(calc(-100% - 2rem));
-        /* match 2 rem to gap above */
+        transform: translateX(-100%);
     }
 }
 
