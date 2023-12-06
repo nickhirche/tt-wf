@@ -416,7 +416,7 @@ ul.checklist li::before {
 }
 
 
-/* QUOTES */
+/* QUOTES 
 
 .quote::before, blockquote::before {
     content: "»";
@@ -453,7 +453,7 @@ blockquote {
     width: 2px;
     top:0;
     left:0;
-}
+}*/
 
 .sticky-filter {
   	overflow-y: scroll; /* Add the ability to scroll */
