@@ -349,7 +349,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Splide Slider Product Slider */
 
-.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr { display: none!important;}
+.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr { display: none!important;}
 
 
 /* Marquee Slider */
