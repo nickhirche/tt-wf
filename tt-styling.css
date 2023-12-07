@@ -382,13 +382,23 @@ h1, h2, h3, h4, h5, h6 {
 .tt-product-card::before {
     content: "";
     position: absolute;
-    height: 100%;
-    width: 100%;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-radius: 2rem;
     background: white;
+    -webkit-transition: all var(--transition-base);
+    transition: all var(--transition-base);
 }
 
-.tt-product-card:hover {
 
+.tt-product-card:hover::before {
+    top: -1rem;
+    bottom: -1rem;
+    left: -1rem;
+    right: -1rem;
+    border-radius: 2.5rem;
 }
 
 /* Accordion */
