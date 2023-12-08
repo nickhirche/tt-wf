@@ -388,7 +388,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: 0;
     left: 0;
     right: 0;
-    border-radius: 2rem;
+    border-radius: 1.5rem;
     background: white;
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
@@ -405,14 +405,11 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media screen and (max-width: 767px) {
-    .tt-product-card::before { 
-        border-radius: 1.5rem;
-    }
     .tt-product-card:hover::before {
-        top: -0.25rem;
-        bottom: -0.25rem;
-        left: -0.25rem;
-        right: -0.25rem; 
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0; 
         border-radius: 2.5rem;
     }
 }
