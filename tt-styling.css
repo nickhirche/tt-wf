@@ -245,6 +245,11 @@ h1, h2, h3, h4, h5, h6 {
     transition: all var(--transition-base);
 }
 
+.tt-button:active {
+    -webkit-transition: all 0.05s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: all 0.05s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
 .button-tertiary::before {
     content: '';
     height: .9rem;
