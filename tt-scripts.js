@@ -74,3 +74,10 @@ window.addEventListener('resize', () => {
     });
   }
 });
+
+/* ACCORDION */
+
+const accordions = Array.from(document.querySelectorAll('.tt-faq-container'));
+new Accordion(accordions, {
+  showMultiple: true,
+});
