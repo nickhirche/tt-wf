@@ -384,7 +384,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Product Card */
-.tt-product-card, .tt-product-card:hover { box-shadow: none; background-color: none; }
+.tt-product-card, .tt-product-card:hover { box-shadow: none; background-color: unset; }
 
 .tt-product-card::before {
     content: "";
