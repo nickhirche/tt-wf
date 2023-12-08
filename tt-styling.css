@@ -240,7 +240,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* BUTTONS */
 
-.tt-button:hover {
+.tt-button {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
 }
