@@ -422,11 +422,11 @@ h1, h2, h3, h4, h5, h6 {
 .ac-trigger:after, .ac-trigger:before {
     content: '';
     position: absolute;
-    left: 1rem;
-    top: 0.9rem;
+    left: 0.8rem;
+    top: 1rem;
     width: 2px;
-    height: 0.8rem;
-    background-color: black;
+    height: 0.6rem;
+    background-color: var(--black-a-0);
     transition: all 0.2s;
   }
 
@@ -434,8 +434,8 @@ h1, h2, h3, h4, h5, h6 {
     transform: rotate(90deg);
 }
 
-.tt-faq-item.is-active .ac-trigger:after {
-    transform: rotate(0deg);
+.tt-faq-item.is-active .ac-trigger:before {
+    transform: rotate(90deg);
 }
 
 /* RICHTEXTEDITOR */
