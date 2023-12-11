@@ -91,10 +91,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Berechne den neuen top-Wert
         const topValue = `calc(50vh - ${elementHeight / 2}px)`;
 
+        // Protokolliere den berechneten top-Wert
+        console.log('Calculated top value:', topValue);
+
         // Weise das Element mit dem neuen top-Wert zu
         el.style.top = topValue;
-        console.log(el.style.top);
-      });
+
+        // Protokolliere den gesetzten top-Wert
+        console.log('Set top value:', el.style.top);
     }
   }
 
