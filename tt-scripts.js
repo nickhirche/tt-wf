@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateStickyElementPosition() {
     // Suche nach allen Elementen mit der Klasse .tt-col-content.sticky
     const stickyElements = document.querySelectorAll('.tt-col-content.sticky');
+    console.log(stickyElements);
 
     // Überprüfe, ob sich die Fensterbreite geändert hat
     if (window.innerWidth !== windowWidth) {
