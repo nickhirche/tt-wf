@@ -424,9 +424,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Product Card */
+.tt-blog-card .blog-card-media {
+    -webkit-transition: all var(--transition-base);
+    transition: all var(--transition-base);
+
+}
 .tt-blog-card:hover .blog-card-media {
-    transition: all 0.2s;
-    transform: scale(calc(100%+1rem));
+    transform: scale(110%);
 }
 
 /* Accordion */
