@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Weise das Element mit dem neuen top-Wert zu
         el.style.top = topValue;
+        console.log(el.style.top);
       });
     }
   }
