@@ -505,6 +505,8 @@ blockquote span::after, blockquote em::after {
     content: "«";
 }
 
+
+
     /*
 .quote::before, blockquote::before {
     content: "»";
@@ -565,6 +567,16 @@ blockquote {
 }
 .tt-richtext:last-child {
     margin-bottom: 0;
+}
+
+
+/* SUBSCRIPT */
+
+.tt-richtext sub {
+    border-radius: 0.4rem;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    padding: 0.25rem 0.4rem 0.05rem;
 }
 
 /* FIRST CHILD Settings */
