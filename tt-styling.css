@@ -571,10 +571,10 @@ blockquote {
 
 /* RICHTEXT */
 
-.tt-richtext:first-child {
+.tt-richtext:first-child, .tt-introtext-wrap:first-child {
     margin-top: 0;
 }
-.tt-richtext:last-child {
+.tt-richtext:last-child, .tt-introtext-wrap:last-child {
     margin-bottom: 0;
 }
 
