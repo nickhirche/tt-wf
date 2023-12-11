@@ -1,43 +1,43 @@
-// Stelle sicher, dass windowWidth nicht bereits deklariert wurde
-var windowWidth = window.innerWidth;
+document.addEventListener('DOMContentLoaded', function() {
+  // Stelle sicher, dass windowWidth nicht bereits deklariert wurde
+  var windowWidth = window.innerWidth;
 
-let originalElements = {};
-let containers = {};
+  let originalElements = {};
+  let containers = {};
 
-function setAnimationDurationsAndClone(originalElement, container) {
-  // Berechne und setze die Animation-Dauer für das Original-Element
-  const pps = originalElement.getAttribute('data-pps');
-  if (pps && !isNaN(pps) && pps > 0) {
-    const duration = originalElement.offsetWidth / pps;
-    originalElement.style.animationDuration = `${duration}s`;
-  } else {
-    console.error('Invalid or missing data-pps attribute value for element:', originalElement);
-  }
+  function setAnimationDurationsAndClone(originalElement, container) {
+    // Berechne und setze die Animation-Dauer für das Original-Element
+    const pps = originalElement.getAttribute('data-pps');
+    if (pps && !isNaN(pps) && pps > 0) {
+      const duration = originalElement.offsetWidth / pps;
+      originalElement.style.animationDuration = `${duration}s`;
+    } else {
+      console.error('Invalid or missing data-pps attribute value for element:', originalElement);
+    }
 
-  let totalWidth = originalElement.offsetWidth;
+    let totalWidth = originalElement.offsetWidth;
 
-  // Füge Klone hinzu, bis die Gesamtbreite das 1,2-fache der Fensterbreite erreicht oder überschreitet
-  while (totalWidth <= windowWidth * 1.2) {
-    const clone = originalElement.cloneNode(true);
-    container.appendChild(clone);
-    totalWidth += clone.offsetWidth;
-  }
+    // Füge Klone hinzu, bis die Gesamtbreite das 1,2-fache der Fensterbreite erreicht oder überschreitet
+    while (totalWidth <= windowWidth * 1.2) {
+      const clone = originalElement.cloneNode(true);
+      container.appendChild(clone);
+      totalWidth += clone.offsetWidth;
+    }
 
-  // Füge einen oder zwei finale Klone hinzu, sobald die Gesamtbreite das 1,2-fache der Fensterbreite erreicht oder überschreitet
-  if (totalWidth > windowWidth * 1.2) {
-    const finalClone1 = originalElement.cloneNode(true);
-    container.appendChild(finalClone1);
+    // Füge einen oder zwei finale Klone hinzu, sobald die Gesamtbreite das 1,2-fache der Fensterbreite erreicht oder überschreitet
+    if (totalWidth > windowWidth * 1.2) {
+      const finalClone1 = originalElement.cloneNode(true);
+      container.appendChild(finalClone1);
 
-    if (originalElement.classList.contains('scroll-reverse')) {
-      const finalClone2 = originalElement.cloneNode(true);
-      container.appendChild(finalClone2);
+      if (originalElement.classList.contains('scroll-reverse')) {
+        const finalClone2 = originalElement.cloneNode(true);
+        container.appendChild(finalClone2);
+      }
     }
   }
-}
 
-const classes = ['.tt-marquee', '.tt-logowall-wrapper'];
+  const classes = ['.tt-marquee', '.tt-logowall-wrapper'];
 
-document.addEventListener('DOMContentLoaded', () => {
   classes.forEach(className => {
     let elements = document.querySelectorAll(className);
     elements.forEach((element, index) => {
@@ -51,59 +51,57 @@ document.addEventListener('DOMContentLoaded', () => {
       setAnimationDurationsAndClone(element, containers[key]);
     });
   });
-});
 
-window.addEventListener('resize', () => {
-  // Überprüfe, ob sich die Fensterbreite tatsächlich geändert hat
-  if (window.innerWidth !== windowWidth) {
-    windowWidth = window.innerWidth;
+  window.addEventListener('resize', () => {
+    // Überprüfe, ob sich die Fensterbreite tatsächlich geändert hat
+    if (window.innerWidth !== windowWidth) {
+      windowWidth = window.innerWidth;
 
-    Object.keys(originalElements).forEach(key => {
-      const container = containers[key];
-      const originalElement = originalElements[key];
+      Object.keys(originalElements).forEach(key => {
+        const container = containers[key];
+        const originalElement = originalElements[key];
 
-      // Entferne alle Klone
-      while (container.firstChild) {
-        container.removeChild(container.firstChild);
-      }
+        // Entferne alle Klone
+        while (container.firstChild) {
+          container.removeChild(container.firstChild);
+        }
 
-      // Füge das ursprüngliche Element wieder ein und füge dann Klone hinzu
-      const newElement = originalElement.cloneNode(true);
-      container.appendChild(newElement);
-      setAnimationDurationsAndClone(newElement, container);
-    });
+        // Füge das ursprüngliche Element wieder ein und füge dann Klone hinzu
+        const newElement = originalElement.cloneNode(true);
+        container.appendChild(newElement);
+        setAnimationDurationsAndClone(newElement, container);
+      });
+    }
+  });
+
+  function updateStickyElementPosition() {
+    // Suche nach allen Elementen mit der Klasse .tt-col-content.sticky
+    const stickyElements = document.querySelectorAll('.tt-col-content.sticky');
+
+    // Überprüfe, ob sich die Fensterbreite geändert hat
+    if (window.innerWidth !== windowWidth) {
+      // Aktualisiere die gespeicherte Fensterbreite
+      windowWidth = window.innerWidth;
+
+      stickyElements.forEach(el => {
+        // Ermittle die Höhe des Elements
+        const elementHeight = el.offsetHeight;
+
+        // Berechne den neuen top-Wert
+        const topValue = `calc(50vh - ${elementHeight / 2}px)`;
+
+        // Weise das Element mit dem neuen top-Wert zu
+        el.style.top = topValue;
+      });
+    }
   }
+
+  // Führe die Funktion beim ersten Laden aus
+  updateStickyElementPosition();
+
+  // Füge einen Event Listener hinzu, der bei einem Fenster-Resize die Funktion ausführt
+  window.addEventListener('resize', updateStickyElementPosition);
 });
-
-/* STICKY HIGH */
-
-function updateStickyElementPosition() {
-  // Suche nach allen Elementen mit der Klasse .tt-col-content.sticky
-  const stickyElements = document.querySelectorAll('.tt-col-content.sticky');
-
-  // Überprüfe, ob sich die Fensterbreite geändert hat
-  if (window.innerWidth !== windowWidth) {
-    // Aktualisiere die gespeicherte Fensterbreite
-    windowWidth = window.innerWidth;
-
-    stickyElements.forEach(el => {
-      // Ermittle die Höhe des Elements
-      const elementHeight = el.offsetHeight;
-
-      // Berechne den neuen top-Wert
-      const topValue = `calc(50vh - ${elementHeight / 2}px)`;
-
-      // Weise das Element mit dem neuen top-Wert zu
-      el.style.top = topValue;
-    });
-  }
-}
-
-// Führe die Funktion beim ersten Laden aus
-updateStickyElementPosition();
-
-// Füge einen Event Listener hinzu, der bei einem Fenster-Resize die Funktion ausführt
-window.addEventListener('resize', updateStickyElementPosition);
 
 /* ACCORDION */
 
