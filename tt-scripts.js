@@ -138,6 +138,16 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
+          '.tt-blog-card-slider': {
+            // Optionen für .tt-marqueee-slider
+            autoWidth: true,
+            drag   : true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            flickPower: '150',
+            wheelSleep: '0',
+          
       // Weitere Konfigurationen können hier hinzugefügt werden
     };
   
