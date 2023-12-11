@@ -359,7 +359,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Splide Slider Product Slider */
 
-.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr { display: none!important;}
+.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr, .splide__sr { display: none!important;}
 
 
 /* Marquee Slider */
@@ -1145,73 +1145,6 @@ blockquote {
     content: "·";
     margin-left: 0.3rem;
 }
-
-/* COMPANY LOGOS */
-
-.company-group .company-logo {
-    opacity: 100%;
-}
-
-.company-group .label::before {
-    content: '';
-    height: 1px;
-    width: 100%;
-    margin-bottom: .5rem;
-    display: inline-block;
-    background-color: rgba(192, 168, 240, .1);
-}
-
-
-
-.swiper-partner-slider .swiper-wrapper, .swiper-piano-plays-slider .swiper-wrapper {
-    -webkit-transition-timing-function:linear!important;    
-    transition-timing-function:linear!important; 
-}
-
-
-
-/* TEASER CARDS */
-
-.three-cols-teasergroup.challenges-teaser .teasercard-wrapper {
-    padding-top: 1.5rem;
-    grid-column-gap: 1.5rem;
-    grid-row-gap: 1.5rem;
-}
-
-.teasercard-wrapper {
-    -webkit-backdrop-filter: blur(1rem);
-    backdrop-filter: blur(1rem);
-}
-
-a.teasercard-wrapper:hover {
-    background-color: rgba(239,233,251,.1);
-}
-
-a.teasercard-wrapper:hover .icon-button {
-    color: #EFE9FB;
-}
-
-.three-cols-teasergroup-list.left-shifted .three-cols-teasergroup-item:nth-child(3n+2) {
-    transform: translate3d(0px, 4rem, 0px); 
-}
-
-.three-cols-teasergroup-list.left-shifted .three-cols-teasergroup-item:nth-child(3n+3) {
-    transform: translate3d(0px, 8rem, 0px); 
-}
-
-
-@media screen and (max-width: 1099px) {
-    .three-cols-teasergroup-list.left-shifted .three-cols-teasergroup-item:nth-child(3n+2) { transform: none; }
-    .three-cols-teasergroup-list.left-shifted .three-cols-teasergroup-item:nth-child(3n+3) { transform: none; }
-    .three-cols-teasergroup-list.left-shifted .three-cols-teasergroup-item:nth-child(2n+2) { transform: translate3d(0px, 4rem, 0px); }
-    .three-cols-teasergroup-list.left-shifted { padding-bottom: 4rem }
-}
-
-@media screen and (max-width: 659px) {
-    .three-cols-teasergroup-list.left-shifted .three-cols-teasergroup-item:nth-child(2n+2) { transform: none; }
-    .three-cols-teasergroup-list.left-shifted { padding-bottom: unset }
-}
-
 
 /* Disturber */
 
