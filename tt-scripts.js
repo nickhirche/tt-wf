@@ -1,3 +1,6 @@
+// Stelle sicher, dass windowWidth nicht bereits deklariert wurde
+var windowWidth = windowWidth || window.innerWidth;
+
 let originalElements = {};
 let containers = {};
 let windowWidth = window.innerWidth;
