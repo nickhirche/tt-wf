@@ -571,6 +571,10 @@ blockquote {
 
 /* RICHTEXT */
 
+.tt-richtext.w-embed::before {
+    content: none;
+} 
+
 .tt-richtext:first-child, .tt-introtext-wrap:first-child {
     margin-top: 0;
 }
