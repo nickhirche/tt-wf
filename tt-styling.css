@@ -494,6 +494,7 @@ blockquote span, blockquote em {
     box-decoration-break: clone;
     padding: 0.25rem 0.4rem 0.05rem;
     border-radius: 0.4rem;
+    font-style: normal;
 }
 
 blockquote span::before, blockquote em::before {
