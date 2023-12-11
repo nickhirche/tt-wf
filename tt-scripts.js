@@ -81,3 +81,101 @@ const accordions = Array.from(document.querySelectorAll('.tt-faq-container'));
 new Accordion(accordions, {
   showMultiple: true,
 });
+
+
+/* SPLIDE SLIDER */
+
+// Warten Sie, bis das gesamte Dokument geladen ist, bevor Sie Skripte ausführen
+document.addEventListener('DOMContentLoaded', function() {
+  
+    // Objekt, das die Konfigurationen für die verschiedenen Slider enthält
+    var sliderOptions = {
+        '.tt-usecase-slider': {
+            // Optionen für .tt-usecase-slider
+              type     : 'fade',
+              pagination: false,
+              arrows    : false,
+              rewind: true,
+              drag: true,
+              updateOnMove: true,
+          },
+          '.tt-category-slider': {
+            // Optionen für .tt-category-slider
+              type     : 'loop',
+              focus    : 'center',
+              updateOnMove: true,
+              autoWidth: true,
+              isNavigation: true,
+              drag   : true,
+              cloneStatus: false,
+              autoplay: true,
+              rewind: false,
+              pagination: false,
+              arrows: false,
+              flickPower: '150',
+              wheelSleep: '0',
+          },
+          '.tt-product-slider': {
+            // Optionen für .tt-marqueee-slider
+            autoWidth: true,
+            drag   : true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            flickPower: '150',
+            wheelSleep: '0',
+          },
+          '.tt-usecase-card-slider': {
+            // Optionen für .tt-marqueee-slider
+            type     : 'loop',
+            focus    : 'center',
+            autoWidth: true,
+            drag   : true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            autoplay: true,
+            flickPower: '150',
+            wheelSleep: '0',
+          },
+      // Weitere Konfigurationen können hier hinzugefügt werden
+    };
+  
+    // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
+    var syncPairs = [
+      { parent: '.tt-usecases-container', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
+      // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
+    ];
+  
+    // Objekt zur Speicherung der erstellten Splide-Instanzen
+    var sliders = {};
+  
+    // Über jede Slider-Klasse iterieren, um die Instanzen zu erstellen
+    Object.keys(sliderOptions).forEach(function(sliderClass) {
+      // Alle Elemente auswählen, die zur aktuellen Klasse gehören
+      document.querySelectorAll(sliderClass).forEach(function(sliderElement) {
+        // Erstellen einer neuen Splide-Instanz mit den Optionen
+        var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
+        // Speichern der Instanzen in einem Array für jede Klasse
+        sliders[sliderClass] = sliders[sliderClass] || [];
+        sliders[sliderClass].push(splideInstance);
+        // Aufrufen der mount-Methode, um den Slider zu initialisieren
+        splideInstance.mount();
+      });
+    });
+  
+    // Über das Array von Sync-Paaren iterieren
+    syncPairs.forEach(function(pair) {
+      // Überprüfen, ob das übergeordnete Element existiert
+      var parentElement = document.querySelector(pair.parent);
+      if (parentElement && sliders[pair.primary] && sliders[pair.secondary]) {
+        // Jede primary Slider-Instanz mit jeder secondary Slider-Instanz synchronisieren
+        sliders[pair.primary].forEach(function(primarySlider) {
+          sliders[pair.secondary].forEach(function(secondarySlider) {
+            // Aufrufen der sync-Methode, um die Slider zu synchronisieren
+            primarySlider.sync(secondarySlider);
+          });
+        });
+      }
+    });
+  });
