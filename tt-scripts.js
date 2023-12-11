@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
   function updateStickyElementPosition() {
     // Suche nach allen Elementen mit der Klasse .tt-col-content.sticky
     const stickyElements = document.querySelectorAll('.tt-col-content.sticky');
+    console.log(stickyElements);
 
     // Überprüfe, ob sich die Fensterbreite geändert hat
     if (window.innerWidth !== windowWidth) {
@@ -87,19 +88,20 @@ document.addEventListener('DOMContentLoaded', function() {
         // Ermittle die Höhe des Elements
         const elementHeight = el.offsetHeight;
 
-        // Berechne den neuen top-Wert
-        const topValue = `calc(50vh - ${elementHeight / 2}px)`;
+       // Berechne den neuen top-Wert
+       const topValue = `calc(50vh - ${elementHeight / 2}px)`;
 
-        // Protokolliere den berechneten top-Wert
-        console.log('Calculated top value:', topValue);
+       // Protokolliere den berechneten top-Wert
+       console.log('Calculated top value:', topValue);
 
-        // Weise das Element mit dem neuen top-Wert zu
-        el.style.top = topValue;
+       // Weise das Element mit dem neuen top-Wert zu
+       el.style.top = topValue;
 
-        // Protokolliere den gesetzten top-Wert
-        console.log('Set top value:', el.style.top);
-      });
+       // Protokolliere den gesetzten top-Wert
+       console.log('Set top value:', el.style.top);
+     });
     }
+  }
 
   // Führe die Funktion beim ersten Laden aus
   updateStickyElementPosition();
