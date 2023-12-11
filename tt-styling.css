@@ -410,7 +410,7 @@ h1, h2, h3, h4, h5, h6 {
     bottom: -0.5rem;
     left: -0.5rem;
     right: -0.5rem;
-    border-radius: 3rem;
+    border-radius: 2.5rem;
     box-shadow: 0 20px 34px rgba(0, 0, 0, .06), 0 4px 10px rgba(0, 0, 0, .04), 0 1px 4px rgba(0, 0, 0, .03), 0 1px 8px rgba(0, 0, 0, .02);
 }
 
@@ -420,7 +420,6 @@ h1, h2, h3, h4, h5, h6 {
         bottom: 0;
         left: 0;
         right: 0; 
-        border-radius: 2.5rem;
     }
 }
 
