@@ -423,6 +423,10 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Product Card */
+.tt-blog-card:hover .blog-card-media {
+    transform: scale(calc(100%+1rem));
+}
 
 /* Accordion */
 .ac-trigger:after, .ac-trigger:before {
@@ -576,7 +580,7 @@ blockquote {
     border-radius: 0.4rem;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
-    padding: 0.1rem 0.4rem 0.1rem;
+    padding: 0.1rem 0.2rem 0.1rem;
 }
 
 /* FIRST CHILD Settings */
