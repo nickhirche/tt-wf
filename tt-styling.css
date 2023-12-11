@@ -557,6 +557,15 @@ blockquote {
   scrollbar-width: none;  /* Firefox */
 }  
 
+/* RICHTEXT */
+
+.tt-richtext:first-child {
+    margin-top: 0;
+}
+.tt-richtext:last-child {
+    margin-bottom: 0;
+}
+
 /* FIRST CHILD Settings */
 
 .w-richtext > *:first-child, .article-rte > *:first-child, article > *:first-child, ol > *:first-child, ul > *:first-child, .collection-content > *:first-child { margin-top:0; }
