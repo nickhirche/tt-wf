@@ -1,9 +1,8 @@
 // Stelle sicher, dass windowWidth nicht bereits deklariert wurde
-var windowWidth = windowWidth || window.innerWidth;
+var windowWidth = window.innerWidth;
 
 let originalElements = {};
 let containers = {};
-let windowWidth = window.innerWidth;
 
 function setAnimationDurationsAndClone(originalElement, container) {
   // Berechne und setze die Animation-Dauer für das Original-Element
@@ -38,7 +37,6 @@ function setAnimationDurationsAndClone(originalElement, container) {
 
 const classes = ['.tt-marquee', '.tt-logowall-wrapper'];
 
-// Event Listener, der die Funktion aufruft, sobald das Dokument geladen ist
 document.addEventListener('DOMContentLoaded', () => {
   classes.forEach(className => {
     let elements = document.querySelectorAll(className);
@@ -55,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Event Listener, der die Funktion aufruft, wenn das Fenster neu skaliert wird
 window.addEventListener('resize', () => {
   // Überprüfe, ob sich die Fensterbreite tatsächlich geändert hat
   if (window.innerWidth !== windowWidth) {
@@ -77,6 +74,36 @@ window.addEventListener('resize', () => {
     });
   }
 });
+
+/* STICKY HIGH */
+
+function updateStickyElementPosition() {
+  // Suche nach allen Elementen mit der Klasse .tt-col-content.sticky
+  const stickyElements = document.querySelectorAll('.tt-col-content.sticky');
+
+  // Überprüfe, ob sich die Fensterbreite geändert hat
+  if (window.innerWidth !== windowWidth) {
+    // Aktualisiere die gespeicherte Fensterbreite
+    windowWidth = window.innerWidth;
+
+    stickyElements.forEach(el => {
+      // Ermittle die Höhe des Elements
+      const elementHeight = el.offsetHeight;
+
+      // Berechne den neuen top-Wert
+      const topValue = `calc(50vh - ${elementHeight / 2}px)`;
+
+      // Weise das Element mit dem neuen top-Wert zu
+      el.style.top = topValue;
+    });
+  }
+}
+
+// Führe die Funktion beim ersten Laden aus
+updateStickyElementPosition();
+
+// Füge einen Event Listener hinzu, der bei einem Fenster-Resize die Funktion ausführt
+window.addEventListener('resize', updateStickyElementPosition);
 
 /* ACCORDION */
 
