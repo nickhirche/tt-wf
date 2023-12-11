@@ -489,6 +489,7 @@ ul.checklist li::before {
 /* QUOTES  */
 blockquote span, blockquote em {
     background-color: #fff;
+    color: currentcolor;
     border-radius: 0.4rem;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
