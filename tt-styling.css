@@ -425,6 +425,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Product Card */
 .tt-blog-card:hover .blog-card-media {
+    transition: all 0.2s;
     transform: scale(calc(100%+1rem));
 }
 
