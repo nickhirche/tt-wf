@@ -220,8 +220,8 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log('Syncing pair: ', pair); 
       if (parentElement && sliders[pair.primary] && sliders[pair.secondary]) {
         // Jede primary Slider-Instanz mit jeder secondary Slider-Instanz synchronisieren
-        sliders[pair.primary].forEach(function(primarySlider) {
-          sliders[pair.secondary].forEach(function(secondarySlider) {
+        sliders[pair.primary].forEach(function(primarySlider, i) {
+          sliders[pair.secondary].forEach(function(secondarySlider, j) {
             console.log('Syncing sliders: ', pair.primary, i, pair.secondary, j); // Log each sync operation
             // Aufrufen der sync-Methode, um die Slider zu synchronisieren
             primarySlider.sync(secondarySlider);
