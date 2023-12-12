@@ -113,6 +113,13 @@ document.addEventListener('DOMContentLoaded', function() {
   window.addEventListener('resize', throttle(updateStickyElementPosition, 200));
 });
 
+/* ACCORDION */
+
+const accordions = Array.from(document.querySelectorAll('.tt-faq-container'));
+new Accordion(accordions, {
+  showMultiple: true,
+});
+
 
 /* SPLIDE SLIDER */
 
