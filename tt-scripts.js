@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function updateStickyElementPosition() {
     // Suche nach allen Elementen mit der Klasse .tt-col-content.sticky
-    const stickyElements = document.querySelectorAll('.tt-col-content.sticky');
+    const stickyElements = document.querySelectorAll('.tt-col-content.sticky, .tt-client-quote-wrap');
 
     stickyElements.forEach(el => {
       // Ermittle die Höhe des Elements
