@@ -463,7 +463,7 @@ h1, h2, h3, h4, h5, h6 {
   .typewriter-cursor {
     margin-left: calc(var(--space-text-cursor) * -1);
     display: inline-block;
-    width: 0.075em;
+    width: 0.05em;
     height: 0.75em;
     background: currentColor;
   }
