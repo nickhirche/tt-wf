@@ -453,6 +453,31 @@ h1, h2, h3, h4, h5, h6 {
     transform: rotate(90deg);
 }
 
+/* Typewriter */
+
+.typewriter-text {
+    padding-right: var(--space-text-cursor);
+    hyphens: auto;
+  }
+  
+  .typewriter-cursor {
+    margin-left: calc(var(--space-text-cursor) * -1);
+    display: inline-block;
+    width: 0.075em;
+    height: 0.75em;
+    background: currentColor;
+  }
+  
+  .typewriter-content {
+    text-indent: -9999rem;
+    width: 0;
+    height: 0;
+    display: block;
+  }
+  
+
+
+
 /* RICHTEXTEDITOR */
 
 .article-rte a {
