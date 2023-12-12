@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
-      { parent: '.tt-usecases-container', primary: '.tt-category-slider', secondary: '.tt-usecase-slider' },
+      { parent: '.tt-usecases-container', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
@@ -208,6 +208,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sliders[sliderClass] = sliders[sliderClass] || [];
         sliders[sliderClass].push(splideInstance);
         // Aufrufen der mount-Methode, um den Slider zu initialisieren
+        console.log('Mounting slider: ', sliderClass); // Log the mounting process
         splideInstance.mount();
       });
     });
@@ -216,14 +217,18 @@ document.addEventListener('DOMContentLoaded', function() {
     syncPairs.forEach(function(pair) {
       // Überprüfen, ob das übergeordnete Element existiert
       var parentElement = document.querySelector(pair.parent);
+      console.log('Syncing pair: ', pair); 
       if (parentElement && sliders[pair.primary] && sliders[pair.secondary]) {
         // Jede primary Slider-Instanz mit jeder secondary Slider-Instanz synchronisieren
         sliders[pair.primary].forEach(function(primarySlider) {
           sliders[pair.secondary].forEach(function(secondarySlider) {
+            console.log('Syncing sliders: ', pair.primary, i, pair.secondary, j); // Log each sync operation
             // Aufrufen der sync-Methode, um die Slider zu synchronisieren
             primarySlider.sync(secondarySlider);
           });
         });
+      } else {
+        console.log('Unable to sync pair: ', pair); // Log if syncing failed
       }
     });
   });
