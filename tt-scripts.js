@@ -85,32 +85,32 @@ document.addEventListener('DOMContentLoaded', function() {
       // Berechne den neuen top-Wert
       const topValue = `calc(50vh - ${elementHeight / 2}px)`;
 
-      // Protokolliere den berechneten top-Wert
-      console.log('Calculated top value:', topValue);
-
       // Weise das Element mit dem neuen top-Wert zu
       el.style.top = topValue;
 
-      // Protokolliere den gesetzten top-Wert
-      console.log('Set top value:', el.style.top);
+      // Aktualisiere die gespeicherte Fensterbreite
+      windowWidth = window.innerWidth;
     });
+  }
 
-    // Aktualisiere die gespeicherte Fensterbreite
-    windowWidth = window.innerWidth;
+  // Throttle Funktion
+  function throttle(func, delay) {
+    let lastCall = 0;
+    return function(...args) {
+      const now = new Date().getTime();
+      if (now - lastCall < delay) {
+        return;
+      }
+      lastCall = now;
+      return func(...args);
+    }
   }
 
   // Führe die Funktion beim ersten Laden aus
   updateStickyElementPosition();
 
   // Füge einen Event Listener hinzu, der bei einem Fenster-Resize die Funktion ausführt
-  window.addEventListener('resize', updateStickyElementPosition);
-});
-
-/* ACCORDION */
-
-const accordions = Array.from(document.querySelectorAll('.tt-faq-container'));
-new Accordion(accordions, {
-  showMultiple: true,
+  window.addEventListener('resize', throttle(updateStickyElementPosition, 200));
 });
 
 
