@@ -191,7 +191,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
-      { parent: '.tt-usecases-container', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
+      { parent: '.tt-usecases-container', primary: '.tt-category-slider', secondary: '.tt-usecase-slider' },
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
