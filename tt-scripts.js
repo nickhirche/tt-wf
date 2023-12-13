@@ -120,6 +120,12 @@ new Accordion(accordions, {
   showMultiple: true,
 });
 
+/* COPYRIGHT YEAR */
+
+Webflow.push(function() {
+  $('.copyright-year').text(new Date().getFullYear());
+});
+
 
 /* SPLIDE SLIDER */
 
