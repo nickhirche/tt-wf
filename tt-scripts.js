@@ -115,7 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* ACCORDION */
 
-const accordions = Array.from(document.querySelectorAll('.tt-faq-container'));
+const accordions = Array.from(document.querySelectorAll('.tt-faq-container', 'tt-pricing-category'));
 new Accordion(accordions, {
   showMultiple: true,
 });
