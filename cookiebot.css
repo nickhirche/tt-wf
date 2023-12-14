@@ -337,3 +337,8 @@
 #CookiebotWidget #CookiebotWidget-buttons #CookiebotWidget-btn-withdraw {
     border-color: #141414 !important;
 }
+
+
+.CookieDeclarationType {
+    font-size: 0.8rem;
+}
