@@ -622,8 +622,14 @@ blockquote span::after, blockquote em::after {
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
+.tt-pricing-sub-toggle .tt-pricing-feature-col div {
+    padding-left: 1em;
+    position: relative;
+}
+
 .tt-pricing-sub-toggle .tt-pricing-feature-col div::before {
     content: '';
+    position: absolute;
     height: 0.8em;
     width: 0.8em;
     transform: translateY(0.05em);
