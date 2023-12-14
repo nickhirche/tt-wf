@@ -596,6 +596,12 @@ blockquote span::after, blockquote em::after {
 .tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before {
     content:"";
     display: inline-block;
+    width: 100%;
+    height: 3rem;
+}
+.tt-pricing-table::before {
+    content:"";
+    display: inline-block;
     position: sticky;
     background-color: var(--warm-grey-1);
     top: 0rem;
