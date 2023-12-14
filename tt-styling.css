@@ -593,7 +593,7 @@ blockquote span::after, blockquote em::after {
     font-variant-numeric: lining-nums tabular-nums;
 }
 
-.tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before
+.tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before {
     content:"";
     display: inline-block;
     position: sticky;
