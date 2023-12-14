@@ -550,44 +550,6 @@ blockquote span::after, blockquote em::after {
 
 
 
-    /*
-.quote::before, blockquote::before {
-    content: "»";
-    background: linear-gradient(146.12deg, #A753F1 11.67%, #7100CA 87.59%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 700;
-    font-style: normal;
-}
-
-.quote::after, blockquote::after {
-    content: "«";
-    background: linear-gradient(146.12deg, #A753F1 11.67%, #7100CA 87.59%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    font-weight: 700;
-    font-style: normal;
-}
-
-blockquote {
-    border-image: linear-gradient(180deg, #923F7C 0%, #5513AF 100%) 1;
-}
-.quote-panel {
-    border-left: unset;
-}
-
-.quote-panel::before {
-    content:"";
-    background: linear-gradient(180deg, #923F7C 0%, #5513AF 100%);
-    position: absolute;
-    height: 100%;
-    width: 2px;
-    top:0;
-    left:0;
-}*/
-
 .sticky-filter {
   	overflow-y: scroll; /* Add the ability to scroll */
 }
@@ -624,6 +586,11 @@ blockquote {
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     padding: 0.1rem 0.2rem 0.1rem;
+}
+
+/* Pricing Table */
+.tt-pricing-plan-col {
+    font-variant-numeric: lining-nums tabular-nums;
 }
 
 /* FIRST CHILD Settings */
