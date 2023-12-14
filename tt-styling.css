@@ -612,7 +612,7 @@ blockquote span::after, blockquote em::after {
     height: 3rem;
 }
 
-.tt-pricing-table > div:nth-child(2) {
+.tt-pricing-category > div:nth-child(2) {
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
