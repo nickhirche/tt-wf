@@ -629,10 +629,9 @@ blockquote span::after, blockquote em::after {
     margin-left: .1rem;
     display: inline-block;
     background-size: contain;
-    background-image: url("data:image/svg+xml,%3Csvg width='.8rem' height='.8rem' viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M13.7071 6.29289C14.0976 6.68342 14.0976 7.31658 13.7071 7.70711L9.70711 11.7071C9.51957 11.8946 9.26522 12 9 12C8.73478 12 8.48043 11.8946 8.29289 11.7071L4.29289 7.70711C3.90237 7.31658 3.90237 6.68342 4.29289 6.29289C4.68342 5.90237 5.31658 5.90237 5.70711 6.29289L9 9.58579L12.2929 6.29289C12.6834 5.90237 13.3166 5.90237 13.7071 6.29289Z' fill='white'/%3E%3C/svg%3E%0A");
-    opacity: 0.6;
-    -webkit-transition: 400ms cubic-bezier(0.65, 0, 0.35, 1);
-    transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1); 
+    background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.96967 9.53033C3.67678 9.23744 3.67678 8.76256 3.96967 8.46967L6.43934 6L3.96967 3.53033C3.67678 3.23744 3.67678 2.76256 3.96967 2.46967C4.26256 2.17678 4.73744 2.17678 5.03033 2.46967L8.03033 5.46967C8.17098 5.61032 8.25 5.80109 8.25 6C8.25 6.19891 8.17098 6.38968 8.03033 6.53033L5.03033 9.53033C4.73744 9.82322 4.26256 9.82322 3.96967 9.53033Z' fill='%236F00FF'/%3E%3C/svg%3E%0A");
+    -webkit-transition: all var(--transition-base);
+    transition: all var(--transition-base);
 }
 
 /* FIRST CHILD Settings */
