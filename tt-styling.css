@@ -434,7 +434,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Accordion */
-.ac-trigger:after, .ac-trigger:before {
+.tt-faq-container .ac-trigger:after, .tt-faq-container .ac-trigger:before {
     content: '';
     position: absolute;
     left: 0.8rem;
@@ -445,11 +445,11 @@ h1, h2, h3, h4, h5, h6 {
     transition: all 0.2s;
   }
 
-.ac-trigger:after {
+  .tt-faq-container .ac-trigger:after {
     transform: rotate(90deg);
 }
 
-.tt-faq-item.is-active .ac-trigger:before {
+.tt-faq-container .tt-faq-item.is-active .ac-trigger:before {
     transform: rotate(90deg);
 }
 
