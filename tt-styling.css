@@ -655,7 +655,7 @@ blockquote span::after, blockquote em::after {
 
 /* Pricing Tab */
 
-.tt-pricing-tabs .tt-pricing-category-title {
+.tt-pricing-tabs .tt-pricing-plans {
     display: none;
 }
 
