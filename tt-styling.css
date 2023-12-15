@@ -653,6 +653,37 @@ blockquote span::after, blockquote em::after {
     transform: rotate(90deg);
 }
 
+/* Pricing Tab */
+
+/* Tab 1 Col 1 */
+.w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-1 {
+    display: flex;
+}
+.w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-2, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3 {
+    display: none;
+}
+/* Tab 2 Col 2 */
+.w-tab-pane[data-w-tab="Tab2"] .tt-pricing-plan-col.col-2 {
+    display: flex;
+}
+.w-tab-pane[data-w-tab="Tab2"] .tt-pricing-plan-col.col-1, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3 {
+    display: none;
+}
+/* Tab 3 Col 3 */
+.w-tab-pane[data-w-tab="Tab3"] .tt-pricing-plan-col.col-3 {
+    display: flex;
+}
+.w-tab-pane[data-w-tab="Tab3"] .tt-pricing-plan-col.col-1, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-2, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3 {
+    display: none;
+}
+/* Tab 4 Col 4 */
+.w-tab-pane[data-w-tab="Tab4"] .tt-pricing-plan-col.col-4 {
+    display: flex;
+}
+.w-tab-pane[data-w-tab="Tab4"] .tt-pricing-plan-col.col-2, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3, .w-tab-pane[data-w-tab="Tab1"] .tt-pricing-plan-col.col-3 {
+    display: none;
+}
+
 /* FIRST CHILD Settings */
 
 .w-richtext > *:first-child, .article-rte > *:first-child, article > *:first-child, ol > *:first-child, ul > *:first-child, .collection-content > *:first-child { margin-top:0; }
