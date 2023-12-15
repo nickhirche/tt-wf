@@ -597,7 +597,7 @@ blockquote span::after, blockquote em::after {
     content:"";
     display: inline-block;
     width: 100%;
-    height: 3rem;
+    height: 2rem;
 }
 .tt-pricing-table::before {
     content:"";
@@ -615,8 +615,16 @@ blockquote span::after, blockquote em::after {
     display: inline-block;
     top: 5rem;
     width: 100%;
-    height: 3rem;
+    height: 2rem;
 }
+
+.tt-pricing-tabs .tt-pricing-category {
+    margin-top: 1.5rem;
+}
+.tt-pricing-tabs .tt-pricing-category::after, .tt-pricing-tabs .tt-pricing-category::before {
+    content: none;
+}
+
 
 .tt-pricing-category > div:nth-child(2) {
     border-top: 1px solid rgba(0, 0, 0, .1);
