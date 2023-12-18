@@ -501,6 +501,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .bg-black .tt-gradient-panel::before {
     background: url(https://uploads-ssl.webflow.com/645a9acecda2e0594fac6126/65809a10cc78a2c386bcdf50_noise_dark.png), repeat;
+    background-size: 35%;
 }
 
 
