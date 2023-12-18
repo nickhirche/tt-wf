@@ -494,8 +494,9 @@ h1, h2, h3, h4, h5, h6 {
     right: 0;
     z-index: 2;
     background: url(https://uploads-ssl.webflow.com/645a9acecda2e0594fac6126/65809a10c85f59a63201a8a5_noise-light.png), repeat;
+    background-size: 60%;
     background-blend-mode: soft-light;
-    mix-blend-mode: plus-lighter;
+    opacity: 40%;
 }
 
 .bg-black .tt-gradient-panel::before {
