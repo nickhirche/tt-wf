@@ -478,12 +478,27 @@ h1, h2, h3, h4, h5, h6 {
 
   /* GRADIENTS */
 
- .tt-gradient-container img {
+ .tt-gradient-container img, .tt-gradient::before {
     user-select: none;
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
  }
+
+.tt-gradient::before {
+    content:"";
+    position: absolute;
+    top:0;
+    left:0;
+    bottom: 0;
+    right: 0;
+    z-index: 2;
+    background-image: "https://uploads-ssl.webflow.com/645a9acecda2e0594fac6126/65809a10c85f59a63201a8a5_noise-light.png";
+}
+
+.-bg-black .tt-gradient::before {
+    background-image: "https://uploads-ssl.webflow.com/645a9acecda2e0594fac6126/65809a10c85f59a63201a8a5_noise-light.png";
+}
 
 
 
@@ -701,6 +716,8 @@ blockquote span::after, blockquote em::after {
 .w-richtext > *:first-child, .article-rte > *:first-child, article > *:first-child, ol > *:first-child, ul > *:first-child, .collection-content > *:first-child { margin-top:0; }
 .w-richtext > *:last-child, .article-rte > *:last-child, article > *:last-child { margin-bottom:0; }
 .w-container:before, .w-container:after { display:none;}
+
+
 
 /* COL GROUPS */
 
