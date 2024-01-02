@@ -214,7 +214,6 @@ document.addEventListener('DOMContentLoaded', function() {
         sliders[sliderClass] = sliders[sliderClass] || [];
         sliders[sliderClass].push(splideInstance);
         // Aufrufen der mount-Methode, um den Slider zu initialisieren
-        console.log('Mounting slider: ', sliderClass); // Log the mounting process
         splideInstance.mount();
       });
     });
@@ -223,12 +222,10 @@ document.addEventListener('DOMContentLoaded', function() {
     syncPairs.forEach(function(pair) {
       // Überprüfen, ob das übergeordnete Element existiert
       var parentElement = document.querySelector(pair.parent);
-      console.log('Syncing pair: ', pair); 
       if (parentElement && sliders[pair.primary] && sliders[pair.secondary]) {
         // Jede primary Slider-Instanz mit jeder secondary Slider-Instanz synchronisieren
         sliders[pair.primary].forEach(function(primarySlider, i) {
           sliders[pair.secondary].forEach(function(secondarySlider, j) {
-            console.log('Syncing sliders: ', pair.primary, i, pair.secondary, j); // Log each sync operation
             // Aufrufen der sync-Methode, um die Slider zu synchronisieren
             primarySlider.sync(secondarySlider);
           });
