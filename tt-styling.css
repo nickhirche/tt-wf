@@ -636,7 +636,6 @@ blockquote span::after, blockquote em::after {
 @media screen and (max-width: 479px) {
     .tt-pricing-table::before {
         width: 95vw;
-        margin-left: -5vw;
         height: 3.2rem;
     }
 }
