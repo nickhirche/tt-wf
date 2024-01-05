@@ -677,10 +677,6 @@ blockquote span::after, blockquote em::after {
 }
 
 /* Pricing Plans */
-.tt-pricing-tabs .tt-pricing-plans {
-    display: none;
-}
-
 .tt-pricing-table-wrap {
     gap: 0;
 }
