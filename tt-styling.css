@@ -676,7 +676,17 @@ blockquote span::after, blockquote em::after {
     transform: rotate(90deg);
 }
 
-/* Pricing Tab */
+/* Pricing Plans */
+
+.tt-pricing-plans::before {
+    content: "";
+    position: absolute;
+    background-color: var(--warm-grey-1);
+    top: -3.2rem;
+    width: 100%;
+    height: 3.2rem;
+    z-index: 61;
+}
 
 .tt-pricing-tabs .tt-pricing-plans {
     display: none;
