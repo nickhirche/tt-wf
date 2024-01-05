@@ -618,6 +618,10 @@ blockquote span::after, blockquote em::after {
     width: 100%;
     height: 2rem;
 }
+.tt-pricing-table {
+    margin-top: 0;
+}
+
 .tt-pricing-table::before {
     content:"";
     display: inline-block;
@@ -676,6 +680,51 @@ blockquote span::after, blockquote em::after {
 
 .tt-pricing-tabs .tt-pricing-plans {
     display: none;
+}
+
+.tt-pricing-table-wrap {
+    gap: 0;
+}
+
+@media screen and (max-width: 479px) {
+
+    /* Tab 1 Col 1 */
+    .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-1 {
+        display: flex;
+    }
+    .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-2, 
+    .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-3, 
+    .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-4 {
+        display: none;
+    }
+    /* Tab 2 Col 2 */
+    .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-2 {
+        display: flex;
+    }
+    .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-1, 
+    .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-3,
+    .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-4 {
+        display: none;
+    }
+    /* Tab 3 Col 3 */
+    .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-3 {
+        display: flex;
+    }
+    .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-1, 
+    .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-2, 
+    .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-4 {
+        display: none;
+    }
+    /* Tab 4 Col 4 */
+    .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-4 {
+        display: flex;
+    }
+    .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-1, 
+    .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-2, 
+    .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-3 {
+        display: none;
+    }
+
 }
 
 /* Tab 1 Col 1 */
