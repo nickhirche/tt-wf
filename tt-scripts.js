@@ -231,7 +231,7 @@ document.addEventListener('DOMContentLoaded', function() {
           });
         });
       } else {
-        console.log('Unable to sync pair: ', pair); // Log if syncing failed
+        // console.log('Unable to sync pair: ', pair); // Log if syncing failed
       }
     });
   });
