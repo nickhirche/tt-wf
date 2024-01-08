@@ -608,6 +608,18 @@ blockquote span::after, blockquote em::after {
 }
 
 /* Pricing Table */
+.tt-pricing-tab-menu {
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+}
+
+.tt-pricing-tabs .tt-price-wrap {
+    display: none;
+}
+.tt-pricing-tabs .tt-price-wrap.is-active {
+    display: flex;
+}
+
 .tt-pricing-plan-col {
     font-variant-numeric: lining-nums tabular-nums;
 }
