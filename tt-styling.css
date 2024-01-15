@@ -740,9 +740,13 @@ blockquote span::after, blockquote em::after {
     display: none;
   }
   
-.code-output .shiki, .code-output .shiki * {
+.code-output .shiki {
     display: block;
-  }
+}
+
+.code-output .shiki * {
+    display: inline-block;
+}
 
 /* FIRST CHILD Settings */
 
