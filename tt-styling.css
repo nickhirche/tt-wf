@@ -742,6 +742,11 @@ blockquote span::after, blockquote em::after {
   
 .code-output .shiki {
     display: block;
+    overflow: auto;
+    position: relative;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+    max-height: max(300px,60vh);
 }
 
 .code-output .shiki * {
