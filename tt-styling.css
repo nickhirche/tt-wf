@@ -665,12 +665,12 @@ blockquote span::after, blockquote em::after {
     border-top: 1px solid rgba(0, 0, 0, .1);
 }
 
-.tt-pricing-sub-toggle .tt-pricing-feature-col div {
+.tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group {
     padding-left: 0.8em;
     position: relative;
 }
 
-.tt-pricing-sub-toggle .tt-pricing-feature-col div::before {
+.tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group::before {
     content: '';
     position: absolute;
     height: 0.8em;
@@ -684,7 +684,7 @@ blockquote span::after, blockquote em::after {
     transition: all var(--transition-base);
 }
 
-.tt-pricing-feature-group.is-active .tt-pricing-sub-toggle .tt-pricing-feature-col div::before {
+.tt-pricing-feature-group.is-active .tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group::before {
     transform: rotate(90deg);
 }
 
