@@ -560,7 +560,7 @@ ul.checklist li::before {
 }
 
 /* Feature Card  */
-.tt-feature-requirements-wrap:first-child::after {
+.tt-feature-requirements-content:first-of-type::after {
     content: '';
     height: 100%;
     width: 1px;
