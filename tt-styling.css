@@ -598,7 +598,7 @@ ol.quickstart-list {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: calc(1rem-1px); 
+    border-radius: calc(1rem - 1px); 
     padding: 1px; 
     background: linear-gradient(to bottom right, var(--orange-500), var(--blue-300));
     -webkit-mask: 
