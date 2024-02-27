@@ -135,7 +135,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Objekt, das die Konfigurationen für die verschiedenen Slider enthält
     var sliderOptions = {
         '.tt-usecase-slider': {
-            // Optionen für .tt-usecase-slider
+              type     : 'fade',
+              pagination: false,
+              arrows    : false,
+              rewind: true,
+              drag: true,
+              updateOnMove: true,
+          },
+          '.tt-accordion-media-slider': {
               type     : 'fade',
               pagination: false,
               arrows    : false,
@@ -144,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function() {
               updateOnMove: true,
           },
           '.tt-category-slider': {
-            // Optionen für .tt-category-slider
               type     : 'loop',
               focus    : 'center',
               updateOnMove: true,
@@ -160,7 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
               wheelSleep: '0',
           },
           '.tt-product-slider': {
-            // Optionen für .tt-marqueee-slider
             autoWidth: true,
             drag   : true,
             rewind: false,
@@ -170,7 +175,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wheelSleep: '0',
           },
           '.tt-usecase-card-slider': {
-            // Optionen für .tt-marqueee-slider
             type     : 'loop',
             focus    : 'center',
             autoWidth: true,
@@ -183,7 +187,6 @@ document.addEventListener('DOMContentLoaded', function() {
             wheelSleep: '0',
           },
           '.tt-blog-card-slider': {
-            // Optionen für .tt-blog-card-slider
             autoWidth: true,
             drag   : true,
             rewind: false,
