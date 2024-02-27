@@ -566,7 +566,7 @@ ol.quickstart-list {
     padding-left: 0; 
     display: flex;
     flex-direction: column;
-    gap: 0.5em;
+    gap: 0.4em;
   }
   
   ol.quickstart-list li {
