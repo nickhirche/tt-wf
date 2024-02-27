@@ -559,6 +559,23 @@ ul.checklist li::before {
     background-color: var(--blue-300);
 }
 
+/* Qucikstart List  */
+ol.quickstart-list {
+    list-style: none; /* Entfernt die standardmäßigen Listennummern */
+    counter-reset: list-counter; /* Setzt einen Zähler für die Listenpunkte */
+    padding-left: 0; /* Entfernt den Standard-Padding-Wert */
+  }
+  
+  ol.quickstart-list li {
+    counter-increment: list-counter; /* Erhöht den Zähler für jedes Listenelement */
+    margin-bottom: 5px; /* Fügt etwas Abstand zwischen den Listenelementen hinzu */
+  }
+  
+  ol.quickstart-list li::before {
+    content: "{" counter(list-counter) "}"; /* Fügt die Zahlen in geschweiften Klammern hinzu */
+    margin-right: 5px; /* Fügt Abstand zwischen der Nummer und dem Text hinzu */
+  }
+
 /* Feature Card  */
 .tt-feature-requirements-content:not(:last-child)::after {
     content: ""; 
