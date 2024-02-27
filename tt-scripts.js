@@ -174,6 +174,15 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
+          '.tt-caccordion-content-slider': {
+            autoWidth: true,
+            drag   : true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            flickPower: '150',
+            wheelSleep: '0',
+          },
           '.tt-usecase-card-slider': {
             type     : 'loop',
             focus    : 'center',
@@ -201,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
       { parent: '.tt-usecases-slider', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
+      { parent: '.tt-feature-accordion', primary: '.tt-caccordion-content-slider', secondary: '.tt-accordion-media-slider' },
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
