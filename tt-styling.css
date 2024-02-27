@@ -587,7 +587,7 @@ ol.quickstart-list {
     right: -2.5rem;
     width: 1px;
     height: 100%;
-    background-color: var(--white-a-30);
+    background-color: var(--white-a-20);
     transform: translateZ(0);
   }
 
