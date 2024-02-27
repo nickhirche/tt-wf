@@ -588,27 +588,31 @@ ol.quickstart-list {
     width: 1px;
     height: 100%;
     background-color: var(--white-a-30);
+    transform: translateZ(0);
   }
 
 .tt-feature-quickstart {
     border-color: transparent;
 }
 
-.card-comments .tt-feature-quickstart::before {
+.tt-feature-quickstart::before {
     content: "";
     position: absolute;
     inset: 0;
-    border-radius: calc(1rem - 1px); 
-    padding: 1px; 
-    background: linear-gradient(to bottom right, var(--orange-500), var(--blue-300));
+    border-radius: calc(1rem - 2px); 
+    padding: 2px; 
     -webkit-mask: 
        linear-gradient(#fff 0 0) content-box, 
        linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude; 
+    transform: translateZ(0);
+    opacity: 0.6;
   }
 
-  
+  .card-comments .tt-feature-quickstart::before {
+    background: linear-gradient(to bottom right, var(--orange-500), var(--blue-300));
+  }
   
 
 /* QUOTES  */
