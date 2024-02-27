@@ -592,15 +592,13 @@ ol.quickstart-list {
 
 @media screen and (max-width: 767px) {
     .tt-feature-requirements-content:not(:last-child)::after {
-        content: none;
+        right: -1.25rem;
     }
 }
 
 @media screen and (max-width: 479px) {
     .tt-feature-requirements-content:not(:last-child)::after {
-        bottom: -1.25rem;
-        width: 100%;
-        height: 1px;
+        content: none;
     }
 }
 
