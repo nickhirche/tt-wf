@@ -588,8 +588,22 @@ ol.quickstart-list {
     width: 1px;
     height: 100%;
     background-color: var(--white-a-20);
-    transform: translateZ(0);
-  }
+}
+
+@media screen and (max-width: 767px) {
+    .tt-feature-requirements-content:not(:last-child)::after {
+        right: -1.25rem;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .tt-feature-requirements-content:not(:last-child)::after {
+        bottom: -1.25rem;
+        width: 100%;
+        height: 1px;
+    }
+}
+
 
 .tt-feature-quickstart {
     border-color: transparent;
@@ -608,11 +622,15 @@ ol.quickstart-list {
     -webkit-mask: 
        linear-gradient(#fff 0 0) content-box, 
        linear-gradient(#fff 0 0);
+    mask: 
+       linear-gradient(#fff 0 0) content-box, 
+       linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
             mask-composite: exclude; 
     transform: translateZ(0);
     opacity: 0.6;
     z-index: 0;
+    transform: translateZ(0);
   }
 
   .card-comments .tt-feature-quickstart::before {
