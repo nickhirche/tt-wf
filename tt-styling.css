@@ -552,6 +552,13 @@ ul.checklist li::before {
     background-color: var(--purple-600);
 }
 
+.card-comments:nth-child(1) ul.checklist li::before {
+    background-color: var(--orange-600);
+}
+.card-comments:nth-child(2) ul.checklist li::before {
+    background-color: var(--blue-300);
+}
+
 
 /* QUOTES  */
 blockquote span, blockquote em {

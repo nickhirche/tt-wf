@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Übereinander positionierte SVGs</title>
+<style>
+  .svg-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+  }
+
+  .svg-container svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+</style>
+</head>
+<body>
+
+<div class="svg-container">
+  <!-- SVG 1 -->
+  <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- SVG content goes here -->
+  </svg>
+  
+  <!-- SVG 2 -->
+  <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- SVG content goes here -->
+  </svg>
+  
+  <!-- SVG 3 -->
+  <svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+    <!-- SVG content goes here -->
+  </svg>
+</div>
+
+</body>
+</html>
