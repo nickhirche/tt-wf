@@ -613,7 +613,7 @@ ol.quickstart-list {
     padding: 10px; /* Dicke des Rands */
     
     /* Farbverlauf über das gesamte Pseudo-Element */
-    background: linear-gradient(to bottom right, var(--farbe1), var(--farbe2));
+    background: linear-gradient(to bottom right, var(--orange-500), var(--blue-300));
     
     /* Runde Ecken für das Pseudo-Element */
     border-radius: inherit;
