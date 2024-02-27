@@ -560,14 +560,11 @@ ul.checklist li::before {
 }
 
 /* Feature Card  */
-.tt-feature-requirements-wrap:first-child::after {
-    content: "";
-    height: 100%;
-    width: 1px;
-    background-color: var(--white-a-30);
-    display: block;
-}
-
+.tt-feature-requirements-content:not(:last-child)::after {
+    content: "|"; /* Das ist Ihr Trennzeichen */
+    margin: 0 10px; /* Fügen Sie nach Bedarf Abstand hinzu */
+    color: red;
+  }
 
 /* QUOTES  */
 blockquote span, blockquote em {
