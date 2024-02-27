@@ -602,36 +602,28 @@ ol.quickstart-list {
 */
 
 .card-comments .tt-feature-quickstart::before {
+   
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
+    border-radius: 15px; /* Gleiche border-radius wie das Elternelement */
   
-    /* Erzeugt einen Rand um das Pseudo-Element */
-    padding: 10px; /* Dicke des Rands */
-    
     /* Farbverlauf über das gesamte Pseudo-Element */
     background: linear-gradient(to bottom right, var(--orange-500), var(--blue-300));
-    
-    /* Runde Ecken für das Pseudo-Element */
-    border-radius: inherit;
   
     /* Maskierung, um nur den Rand sichtbar zu machen */
-    -webkit-mask-image: linear-gradient(black, black);
-    mask-image: linear-gradient(black, black);
-    
-    /* Anpassen der Maskengrößen, um einen "Rand" zu erzeugen */
-    -webkit-mask-size: calc(100% - 20px) calc(100% - 20px);
-    mask-size: calc(100% - 20px) calc(100% - 20px);
-    -webkit-mask-position: center;
-    mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-    mask-repeat: no-repeat;
+    -webkit-mask: 
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(to bottom right, black 0%, black 100%) border-box;
+    mask: 
+      linear-gradient(#fff 0 0) padding-box, 
+      linear-gradient(to bottom right, black 0%, black 100%) border-box;
   
-    /* Die Maske wird nur auf das ::before Pseudo-Element angewendet */
-    -webkit-mask-composite: exclude;
+    /* Breite des Randes */
+    border: 10px solid transparent;
   }
 
   
