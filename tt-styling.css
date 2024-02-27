@@ -595,6 +595,10 @@ ol.quickstart-list {
     border-color: transparent;
 }
 
+.tt-feature-quickstart * {
+    z-index: 1;
+}
+
 .tt-feature-quickstart::before {
     content: "";
     position: absolute;
@@ -608,6 +612,7 @@ ol.quickstart-list {
             mask-composite: exclude; 
     transform: translateZ(0);
     opacity: 0.6;
+    z-index: 0;
   }
 
   .card-comments .tt-feature-quickstart::before {
