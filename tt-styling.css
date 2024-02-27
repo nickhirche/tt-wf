@@ -552,13 +552,20 @@ ul.checklist li::before {
     background-color: var(--purple-600);
 }
 
-.card-comments .tt-feature-requriemnts-wrap:first-child ul.checklist li::before {
+.card-comments .tt-feature-requirements-wrap:first-child ul.checklist li::before {
     background-color: var(--orange-600);
 }
-.card-comments .tt-feature-requriemnts-wrap:nth-child(2) ul.checklist li::before {
+.card-comments .tt-feature-requirements-wrap:nth-child(2) ul.checklist li::before {
     background-color: var(--blue-300);
 }
 
+/* Feature Card  */
+.tt-feature-requirements-wrap:first-child::after {
+    content: '';
+    height: 100%;
+    width: 1px;
+    background-color: var(--white-a-30);;
+}
 
 /* QUOTES  */
 blockquote span, blockquote em {
