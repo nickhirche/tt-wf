@@ -600,7 +600,7 @@ ol.quickstart-list {
 } 
 */
 
-.card-comments::before {
+.card-comments .tt-feature-quickstart::before {
     content: "";
     position: absolute;
     top: 0;
