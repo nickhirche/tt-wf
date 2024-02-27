@@ -561,8 +561,11 @@ ul.checklist li::before {
 
 /* Feature Card  */
 .tt-feature-requirements-content:not(:last-child)::after {
-    content: "|"; /* Das ist Ihr Trennzeichen */
-    margin: 0 10px; /* Fügen Sie nach Bedarf Abstand hinzu */
+    content: ""; 
+    position: absolute;
+    right: 2.5rem;
+    width: 1px;
+    height: 100%;
     color: red;
   }
 
