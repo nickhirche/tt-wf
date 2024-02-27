@@ -176,6 +176,7 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           '.tt-caccordion-content-slider': {
             autoWidth: true,
+            isNavigation: true,
             drag   : true,
             rewind: false,
             pagination: false,
