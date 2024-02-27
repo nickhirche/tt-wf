@@ -592,7 +592,7 @@ ol.quickstart-list {
 
 @media screen and (max-width: 767px) {
     .tt-feature-requirements-content:not(:last-child)::after {
-        right: -1.25rem;
+        content: none;
     }
 }
 
