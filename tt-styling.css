@@ -552,10 +552,10 @@ ul.checklist li::before {
     background-color: var(--purple-600);
 }
 
-.card-comments .tt-feature-requirements-wrap:first-child ul.checklist li::before {
+.card-comments .tt-feature-requirements-content:first-child ul.checklist li::before {
     background-color: var(--orange-600);
 }
-.card-comments .tt-feature-requirements-wrap:nth-child(2) ul.checklist li::before {
+.card-comments .tt-feature-requirements-content:nth-child(2) ul.checklist li::before {
     background-color: var(--blue-300);
 }
 
