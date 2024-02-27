@@ -583,7 +583,7 @@ ol.quickstart-list {
     right: 2.5rem;
     width: 1px;
     height: 100%;
-    color: red;
+    background-color: var(--white-a-30);
   }
 
 /* QUOTES  */
