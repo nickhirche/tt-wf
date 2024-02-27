@@ -607,10 +607,30 @@ ol.quickstart-list {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg width='200' height='200' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='grad-comments' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23ef7953;stop-opacity:1' /%3E%3Cstop offset='100%25' style='stop-color:%23505ee2;stop-opacity:1' /%3E%3C/linearGradient%3E%3C/defs%3E%3Crect x='0' y='0' width='200' height='200' rx='16' stroke='url(%23grad-comments)' /%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: 0;
+  
+    /* Erzeugt einen Rand um das Pseudo-Element */
+    padding: 10px; /* Dicke des Rands */
+    
+    /* Farbverlauf über das gesamte Pseudo-Element */
+    background: linear-gradient(to bottom right, var(--farbe1), var(--farbe2));
+    
+    /* Runde Ecken für das Pseudo-Element */
+    border-radius: inherit;
+  
+    /* Maskierung, um nur den Rand sichtbar zu machen */
+    -webkit-mask-image: linear-gradient(black, black);
+    mask-image: linear-gradient(black, black);
+    
+    /* Anpassen der Maskengrößen, um einen "Rand" zu erzeugen */
+    -webkit-mask-size: calc(100% - 20px) calc(100% - 20px);
+    mask-size: calc(100% - 20px) calc(100% - 20px);
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+  
+    /* Die Maske wird nur auf das ::before Pseudo-Element angewendet */
+    -webkit-mask-composite: exclude;
   }
 
   
