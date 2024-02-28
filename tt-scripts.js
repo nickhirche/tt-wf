@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Objekt, das die Konfigurationen für die verschiedenen Slider enthält
     var sliderOptions = {
-        '.tt-usecase-slider': {
+          '.tt-usecase-slider': {
               type     : 'fade',
               pagination: false,
               arrows    : false,
@@ -203,6 +203,29 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
+          // Features Slider
+          '.tt-feauture-content-slider': {
+            type     : 'fade',
+            pagination: false,
+            arrows    : false,
+            rewind: true,
+            drag: true,
+            updateOnMove: true,
+          },
+          '.tt-feature-nav-slider': {
+            focus    : 'center',
+            updateOnMove: true,
+            autoWidth: true,
+            isNavigation: true,
+            drag   : true,
+            cloneStatus: false,
+            autoplay: true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            flickPower: '150',
+            wheelSleep: '0',
+          },
       // Weitere Konfigurationen können hier hinzugefügt werden
     };
   
@@ -210,6 +233,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var syncPairs = [
       { parent: '.tt-usecases-slider', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
       { parent: '.tt-feature-accordion', primary: '.tt-accordion-media-slider', secondary: '.tt-accordion-content-slider' },
+      { parent: '.tt-features-slider', primary: '.tt-feature-nav-slider', secondary: '.tt-feauture-content-slider' },
+      
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
