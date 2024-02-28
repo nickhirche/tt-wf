@@ -213,6 +213,7 @@ document.addEventListener('DOMContentLoaded', function() {
             updateOnMove: true,
           },
           '.tt-feature-nav-slider': {
+            type     : 'loop',
             focus    : 'center',
             updateOnMove: true,
             autoWidth: true,
