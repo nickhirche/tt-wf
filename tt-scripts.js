@@ -246,5 +246,4 @@ document.addEventListener('DOMContentLoaded', function() {
         // console.log('Unable to sync pair: ', pair); // Log if syncing failed
       }
     });
-
   });
