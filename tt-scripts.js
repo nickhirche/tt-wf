@@ -257,18 +257,30 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Über das Array von Sync-Paaren iterieren
     syncPairs.forEach(function(pair) {
-      // Überprüfen, ob das übergeordnete Element existiert
+      // Versuche, das übergeordnete Element zu finden
       var parentElement = document.querySelector(pair.parent);
-      if (parentElement && sliders[pair.primary] && sliders[pair.secondary]) {
-        // Jede primary Slider-Instanz mit jeder secondary Slider-Instanz synchronisieren
-        sliders[pair.primary].forEach(function(primarySlider, i) {
-          sliders[pair.secondary].forEach(function(secondarySlider, j) {
-            // Aufrufen der sync-Methode, um die Slider zu synchronisieren
-            primarySlider.sync(secondarySlider);
-          });
+      if (!parentElement) {
+        console.warn('Parent element not found for the pair: ', pair);
+        return; // Überspringe die aktuelle Iteration und fahre mit der nächsten fort
+      }
+  
+      // Speichere die Arrays der primary und secondary Sliders
+      var primarySliders = sliders[pair.primary] || [];
+      var secondarySliders = sliders[pair.secondary] || [];
+  
+      // Wenn beide Slider gefunden wurden, synchronisiere sie
+      if (primarySliders.length && secondarySliders.length) {
+        primarySliders.forEach(function(primarySlider, i) {
+          // Stelle sicher, dass ein korrespondierender secondary Slider existiert
+          if (secondarySliders[i]) {
+            primarySlider.sync(secondarySliders[i]);
+          } else {
+            console.warn('No matching secondary slider for primary slider index:', i);
+          }
         });
       } else {
-        console.log('Unable to sync pair: ', pair); // Log if syncing failed
+        // Wenn einer der Slider nicht gefunden wurde, logge eine Warnung und fahre mit dem nächsten Paar fort
+        console.warn('Unable to sync pair due to missing primary or secondary sliders:', pair);
       }
     });
   });
