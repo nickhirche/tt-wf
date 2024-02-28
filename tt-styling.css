@@ -466,7 +466,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0rem;
 }
 
-.splide__slide > .accordion-content-wrap:not(:last-child) {
+.splide__list .splide__slide:not(:last-child) .accordion-content-wrap {
     border-bottom: solid 1px white; 
 }
 
