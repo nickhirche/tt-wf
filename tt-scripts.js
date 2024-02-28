@@ -177,6 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
           '.tt-accordion-content-slider': {
             autoWidth: false,
             isNavigation: true,
+            updateOnMove: true,
             drag   : false,
             rewind: false,
             pagination: false,
