@@ -188,7 +188,9 @@ document.addEventListener('DOMContentLoaded', function() {
             breakpoints: {
               768: { // or less
                 type: 'loop', 
-                pagination: true, // Zeige die Pagination
+                focu: 'center',
+                pagination: true,
+                drag: true,
               },
             },
           },
