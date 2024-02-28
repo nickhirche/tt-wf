@@ -416,7 +416,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Accordion Slider */
-.tt-accordion-content-slider, .tt-accordion-content-slider * {
+.tt-accordion-content-slider, .tt-accordion-content-slider > * {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
 }
@@ -435,11 +435,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tt-accordion-content-slider .splide__slide .accordion-text-wrap {
-    display: none;
+    height: 0px;
+    padding-top: 0px;
 }
 
 .tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
-    display: flex;
+    height: auto;
+    padding-top: .6rem ;
 }
 
 
