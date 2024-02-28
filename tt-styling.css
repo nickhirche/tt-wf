@@ -413,7 +413,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-/* Acaccordion Slider */
+/* Accordion Slider */
 .accordion-content-wrap {
     opacity: .4;
 }
@@ -421,6 +421,9 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
 }
 
+.is-active .accordion-content-wrap * {
+    transform: translateX(2em);
+}
 
 
 /* CARDS */
