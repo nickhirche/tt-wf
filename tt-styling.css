@@ -416,12 +416,12 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Accordion Slider */
-.tt-accordion-content-slider, .tt-accordion-content-slider > * {
+.tt-accordion-content-slider, .tt-accordion-content-slider * {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
 }
 
-.tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap * {
+.tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap > * {
     transform: translateX(2em);
 }
 
