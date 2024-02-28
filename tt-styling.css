@@ -470,6 +470,17 @@ h1, h2, h3, h4, h5, h6 {
     border-bottom: solid 1px white; 
 }
 
+@media screen and (max-width: 991px) {
+    .tt-accordion-content-slider .splide__slide .accordion-content-wrap::before {
+        content: none;
+    }
+    .tt-accordion-content-slider .splide__slide .accordion-text-wrap {
+        height: auto;
+        padding-top: .6rem ;
+        opacity: 1;
+    }
+}
+
 
 /* CARDS */
 /* Product Card */
