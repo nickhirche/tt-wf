@@ -134,15 +134,8 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Objekt, das die Konfigurationen für die verschiedenen Slider enthält
     var sliderOptions = {
+          // Synced Usecase Slider Group
           '.tt-usecase-slider': {
-              type     : 'fade',
-              pagination: false,
-              arrows    : false,
-              rewind: true,
-              drag: true,
-              updateOnMove: true,
-          },
-          '.tt-accordion-media-slider': {
               type     : 'fade',
               pagination: false,
               arrows    : false,
@@ -165,6 +158,7 @@ document.addEventListener('DOMContentLoaded', function() {
               flickPower: '150',
               wheelSleep: '0',
           },
+          // Prodcut Slider
           '.tt-product-slider': {
             autoWidth: true,
             drag   : true,
@@ -174,6 +168,15 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
+          // Synced Accordion Slider Group
+          '.tt-accordion-media-slider': {
+              type     : 'fade',
+              pagination: false,
+              arrows    : false,
+              rewind: true,
+              drag: true,
+              updateOnMove: true,
+          },  
           '.tt-accordion-content-slider': {
             autoWidth: false,
             isNavigation: true,
@@ -182,7 +185,14 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
+            breakpoints: {
+              768: { // or less
+                type: 'loop', 
+                pagination: true, // Zeige die Pagination
+              },
+            },
           },
+          // Usecase Card Slider
           '.tt-usecase-card-slider': {
             type     : 'loop',
             focus    : 'center',
@@ -204,7 +214,7 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
-          // Features Slider
+          // Synced Features Slider Group
           '.tt-feauture-content-slider': { 
             type     : 'fade',
             pagination: false,
