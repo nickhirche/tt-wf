@@ -260,7 +260,7 @@ document.addEventListener('DOMContentLoaded', function() {
       // Versuche, das übergeordnete Element zu finden
       var parentElement = document.querySelector(pair.parent);
       if (!parentElement) {
-        console.warn('Parent element not found for the pair: ', pair);
+        // console.warn('Parent element not found for the pair: ', pair);
         return; // Überspringe die aktuelle Iteration und fahre mit der nächsten fort
       }
   
@@ -274,14 +274,14 @@ document.addEventListener('DOMContentLoaded', function() {
           // Stelle sicher, dass ein korrespondierender secondary Slider existiert
           if (secondarySliders[i]) {
             primarySlider.sync(secondarySliders[i]);
-            console.log(`Synced primary slider at index ${i} with secondary slider`);
+            // console.log(`Synced primary slider at index ${i} with secondary slider`);
           } else {
-            console.warn('No matching secondary slider for primary slider index:', i);
+            // console.warn('No matching secondary slider for primary slider index:', i);
           }
         });
       } else {
         // Wenn einer der Slider nicht gefunden wurde, logge eine Warnung und fahre mit dem nächsten Paar fort
-        console.warn('Unable to sync pair due to missing primary or secondary sliders:', pair);
+        // console.warn('Unable to sync pair due to missing primary or secondary sliders:', pair);
       }
     });
   });

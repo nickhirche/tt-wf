@@ -383,7 +383,9 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Splide Slider Product Slider */
 
-.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr, .splide__sr, .tt-accordion-media-slider .splide__sr, .splide__sr { display: none!important;}
+.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr, .splide__sr, .tt-accordion-media-slider .splide__sr, .splide__sr { 
+    display: none!important;
+}
 
 
 /* Marquee Slider */
@@ -414,15 +416,25 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Accordion Slider */
-.accordion-content-wrap {
-    opacity: .4;
+.tt-accordion-media-slider .splide__slide.is-active .accordion-content-wrap * {
+    transform: translateX(2em);
 }
-.is-active .accordion-content-wrap {
+
+.tt-accordion-media-slider .splide__slide  {
+    opacity: .4;
+    cursor: pointer;
+}
+
+.tt-accordion-media-slider .splide__slide.is-active, .tt-accordion-media-slider .splide__slide:hover  {
     opacity: 1;
 }
 
-.is-active .accordion-content-wrap * {
-    transform: translateX(2em);
+.tt-accordion-media-slider .splide__slide .accordion-text-wrap {
+    display: none;
+}
+
+.tt-accordion-media-slider .splide__slide.is-active .accordion-text-wrap {
+    display: flex;
 }
 
 
