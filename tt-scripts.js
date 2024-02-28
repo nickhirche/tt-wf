@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wheelSleep: '0',
           },
           // Features Slider
-          '.tt-feauture-content-slider': {
+          '.tt-feauture-content-slider': { 
             type     : 'fade',
             pagination: false,
             arrows    : false,
@@ -232,6 +232,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
+      { parent: '.tt-features-slider', primary: '.tt-feature-nav-slider', secondary: '.tt-feauture-content-slider' },
       { parent: '.tt-usecases-slider', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
       { parent: '.tt-feature-accordion', primary: '.tt-accordion-media-slider', secondary: '.tt-accordion-content-slider' },
       { parent: '.tt-features-slider', primary: '.tt-feature-nav-slider', secondary: '.tt-feauture-content-slider' },
