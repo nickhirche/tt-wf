@@ -174,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
-          '.tt-caccordion-content-slider': {
+          '.tt-accordion-content-slider': {
             autoWidth: false,
             isNavigation: true,
             drag   : false,
@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
       { parent: '.tt-usecases-slider', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
-      { parent: '.tt-feature-accordion', primary: '.tt-accordion-media-slider', secondary: '.tt-caccordion-content-slider' },
+      { parent: '.tt-feature-accordion', primary: '.tt-accordion-media-slider', secondary: '.tt-accordion-content-slider' },
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
@@ -246,52 +246,5 @@ document.addEventListener('DOMContentLoaded', function() {
         // console.log('Unable to sync pair: ', pair); // Log if syncing failed
       }
     });
-        // Funktion, die die Slider als Buttons einrichtet
-        function setupAsButtons(primarySliderClass, secondarySliderClass) {
-          sliders[primarySliderClass].forEach(function(primarySlider) {
-              var slides = primarySlider.slides;
-              slides.forEach(function(slide, index) {
-                  slide.slide.addEventListener('click', function() {
-                      // Setzen des aktiven Zustands
-                      slides.forEach(function(s) { s.slide.classList.remove('is-active'); });
-                      slide.slide.classList.add('is-active');
-  
-                      // Steuern des sekundären Sliders
-                      sliders[secondarySliderClass].forEach(function(secondarySlider) {
-                          secondarySlider.go(index);
-                      });
-                  });
-              });
-          });
-      }
-  
-      // Funktion zum Überprüfen der Bildschirmgröße und Einrichten der Slider
-      function checkWindowSize() {
-          var syncAsButtons = window.matchMedia("(min-width: 768px)").matches;
-  
-          // Wenn wir uns im Desktop-Modus befinden, richten Sie die Slider als Buttons ein
-          if(syncAsButtons) {
-              setupAsButtons('.tt-caccordion-content-slider', '.tt-accordion-media-slider');
-          } else {
-              // Im Tablet-Modus, richten Sie die Slider normal ein
-              if(sliders['.tt-caccordion-content-slider']) {
-                  sliders['.tt-caccordion-content-slider'].forEach(function(slider) {
-                      // Eigenschaften X anwenden
-                      slider.options = {
-                          ...slider.options,
-                          // Eigenschaften X hier einfügen, z.B.:
-                          type: 'slide',
-                          perPage: 1,
-                          perMove: 1,
-                          // ... Weitere Eigenschaften X ...
-                      };
-                      slider.refresh(); // Aktualisieren Sie den Slider mit den neuen Optionen
-                  });
-              }
-          }
-      }
-  
-      // Überprüfen Sie die Bildschirmgröße beim Laden und bei Größenänderungen
-      checkWindowSize();
-      window.addEventListener('resize', checkWindowSize);
+
   });

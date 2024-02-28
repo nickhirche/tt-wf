@@ -345,7 +345,7 @@ h1, h2, h3, h4, h5, h6 {
     }    
 }
 
-
+/* SLIDER */
 /* Splide Slider */
 
 .tt-category-slider .splide__slide, .tt-category-slider .splide__slide .usecase-category-wrap, .tt-usecase-slider .splide__track .splide__slid  {
@@ -412,6 +412,18 @@ h1, h2, h3, h4, h5, h6 {
     user-select: none;
 }
 
+
+/* Acaccordion Slider */
+.accordion-content-wrap {
+    opacity: .4;
+}
+.is-active .accordion-content-wrap {
+    opacity: 1;
+}
+
+
+
+/* CARDS */
 /* Product Card */
 .tt-product-card, .tt-product-card:hover { box-shadow: none; background-color: unset; }
 
