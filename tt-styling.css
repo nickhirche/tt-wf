@@ -426,7 +426,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap > * {
-    transform: translateX(2em);
+    transform: translateX(1.4rem);
 }
 
 .tt-accordion-content-slider .splide__slide  {
