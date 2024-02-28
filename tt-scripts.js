@@ -187,6 +187,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             breakpoints: {
               991: { // or less
+                autoWidth: true,
                 type: 'loop', 
                 focu: 'center',
                 pagination: true,
