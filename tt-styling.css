@@ -368,22 +368,22 @@ h1, h2, h3, h4, h5, h6 {
     background-color: rgba(255, 255, 255, .2);
 }
 
-.tt-usecase-slider .splide__track {
+.tt-usecase-slider .splide__track, .tt-accordion-media-slider .splide__track {
     overflow: hidden;
 }
 
-.tt-usecase-slider .splide__track .splide__slide {
+.tt-usecase-slider .splide__track .splide__slide, .tt-accordion-media-slider .splide__track .splide__slide  {
     opacity: 0;
 }
 
-.tt-usecase-slider .splide__track .splide__slide.is-active {
+.tt-usecase-slider .splide__track .splide__slide.is-active, .tt-accordion-media-slider .splide__track .splide__slide.is-active  {
     opacity: 1;
 }
 
 
 /* Splide Slider Product Slider */
 
-.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr, .splide__sr { display: none!important;}
+.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr, .splide__sr, .tt-accordion-media-slider .splide__sr, .splide__sr { display: none!important;}
 
 
 /* Marquee Slider */
