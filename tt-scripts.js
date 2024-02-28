@@ -189,7 +189,7 @@ document.addEventListener('DOMContentLoaded', function() {
               991: { // or less
                 autoWidth: true,
                 type: 'loop', 
-                focu: 'center',
+                focus: 'center',
                 pagination: true,
                 drag: true,
                 cloneStatus: false,
