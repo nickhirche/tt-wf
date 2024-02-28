@@ -235,8 +235,6 @@ document.addEventListener('DOMContentLoaded', function() {
       { parent: '.tt-features-slider', primary: '.tt-feature-nav-slider', secondary: '.tt-feauture-content-slider' },
       { parent: '.tt-usecases-slider', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
       { parent: '.tt-feature-accordion', primary: '.tt-accordion-media-slider', secondary: '.tt-accordion-content-slider' },
-      { parent: '.tt-features-slider', primary: '.tt-feature-nav-slider', secondary: '.tt-feauture-content-slider' },
-      
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
@@ -276,6 +274,7 @@ document.addEventListener('DOMContentLoaded', function() {
           // Stelle sicher, dass ein korrespondierender secondary Slider existiert
           if (secondarySliders[i]) {
             primarySlider.sync(secondarySliders[i]);
+            console.log(`Synced primary slider at index ${i} with secondary slider`);
           } else {
             console.warn('No matching secondary slider for primary slider index:', i);
           }
