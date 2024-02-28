@@ -186,11 +186,14 @@ document.addEventListener('DOMContentLoaded', function() {
             pagination: false,
             arrows: false,
             breakpoints: {
-              768: { // or less
+              991: { // or less
                 type: 'loop', 
                 focu: 'center',
                 pagination: true,
                 drag: true,
+                cloneStatus: false,
+                flickPower: '150',
+                wheelSleep: '0',
               },
             },
           },
