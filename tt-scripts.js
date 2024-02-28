@@ -181,8 +181,6 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
-            flickPower: '150',
-            wheelSleep: '0',
           },
           '.tt-usecase-card-slider': {
             type     : 'loop',
