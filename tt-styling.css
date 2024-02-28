@@ -416,24 +416,24 @@ h1, h2, h3, h4, h5, h6 {
 
 
 /* Accordion Slider */
-.tt-accordion-media-slider .splide__slide.is-active .accordion-content-wrap * {
+.tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap * {
     transform: translateX(2em);
 }
 
-.tt-accordion-media-slider .splide__slide  {
+.tt-accordion-content-slider .splide__slide  {
     opacity: .4;
     cursor: pointer;
 }
 
-.tt-accordion-media-slider .splide__slide.is-active, .tt-accordion-media-slider .splide__slide:hover  {
+.tt-accordion-content-slider .splide__slide.is-active, .tt-accordion-content-slider .splide__slide:hover  {
     opacity: 1;
 }
 
-.tt-accordion-media-slider .splide__slide .accordion-text-wrap {
+.tt-accordion-content-slider .splide__slide .accordion-text-wrap {
     display: none;
 }
 
-.tt-accordion-media-slider .splide__slide.is-active .accordion-text-wrap {
+.tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
     display: flex;
 }
 
