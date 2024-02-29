@@ -185,6 +185,8 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: true,
             pagination: false,
             arrows: false,
+            flickPower: '150',
+            wheelSleep: '0',
             breakpoints: {
               991: { // or less
                 type     : 'loop',
@@ -198,8 +200,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 rewind: false,
                 pagination: true,
                 arrows: false,
-                flickPower: '50',
-                wheelSleep: '0',
               },
             },
           },
