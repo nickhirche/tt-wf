@@ -484,7 +484,7 @@ h1, h2, h3, h4, h5, h6 {
         border-bottom: none;
     }
     .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap > * {
-        transform: translateX(0);
+        transform: none;
     }
 }
 
