@@ -37,6 +37,7 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
     word-break: break-word;
+    hyphens: auto;
 }
 
 /* Spacings */
@@ -479,6 +480,30 @@ h1, h2, h3, h4, h5, h6 {
         padding-top: .6rem ;
         opacity: 1;
     }
+}
+
+/* Pagination */
+ul.tt-accordion-content-slider .splide__pagination {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+}
+
+.tt-accordion-content-slider button..splide__pagination__page {
+    padding: 0.25rem;
+}
+
+.tt-accordion-content-slider button.splide__pagination__page::before {
+    content: "";
+    display: block;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: red;
+    border-radius: 1rem;
+}
+.tt-accordion-content-slider button.splide__pagination__page.is-active::before {
+    width: 1rem;
 }
 
 
