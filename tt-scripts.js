@@ -311,19 +311,29 @@ document.addEventListener('DOMContentLoaded', function() {
     var observerCallback = function(entries, observer) {
       entries.forEach(function(entry) {
         var sliderElement = entry.target;
-        var sliderClass = sliderElement.closest('.splide').classList[0]; // Finde die Klasse des Sliders
-        var splideInstance = sliders[sliderClass]; // Angenommen, dies ist Ihre Referenz auf die Splide-Instanz
+        // Stellen Sie sicher, dass Sie die tatsächliche Klasse für die Slider-Optionen verwenden
+        var sliderClasses = sliderElement.className.split(' ').filter(function(className) {
+          return className in sliderOptions;
+        });
 
-        if (entry.isIntersecting) {
-          // Wenn das Element sichtbar wird und autoplay für diesen Slider aktiviert ist
-          if (sliderOptions['.' + sliderClass].autoplay) {
-            splideInstance.options = { autoplay: true }; // Setze Autoplay-Optionen
-            splideInstance.play(); // Starte das Autoplay
-          }
-        } else {
-          // Wenn das Element nicht sichtbar ist oder der Viewport verlässt
-          if (splideInstance.options.autoplay) {
-            splideInstance.pause(); // Stoppe das Autoplay
+        // Es könnte mehr als eine passende Klasse geben. Nehmen Sie die erste.
+        if (sliderClasses.length > 0) {
+          var sliderClass = '.' + sliderClasses[0];
+          var splideInstance = sliders[sliderClass].find(instance => instance.root === sliderElement);
+
+          if (entry.isIntersecting) {
+            // Wenn das Element sichtbar wird und autoplay für diesen Slider aktiviert ist
+            if (sliderOptions[sliderClass].autoplay) {
+              // Starte das Autoplay, wenn es nicht bereits läuft
+              if (!splideInstance.autoplay.isPaused) {
+                splideInstance.autoplay.play();
+              }
+            }
+          } else {
+            // Wenn das Element nicht sichtbar ist
+            if (splideInstance.autoplay) {
+              splideInstance.autoplay.pause();
+            }
           }
         }
       });
