@@ -306,7 +306,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
         
         // Hier binden Sie die Intersection Extension während der Initialisierung
-        splideInstance.mount(window.splide.Extensions);
+        splideInstance.mount(window.splide.Intersection);
 
         // Speichern der Instanzen in einem Array für jede Klasse
         sliders[sliderClass] = sliders[sliderClass] || [];
