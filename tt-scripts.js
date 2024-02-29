@@ -170,9 +170,9 @@ document.addEventListener('DOMContentLoaded', function() {
           },
           // Synced Accordion Slider Group
           '.tt-accordion-media-slider': {
-              type     : 'fade',
+              type: 'fade',
               pagination: false,
-              arrows    : false,
+              arrows: false,
               rewind: true,
               drag: true,
               updateOnMove: true,
@@ -181,8 +181,8 @@ document.addEventListener('DOMContentLoaded', function() {
             autoWidth: false,
             isNavigation: true,
             updateOnMove: true,
-            drag   : false,
-            rewind: false,
+            drag: false,
+            rewind: true,
             pagination: false,
             arrows: false,
             breakpoints: {
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 rewind: false,
                 pagination: true,
                 arrows: false,
-                flickPower: '150',
+                flickPower: '50',
                 wheelSleep: '0',
               },
             },
