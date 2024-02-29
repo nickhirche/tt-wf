@@ -310,19 +310,20 @@ document.addEventListener('DOMContentLoaded', function() {
     // Intersection Observer Callback
     var observerCallback = function(entries, observer) {
       entries.forEach(function(entry) {
-        if (entry.isIntersecting && entry.target.classList.contains('splide') && !entry.target.classList.contains('is-initialized')) {
-          var sliderElement = entry.target;
-          var sliderClass = '.' + sliderElement.classList[0]; // Nehmen Sie die erste Klasse für den Selektor
-          var options = sliderOptions[sliderClass];
-          if (options) {
-            var splideInstance = new Splide(sliderElement, options);
-            // Speichern der Instanz, falls sie später synchronisiert werden muss
-            sliders[sliderClass] = sliders[sliderClass] || [];
-            sliders[sliderClass].push(splideInstance);
-            // Initialisiere den Slider
-            splideInstance.mount();
-            // Stoppe die Beobachtung, nachdem der Slider initialisiert wurde
-            observer.unobserve(entry.target);
+        var sliderElement = entry.target;
+        var sliderClass = sliderElement.closest('.splide').classList[0]; // Finde die Klasse des Sliders
+        var splideInstance = sliders[sliderClass]; // Angenommen, dies ist Ihre Referenz auf die Splide-Instanz
+
+        if (entry.isIntersecting) {
+          // Wenn das Element sichtbar wird und autoplay für diesen Slider aktiviert ist
+          if (sliderOptions['.' + sliderClass].autoplay) {
+            splideInstance.options = { autoplay: true }; // Setze Autoplay-Optionen
+            splideInstance.play(); // Starte das Autoplay
+          }
+        } else {
+          // Wenn das Element nicht sichtbar ist oder der Viewport verlässt
+          if (splideInstance.options.autoplay) {
+            splideInstance.pause(); // Stoppe das Autoplay
           }
         }
       });
