@@ -151,7 +151,16 @@ document.addEventListener('DOMContentLoaded', function() {
               isNavigation: true,
               drag   : true,
               cloneStatus: false,
-              autoplay: true,
+              autoplay: 'pause',
+              intersection: {
+                rootMargin: '-200px 0',
+                inView: {
+                  autoplay: true,
+                },
+                outView: {
+                  autoplay: false,
+                },
+              },
               rewind: false,
               pagination: false,
               arrows: false,
@@ -194,7 +203,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 isNavigation: true,
                 drag   : true,
                 cloneStatus: false,
-                autoplay: true,
+                autoplay: 'pause',
+                intersection: {
+                  rootMargin: '200px',
+                  inView: {
+                    autoplay: true,
+                  },
+                  outView: {
+                    autoplay: false,
+                  },
+                },
                 rewind: false,
                 pagination: true,
                 arrows: false,
@@ -212,7 +230,16 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
-            autoplay: true,
+            autoplay: 'pause',
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoplay: true,
+              },
+              outView: {
+                autoplay: false,
+              },
+            },
             flickPower: '150',
             wheelSleep: '0',
           },
@@ -242,7 +269,16 @@ document.addEventListener('DOMContentLoaded', function() {
             isNavigation: true,
             drag   : true,
             cloneStatus: false,
-            autoplay: true,
+            autoplay: 'pause',
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoplay: true,
+              },
+              outView: {
+                autoplay: false,
+              },
+            },
             rewind: false,
             pagination: false,
             arrows: false,
@@ -300,48 +336,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Intersection Observer Optionen
-    var observerOptions = {
-      root: null,
-      rootMargin: '-30% 0px -30% 0px',
-      threshold: 0.1
-    };
-
-    // Intersection Observer Callback
-    var observerCallback = function(entries) {
-      entries.forEach(function(entry) {
-        var sliderElement = entry.target;
-        // Finden Sie die passende Klasse für Slider-Optionen
-        var sliderClass = Object.keys(sliderOptions).find(function(key) {
-          return sliderElement.classList.contains(key.substring(1));
-        });
-  
-        if (sliderClass) {
-          var splideInstances = sliders[sliderClass];
-          splideInstances.forEach(function(splideInstance) {
-            if (entry.isIntersecting) {
-              // Wenn das Element sichtbar wird und autoplay für diesen Slider aktiviert ist
-              if (sliderOptions[sliderClass].autoplay) {
-                splideInstance.options.autoplay = true; // Aktivieren Sie Autoplay in den Optionen
-                splideInstance.play(); // Starten Sie das Autoplay
-              }
-            } else {
-              // Wenn das Element nicht sichtbar ist
-              splideInstance.options.autoplay = false; // Deaktivieren Sie Autoplay in den Optionen
-              splideInstance.pause(); // Pausieren Sie das Autoplay
-            }
-          });
-        }
-      });
-    };
-  
-    // Erstelle den Observer
-    var observer = new IntersectionObserver(observerCallback, observerOptions);
-  
-    // Wähle alle Slider-Elemente aus und füge sie dem Observer hinzu
-    Object.keys(sliders).forEach(function(sliderClass) {
-      sliders[sliderClass].forEach(function(splideInstance) {
-        observer.observe(splideInstance.root);
-      });
-    });
 });
