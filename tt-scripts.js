@@ -307,3 +307,34 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   });
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Auswahl des zu beobachtenden Elements
+    const svgElement = document.querySelector('.svg-animation');
+  
+    // Die Callback-Funktion, die ausgeführt wird, wenn die Beobachtungskriterien erfüllt sind
+    const observerCallback = (entries, observer) => {
+      entries.forEach(entry => {
+        // Prüfen, ob das Element im Viewport oder 20vh darüber ist
+        if (entry.isIntersecting) {
+          // Element ist im Viewport oder 20vh darüber - Animation fortsetzen
+          svgElement.unpauseAnimations();
+        } else {
+          // Element ist nicht im Viewport - Animation anhalten
+          svgElement.pauseAnimations();
+        }
+      });
+    };
+  
+    // Erstellen des Intersection Observers mit der Callback-Funktion und Optionen
+    const observerOptions = {
+      root: null, // Bezieht sich auf den Viewport
+      rootMargin: '20vh 0px 0px 20vh', // 20vh über dem Viewport
+      threshold: 0.1 // Der Anteil des Elements, der sichtbar sein muss
+    };
+  
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+  
+    // Starten der Beobachtung
+    observer.observe(svgElement);
+  });
