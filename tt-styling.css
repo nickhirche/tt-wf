@@ -487,23 +487,26 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: unset;
     display: flex;
 }
 
 .tt-accordion-content-slider button..splide__pagination__page {
-    padding: 0.25rem;
+    padding: 0.2rem;
 }
 
 .tt-accordion-content-slider button.splide__pagination__page::before {
+    -webkit-transition: all var(--transition-base);
+    transition: all var(--transition-base);
     content: "";
     display: block;
-    width: 0.5rem;
-    height: 0.5rem;
-    background: red;
+    width: 0.4rem;
+    height: 0.4rem;
+    background: var(--black-6-16);
     border-radius: 1rem;
 }
 .tt-accordion-content-slider button.splide__pagination__page.is-active::before {
-    width: 1rem;
+    width: 1.5rem;
 }
 
 
