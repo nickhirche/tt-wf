@@ -489,6 +489,7 @@ h1, h2, h3, h4, h5, h6 {
     .tt-accordion-content-slider, .tt-accordion-content-slider *, .accordion-content-wrap::before  {
         -webkit-transition: none;
         transition: none;
+        
     }
 }
 
