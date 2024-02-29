@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Objekt zur Speicherung der erstellten Splide-Instanzen
     var sliders = {};
-  
+
     // Über jede Slider-Klasse iterieren, um die Instanzen zu erstellen
     Object.keys(sliderOptions).forEach(function(sliderClass) {
       // Alle Elemente auswählen, die zur aktuellen Klasse gehören
@@ -308,49 +308,40 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Intersection Observer Callback
-    var observerCallback = function(entries, observer) {
+    var observerCallback = function(entries) {
       entries.forEach(function(entry) {
         var sliderElement = entry.target;
-        // Stellen Sie sicher, dass Sie die tatsächliche Klasse für die Slider-Optionen verwenden
-        var sliderClasses = sliderElement.className.split(' ').filter(function(className) {
-          return className in sliderOptions;
+        // Finden Sie die passende Klasse für Slider-Optionen
+        var sliderClass = Object.keys(sliderOptions).find(function(key) {
+          return sliderElement.classList.contains(key.substring(1));
         });
-
-        // Es könnte mehr als eine passende Klasse geben. Nehmen Sie die erste.
-        if (sliderClasses.length > 0) {
-          var sliderClass = '.' + sliderClasses[0];
-          var splideInstance = sliders[sliderClass].find(instance => instance.root === sliderElement);
-
-          if (entry.isIntersecting) {
-            // Wenn das Element sichtbar wird und autoplay für diesen Slider aktiviert ist
-            if (sliderOptions[sliderClass].autoplay) {
-              // Starte das Autoplay, wenn es nicht bereits läuft
-              if (!splideInstance.autoplay.isPaused) {
-                splideInstance.autoplay.play();
+  
+        if (sliderClass) {
+          var splideInstances = sliders[sliderClass];
+          splideInstances.forEach(function(splideInstance) {
+            if (entry.isIntersecting) {
+              // Wenn das Element sichtbar wird und autoplay für diesen Slider aktiviert ist
+              if (sliderOptions[sliderClass].autoplay) {
+                splideInstance.options.autoplay = true; // Aktivieren Sie Autoplay in den Optionen
+                splideInstance.play(); // Starten Sie das Autoplay
               }
+            } else {
+              // Wenn das Element nicht sichtbar ist
+              splideInstance.options.autoplay = false; // Deaktivieren Sie Autoplay in den Optionen
+              splideInstance.pause(); // Pausieren Sie das Autoplay
             }
-          } else {
-            // Wenn das Element nicht sichtbar ist
-            if (splideInstance.autoplay) {
-              splideInstance.autoplay.pause();
-            }
-          }
+          });
         }
       });
     };
-
+  
     // Erstelle den Observer
     var observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Wähle alle Slider-Elemente aus, die mit der Klasse 'splide' markiert sind, aber noch nicht initialisiert wurden
-    var sliderElements = document.querySelectorAll('.splide:not(.is-initialized)');
-
-    // Überprüfe, ob Slider-Elemente vorhanden sind und füge sie dem Observer hinzu
-    if (sliderElements.length > 0) {
-      sliderElements.forEach(function(sliderElement) {
-        if (sliderElement instanceof Element) {
-          observer.observe(sliderElement);
-        }
+  
+    // Wähle alle Slider-Elemente aus und füge sie dem Observer hinzu
+    Object.keys(sliders).forEach(function(sliderClass) {
+      sliders[sliderClass].forEach(function(splideInstance) {
+        observer.observe(splideInstance.root);
       });
-    }
+    });
 });
