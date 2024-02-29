@@ -303,7 +303,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Intersection Observer Optionen
     var observerOptions = {
       root: null,
-      rootMargin: '-20% 0px -20% 0px',
+      rootMargin: '-30% 0px -30% 0px',
       threshold: 0.1
     };
 
