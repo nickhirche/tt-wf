@@ -300,79 +300,46 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-// Intersection Observer Optionen
-var observerOptions = {
-  root: null,
-  rootMargin: '0px',
-  threshold: 0.1
-};
+    // Intersection Observer Optionen
+    var observerOptions = {
+      root: null,
+      rootMargin: '20% 0px 20% 0px',
+      threshold: 0.1
+    };
 
-// Intersection Observer Callback
-var observerCallback = function(entries, observer) {
-  entries.forEach(function(entry) {
-    if (entry.isIntersecting && entry.target.classList.contains('splide') && !entry.target.classList.contains('is-initialized')) {
-      var sliderElement = entry.target;
-      var sliderClass = '.' + sliderElement.classList[0]; // Nehmen Sie die erste Klasse für den Selektor
-      var options = sliderOptions[sliderClass];
-      if (options) {
-        var splideInstance = new Splide(sliderElement, options);
-        // Speichern der Instanz, falls sie später synchronisiert werden muss
-        sliders[sliderClass] = sliders[sliderClass] || [];
-        sliders[sliderClass].push(splideInstance);
-        // Initialisiere den Slider
-        splideInstance.mount();
-        // Stoppe die Beobachtung, nachdem der Slider initialisiert wurde
-        observer.unobserve(entry.target);
-      }
+    // Intersection Observer Callback
+    var observerCallback = function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting && entry.target.classList.contains('splide') && !entry.target.classList.contains('is-initialized')) {
+          var sliderElement = entry.target;
+          var sliderClass = '.' + sliderElement.classList[0]; // Nehmen Sie die erste Klasse für den Selektor
+          var options = sliderOptions[sliderClass];
+          if (options) {
+            var splideInstance = new Splide(sliderElement, options);
+            // Speichern der Instanz, falls sie später synchronisiert werden muss
+            sliders[sliderClass] = sliders[sliderClass] || [];
+            sliders[sliderClass].push(splideInstance);
+            // Initialisiere den Slider
+            splideInstance.mount();
+            // Stoppe die Beobachtung, nachdem der Slider initialisiert wurde
+            observer.unobserve(entry.target);
+          }
+        }
+      });
+    };
+
+    // Erstelle den Observer
+    var observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Wähle alle Slider-Elemente aus, die mit der Klasse 'splide' markiert sind, aber noch nicht initialisiert wurden
+    var sliderElements = document.querySelectorAll('.splide:not(.is-initialized)');
+
+    // Überprüfe, ob Slider-Elemente vorhanden sind und füge sie dem Observer hinzu
+    if (sliderElements.length > 0) {
+      sliderElements.forEach(function(sliderElement) {
+        if (sliderElement instanceof Element) {
+          observer.observe(sliderElement);
+        }
+      });
     }
-  });
-};
-
-// Erstelle den Observer
-var observer = new IntersectionObserver(observerCallback, observerOptions);
-
-// Wähle alle Slider-Elemente aus, die mit der Klasse 'splide' markiert sind, aber noch nicht initialisiert wurden
-var sliderElements = document.querySelectorAll('.splide:not(.is-initialized)');
-
-// Überprüfe, ob Slider-Elemente vorhanden sind und füge sie dem Observer hinzu
-if (sliderElements.length > 0) {
-  sliderElements.forEach(function(sliderElement) {
-    if (sliderElement instanceof Element) {
-      observer.observe(sliderElement);
-    }
-  });
-}
-});
-
-/* SVG Animation Stoper */
-
-document.addEventListener('DOMContentLoaded', function() {
-  // Auswahl des zu beobachtenden Elements
-  const svgElement = document.querySelector('.svg-animation');
-
-  // Die Callback-Funktion, die ausgeführt wird, wenn die Beobachtungskriterien erfüllt sind
-  const observerCallback = (entries, observer) => {
-    entries.forEach(entry => {
-      // Prüfen, ob das Element im Viewport oder 20vh darüber ist
-      if (entry.isIntersecting) {
-        // Element ist im Viewport oder 20vh darüber - Animation fortsetzen
-        svgElement.unpauseAnimations();
-      } else {
-        // Element ist nicht im Viewport - Animation anhalten
-        svgElement.pauseAnimations();
-      }
-    });
-  };
-
-  // Erstellen des Intersection Observers mit der Callback-Funktion und Optionen
-  const observerOptions = {
-    root: null, // Bezieht sich auf den Viewport
-    rootMargin: '20% 0px 20% 0px', // 20vh über dem Viewport
-    threshold: 0.1 // Der Anteil des Elements, der sichtbar sein muss
-  };
-
-  const observer = new IntersectionObserver(observerCallback, observerOptions);
-
-  // Starten der Beobachtung
-  observer.observe(svgElement);
 });
