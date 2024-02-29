@@ -483,6 +483,9 @@ h1, h2, h3, h4, h5, h6 {
     .tt-accordion-content-slider .splide__list .splide__slide:not(:last-child) {
         border-bottom: none;
     }
+    .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap > * {
+        transform: unset;
+    }
 }
 
 /* Pagination */
