@@ -489,9 +489,10 @@ h1, h2, h3, h4, h5, h6 {
     list-style: none;
     font-size: unset;
     display: flex;
+    gap: 0;
 }
 
-.tt-accordion-content-slider button..splide__pagination__page {
+.tt-accordion-content-slider button.splide__pagination__page {
     padding: 0.2rem;
 }
 
