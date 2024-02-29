@@ -300,63 +300,48 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // Intersection Observer Optionen
-    var observerOptions = {
-      root: null,
-      rootMargin: '20% 0px 20% 0px',
-      threshold: 0.1
-    };
+// Intersection Observer Optionen
+var observerOptions = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.1
+};
 
-    // Intersection Observer Callback
-    var observerCallback = function(entries, observer) {
-      entries.forEach(function(entry) {
-        if (entry.isIntersecting) {
-          var sliderElement = entry.target;
-          var sliderClass = '.' + sliderElement.classList[0]; // Nehmen Sie die erste Klasse für den Selektor
-          var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
-          
-          // Speichern der Instanz, falls sie später synchronisiert werden muss
-          sliders[sliderClass] = sliders[sliderClass] || [];
-          sliders[sliderClass].push(splideInstance);
+// Intersection Observer Callback
+var observerCallback = function(entries, observer) {
+  entries.forEach(function(entry) {
+    if (entry.isIntersecting && entry.target.classList.contains('splide') && !entry.target.classList.contains('is-initialized')) {
+      var sliderElement = entry.target;
+      var sliderClass = '.' + sliderElement.classList[0]; // Nehmen Sie die erste Klasse für den Selektor
+      var options = sliderOptions[sliderClass];
+      if (options) {
+        var splideInstance = new Splide(sliderElement, options);
+        // Speichern der Instanz, falls sie später synchronisiert werden muss
+        sliders[sliderClass] = sliders[sliderClass] || [];
+        sliders[sliderClass].push(splideInstance);
+        // Initialisiere den Slider
+        splideInstance.mount();
+        // Stoppe die Beobachtung, nachdem der Slider initialisiert wurde
+        observer.unobserve(entry.target);
+      }
+    }
+  });
+};
 
-          // Initialisiere den Slider
-          splideInstance.mount();
+// Erstelle den Observer
+var observer = new IntersectionObserver(observerCallback, observerOptions);
 
-          // Stoppe die Beobachtung, nachdem der Slider initialisiert wurde
-          observer.unobserve(entry.target);
+// Wähle alle Slider-Elemente aus, die mit der Klasse 'splide' markiert sind, aber noch nicht initialisiert wurden
+var sliderElements = document.querySelectorAll('.splide:not(.is-initialized)');
 
-          // Überprüfe, ob der Slider Teil eines Sync-Paares ist und synchronisiere, wenn nötig
-          syncPairs.forEach(function(pair) {
-            if (sliderElement.matches(pair.primary) || sliderElement.matches(pair.secondary)) {
-              // Finde den entsprechenden Partner-Slider
-              var partnerClass = sliderElement.matches(pair.primary) ? pair.secondary : pair.primary;
-              var partnerSliderElements = document.querySelectorAll(partnerClass);
-
-              partnerSliderElements.forEach(function(partnerSliderElement) {
-                var partnerSplideInstance = new Splide(partnerSliderElement, sliderOptions[partnerClass]);
-                sliders[partnerClass] = sliders[partnerClass] || [];
-                sliders[partnerClass].push(partnerSplideInstance);
-                partnerSplideInstance.mount();
-                
-                // Synchronisiere die Slider
-                splideInstance.sync(partnerSplideInstance);
-              });
-            }
-          });
-        }
-      });
-    };
-
-    // Erstelle den Observer
-    var observer = new IntersectionObserver(observerCallback, observerOptions);
-
-    // Wähle alle Slider-Elemente aus
-    var sliderElements = document.querySelectorAll('.splide');
-
-    // Beobachte alle Slider-Elemente
-    sliderElements.forEach(function(sliderElement) {
+// Überprüfe, ob Slider-Elemente vorhanden sind und füge sie dem Observer hinzu
+if (sliderElements.length > 0) {
+  sliderElements.forEach(function(sliderElement) {
+    if (sliderElement instanceof Element) {
       observer.observe(sliderElement);
-    });
+    }
+  });
+}
 });
 
 /* SVG Animation Stoper */
