@@ -505,13 +505,13 @@ h1, h2, h3, h4, h5, h6 {
     transition: all var(--transition-base);
     content: "";
     display: block;
-    width: 0.4rem;
-    height: 0.4rem;
+    width: 0.6rem;
+    height: 0.6rem;
     background: var(--black-6-16);
     border-radius: 1rem;
 }
 .tt-accordion-content-slider button.splide__pagination__page.is-active::before {
-    width: 1.5rem;
+    width: 2rem;
 }
 
 
