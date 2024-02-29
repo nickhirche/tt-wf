@@ -331,7 +331,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Erstellen des Intersection Observers mit der Callback-Funktion und Optionen
   const observerOptions = {
     root: null, // Bezieht sich auf den Viewport
-    rootMargin: '20% 0px 0px -20%', // 20vh über dem Viewport
+    rootMargin: '20% 0px 20% 0px', // 20vh über dem Viewport
     threshold: 0.1 // Der Anteil des Elements, der sichtbar sein muss
   };
 
