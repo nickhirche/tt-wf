@@ -337,10 +337,4 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
 
-    // ... Initialisierung Ihrer Sliders ...
-document.querySelectorAll('.splide').forEach(function(sliderElement) {
-  var splide = new Splide(sliderElement, sliderOptions[sliderElement.getAttribute('class').split(' ')[1]]).mount();
-  // Kein manuelles Play erforderlich, da Intersection-Extension dies handhaben sollte
-});
-
 });
