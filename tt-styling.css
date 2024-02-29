@@ -630,16 +630,16 @@ h1, h2, h3, h4, h5, h6 {
     right: 0;
     z-index: 2;
     background: url(https://uploads-ssl.webflow.com/645a9acecda2e0594fac6126/65809a10c85f59a63201a8a5_noise-light.png), repeat;
-    background-size: 50%;
+    background-size: 10%;
     background-blend-mode: soft-light;
-    opacity: 1;
+    opacity: .8;
     filter: blur(1px);
 }
 
 .bg-black .tt-gradient-panel::before, .tt-footer .tt-gradient-panel::before {
     background: url(https://uploads-ssl.webflow.com/645a9acecda2e0594fac6126/65809a10cc78a2c386bcdf50_noise_dark.png), repeat;
-    background-size: 20%;
-    opacity: 0.6;
+    background-size: 10%;
+    opacity: .6;
 }
 
 
