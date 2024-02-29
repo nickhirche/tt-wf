@@ -301,15 +301,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Über jede Slider-Klasse iterieren, um die Instanzen zu erstellen
     Object.keys(sliderOptions).forEach(function(sliderClass) {
-      // Alle Elemente auswählen, die zur aktuellen Klasse gehören
       document.querySelectorAll(sliderClass).forEach(function(sliderElement) {
         // Erstellen einer neuen Splide-Instanz mit den Optionen
         var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
+        
+        // Hier binden Sie die Intersection Extension während der Initialisierung
+        splideInstance.mount(window.splide.Extensions);
+
         // Speichern der Instanzen in einem Array für jede Klasse
         sliders[sliderClass] = sliders[sliderClass] || [];
         sliders[sliderClass].push(splideInstance);
-        // Aufrufen der mount-Methode, um den Slider zu initialisieren
-        splideInstance.mount();
       });
     });
   
