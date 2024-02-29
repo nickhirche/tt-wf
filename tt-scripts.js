@@ -304,9 +304,9 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll(sliderClass).forEach(function(sliderElement) {
         // Erstellen einer neuen Splide-Instanz mit den Optionen
         var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
-        
-        // Hier binden Sie die Intersection Extension während der Initialisierung
-        splideInstance.mount(window.splide.Intersection);
+
+        // Einfach mount aufrufen, ohne Argumente zu übergeben
+        splideInstance.mount();
 
         // Speichern der Instanzen in einem Array für jede Klasse
         sliders[sliderClass] = sliders[sliderClass] || [];
