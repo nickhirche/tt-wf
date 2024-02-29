@@ -282,31 +282,82 @@ document.addEventListener('DOMContentLoaded', function() {
       // Versuche, das übergeordnete Element zu finden
       var parentElement = document.querySelector(pair.parent);
       if (!parentElement) {
-        // console.warn('Parent element not found for the pair: ', pair);
         return; // Überspringe die aktuelle Iteration und fahre mit der nächsten fort
       }
-  
+
       // Speichere die Arrays der primary und secondary Sliders
       var primarySliders = sliders[pair.primary] || [];
       var secondarySliders = sliders[pair.secondary] || [];
-  
+
       // Wenn beide Slider gefunden wurden, synchronisiere sie
       if (primarySliders.length && secondarySliders.length) {
         primarySliders.forEach(function(primarySlider, i) {
           // Stelle sicher, dass ein korrespondierender secondary Slider existiert
           if (secondarySliders[i]) {
             primarySlider.sync(secondarySliders[i]);
-            // console.log(`Synced primary slider at index ${i} with secondary slider`);
-          } else {
-            // console.warn('No matching secondary slider for primary slider index:', i);
           }
         });
-      } else {
-        // Wenn einer der Slider nicht gefunden wurde, logge eine Warnung und fahre mit dem nächsten Paar fort
-        // console.warn('Unable to sync pair due to missing primary or secondary sliders:', pair);
       }
     });
-  });
+
+    // Intersection Observer Optionen
+    var observerOptions = {
+      root: null,
+      rootMargin: '20% 0px 20% 0px',
+      threshold: 0.1
+    };
+
+    // Intersection Observer Callback
+    var observerCallback = function(entries, observer) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          var sliderElement = entry.target;
+          var sliderClass = '.' + sliderElement.classList[0]; // Nehmen Sie die erste Klasse für den Selektor
+          var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
+          
+          // Speichern der Instanz, falls sie später synchronisiert werden muss
+          sliders[sliderClass] = sliders[sliderClass] || [];
+          sliders[sliderClass].push(splideInstance);
+
+          // Initialisiere den Slider
+          splideInstance.mount();
+
+          // Stoppe die Beobachtung, nachdem der Slider initialisiert wurde
+          observer.unobserve(entry.target);
+
+          // Überprüfe, ob der Slider Teil eines Sync-Paares ist und synchronisiere, wenn nötig
+          syncPairs.forEach(function(pair) {
+            if (sliderElement.matches(pair.primary) || sliderElement.matches(pair.secondary)) {
+              // Finde den entsprechenden Partner-Slider
+              var partnerClass = sliderElement.matches(pair.primary) ? pair.secondary : pair.primary;
+              var partnerSliderElements = document.querySelectorAll(partnerClass);
+
+              partnerSliderElements.forEach(function(partnerSliderElement) {
+                var partnerSplideInstance = new Splide(partnerSliderElement, sliderOptions[partnerClass]);
+                sliders[partnerClass] = sliders[partnerClass] || [];
+                sliders[partnerClass].push(partnerSplideInstance);
+                partnerSplideInstance.mount();
+                
+                // Synchronisiere die Slider
+                splideInstance.sync(partnerSplideInstance);
+              });
+            }
+          });
+        }
+      });
+    };
+
+    // Erstelle den Observer
+    var observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    // Wähle alle Slider-Elemente aus
+    var sliderElements = document.querySelectorAll('.splide');
+
+    // Beobachte alle Slider-Elemente
+    sliderElements.forEach(function(sliderElement) {
+      observer.observe(sliderElement);
+    });
+});
 
 /* SVG Animation Stoper */
 
