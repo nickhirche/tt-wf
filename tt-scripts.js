@@ -300,18 +300,17 @@ document.addEventListener('DOMContentLoaded', function() {
     var sliders = {};
 
     // Über jede Slider-Klasse iterieren, um die Instanzen zu erstellen
-    Object.keys(sliderOptions).forEach(function (sliderClass) {
-      document.querySelectorAll(sliderClass).forEach(function (sliderElement) {
+    Object.keys(sliderOptions).forEach(function(sliderClass) {
+      document.querySelectorAll(sliderClass).forEach(function(sliderElement) {
         // Erstellen einer neuen Splide-Instanz mit den Optionen
-        var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]);
+        var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]).mount(window.splide.Extensions);
 
-        // Mounten der Splide-Instanz mit der Intersection-Extension
-        // Stellen Sie sicher, dass die Intersection Extension verfügbar ist
-        if (window.splide && window.splide.Extensions && window.splide.Extensions.Intersection) {
-          splideInstance.mount(window.splide.Extensions);
-        } else {
-          console.error('Intersection Extension wurde nicht gefunden.');
-        }
+        // Hinzufügen von Ereignis-Callbacks für Autoplay
+        splideInstance.on('autoplay:play', function() {
+          console.log('Autoplay started for', sliderElement);
+        }).on('autoplay:pause', function() {
+          console.log('Autoplay paused for', sliderElement);
+        });
 
         // Speichern der Instanzen in einem Array für jede Klasse
         sliders[sliderClass] = sliders[sliderClass] || [];
