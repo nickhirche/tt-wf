@@ -134,6 +134,39 @@ document.addEventListener('DOMContentLoaded', function() {
   
     // Objekt, das die Konfigurationen für die verschiedenen Slider enthält
     var sliderOptions = {
+          // Synced Features Slider Group
+          '.tt-feauture-content-slider': { 
+            type     : 'fade',
+            pagination: false,
+            arrows    : false,
+            rewind: true,
+            drag: true,
+            updateOnMove: true,
+          },
+          '.tt-feature-nav-slider': {
+            type     : 'loop',
+            focus    : 'center',
+            updateOnMove: true,
+            autoWidth: true,
+            isNavigation: true,
+            drag   : true,
+            cloneStatus: false,
+            autoplay: false,
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoplay: true,
+              },
+              outView: {
+                autoplay: false,
+              },
+            },
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            flickPower: '150',
+            wheelSleep: '0',
+          },
           // Synced Usecase Slider Group
           '.tt-usecase-slider': {
               type     : 'fade',
@@ -252,39 +285,7 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
-          // Synced Features Slider Group
-          '.tt-feauture-content-slider': { 
-            type     : 'fade',
-            pagination: false,
-            arrows    : false,
-            rewind: true,
-            drag: true,
-            updateOnMove: true,
-          },
-          '.tt-feature-nav-slider': {
-            type     : 'loop',
-            focus    : 'center',
-            updateOnMove: true,
-            autoWidth: true,
-            isNavigation: true,
-            drag   : true,
-            cloneStatus: false,
-            autoplay: false,
-            intersection: {
-              rootMargin: '200px',
-              inView: {
-                autoplay: true,
-              },
-              outView: {
-                autoplay: false,
-              },
-            },
-            rewind: false,
-            pagination: false,
-            arrows: false,
-            flickPower: '150',
-            wheelSleep: '0',
-          },
+          
       // Weitere Konfigurationen können hier hinzugefügt werden
     };
   

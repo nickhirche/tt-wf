@@ -352,7 +352,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 /* Splide Slider */
 
-.tt-category-slider .splide__slide, .tt-category-slider .splide__slide .usecase-category-wrap, .tt-usecase-slider .splide__track .splide__slid  {
+.tt-category-slider .splide__slide, .tt-category-slider .splide__slide .usecase-category-wrap, .tt-usecase-slider .splide__track .splide__slid, .tt-feature-nav-slider .splide__slide, .tt-feature-nav-slider .splide__slide .feature-nav-wrap    {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
 
@@ -369,7 +369,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .tt-category-slider .splide__slide.is-active .usecase-category-wrap, .tt-feature-nav-slider .splide__slide.is-active .feature-nav-wrap  {
     border-radius: 1rem;
-    box-shadow: 0 0 0 3px rgba(255, 255, 255, .6);
+    box-shadow: 0 0 0 2px rgba(255, 255, 255, .6);
     background-color: rgba(255, 255, 255, .2);
 }
 
