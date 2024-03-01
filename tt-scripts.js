@@ -144,12 +144,12 @@ document.addEventListener('DOMContentLoaded', function() {
             updateOnMove: true,
           },
           '.tt-feature-nav-slider': {
-            type     : 'loop',
             focus    : 'center',
+            drag: false,
+            rewind: true,
             updateOnMove: true,
             autoWidth: true,
             isNavigation: true,
-            drag   : true,
             cloneStatus: false,
             autoplay: 'pause',
             intersection: {
@@ -166,6 +166,12 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             flickPower: '150',
             wheelSleep: '0',
+            breakpoints: {
+              991: { // or less
+                type     : 'loop',
+                drag   : true,
+              },
+            },
           },
           // Synced Usecase Slider Group
           '.tt-usecase-slider': {
