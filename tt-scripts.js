@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
               isNavigation: true,
               drag   : true,
               cloneStatus: false,
-              autoplay: false,
+              autoplay: 'pause',
               intersection: {
                 rootMargin: '200px',
                 inView: {
@@ -203,7 +203,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 isNavigation: true,
                 drag   : true,
                 cloneStatus: false,
-                autoplay: false,
+                autoplay: 'pause',
                 intersection: {
                   rootMargin: '200px',
                   inView: {
@@ -230,7 +230,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
-            autoplay: false,
+            autoplay: 'pause',
             intersection: {
               rootMargin: '200px',
               inView: {
