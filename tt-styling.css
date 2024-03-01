@@ -355,6 +355,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-category-slider .splide__slide, .tt-category-slider .splide__slide .usecase-category-wrap, .tt-usecase-slider .splide__track .splide__slid  {
     -webkit-transition: all var(--transition-base);
     transition: all var(--transition-base);
+    
 }
 
 .tt-category-slider .splide__slide, .tt-feauture-content-slider .splide__slide  {
