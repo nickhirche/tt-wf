@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
               cloneStatus: false,
               autoplay: false,
               intersection: {
-                rootMargin: '-200px 0',
+                rootMargin: '200px',
                 inView: {
                   autoplay: true,
                 },
