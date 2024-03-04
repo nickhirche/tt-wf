@@ -144,14 +144,13 @@ document.addEventListener('DOMContentLoaded', function() {
             updateOnMove: true,
           },
           '.tt-feature-nav-slider': {
-            focus    : 'center',
+            autoWidth: false,
+            isNavigation: true,
+            updateOnMove: true,
             drag: false,
             rewind: true,
-            updateOnMove: true,
-            autoWidth: true,
-            isNavigation: true,
-            cloneStatus: false,
-            autoplay: 'pause',
+            pagination: false,
+            arrows: false,
             intersection: {
               rootMargin: '200px',
               inView: {
@@ -161,11 +160,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 autoplay: false,
               },
             },
-            rewind: false,
-            pagination: false,
-            arrows: false,
-            flickPower: '150',
-            wheelSleep: '0',
             breakpoints: {
               991: { // or less
                 type     : 'loop',
@@ -233,6 +227,15 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: true,
             pagination: false,
             arrows: false,
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoplay: true,
+              },
+              outView: {
+                autoplay: false,
+              },
+            },
             breakpoints: {
               991: { // or less
                 type     : 'loop',
