@@ -412,11 +412,15 @@ h1, h2, h3, h4, h5, h6 {
 .scroll {
     animation: scroll 15s linear infinite;
     user-select: none;
+    will-change: transform;
+    transform-style: preserve-3d;
 }
 
 .scroll-reverse {
     animation: scroll 15s linear infinite reverse;
     user-select: none;
+    will-change: transform;
+    transform-style: preserve-3d;
 }
 
 
