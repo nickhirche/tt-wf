@@ -308,7 +308,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: 'pause',
             autoScroll: {
-              speed: -1,
+              speed: 2,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
