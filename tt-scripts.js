@@ -190,6 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
               isNavigation: true,
               drag   : true,
               cloneStatus: false,
+              autoScroll: false,
               autoplay: 'pause',
               intersection: {
                 rootMargin: '200px',
