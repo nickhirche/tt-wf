@@ -306,8 +306,12 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
-            pauseOnHover: false,
             autoScroll: 'pause',
+            autoScroll: {
+              speed: -1,
+              pauseOnHover: false,
+              pauseOnFocus: false,
+            },
             intersection: {
               rootMargin: '200px',
               inView: {
