@@ -214,6 +214,8 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
+            autoScroll: false,
+            
             flickPower: '150',
             wheelSleep: '0',
           },
@@ -234,6 +236,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: true,
             pagination: false,
             arrows: false,
+            autoScroll: false,
             intersection: {
               rootMargin: '200px',
               inView: {
@@ -273,20 +276,21 @@ document.addEventListener('DOMContentLoaded', function() {
           // Usecase Card Slider
           '.tt-usecase-card-slider': {
             type     : 'loop',
+            drag   : 'free',
             focus    : 'center',
             autoWidth: true,
             drag   : true,
             rewind: false,
             pagination: false,
             arrows: false,
-            autoplay: 'pause',
+            autoScroll: 'pause',
             intersection: {
               rootMargin: '200px',
               inView: {
-                autoplay: true,
+                autoScroll: true,
               },
               outView: {
-                autoplay: false,
+                autoScroll: false,
               },
             },
             flickPower: '150',
@@ -298,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
+            autoScroll: false,
             flickPower: '150',
             wheelSleep: '0',
           },
