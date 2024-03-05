@@ -341,12 +341,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Allgemeine Optionen für den Marquee Slider
     var baseMarqueeOptions = sliderOptions['.tt-marquee-slider'];
+    if (!baseMarqueeOptions) {
+        console.error("Basiskonfiguration für '.tt-marquee-slider' nicht gefunden.");
+        return; // Breche die Ausführung ab, wenn die Basiskonfiguration fehlt
+    }
 
     // Erstelle Slider-Instanzen für jeden .tt-marquee-slider
     document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
         // Lese den Wert von data-speed für den aktuellen Slider
         var marqueeSpeed = sliderElement.dataset.speed;
-        marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert, falls kein Wert gesetzt ist
+        marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : baseMarqueeOptions.autoScroll.speed; // Verwende den Basisgeschwindigkeitswert, falls kein Wert gesetzt ist
 
         // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
         var marqueeOptions = {
