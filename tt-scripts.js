@@ -276,21 +276,21 @@ document.addEventListener('DOMContentLoaded', function() {
           // Usecase Card Slider
           '.tt-usecase-card-slider': {
             type     : 'loop',
-            drag   : 'free',
             focus    : 'center',
             autoWidth: true,
             drag   : true,
             rewind: false,
             pagination: false,
             arrows: false,
-            autoScroll: 'pause',
+            autoScroll: false,
+            autoplay: 'pause',
             intersection: {
               rootMargin: '200px',
               inView: {
-                autoScroll: true,
+                autoplay: true,
               },
               outView: {
-                autoScroll: false,
+                autoplay: false,
               },
             },
             flickPower: '150',
