@@ -701,10 +701,10 @@ ul.checklist li::before {
     background-color: var(--blue-300);
 }
 
-.card-content-ai .tt-feature-requirements-content:first-child ul.checklist li::before {
+.card-ai .tt-feature-requirements-content:first-child ul.checklist li::before {
     background-color: var(--indigo-500);
 }
-.card-content-ai .tt-feature-requirements-content:nth-child(2) ul.checklist li::before {
+.card-ai .tt-feature-requirements-content:nth-child(2) ul.checklist li::before {
     background-color: var(--red-300);
 }
 
@@ -784,7 +784,7 @@ ol.quickstart-list {
     background: linear-gradient(to bottom right, var(--orange-500), var(--blue-300));
   }
 
-  .card-content-ai .tt-feature-quickstart::before {
+  .card-ai .tt-feature-quickstart::before {
     background: linear-gradient(to bottom right, var(--indigo-500), var(--red-300));
   }
   
