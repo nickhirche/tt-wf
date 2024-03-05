@@ -351,13 +351,6 @@ document.addEventListener('DOMContentLoaded', function() {
         // Erstellen einer neuen Splide-Instanz mit den Optionen
         var splideInstance = new Splide(sliderElement, sliderOptions[sliderClass]).mount(window.splide.Extensions);
 
-        // Hinzufügen von Ereignis-Callbacks für Autoplay
-        splideInstance.on('autoplay:play', function() {
-          console.log('Autoplay started for', sliderElement);
-        }).on('autoplay:pause', function() {
-          console.log('Autoplay paused for', sliderElement);
-        });
-
         // Speichern der Instanzen in einem Array für jede Klasse
         sliders[sliderClass] = sliders[sliderClass] || [];
         sliders[sliderClass].push(splideInstance);
