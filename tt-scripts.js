@@ -364,6 +364,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sliders['.tt-marquee-slider'] = sliders['.tt-marquee-slider'] || [];
         sliders['.tt-marquee-slider'].push(splideInstance);
     });
+    
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
