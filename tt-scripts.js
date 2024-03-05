@@ -339,6 +339,8 @@ document.addEventListener('DOMContentLoaded', function() {
       // Weitere Konfigurationen können hier hinzugefügt werden
     };
 
+    var sliders = {};
+    
     // Erstelle Slider-Instanzen für jeden .tt-marquee-slider
     document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
       // Lese den Wert von data-speed für den aktuellen Slider
