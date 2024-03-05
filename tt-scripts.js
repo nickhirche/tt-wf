@@ -215,7 +215,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pagination: false,
             arrows: false,
             autoScroll: false,
-            
+
             flickPower: '150',
             wheelSleep: '0',
           },
@@ -296,6 +296,30 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
+          // Marquee Slider
+          '.tt-marquee-slider': {
+            type     : 'loop',
+            drag   : 'free',
+            focus    : 'center',
+            autoWidth: true,
+            drag   : true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            autoScroll: 'pause',
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoScroll: true,
+              },
+              outView: {
+                autoScroll: false,
+              },
+            },
+            flickPower: '150',
+            wheelSleep: '0',
+          },
+          // Blog Slider
           '.tt-blog-card-slider': {
             autoWidth: true,
             drag   : true,
