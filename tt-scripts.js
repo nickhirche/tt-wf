@@ -348,6 +348,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var marqueeSpeed = sliderElement.dataset.speed;
         marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert, falls kein Wert gesetzt ist
 
+        // Überprüfe, ob der marqueeSpeed gültig ist
+        console.log(`Speed für Slider ist: ${marqueeSpeed}`); // Zum Debuggen
+
         // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
         var marqueeOptions = {
             ...sliderOptions['.tt-marquee-slider'],
@@ -364,7 +367,7 @@ document.addEventListener('DOMContentLoaded', function() {
         sliders['.tt-marquee-slider'] = sliders['.tt-marquee-slider'] || [];
         sliders['.tt-marquee-slider'].push(splideInstance);
     });
-    
+
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
