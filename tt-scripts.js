@@ -339,34 +339,37 @@ document.addEventListener('DOMContentLoaded', function() {
       // Weitere Konfigurationen können hier hinzugefügt werden
     };
 
-    // Objekt zur Speicherung der erstellten Splide-Instanzen
-    var sliders = {};
-
     // Erstelle Slider-Instanzen für jeden .tt-marquee-slider
     document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
-        // Lese den Wert von data-speed für den aktuellen Slider
-        var marqueeSpeed = sliderElement.dataset.speed;
-        marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert, falls kein Wert gesetzt ist
+      // Lese den Wert von data-speed für den aktuellen Slider
+      var marqueeSpeed = sliderElement.dataset.speed; // Lese den dataset-Wert von speed
+      marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert
 
-        // Überprüfe, ob der marqueeSpeed gültig ist
-        console.log(`Speed für Slider ist: ${marqueeSpeed}`); // Zum Debuggen
+      // Überprüfe, ob der marqueeSpeed gültig ist
+      console.log(`Speed für Slider ist: ${marqueeSpeed}`); // Zum Debuggen
 
-        // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
-        var marqueeOptions = {
-            ...sliderOptions['.tt-marquee-slider'],
-            autoScroll: {
-                ...sliderOptions['.tt-marquee-slider'].autoScroll,
-                speed: marqueeSpeed
-            }
-        };
+      // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
+      var marqueeOptions = Object.assign({}, sliderOptions['.tt-marquee-slider']); // Erstelle eine Kopie der Basisoptionen
 
-        // Erstelle eine neue Splide-Instanz mit den angepassten Optionen für den aktuellen Slider
-        var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
+      // Stelle sicher, dass autoScroll ein Objekt ist
+      if (typeof marqueeOptions.autoScroll === 'object') {
+          marqueeOptions.autoScroll = Object.assign({}, marqueeOptions.autoScroll);
+          marqueeOptions.autoScroll.speed = marqueeSpeed;
+      } else {
+          marqueeOptions.autoScroll = {
+              speed: marqueeSpeed,
+              pauseOnHover: false,
+              pauseOnFocus: false
+          };
+      }
 
-        // Füge die neue Instanz zu einem Array von Slidern hinzu, basierend auf der Klasse
-        sliders['.tt-marquee-slider'] = sliders['.tt-marquee-slider'] || [];
-        sliders['.tt-marquee-slider'].push(splideInstance);
-    });
+      // Erstelle eine neue Splide-Instanz mit den angepassten Optionen für den aktuellen Slider
+      var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
+
+      // Speichere die Instanz in einem Array, basierend auf der Klasse
+      sliders['.tt-marquee-slider'] = sliders['.tt-marquee-slider'] || [];
+      sliders['.tt-marquee-slider'].push(splideInstance);
+  });
 
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
