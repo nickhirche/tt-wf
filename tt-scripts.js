@@ -316,7 +316,7 @@ document.addEventListener('DOMContentLoaded', function() {
               pauseOnHover: false,
               pauseOnFocus: false,
             },
-            intersection: {
+            /*intersection: {
               rootMargin: '200px',
               inView: {
                 autoScroll: true,
@@ -324,9 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
               outView: {
                 autoScroll: false,
               },
-            },
-            flickPower: '150',
-            wheelSleep: '0',
+            },*/
           },
           // Blog Slider
           '.tt-blog-card-slider': {
