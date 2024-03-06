@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: 1,
+              speed: 1.5,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -334,7 +334,31 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: 4,
+              speed: 2.5,
+              pauseOnHover: false,
+              pauseOnFocus: false,
+            },
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoScroll: true,
+              },
+              outView: {
+                autoScroll: false,
+              },
+            },
+          },
+          '.tt-marquee-slider.marquee-right-speed-1': {
+            type     : 'loop',
+            focus    : 'center',
+            drag   : false,
+            autoWidth: true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            autoScroll: {
+              autoStart: false,
+              speed: -1.5,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -358,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: -1,
+              speed: -2.5,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
