@@ -377,7 +377,7 @@ document.addEventListener('DOMContentLoaded', function() {
     ];
   
     // Objekt zur Speicherung der erstellten Splide-Instanzen
-    var sliders = {};
+    // var sliders = {};
 
     // Über jede Slider-Klasse iterieren, um die Instanzen zu erstellen
     Object.keys(sliderOptions).forEach(function(sliderClass) {
