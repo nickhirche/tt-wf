@@ -319,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
               rootMargin: '200px',
               inView: {
                 autoScroll: {
-                  speed: -2,
+                  speed: -6,
                 },
               },
               outView: {
