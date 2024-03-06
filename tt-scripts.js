@@ -302,16 +302,14 @@ document.addEventListener('DOMContentLoaded', function() {
           // Marquee Slider
           '.tt-marquee-slider': {
             type     : 'loop',
-            drag   : 'free',
+            drag   : false,
             focus    : 'center',
             autoWidth: true,
-            drag   : false,
             rewind: false,
             pagination: false,
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: -2,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -357,6 +355,18 @@ document.addEventListener('DOMContentLoaded', function() {
               speed: marqueeSpeed
           }
       };
+      var marqueeOptions = {
+        ...sliderOptions['.tt-marquee-slider'],
+        intersection: {
+            ...sliderOptions['.tt-marquee-slider'].intersection,
+            inView: {
+                ...sliderOptions['.tt-marquee-slider'].intersection.inView,
+                autoScroll: {
+                    speed: marqueeSpeed
+                },
+            }
+        }
+     };  
 
       // Erstelle eine neue Splide-Instanz mit den angepassten Optionen für den aktuellen Slider
       var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
