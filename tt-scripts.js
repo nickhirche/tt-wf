@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function() {
             autoWidth: true,
             isNavigation: true,
             cloneStatus: false,
+            autoScroll: false,
             autoplay: 'pause',
             intersection: {
               rootMargin: '200px',
