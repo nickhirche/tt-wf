@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: 1.5,
+              speed: 1.25,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -334,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: 2.5,
+              speed: 2,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: -1.5,
+              speed: -1.25,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -382,7 +382,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: -2.5,
+              speed: -2,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
