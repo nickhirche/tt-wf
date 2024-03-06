@@ -286,9 +286,10 @@ document.addEventListener('DOMContentLoaded', function() {
             pagination: false,
             arrows: false,
             autoScroll: false,
+            easing: 'cubic-bezier(0.65,0.05,0.36,1)',
             autoplay: 'pause',
             intersection: {
-              rootMargin: '200px',
+              rootMargin: '30%',
               inView: {
                 autoplay: true,
               },
