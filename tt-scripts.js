@@ -309,7 +309,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: false,
             pagination: false,
             arrows: false,
-            autoScroll: 'pause',
+            // autoScroll: 'pause',
             autoScroll: {
               speed: 2,
               pauseOnHover: false,
