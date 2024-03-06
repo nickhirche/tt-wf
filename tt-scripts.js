@@ -367,7 +367,10 @@ document.addEventListener('DOMContentLoaded', function() {
         var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
 
          // Logge die Splide-Instanz in der Konsole
-        console.log(splideInstance);
+         console.log('Splide-Instanz:', splideInstance);
+         console.log('Splide-Optionen:', splideInstance.options);
+         console.log('Hat autoScroll:', splideInstance.options.autoScroll);
+         console.log('autoScroll Speed:', splideInstance.options.autoScroll.speed);
 
         // Füge die neue Instanz zu einem Array von Slidern hinzu, basierend auf der Klasse
         var sliderClass = '.tt-marquee-slider';
