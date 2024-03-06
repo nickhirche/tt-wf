@@ -318,7 +318,11 @@ document.addEventListener('DOMContentLoaded', function() {
             intersection: {
               rootMargin: '200px',
               inView: {
-                autoScroll: true,
+                autoScroll: {
+                  speed: -2,
+                  pauseOnHover: false,
+                  pauseOnFocus: false,
+                },
               },
               outView: {
                 autoScroll: false,
@@ -359,6 +363,9 @@ document.addEventListener('DOMContentLoaded', function() {
               speed: marqueeSpeed
           }
         };
+
+        // Aktualisiere die Splide-Instanz, damit die neuen Optionen übernommen werden
+        splideInstance.refresh();
 
         // Debugging: Überprüfen Sie den Wert, der an die Optionen übergeben wird
         console.log('Speed-Wert für den Slider:', marqueeSpeed, 'Optionen:', marqueeOptions);
