@@ -344,9 +344,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Erstelle Slider-Instanzen für jeden .tt-marquee-slider
     document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
         
-      // Lese den Wert von data-speed für den aktuellen Slider
-        var marqueeSpeed = sliderElement.dataset.speed;
-        marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert
+        // Lese den Wert von data-speed für den aktuellen Slider
+          var marqueeSpeed = sliderElement.dataset.speed;
+          marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert
 
         // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
         var marqueeOptions = {
@@ -356,6 +356,9 @@ document.addEventListener('DOMContentLoaded', function() {
               speed: marqueeSpeed
           }
         };
+
+        // Debugging: Überprüfen Sie den Wert, der an die Optionen übergeben wird
+        console.log('Speed-Wert für den Slider:', marqueeSpeed, 'Optionen:', marqueeOptions);
 
         // Erstelle eine neue Splide-Instanz mit den angepassten Optionen für den aktuellen Slider
         var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
