@@ -300,7 +300,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wheelSleep: '0',
           },
           // Marquee Slider
-          '.tt-marquee-slider': {
+          '.tt-marquee-slider.marquee-left-speed-1': {
             type     : 'loop',
             focus    : 'center',
             drag   : false,
@@ -310,7 +310,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: 4,
+              speed: 1,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -324,7 +324,7 @@ document.addEventListener('DOMContentLoaded', function() {
               },
             },
           },
-          '.tt-marquee-slider.marquee-left-speed-1': {
+          '.tt-marquee-slider.marquee-left-speed-2': {
             type     : 'loop',
             focus    : 'center',
             drag   : false,
@@ -358,7 +358,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             autoScroll: {
               autoStart: false,
-              speed: -2,
+              speed: -1,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
