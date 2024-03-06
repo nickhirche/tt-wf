@@ -342,7 +342,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Erstelle Slider-Instanzen für jeden .tt-marquee-slider
     document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
-        console.log(sliderElement.dataset.speed); // Prüfen Sie den Wert, bevor Sie ihn parsen
+       
+        // Prüfen Sie den Wert, bevor Sie ihn parsen
+        console.log(sliderElement.dataset.speed);
         
         // Lese den Wert von data-speed für den aktuellen Slider
           var marqueeSpeed = sliderElement.dataset.speed;
