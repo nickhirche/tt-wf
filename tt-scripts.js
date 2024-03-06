@@ -349,13 +349,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
       var marqueeOptions = {
-          ...sliderOptions['.tt-marquee-slider'],
-          autoScroll: {
-              ...sliderOptions['.tt-marquee-slider'].autoScroll,
-              speed: marqueeSpeed
-          }
-      };
-      var marqueeOptions = {
         ...sliderOptions['.tt-marquee-slider'],
         intersection: {
             ...sliderOptions['.tt-marquee-slider'].intersection,
