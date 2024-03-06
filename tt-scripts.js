@@ -302,23 +302,70 @@ document.addEventListener('DOMContentLoaded', function() {
           // Marquee Slider
           '.tt-marquee-slider': {
             type     : 'loop',
-            drag   : false,
             focus    : 'center',
+            drag   : false,
             autoWidth: true,
             rewind: false,
             pagination: false,
             arrows: false,
             autoScroll: {
               autoStart: false,
+              speed: 4,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
             intersection: {
               rootMargin: '200px',
               inView: {
-                autoScroll: {
-                  speed: -6,
-                },
+                autoScroll: true,
+              },
+              outView: {
+                autoScroll: false,
+              },
+            },
+          },
+          '.tt-marquee-slider.marquee-left-speed-1': {
+            type     : 'loop',
+            focus    : 'center',
+            drag   : false,
+            autoWidth: true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            autoScroll: {
+              autoStart: false,
+              speed: 4,
+              pauseOnHover: false,
+              pauseOnFocus: false,
+            },
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoScroll: true,
+              },
+              outView: {
+                autoScroll: false,
+              },
+            },
+          },
+          '.tt-marquee-slider.marquee-right-speed-2': {
+            type     : 'loop',
+            focus    : 'center',
+            drag   : false,
+            autoWidth: true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            autoScroll: {
+              autoStart: false,
+              speed: -2,
+              pauseOnHover: false,
+              pauseOnFocus: false,
+            },
+            intersection: {
+              rootMargin: '200px',
+              inView: {
+                autoScroll: true,
               },
               outView: {
                 autoScroll: false,
@@ -339,46 +386,6 @@ document.addEventListener('DOMContentLoaded', function() {
           
       // Weitere Konfigurationen können hier hinzugefügt werden
     };
-
-    // Erstelle Slider-Instanzen für jeden .tt-marquee-slider
-    document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
-      // Lese den Wert von data-speed für den aktuellen Slider
-      var marqueeSpeed = sliderElement.dataset.speed;
-      marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 10; // Verwende 2 als Standardwert
-      console.log(marqueeSpeed); // Prüfen Sie den geparsten Wert
-
-      // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
-      var marqueeOptions = {
-        ...sliderOptions['.tt-marquee-slider'],
-        intersection: {
-            ...sliderOptions['.tt-marquee-slider'].intersection,
-            inView: {
-                ...sliderOptions['.tt-marquee-slider'].intersection.inView,
-                autoScroll: {
-                    speed: marqueeSpeed
-                },
-            }
-        }
-     };  
-
-      // Erstelle eine neue Splide-Instanz mit den angepassten Optionen für den aktuellen Slider
-      var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
-
-      // Debugging: Überprüfen Sie den Wert, der an die Optionen übergeben wird
-      console.log('Speed-Wert für den Slider:', marqueeSpeed, 'Optionen:', marqueeOptions);
-
-      // Logge die Splide-Instanz in der Konsole
-      console.log('Splide-Instanz:', splideInstance);
-      console.log('Splide-Optionen:', splideInstance.options);
-      console.log('Hat autoScroll:', splideInstance.options.autoScroll);
-      console.log('autoScroll Speed:', splideInstance.options.autoScroll.speed);
-
-      // Füge die neue Instanz zu einem Array von Slidern hinzu, basierend auf der Klasse
-      var sliderClass = '.tt-marquee-slider';
-      sliders[sliderClass] = sliders[sliderClass] || [];
-      sliders[sliderClass].push(splideInstance);
-    });
-
   
     // Array von Objekten, die definieren, welche Slider synchronisiert werden sollen
     var syncPairs = [
