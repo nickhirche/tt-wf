@@ -387,7 +387,7 @@ document.addEventListener('DOMContentLoaded', function() {
               pauseOnFocus: false,
             },
             intersection: {
-              rootMargin: '200px',
+              rootMargin: '30vh',
               inView: {
                 autoScroll: true,
               },
