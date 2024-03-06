@@ -312,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function() {
             // autoScroll: 'pause',
             autoScroll: {
               //autoStart: false,
-              speed: 2,
+              speed: -2,
               pauseOnHover: false,
               pauseOnFocus: false,
             },
@@ -346,7 +346,7 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Lese den Wert von data-speed für den aktuellen Slider
           var marqueeSpeed = sliderElement.dataset.speed;
-          marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 2; // Verwende 2 als Standardwert
+          marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : -1; // Verwende 2 als Standardwert
 
         // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
         var marqueeOptions = {
