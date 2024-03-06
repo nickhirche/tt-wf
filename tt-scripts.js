@@ -344,7 +344,7 @@ document.addEventListener('DOMContentLoaded', function() {
     document.querySelectorAll('.tt-marquee-slider').forEach(function(sliderElement) {
       // Lese den Wert von data-speed für den aktuellen Slider
       var marqueeSpeed = sliderElement.dataset.speed;
-      marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 4; // Verwende 2 als Standardwert
+      marqueeSpeed = marqueeSpeed ? parseInt(marqueeSpeed, 10) : 10; // Verwende 2 als Standardwert
       console.log(marqueeSpeed); // Prüfen Sie den geparsten Wert
 
       // Kopiere allgemeine Optionen und überschreibe autoScroll.speed mit dem individuellen Wert
