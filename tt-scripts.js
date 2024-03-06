@@ -315,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
               pauseOnFocus: false,
             },
             intersection: {
-              rootMargin: '200px',
+              rootMargin: '30%',
               inView: {
                 autoScroll: true,
               },
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', function() {
               pauseOnFocus: false,
             },
             intersection: {
-              rootMargin: '200px',
+              rootMargin: '30%',
               inView: {
                 autoScroll: true,
               },
@@ -363,7 +363,7 @@ document.addEventListener('DOMContentLoaded', function() {
               pauseOnFocus: false,
             },
             intersection: {
-              rootMargin: '200px',
+              rootMargin: '30%',
               inView: {
                 autoScroll: true,
               },
