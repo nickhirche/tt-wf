@@ -366,6 +366,9 @@ document.addEventListener('DOMContentLoaded', function() {
         // Erstelle eine neue Splide-Instanz mit den angepassten Optionen für den aktuellen Slider
         var splideInstance = new Splide(sliderElement, marqueeOptions).mount();
 
+         // Logge die Splide-Instanz in der Konsole
+        console.log(splideInstance);
+
         // Füge die neue Instanz zu einem Array von Slidern hinzu, basierend auf der Klasse
         var sliderClass = '.tt-marquee-slider';
         sliders[sliderClass] = sliders[sliderClass] || [];
