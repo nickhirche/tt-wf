@@ -305,7 +305,7 @@ document.addEventListener('DOMContentLoaded', function() {
             drag   : 'free',
             focus    : 'center',
             autoWidth: true,
-            drag   : true,
+            drag   : false,
             rewind: false,
             pagination: false,
             arrows: false,
