@@ -311,7 +311,7 @@ document.addEventListener('DOMContentLoaded', function() {
             arrows: false,
             // autoScroll: 'pause',
             autoScroll: {
-              autoStart: false,
+              //autoStart: false,
               speed: 2,
               pauseOnHover: false,
               pauseOnFocus: false,
