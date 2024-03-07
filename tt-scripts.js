@@ -230,6 +230,17 @@ document.addEventListener('DOMContentLoaded', function() {
               rewind: true,
               drag: true,
               updateOnMove: true,
+              autoScroll: false,
+              autoplay: 'pause',
+              intersection: {
+                rootMargin: '200px',
+                inView: {
+                  autoplay: true,
+                },
+                outView: {
+                  autoplay: false,
+                },
+              },
           },  
           '.tt-accordion-content-slider': {
             autoWidth: false,
@@ -239,16 +250,6 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: true,
             pagination: false,
             arrows: false,
-            autoScroll: false,
-            intersection: {
-              rootMargin: '200px',
-              inView: {
-                autoplay: true,
-              },
-              outView: {
-                autoplay: false,
-              },
-            },
             breakpoints: {
               991: { // or less
                 type     : 'loop',
