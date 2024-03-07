@@ -231,6 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
               drag: true,
               updateOnMove: true,
               autoScroll: false,
+              pauseOnHover: false,
+              pauseOnFocus: false,
               autoplay: 'pause',
               intersection: {
                 rootMargin: '200px',
@@ -250,6 +252,7 @@ document.addEventListener('DOMContentLoaded', function() {
             rewind: true,
             pagination: false,
             arrows: false,
+            autoScroll: false,
             breakpoints: {
               991: { // or less
                 type     : 'loop',
