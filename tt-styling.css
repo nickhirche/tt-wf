@@ -856,6 +856,11 @@ blockquote span::after, blockquote em::after {
     padding: 0.1rem 0.2rem 0.1rem;
 }
 
+.tt-richtext pre.w-code-block code {
+    max-height: max(300px, 60vh);
+    overflow: auto;
+}
+
 .w-code-block {
     font-family: Jetbrainsmono, sans-serif;
     font-size: .85rem;
@@ -872,6 +877,7 @@ blockquote span::after, blockquote em::after {
 pre.w-code-block code {
     margin: unset;
 }
+
 
 /* Hintblock */
 
