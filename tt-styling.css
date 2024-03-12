@@ -857,7 +857,7 @@ blockquote span::after, blockquote em::after {
     font-size: .85rem;
     font-weight: 500;
     border-radius: 0.75rem;
-    background-color: #222222;
+    background-color: #222222 !important;
 }
 
 .tt-richtext .w-code-block {
