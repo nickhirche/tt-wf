@@ -843,13 +843,30 @@ blockquote span::after, blockquote em::after {
 }
 
 
-/* SUBSCRIPT */
+/* CODE + CODEBLOCK */
 
 .tt-richtext code {
     border-radius: 0.4rem;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
     padding: 0.1rem 0.2rem 0.1rem;
+}
+
+.w-code-block {
+    font-family: Jetbrainsmono, sans-serif;
+    font-size: .85rem;
+    font-weight: 500;
+    border-radius: 0.75rem;
+    background-color: #222222;
+}
+
+.tt-richtext .w-code-block {
+    margin-top: 1.4rem;
+    margin-bottom: 1.4rem;
+}
+
+pre.w-code-block code {
+    margin: unset;
 }
 
 /* Pricing Table */
