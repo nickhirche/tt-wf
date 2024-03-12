@@ -869,6 +869,21 @@ pre.w-code-block code {
     margin: unset;
 }
 
+/* Hintblock */
+
+.tt-hint-block::before {
+    content:"💡";
+    font-family: Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, Android Emoji, EmojiSymbols, EmojiOne Mozilla, Twemoji Mozilla, Segoe UI Symbol, Noto Color Emoji Compat, emoji;
+}
+
+.tt-hint-block-content:first-child {
+    margin-top: 0;
+}
+
+.tt-hint-block-content h1, .tt-hint-block-content h2, .tt-hint-block-content h3, .tt-hint-block-content h4, .tt-hint-block-content h5  {
+    font-size: 1rem;
+}
+
 /* Pricing Table */
 .tt-pricing-tab-menu {
     -webkit-backdrop-filter: blur(1rem);
