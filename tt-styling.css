@@ -845,7 +845,7 @@ blockquote span::after, blockquote em::after {
 
 /* SUBSCRIPT */
 
-.tt-richtext sub {
+.tt-richtext code {
     border-radius: 0.4rem;
     -webkit-box-decoration-break: clone;
     box-decoration-break: clone;
