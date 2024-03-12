@@ -880,8 +880,13 @@ pre.w-code-block code {
     margin-top: 0;
 }
 
+.tt-richtext .tt-hint-block-content:first-child, .tt-richtext .tt-hint-block-content:first-child p {
+    margin-top: 0;
+}
+
 .tt-hint-block-content h1, .tt-hint-block-content h2, .tt-hint-block-content h3, .tt-hint-block-content h4, .tt-hint-block-content h5  {
     font-size: 1rem;
+    margin: 0;
 }
 
 /* Pricing Table */
