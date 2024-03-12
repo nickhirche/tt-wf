@@ -842,6 +842,10 @@ blockquote span::after, blockquote em::after {
     margin-bottom: 0;
 }
 
+.tt-richtext .w-embed {
+    margin: 2rem 0;
+} 
+
 
 /* CODE + CODEBLOCK */
 
