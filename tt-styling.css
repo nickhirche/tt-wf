@@ -895,7 +895,7 @@ pre.w-code-block code {
 }
 
 .tt-hint-block-content h1, .tt-hint-block-content h2, .tt-hint-block-content h3, .tt-hint-block-content h4, .tt-hint-block-content h5  {
-    font-size: 1rem;
+    font-size: .9rem;
     margin: 0;
 }
 
