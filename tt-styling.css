@@ -867,15 +867,14 @@ blockquote span::after, blockquote em::after {
 
 .tt-richtext.tt-rte-terms ol > li {
     font-size: 1.4rem;
-}
-
-.tt-richtext.tt-rte-terms ol > li:before {
-font-family: Polysans median, sans-serif;
-font-weight: 600;
+    font-family: Polysans median, sans-serif;
+    font-weight: 600;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol li {
     font-size: 1rem;
+    font-family: Polysans slim, sans-serif;
+    font-weight: 300;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li {
