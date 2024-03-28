@@ -846,6 +846,43 @@ blockquote span::after, blockquote em::after {
     margin: 2rem 0;
 } 
 
+/* RICHTEXT Terms */
+
+.tt-richtext.tt-rte-terms ol {
+    counter-reset: item;
+    list-style-type: none; /* Entfernt die Standard-Nummerierung */
+} 
+
+.tt-richtext.tt-rte-terms li {
+    display: block;
+} 
+
+.tt-richtext.tt-rte-terms li:before {
+    content: counters(item, ".") " ";
+    counter-increment: item;
+}
+
+.tt-richtext.tt-rte-terms ol > li {
+/* Stil X */
+}
+
+.tt-richtext.tt-rte-terms ol > li > ol {
+/* Anderer Stil */
+}
+
+.tt-richtext.tt-rte-terms ol > li > ol > li {
+/* Wieder ein anderer Stil */
+}
+
+.tt-richtext.tt-rte-terms ol > li > ol > li > ol {
+/* Noch ein anderer Stil */
+}
+
+.tt-richtext.tt-rte-terms ol > li > ol > li > ol > li {
+/* Noch ein anderer Stil */
+}
+
+
 
 /* CODE + CODEBLOCK */
 
