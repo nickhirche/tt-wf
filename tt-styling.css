@@ -869,12 +869,13 @@ blockquote span::after, blockquote em::after {
     font-size: 1.4rem;
 }
 
-.tt-richtext.tt-rte-terms ol > li > ol li {
-    font-size: 1rem;
+.tt-richtext.tt-rte-terms ol > li:before {
+font-family: Polysans median, sans-serif;
+font-weight: 600;
 }
 
-.tt-richtext.tt-rte-terms ol > li > ol {
-/* Anderer Stil */
+.tt-richtext.tt-rte-terms ol > li > ol li {
+    font-size: 1rem;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li {
@@ -883,10 +884,6 @@ blockquote span::after, blockquote em::after {
 .tt-richtext.tt-rte-terms ol > li > ol > li::before {
     position: absolute;
     margin-left: -3rem;
-}
-
-.tt-richtext.tt-rte-terms ol > li > ol > li > ol {
-/* Noch ein anderer Stil */
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li > ol > li {
