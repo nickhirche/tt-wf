@@ -853,6 +853,7 @@ blockquote span::after, blockquote em::after {
     list-style-type: none; /* Entfernt die Standard-Nummerierung */
     width: 100%;
     padding-left: 0;
+    font-variant-numeric: lining-nums tabular-nums;
 } 
 
 .tt-richtext.tt-rte-terms li {
@@ -860,12 +861,16 @@ blockquote span::after, blockquote em::after {
 } 
 
 .tt-richtext.tt-rte-terms li:before {
-    content: counters(item, ".") " ";
+    content: counters(item, ".") ". ";
     counter-increment: item;
 }
 
 .tt-richtext.tt-rte-terms ol > li {
-/* Stil X */
+    font-size: 1.4rem;
+}
+
+.tt-richtext.tt-rte-terms ol > li > ol li {
+    font-size: 1rem;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol {
@@ -873,11 +878,11 @@ blockquote span::after, blockquote em::after {
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li {
-    padding-left: 2rem;
+    padding-left: 3rem;
 }
 .tt-richtext.tt-rte-terms ol > li > ol > li::before {
     position: absolute;
-    margin-left: -2rem;
+    margin-left: -3rem;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li > ol {
@@ -885,7 +890,11 @@ blockquote span::after, blockquote em::after {
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li > ol > li {
-/* Noch ein anderer Stil */
+    padding-left: 4rem;
+}
+
+.tt-richtext.tt-rte-terms ol > li > ol > li > ol > li::before {
+    margin-left: -4rem;
 }
 
 
