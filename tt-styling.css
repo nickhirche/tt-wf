@@ -851,6 +851,8 @@ blockquote span::after, blockquote em::after {
 .tt-richtext.tt-rte-terms ol {
     counter-reset: item;
     list-style-type: none; /* Entfernt die Standard-Nummerierung */
+    width: 100%;
+    padding-left: 0;
 } 
 
 .tt-richtext.tt-rte-terms li {
@@ -871,7 +873,11 @@ blockquote span::after, blockquote em::after {
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li {
-/* Wieder ein anderer Stil */
+    padding-left: 2rem;
+}
+.tt-richtext.tt-rte-terms ol > li > ol > li::before {
+    position: absolute;
+    margin-left: -2rem;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li > ol {
