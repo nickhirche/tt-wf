@@ -712,20 +712,41 @@ ul.checklist li::before {
 }
 
 /* Requirements */
+/* Editor Feature Highlights */
 .tt-feature-highlights.editor-colors .tt-feature-cards :first-child {
   border-color: var(--color-editor-grading-1);
+}
+.tt-feature-highlights.editor-colors .tt-feature-cards :first-child .feature-count {
+  -webkit-text-stroke-color: var(--color-editor-grading-1);
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(2) {
   border-color: var(--color-editor-grading-2);
 }
+.tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(2) .feature-count {
+  -webkit-text-stroke-color: var(--color-editor-grading-2);
+}
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(3) {
   border-color: var(--color-editor-grading-3);
+}
+.tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(3) .feature-count {
+  -webkit-text-stroke-color: var(--color-editor-grading-3);
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(4) {
   border-color: var(--color-editor-grading-4);
 }
+.tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(4) .feature-count {
+  -webkit-text-stroke-color: var(--color-editor-grading-4);
+}
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(5) {
   border-color: var(--color-editor-grading-5);
+}
+.tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(5) .feature-count {
+  -webkit-text-stroke-color: var(--color-editor-grading-5);
+}
+
+.tt-feature-requirements,
+.tt-feature-quickstart {
+  box-shadow: var(--shadow-dark);
 }
 
 .card-comments .tt-feature-requirements-content:first-child ul.checklist li::before {
