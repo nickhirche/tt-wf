@@ -7,9 +7,13 @@
 }
 
 :root {
+  --black-8: hsla(0, 0%, 0%, 0.1);
+  --black-9: hsla(0, 0%, 0%, 0.06);
+  --transition-base: 0.25s cubic-bezier(0.65, 0, 0.35, 1);
+  --shadow-dark: 0px 2rem 1.5rem 0px rgba(0, 0, 0, 0.10), 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.07), 0px 0.125rem 0.1rem 0px rgba(0, 0, 0, 0.05);
+  z-index: 3;
   font-size: 20px;
 }
-
 @media (max-width: 992px) {
   :root {
     font-size: 19px;
@@ -20,6 +24,7 @@
     font-size: 18px;
   }
 }
+
 @media screen and (max-width: 767px) {
   .course-cards::after, .c-calculator_wrapper::after {
     content: "&#32;";
@@ -29,13 +34,6 @@
     color: transparent;
   }
 }
-:root {
-  --black-8: hsla(0, 0%, 0%, 0.1);
-  --black-9: hsla(0, 0%, 0%, 0.06);
-  --transition-base: 0.25s cubic-bezier(0.65, 0, 0.35, 1);
-  z-index: 3;
-}
-
 body {
   font-feature-settings: "ss04" on, "salt" on, "ss01" on;
 }
@@ -715,19 +713,19 @@ ul.checklist li::before {
 
 /* Requirements */
 .tt-feature-highlights.editor-colors .tt-feature-cards :first-child {
-  border-color: var(color-editor-grading-1);
+  border-color: var(--color-editor-grading-1);
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(2) {
-  border-color: var(color-editor-grading-2);
+  border-color: var(--color-editor-grading-2);
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(3) {
-  border-color: var(color-editor-grading-3);
+  border-color: var(--color-editor-grading-3);
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(4) {
-  border-color: var(color-editor-grading-4);
+  border-color: var(--color-editor-grading-4);
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards :nth-child(5) {
-  border-color: var(color-editor-grading-5);
+  border-color: var(--color-editor-grading-5);
 }
 
 .card-comments .tt-feature-requirements-content:first-child ul.checklist li::before {
@@ -801,6 +799,7 @@ ol.quickstart-list li::before {
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
+  margin-bottom: 0.5rem;
 }
 .tt-feature-quickstart::after {
   content: "";
