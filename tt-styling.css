@@ -589,7 +589,7 @@ h1, h2, h3, h4, h5, h6 {
     right: 0;
   }
 }
-/* Product Card */
+/* Blog Card */
 .tt-blog-card .blog-card-media {
   transition: all var(--transition-base);
 }
@@ -975,7 +975,9 @@ ol.quickstart-list li::before {
 }
 
 /* QUOTES  */
-blockquote span, blockquote em {
+/* Blockquote  */
+blockquote span,
+blockquote em {
   background-color: #fff;
   color: currentcolor;
   border-radius: 0.4rem;
@@ -985,13 +987,20 @@ blockquote span, blockquote em {
   border-radius: 0.4rem;
   font-style: normal;
 }
-
-blockquote span::before, blockquote em::before {
+blockquote span::before,
+blockquote em::before {
   content: "»";
 }
-
-blockquote span::after, blockquote em::after {
+blockquote span::after,
+blockquote em::after {
   content: "«";
+}
+
+.tt-client-quote-wrap:nth-child(2) {
+  background-image: url("https://cdn.prod.website-files.com/645a9acecda2e0594fac6126/6580b17fe7c78406c95a807b_gradient-noise-violett-orange.png");
+}
+.tt-client-quote-wrap:nth-child(3) {
+  background-image: url("https://cdn.prod.website-files.com/645a9acecda2e0594fac6126/6580b17f35510ffc21541056_gradient-noise-collaboration.png");
 }
 
 .sticky-filter {
