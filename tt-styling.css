@@ -298,7 +298,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(2em);
 }
 
-.btn-text.btn-arrow:hover:after {
+.btn-text.btn-arrow:hover:after,
+.tt-two-col-card:hover .btn-text.btn-arrow::after,
+.tt-product-card .btn-text.btn-arrow::after {
   transform: translateX(1em);
 }
 
