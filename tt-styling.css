@@ -304,7 +304,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: translateX(1em);
 }
 
-.btn-arrow:hover .btn-content {
+.btn-arrow:hover .btn-content,
+.tt-two-col-card:hover .btn-arrow .btn-content,
+.tt-product-card .btn-arrow .btn-content {
   transform: translateX(1.2em);
 }
 
