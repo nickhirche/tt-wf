@@ -306,11 +306,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .btn-arrow:hover .btn-content,
 .tt-two-col-card:hover .btn-arrow .btn-content,
-.tt-product-card .btn-arrow .btn-content {
+.tt-product-card:hover .btn-arrow .btn-content {
   transform: translateX(1.2em);
 }
 
-.btn-arrow:hover .btn-primary-arrow {
+.btn-arrow:hover .btn-primary-arrow .tt-two-col-card:hover .btn-arrow .btn-primary-arrow,
+.tt-product-card:hover .btn-arrow .btn-primary-arrow {
   transform: translateX(2em);
 }
 
