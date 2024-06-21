@@ -1339,10 +1339,17 @@ pre.w-code-block code {
 }
 /* Customer Overview Cards */
 .tt-customer-card {
-  transition: all var(--transition-base);
-  background-color: none;
+  background-color: unset;
 }
-.tt-customer-card::after {
+.tt-customer-card, .tt-customer-card .tt-customer-card::before {
+  transition: all var(--transition-base);
+}
+.tt-customer-card .btn-content {
+  width: 0;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.tt-customer-card::before {
   content: "";
   position: absolute;
   width: 100%;
@@ -1352,12 +1359,18 @@ pre.w-code-block code {
   background-color: var(--black-a-50);
   border-radius: 1.5rem;
 }
-.tt-customer-card:hover::after {
+.tt-customer-card:hover::before {
   border-radius: 2rem;
   width: calc(100% + 1rem);
   height: calc(100% + 1rem);
   left: -0.5rem;
   top: -0.5rem;
+}
+.tt-customer-card:hover .tt-button.btn-text.small.dark {
+  color: var(--white-a-0);
+}
+.tt-customer-card:hover .btn-content {
+  width: 100%;
 }
 
 /* BENEFITS TEASER */
