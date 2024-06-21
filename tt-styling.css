@@ -1384,6 +1384,10 @@ pre.w-code-block code {
 }
 @media screen and (max-width: 479px) {
   .tt-customer-card:hover::before {
+    width: calc(100% + 0.5rem);
+    height: calc(100% + 0.5rem);
+    left: -0.25rem;
+    top: -0.25rem;
     border-radius: 1.5rem;
   }
 }
