@@ -1337,6 +1337,29 @@ pre.w-code-block code {
     grid-row-gap: 0.4rem;
   }
 }
+/* Customer Overview Cards */
+.tt-customer-card {
+  transition: all var(--transition-base);
+  background-color: none;
+}
+.tt-customer-card::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: var(--black-a-50);
+  border-radius: 1.5rem;
+}
+.tt-customer-card:hover::after {
+  border-radius: 2rem;
+  width: calc(100% + 1rem);
+  height: calc(100% + 1rem);
+  left: -0.5rem;
+  top: -0.5rem;
+}
+
 /* BENEFITS TEASER */
 /*.benefits-teaser .three-cols-teasergroup-list {
     -webkit-box-pack: start;
