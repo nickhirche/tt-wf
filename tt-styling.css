@@ -1371,8 +1371,8 @@ pre.w-code-block code {
 }
 .tt-customer-card:hover::before {
   border-radius: 2.5rem;
-  right: 0.5rem;
-  bottom: 0.5rem;
+  width: calc(100% + 1rem);
+  height: calc(100% + 1rem);
   left: -0.5rem;
   top: -0.5rem;
   box-shadow: 0 20px 34px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.03), 0 1px 8px rgba(0, 0, 0, 0.02);
