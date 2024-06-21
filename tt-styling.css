@@ -1379,7 +1379,6 @@ pre.w-code-block code {
 }
 .tt-customer-card:hover .tt-button.btn-text.small {
   max-width: 10rem;
-  color: var(--white-a-0);
 }
 .tt-customer-card:hover .btn-content {
   width: 100%;
