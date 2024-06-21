@@ -1360,15 +1360,19 @@ pre.w-code-block code {
   height: 100%;
   left: 0;
   top: 0;
-  background-color: var(--black-a-50);
   border-radius: 1.5rem;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+.tt-customer-card.dark::before {
+  background-color: var(--black-a-50);
 }
 .tt-customer-card:hover::before {
   border-radius: 2rem;
-  width: calc(100% + 1rem);
-  height: calc(100% + 1rem);
+  right: -0.5rem;
+  bottom: -0.5rem;
   left: -0.5rem;
   top: -0.5rem;
+  box-shadow: 0 20px 34px rgba(0, 0, 0, 0.06), 0 4px 10px rgba(0, 0, 0, 0.04), 0 1px 4px rgba(0, 0, 0, 0.03), 0 1px 8px rgba(0, 0, 0, 0.02);
 }
 .tt-customer-card:hover .tt-button.btn-text.small {
   max-width: 10rem;
