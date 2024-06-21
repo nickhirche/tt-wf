@@ -1348,7 +1348,7 @@ pre.w-code-block code {
   background-color: unset;
 }
 .tt-customer-card .tt-button.btn-text.small {
-  width: 1rem;
+  max-width: 0.75rem;
 }
 .tt-customer-card .btn-content {
   white-space: nowrap;
@@ -1371,7 +1371,7 @@ pre.w-code-block code {
   top: -0.5rem;
 }
 .tt-customer-card:hover .tt-button.btn-text.small {
-  width: auto;
+  max-width: 10rem;
   color: var(--white-a-0);
 }
 .tt-customer-card:hover .btn-content {
