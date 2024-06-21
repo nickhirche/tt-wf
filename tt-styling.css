@@ -1339,7 +1339,8 @@ pre.w-code-block code {
 }
 /* Customer Overview Cards */
 .tt-customer-card,
-.tt-customer-card::before {
+.tt-customer-card::before,
+.tt-customer-card .tt-button.btn-text.small {
   transition: all var(--transition-base);
 }
 
