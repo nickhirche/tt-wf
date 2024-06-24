@@ -1108,10 +1108,14 @@ blockquote em::after {
 
 .w-code-block {
   font-family: Jetbrainsmono, sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 500;
   border-radius: 0.75rem;
-  background-color: #222222 !important;
+  background-color: #212121 !important;
+}
+.w-code-block .code-block-wrapper span[style="color:#dcc6e0"] {
+  color: #89DDFF;
+  font-style: italic;
 }
 
 .tt-richtext .w-code-block {
