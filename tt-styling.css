@@ -1124,8 +1124,11 @@ blockquote em::after {
 .w-code-block span[style="color:#abe338"] {
   color: #C3E88D !important;
 }
+.w-code-block span[style="color:#ffa07a"] {
+  color: #F07178 !important;
+}
 .w-code-block span[style="color:#d4d0ab"] {
-  color: var(--mid-gray) !important;
+  color: gray !important;
 }
 
 .tt-richtext .w-code-block {
