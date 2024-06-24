@@ -1113,9 +1113,12 @@ blockquote em::after {
   border-radius: 0.75rem;
   background-color: var(--black-a-0) !important;
 }
-.w-code-block .code-block-wrapper span[style="color:#dcc6e0"] {
+.w-code-block span[style="color:#dcc6e0"] {
   color: #89DDFF !important;
   font-style: italic;
+}
+.w-code-block span[style="color:#d4d0ab"] {
+  color: var(--mid-gray) !important;
 }
 
 .tt-richtext .w-code-block {
