@@ -1112,10 +1112,17 @@ blockquote em::after {
   font-weight: 500;
   border-radius: 0.75rem;
   background-color: var(--black-a-0) !important;
+  color: #EEFFFF !important;
 }
 .w-code-block span[style="color:#dcc6e0"] {
   color: #89DDFF !important;
   font-style: italic;
+}
+.w-code-block span.hljs-attr[style="color:#ffa07a"] {
+  color: #C792EA !important;
+}
+.w-code-block span[style="color:#abe338"] {
+  color: #C3E88D !important;
 }
 .w-code-block span[style="color:#d4d0ab"] {
   color: var(--mid-gray) !important;
