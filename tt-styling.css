@@ -1111,10 +1111,10 @@ blockquote em::after {
   font-size: 0.75rem;
   font-weight: 500;
   border-radius: 0.75rem;
-  background-color: #212121 !important;
+  background-color: var(--black-a-0) !important;
 }
 .w-code-block .code-block-wrapper span[style="color:#dcc6e0"] {
-  color: #89DDFF;
+  color: #89DDFF !important;
   font-style: italic;
 }
 
