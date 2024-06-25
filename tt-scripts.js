@@ -455,16 +455,19 @@ document.addEventListener('DOMContentLoaded', function() {
 
 });
 
+/* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
-  const bgDarkElement = document.querySelector('.bg-dark');
-  const navElement = document.querySelector('header.dark');
+  const bgDarkElement = document.querySelector('.bg-black');
+  const navElement = document.querySelector('nav');
 
   function checkElementInViewport() {
-      const rect = bgDarkElement.getBoundingClientRect();
-      if (rect.top >= 100 && rect.top <= window.innerHeight) {
-          navElement.classList.add('dark');
-      } else {
-          navElement.classList.remove('dark');
+      if (bgDarkElement) {
+          const rect = bgDarkElement.getBoundingClientRect();
+          if (rect.top <= 100) {
+              navElement.classList.add('dark');
+          } else {
+              navElement.classList.remove('dark');
+          }
       }
   }
 
