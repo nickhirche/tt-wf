@@ -464,7 +464,7 @@ document.addEventListener('DOMContentLoaded', function() {
       let addClass = false;
       bgDarkElements.forEach(element => {
           const rect = element.getBoundingClientRect();
-          if (rect.top <= 100) {
+          if (rect.top <= 0 && rect.bottom >= 100) {
               addClass = true;
           }
       });
