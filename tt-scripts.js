@@ -138,9 +138,9 @@ document.addEventListener('DOMContentLoaded', function() {
     var sliderOptions = {
           // Synced Features Slider Group
           '.tt-feauture-content-slider': { 
-            type     : 'fade',
+            type: 'fade',
             pagination: false,
-            arrows    : false,
+            arrows: false,
             rewind: true,
             drag: false,
             updateOnMove: true,
@@ -148,7 +148,6 @@ document.addEventListener('DOMContentLoaded', function() {
           '.tt-feature-nav-slider': {
             drag: false,
             updateOnMove: true,
-            autoWidth: true,
             isNavigation: true,
             cloneStatus: false,
             autoScroll: false,
@@ -159,11 +158,11 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
             breakpoints: {
-              991: { // or less
+              667: { // or less
                 focus    : 'center',
                 type     : 'loop',
                 drag   : true,
-                rewind: true,
+                autoWidth: true,
               },
             },
           },
