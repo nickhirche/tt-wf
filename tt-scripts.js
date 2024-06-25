@@ -162,7 +162,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 focus    : 'center',
                 type     : 'loop',
                 drag   : true,
-                autoWidth: true,
               },
             },
           },
