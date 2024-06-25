@@ -146,7 +146,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateOnMove: true,
           },
           '.tt-feature-nav-slider': {
-            focus    : 'center',
             drag: false,
             updateOnMove: true,
             autoWidth: true,
@@ -161,6 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
             wheelSleep: '0',
             breakpoints: {
               991: { // or less
+                focus    : 'center',
                 type     : 'loop',
                 drag   : true,
                 rewind: true,
