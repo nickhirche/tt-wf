@@ -154,14 +154,15 @@ document.addEventListener('DOMContentLoaded', function() {
             autoplay: false,
             rewind: false,
             pagination: false,
+            autoWidth: true,
             arrows: false,
             flickPower: '150',
             wheelSleep: '0',
             breakpoints: {
               667: { // or less
-                focus    : 'center',
-                type     : 'loop',
-                drag   : true,
+                type: 'loop',
+                focus: 'center',
+                drag: true,
               },
             },
           },
