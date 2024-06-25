@@ -1112,7 +1112,7 @@ blockquote em::after {
   border-radius: 0.75rem;
   background-color: var(--black-a-0) !important;
   color: #EEFFFF !important;
-  scrollbar-color: darkgrey orange;
+  scrollbar-color: #333333 var(--black-a-0);
   scrollbar-width: thin;
 }
 .w-code-block span[style="color:#dcc6e0"] {
@@ -1139,9 +1139,9 @@ blockquote em::after {
   background: #f1f1f1;
 }
 .w-code-block ::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
+  background-color: #333333;
   border-radius: 10px;
-  border: 3px solid orange;
+  border: 2px solid var(--black-a-0);
 }
 .w-code-block ::-webkit-scrollbar-button {
   display: block;
