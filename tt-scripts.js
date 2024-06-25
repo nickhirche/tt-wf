@@ -142,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
             pagination: false,
             arrows    : false,
             rewind: true,
-            drag: true,
+            drag: false,
             updateOnMove: true,
           },
           '.tt-feature-nav-slider': {
