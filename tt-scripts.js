@@ -457,26 +457,31 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
-  const bgDarkElement = document.querySelector('.bg-black');
+  const bgDarkElements = document.querySelectorAll('.bg-dark');
   const navElement = document.querySelector('header');
 
-  function checkElementInViewport() {
-      if (bgDarkElement) {
-          const rect = bgDarkElement.getBoundingClientRect();
+  function checkElementsInViewport() {
+      let addClass = false;
+      bgDarkElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
           if (rect.top <= 100) {
-              navElement.classList.add('dark');
-          } else {
-              navElement.classList.remove('dark');
+              addClass = true;
           }
+      });
+
+      if (addClass) {
+          navElement.classList.add('dark');
+      } else {
+          navElement.classList.remove('dark');
       }
   }
 
   // Initial check
-  checkElementInViewport();
+  checkElementsInViewport();
 
   // Check on scroll
-  window.addEventListener('scroll', checkElementInViewport);
+  window.addEventListener('scroll', checkElementsInViewport);
 
   // Check on resize
-  window.addEventListener('resize', checkElementInViewport);
+  window.addEventListener('resize', checkElementsInViewport);
 });
