@@ -148,22 +148,12 @@ document.addEventListener('DOMContentLoaded', function() {
           '.tt-feature-nav-slider': {
             focus    : 'center',
             drag: false,
-            rewind: true,
             updateOnMove: true,
             autoWidth: true,
             isNavigation: true,
             cloneStatus: false,
             autoScroll: false,
-            autoplay: 'pause',
-            intersection: {
-              rootMargin: '200px',
-              inView: {
-                autoplay: true,
-              },
-              outView: {
-                autoplay: false,
-              },
-            },
+            autoplay: false,
             rewind: false,
             pagination: false,
             arrows: false,
@@ -173,6 +163,7 @@ document.addEventListener('DOMContentLoaded', function() {
               991: { // or less
                 type     : 'loop',
                 drag   : true,
+                rewind: true,
               },
             },
           },
