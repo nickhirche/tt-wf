@@ -1112,7 +1112,7 @@ blockquote em::after {
   border-radius: 0.75rem;
   background-color: var(--black-a-0) !important;
   color: #EEFFFF !important;
-  scrollbar-color: #333333 var(--black-a-0);
+  scrollbar-color: #3D3D3D var(--black-a-0);
   scrollbar-width: thin;
 }
 .w-code-block span[style="color:#dcc6e0"] {
@@ -1139,7 +1139,7 @@ blockquote em::after {
   background: #f1f1f1;
 }
 .w-code-block ::-webkit-scrollbar-thumb {
-  background-color: #333333;
+  background-color: #3D3D3D;
   border-radius: 10px;
   border: 2px solid var(--black-a-0);
 }
@@ -1150,6 +1150,9 @@ blockquote em::after {
 }
 .w-code-block ::-webkit-scrollbar-corner {
   background-color: black;
+}
+.w-code-block code {
+  height: 100%;
 }
 
 .tt-richtext .w-code-block {
