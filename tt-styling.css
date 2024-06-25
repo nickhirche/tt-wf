@@ -1103,7 +1103,6 @@ blockquote em::after {
 
 .tt-richtext pre.w-code-block code {
   max-height: max(300px, 60vh);
-  overflow: auto;
 }
 
 .w-code-block {
