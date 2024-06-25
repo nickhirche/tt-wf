@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
   const bgDarkElement = document.querySelector('.bg-black');
-  const navElement = document.querySelector('nav');
+  const navElement = document.querySelector('header');
 
   function checkElementInViewport() {
       if (bgDarkElement) {
