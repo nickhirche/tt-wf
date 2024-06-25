@@ -454,3 +454,26 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+  const bgDarkElement = document.querySelector('.bg-dark');
+  const navElement = document.querySelector('header.dark');
+
+  function checkElementInViewport() {
+      const rect = bgDarkElement.getBoundingClientRect();
+      if (rect.top >= 100 && rect.top <= window.innerHeight) {
+          navElement.classList.add('dark');
+      } else {
+          navElement.classList.remove('dark');
+      }
+  }
+
+  // Initial check
+  checkElementInViewport();
+
+  // Check on scroll
+  window.addEventListener('scroll', checkElementInViewport);
+
+  // Check on resize
+  window.addEventListener('resize', checkElementInViewport);
+});
