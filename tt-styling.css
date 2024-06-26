@@ -504,6 +504,7 @@ h1, h2, h3, h4, h5, h6 {
   height: 0px;
   padding-top: 0px;
   opacity: 0;
+  transition-duration: 400ms;
 }
 @media screen and (max-width: 991px) {
   .tt-accordion-content-slider .splide__slide .accordion-text-wrap {
@@ -513,7 +514,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap::before {
-  left: 1.25rem;
+  left: -1.25rem;
   opacity: 1;
 }
 .tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
