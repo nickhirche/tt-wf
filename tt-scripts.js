@@ -461,19 +461,19 @@ document.addEventListener('DOMContentLoaded', function() {
   const navElement = document.querySelector('header');
 
   function checkElementsInViewport() {
-      let addClass = false;
-      bgDarkElements.forEach(element => {
-          const rect = element.getBoundingClientRect();
-          if (rect.top <= 0 && rect.bottom >= 100) {
-              addClass = true;
-          }
-      });
+    let addClass = false;
+    bgDarkElements.forEach(element => {
+        const rect = element.getBoundingClientRect();
+        if (rect.top <= window.innerHeight - 100 && rect.bottom >= 100) {
+            addClass = true;
+        }
+    });
 
-      if (addClass) {
-          navElement.classList.add('dark');
-      } else {
-          navElement.classList.remove('dark');
-      }
+    if (addClass) {
+        navElement.classList.add('dark');
+    } else {
+        navElement.classList.remove('dark');
+    }
   }
 
   // Initial check
