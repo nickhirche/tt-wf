@@ -458,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
   const bgDarkElements = document.querySelectorAll('.bg-black');
-  const headerElement = document.querySelector('header');
+  const headerElement = document.querySelector('heade.tt-navbar-strip');
 
   function checkElementsInViewport() {
       let addClass = false;
@@ -466,7 +466,7 @@ document.addEventListener('DOMContentLoaded', function() {
       bgDarkElements.forEach(element => {
           const rect = element.getBoundingClientRect();
           // Check if the element is at least 100px into the viewport from the top
-          if (rect.top <= 100 && rect.bottom >= 100) {
+          if (rect.top <= 200 && rect.bottom >= 100) {
               addClass = true;
           }
       });
