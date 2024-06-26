@@ -504,13 +504,11 @@ h1, h2, h3, h4, h5, h6 {
   height: 0px;
   padding-top: 0px;
   opacity: 0;
-  transition-duration: 400ms;
 }
 @media screen and (max-width: 991px) {
   .tt-accordion-content-slider .splide__slide .accordion-text-wrap {
     height: auto;
     padding-top: 0.6rem;
-    opacity: 1;
   }
 }
 .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap::before {
@@ -521,6 +519,11 @@ h1, h2, h3, h4, h5, h6 {
   height: auto;
   padding-top: 0.6rem;
   opacity: 1;
+}
+@media screen and (max-width: 991px) {
+  .tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
+    opacity: 1;
+  }
 }
 .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap, .tt-accordion-content-slider .splide__slide:hover .accordion-content-wrap {
   opacity: 1;
