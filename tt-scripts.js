@@ -465,6 +465,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
       bgDarkElements.forEach(element => {
           const rect = element.getBoundingClientRect();
+          // Check if the element is at least 100px into the viewport from the top
           if (rect.top <= 100 && rect.bottom >= 100) {
               addClass = true;
           }
