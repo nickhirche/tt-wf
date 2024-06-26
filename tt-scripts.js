@@ -458,22 +458,23 @@ document.addEventListener('DOMContentLoaded', function() {
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
   const bgDarkElements = document.querySelectorAll('.bg-dark');
-  const navElement = document.querySelector('header');
+  const headerElement = document.querySelector('header');
 
   function checkElementsInViewport() {
-    let addClass = false;
-    bgDarkElements.forEach(element => {
-        const rect = element.getBoundingClientRect();
-        if (rect.top <= window.innerHeight - 100 && rect.bottom >= 100) {
-            addClass = true;
-        }
-    });
+      let addClass = false;
 
-    if (addClass) {
-        navElement.classList.add('dark');
-    } else {
-        navElement.classList.remove('dark');
-    }
+      bgDarkElements.forEach(element => {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100 && rect.bottom >= 100) {
+              addClass = true;
+          }
+      });
+
+      if (addClass) {
+          headerElement.classList.add('dark');
+      } else {
+          headerElement.classList.remove('dark');
+      }
   }
 
   // Initial check
