@@ -512,17 +512,9 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 1;
   }
 }
-.tt-accordion-content-slider .splide__slide.is-active {
-  /*.accordion-content-wrap > * {
-  	transform: translateX(1.4rem);
-
-  	@media screen and (max-width: 991px) {
-  		transform: none;
-  	}
-  }*/
-}
 .tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap::before {
-  left: 0rem;
+  left: 1.25rem;
+  opacity: 1;
 }
 .tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
   height: auto;
