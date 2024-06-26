@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
-  const bgDarkElements = document.querySelectorAll('.bg-dark');
+  const bgDarkElements = document.querySelectorAll('.bg-black');
   const headerElement = document.querySelector('header');
 
   function checkElementsInViewport() {
