@@ -925,7 +925,7 @@ ol.quickstart-list li {
 }
 
 ol.quickstart-list li::before {
-  content: "{" counter(list-counter) "}";
+  content: counter(list-counter) ".";
 }
 
 /* Feature Card  */
