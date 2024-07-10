@@ -712,6 +712,7 @@ td {
   padding: 0.4rem 0.5rem;
   text-align: left;
   min-width: 20ch;
+  vertical-align: top;
 }
 
 tbody th {
