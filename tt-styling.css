@@ -699,6 +699,8 @@ table {
 
 thead {
   border-bottom: solid 2px;
+  font-family: Polysans median, sans-serif;
+  font-weight: 600;
 }
 
 tr {
@@ -709,7 +711,12 @@ th,
 td {
   padding: 0.4rem 0.5rem;
   text-align: left;
-  min-width: 23ch;
+  min-width: 20ch;
+}
+
+tbody th {
+  font-family: Polysans slim, sans-serif;
+  font-weight: 300;
 }
 
 /* RICHTEXTEDITOR */
