@@ -714,6 +714,7 @@ td {
   text-align: left;
   min-width: 20ch;
   vertical-align: top;
+  text-wrap: pretty;
 }
 
 tbody th {
