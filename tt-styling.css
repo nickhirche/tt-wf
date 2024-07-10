@@ -684,11 +684,18 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Table */
+.w-embed:has(table) {
+  overflow-x: auto; /* Ermöglicht horizontales Scrollen */
+  width: 90vw;
+  max-width: 38rem;
+}
+
 table {
   border-collapse: collapse;
   border: 0;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   overflow: auto;
+  width: 100%;
 }
 
 thead {
@@ -703,6 +710,7 @@ th,
 td {
   padding: 0.4rem 0.5rem;
   text-align: left;
+  min-width: 23ch;
 }
 
 /* RICHTEXTEDITOR */
