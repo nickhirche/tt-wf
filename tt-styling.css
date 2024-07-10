@@ -705,12 +705,12 @@ thead {
 }
 
 tr {
-  border-bottom: 1px solid grey;
+  border-bottom: 1px solid var(--black-6-16);
 }
 
 th,
 td {
-  padding: 0.4rem 0.5rem;
+  padding: 0.75rem 0.5rem;
   text-align: left;
   min-width: 20ch;
   vertical-align: top;
