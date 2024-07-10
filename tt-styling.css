@@ -694,7 +694,6 @@ table {
   border-collapse: collapse;
   border: 0;
   font-size: 0.9rem;
-  overflow: auto;
   width: 100%;
 }
 
