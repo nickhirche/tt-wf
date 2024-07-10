@@ -683,6 +683,28 @@ h1, h2, h3, h4, h5, h6 {
   opacity: 0.6;
 }
 
+/* Table */
+table {
+  border-collapse: collapse;
+  border: 0;
+  font-size: 0.8rem;
+  overflow: auto;
+}
+
+thead {
+  border-bottom: solid 2px;
+}
+
+tr {
+  border-bottom: 1px solid grey;
+}
+
+th,
+td {
+  padding: 0.4rem 0.5rem;
+  text-align: left;
+}
+
 /* RICHTEXTEDITOR */
 .article-rte a {
   color: currentColor;
