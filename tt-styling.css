@@ -95,6 +95,10 @@ h1, h2, h3, h4, h5, h6 {
   overflow: clip;
 }
 
+.bg-black + .bg-black {
+  border-radius: unset;
+}
+
 /* Paragraphs */
 .label a {
   color: rgba(239, 233, 251, 0.6);
@@ -386,6 +390,11 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 0.9rem;
   }
 }
+/* Forms  */
+.tt-form-wrap input {
+  transition: all var(--transition-base);
+}
+
 /* SLIDER */
 .splide__list {
   transform: translateZ(0);
