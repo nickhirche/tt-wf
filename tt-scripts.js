@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
-  const bgDarkElements = document.querySelectorAll('.bg-black');
+  const bgDarkElements = document.querySelectorAll('.bg-black-2');
   const headerElement = document.querySelector('header.tt-navbar-strip');
 
   function checkElementsInViewport() {
