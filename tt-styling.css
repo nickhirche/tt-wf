@@ -395,7 +395,7 @@ h1, h2, h3, h4, h5, h6 {
   transition: all var(--transition-base);
 }
 .tt-form-wrap input[type=checkbox] {
-  margin-top: 0.15em;
+  margin-top: 0.1em;
 }
 
 /* SLIDER */
