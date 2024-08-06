@@ -391,8 +391,8 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 /* Forms  */
-.tt-form-wrap div:not(.tt-form-fields) {
-  display: none;
+.tt-form-wrap > div:not(.tt-form-fields) {
+  display: none !important;
 }
 .tt-form-wrap .field-wrap[data-error=true]::after {
   content: attr(data-message);
