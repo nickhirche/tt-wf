@@ -398,10 +398,16 @@ h1, h2, h3, h4, h5, h6 {
   content: attr(data-message);
   font-size: 0.7rem;
   margin-top: 0.25rem;
-  color: red;
+  color: var(--error-contrast);
+}
+.tt-form-wrap .field-wrap[data-error=true][data-no-company-mail=true]::after {
+  content: attr(data-message-2);
 }
 .tt-form-wrap .field-wrap[data-error=true] .input {
-  border-color: red;
+  border-color: var(--error);
+}
+.tt-form-wrap .field-wrap[data-error=true] .input:hover, .tt-form-wrap .field-wrap[data-error=true] .input:focus {
+  border-color: var(--error-contrast);
 }
 .tt-form-wrap data-message input {
   transition: all var(--transition-base);
