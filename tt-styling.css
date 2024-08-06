@@ -396,6 +396,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 .tt-form-wrap .field-wrap[data-error=true]::after {
   content: attr(data-message);
+  font-size: 0.7rem;
+  margin-top: 0.25rem;
+  color: red;
+}
+.tt-form-wrap .field-wrap[data-error=true] .input {
+  border-color: red;
 }
 .tt-form-wrap data-message input {
   transition: all var(--transition-base);
