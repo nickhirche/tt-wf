@@ -1095,23 +1095,23 @@ ol.quickstart-list li::before {
   background: linear-gradient(to bottom right, var(--indigo-500), var(--red-300));
 }
 
-/* Archivements */
+/* Archievements */
 .tt-customer-achievements .achievement-item {
   position: relative;
+  border: unset;
 }
 .tt-customer-achievements .achievement-item::after {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: calc(1rem - 2px);
+  border-radius: calc(var(--radius-default) - 2px);
   padding: 2px;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   transform: translateZ(0);
-  opacity: 0.6;
-  z-index: 0;
+  z-index: 1;
 }
 .tt-customer-achievements .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, var(--color-editor-grading-1), var(--color-editor-grading-2));
