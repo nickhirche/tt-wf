@@ -11,6 +11,9 @@
   --black-9: hsla(0, 0%, 0%, 0.06);
   --transition-base: 0.25s cubic-bezier(0.65, 0, 0.35, 1);
   --shadow-dark: 0px 2rem 1.5rem 0px rgba(0, 0, 0, 0.10), 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.07), 0px 0.125rem 0.1rem 0px rgba(0, 0, 0, 0.05);
+  --radius-medium: 2rem;
+  --radius-default: 1.5rem;
+  --radius-small: 1rem;
   z-index: 3;
   font-size: 20px;
 }
@@ -1090,6 +1093,40 @@ ol.quickstart-list li::before {
 
 .card-ai .tt-feature-quickstart::after {
   background: linear-gradient(to bottom right, var(--indigo-500), var(--red-300));
+}
+
+/* Archivements */
+.tt-customer-achievements .achievement-item {
+  position: relative;
+}
+.tt-customer-achievements .achievement-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: calc(1rem - 2px);
+  padding: 2px;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  transform: translateZ(0);
+  opacity: 0.6;
+  z-index: 0;
+}
+.tt-customer-achievements .achievement-item:nth-child(1)::after {
+  background: linear-gradient(to bottom right, var(--color-editor-grading-1), var(--color-editor-grading-2));
+}
+.tt-customer-achievements .achievement-item:nth-child(2)::after {
+  background: linear-gradient(to bottom right, var(--color-editor-grading-2), var(--color-editor-grading-3));
+}
+.tt-customer-achievements .achievement-item:nth-child(3)::after {
+  background: linear-gradient(to bottom right, var(--color-editor-grading-3), var(--color-editor-grading-4));
+}
+.tt-customer-achievements .achievement-item:nth-child(4)::after {
+  background: linear-gradient(to bottom right, var(--color-editor-grading-4), var(--color-editor-grading-5));
+}
+.tt-customer-achievements .achievement-item:nth-child(5)::after {
+  background: linear-gradient(to bottom right, var(--color-editor-grading-5), var(--color-editor-grading-6));
 }
 
 /* QUOTES  */
