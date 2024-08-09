@@ -7,6 +7,8 @@
 }
 
 :root {
+  --color-enterprise-grading-1: #0df28f;
+  --color-enterprise-grading-2: #8b33ff;
   --black-8: hsla(0, 0%, 0%, 0.1);
   --black-9: hsla(0, 0%, 0%, 0.06);
   --transition-base: 0.25s cubic-bezier(0.65, 0, 0.35, 1);
@@ -1095,7 +1097,8 @@ ol.quickstart-list li::before {
   background: linear-gradient(to bottom right, var(--indigo-500), var(--red-300));
 }
 
-/* Archievements */
+/* Color Function */
+/* Archievements General */
 .tt-customer-achievements .achievement-item {
   position: relative;
   border: unset;
@@ -1113,23 +1116,53 @@ ol.quickstart-list li::before {
   transform: translateZ(0);
   z-index: 1;
 }
-.tt-customer-achievements .achievement-item:nth-child(1)::after {
-  background: linear-gradient(to bottom right, var(--color-editor-grading-1), var(--color-editor-grading-2));
+
+/* Specific Gradienten */
+/* Enterprise gradients */
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after {
+  background: linear-gradient(to bottom right, #8b33ff, #4c93c7);
 }
-.tt-customer-achievements .achievement-item:nth-child(2)::after {
-  background: linear-gradient(to bottom right, var(--color-editor-grading-2), var(--color-editor-grading-3));
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2)::after {
+  background: linear-gradient(to bottom right, #4c93c7, #0df28f);
 }
-.tt-customer-achievements .achievement-item:nth-child(3)::after {
-  background: linear-gradient(to bottom right, var(--color-editor-grading-3), var(--color-editor-grading-4));
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1)::after {
+  background: linear-gradient(to bottom right, #8b33ff, #6173da);
 }
-.tt-customer-achievements .achievement-item:nth-child(4)::after {
-  background: linear-gradient(to bottom right, var(--color-editor-grading-4), var(--color-editor-grading-5));
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2)::after {
+  background: linear-gradient(to bottom right, #6173da, #37b2b4);
 }
-.tt-customer-achievements .achievement-item:nth-child(5)::after {
-  background: linear-gradient(to bottom right, var(--color-editor-grading-5), var(--color-editor-grading-6));
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3)::after {
+  background: linear-gradient(to bottom right, #37b2b4, #0df28f);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(1)::after {
+  background: linear-gradient(to bottom right, #8b33ff, #6c63e3);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(2)::after {
+  background: linear-gradient(to bottom right, #6c63e3, #4c93c7);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(3)::after {
+  background: linear-gradient(to bottom right, #4c93c7, #2dc2ab);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(4)::after {
+  background: linear-gradient(to bottom right, #2dc2ab, #0df28f);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(1)::after {
+  background: linear-gradient(to bottom right, #8b33ff, #7259e9);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(2)::after {
+  background: linear-gradient(to bottom right, #7259e9, #597fd2);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(3)::after {
+  background: linear-gradient(to bottom right, #597fd2, #3fa6bc);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(4)::after {
+  background: linear-gradient(to bottom right, #3fa6bc, #26cca5);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(5)::after {
+  background: linear-gradient(to bottom right, #26cca5, #0df28f);
 }
 
-/* QUOTES  */
+/* QUOTES dd */
 /* Blockquote  */
 blockquote span,
 blockquote em {
