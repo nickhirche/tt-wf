@@ -1116,44 +1116,33 @@ ol.quickstart-list li::before {
   transform: translateZ(0);
   z-index: 1;
 }
+.tt-customer-achievements .achievement-item .achievement-head {
+  background: linear-gradient(-45deg, #eeaa52, #e73c6f, #2394d5, #2af3b7);
+  background-size: 100% 100%;
+  -webkit-background-clip: text;
+  color: var(--black-900);
+  -webkit-text-stroke: 2px transparent;
+}
 
 /* Specific Gradients */
 /* Enterprise gradients */
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(1)) .achievement-item:nth-child(1)::after {
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(1)) .achievement-item:nth-child(1)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(1)) .achievement-item:nth-child(1) .achievement-head {
   background: linear-gradient(to bottom right, #0df28f, #8b33ff);
 }
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(1)) .achievement-item:nth-child(1) .achievement-head {
-  -webkit-text-stroke-color: #0df28f;
-}
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after {
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1) .achievement-head {
   background: linear-gradient(to bottom right, #0df28f, #4c93c7);
 }
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1) .achievement-head {
-  -webkit-text-stroke-color: #0df28f;
-}
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2)::after {
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2) .achievement-head {
   background: linear-gradient(to bottom right, #4c93c7, #8b33ff);
 }
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2) .achievement-head {
-  -webkit-text-stroke-color: #4c93c7;
-}
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1)::after {
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1) .achievement-head {
   background: linear-gradient(to bottom right, #0df28f, #37b2b4);
 }
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1) .achievement-head {
-  -webkit-text-stroke-color: #0df28f;
-}
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2)::after {
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2) .achievement-head {
   background: linear-gradient(to bottom right, #37b2b4, #6173da);
 }
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2) .achievement-head {
-  -webkit-text-stroke-color: #37b2b4;
-}
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3)::after {
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3) .achievement-head {
   background: linear-gradient(to bottom right, #6173da, #8b33ff);
-}
-.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3) .achievement-head {
-  -webkit-text-stroke-color: #6173da;
 }
 
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(1)) .meta-feature-item:nth-child(1) .meta-text-gradient {
