@@ -573,7 +573,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-black .tt-accordion-content-slider .splide__slide:not(:last-child) {
-  border-color: black;
+  border-color: var(white-a-5);
 }
 
 /* Pagination */
@@ -1162,7 +1162,12 @@ ol.quickstart-list li::before {
   background: linear-gradient(to bottom right, #26cca5, #0df28f);
 }
 
-/* QUOTES dd */
+/* QUOTES */
+.tt-quote-author:has(:not(.quote-author-image)) .quote-author-details {
+  align-items: center;
+  text-align: center;
+}
+
 /* Blockquote  */
 blockquote span,
 blockquote em {
