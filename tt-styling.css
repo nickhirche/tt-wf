@@ -1119,25 +1119,6 @@ ol.quickstart-list li::before {
 
 /* Specific Gradienten */
 /* Enterprise gradients */
-.tt-customer-achievements.color-enterprise .achievement-head {
-  position: relative;
-  color: transparent;
-  -webkit-text-stroke-color: transparent;
-}
-.tt-customer-achievements.color-enterprise .achievement-head::before {
-  content: attr(data-count);
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(to bottom right, #8b33ff, #0df28f);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  -webkit-text-stroke-width: 2px;
-  -webkit-text-stroke-color: transparent;
-}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, #8b33ff, #4c93c7);
 }
