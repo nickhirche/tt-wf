@@ -1130,6 +1130,7 @@ ol.quickstart-list li::before {
   width: 100%;
   height: 100%;
   background: linear-gradient(to bottom right, red, blue);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke-width: 2px;
@@ -1142,44 +1143,86 @@ ol.quickstart-list li::before {
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, #8b33ff, #4c93c7);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1) .achievement-head {
+  -webkit-text-stroke-color: #8b33ff;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2)::after {
   background: linear-gradient(to bottom right, #4c93c7, #0df28f);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2) .achievement-head {
+  -webkit-text-stroke-color: #4c93c7;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, #8b33ff, #6173da);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1) .achievement-head {
+  -webkit-text-stroke-color: #8b33ff;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2)::after {
   background: linear-gradient(to bottom right, #6173da, #37b2b4);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2) .achievement-head {
+  -webkit-text-stroke-color: #6173da;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3)::after {
   background: linear-gradient(to bottom right, #37b2b4, #0df28f);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3) .achievement-head {
+  -webkit-text-stroke-color: #37b2b4;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, #8b33ff, #6c63e3);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(1) .achievement-head {
+  -webkit-text-stroke-color: #8b33ff;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(2)::after {
   background: linear-gradient(to bottom right, #6c63e3, #4c93c7);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(2) .achievement-head {
+  -webkit-text-stroke-color: #6c63e3;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(3)::after {
   background: linear-gradient(to bottom right, #4c93c7, #2dc2ab);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(3) .achievement-head {
+  -webkit-text-stroke-color: #4c93c7;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(4)::after {
   background: linear-gradient(to bottom right, #2dc2ab, #0df28f);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(4)) .achievement-item:nth-child(4) .achievement-head {
+  -webkit-text-stroke-color: #2dc2ab;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, #8b33ff, #7259e9);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(1) .achievement-head {
+  -webkit-text-stroke-color: #8b33ff;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(2)::after {
   background: linear-gradient(to bottom right, #7259e9, #597fd2);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(2) .achievement-head {
+  -webkit-text-stroke-color: #7259e9;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(3)::after {
   background: linear-gradient(to bottom right, #597fd2, #3fa6bc);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(3) .achievement-head {
+  -webkit-text-stroke-color: #597fd2;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(4)::after {
   background: linear-gradient(to bottom right, #3fa6bc, #26cca5);
 }
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(4) .achievement-head {
+  -webkit-text-stroke-color: #3fa6bc;
+}
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(5)::after {
   background: linear-gradient(to bottom right, #26cca5, #0df28f);
+}
+.tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(5) .achievement-head {
+  -webkit-text-stroke-color: #26cca5;
 }
 
 /* QUOTES */
