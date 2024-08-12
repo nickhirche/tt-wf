@@ -1128,6 +1128,7 @@ ol.quickstart-list li::before {
   left: 0;
   width: 100%;
   height: 100%;
+  background: linear-gradient(to bottom right, red, blue);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -1179,9 +1180,6 @@ ol.quickstart-list li::before {
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(5)) .achievement-item:nth-child(5)::after {
   background: linear-gradient(to bottom right, #26cca5, #0df28f);
-}
-.tt-customer-achievements.color-enterprise .achievement-head::before {
-  background: linear-gradient(to bottom right, #8b33ff, #0df28f);
 }
 
 /* QUOTES */
