@@ -1125,7 +1125,7 @@ ol.quickstart-list li::before {
   -webkit-text-stroke-color: transparent;
 }
 .tt-customer-achievements.color-enterprise .achievement-head::before {
-  content: attr(data-head);
+  content: attr(data-count);
   position: absolute;
   top: 0;
   left: 0;
@@ -1135,7 +1135,8 @@ ol.quickstart-list li::before {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  z-index: 5;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: transparent;
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after {
   background: linear-gradient(to bottom right, #8b33ff, #4c93c7);
