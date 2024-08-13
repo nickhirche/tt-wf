@@ -129,6 +129,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgb(34, 34, 34);
   color: var(--white-a-100);
 }
+.tt-navbar-strip.dark .tt-subnav-content .tt-subnav-icon {
+  filter: invert(1);
+}
 
 .tt-navbar-link, .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before, .tt-navbar-burger, .tt-navbar-burger *, .tt-navbar-burger::before, .tt-subnav-link, .tt-subnav-link *, .tt-subnav-link::before, .tt-subnav-container {
   transition: all var(--transition-base);
