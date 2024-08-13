@@ -110,29 +110,29 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Nav */
-.tt-navbar-strip.dark {
+.tt-navbar.dark .tt-navbar-strip {
   background: rgba(43, 43, 43, 0.6);
 }
-.tt-navbar-strip.dark .w-nav-brand {
+.tt-navbar.dark .tt-navbar-strip .w-nav-brand {
   color: var(--white-a-100);
 }
-.tt-navbar-strip.dark .tt-navbar-link {
+.tt-navbar.dark .tt-navbar-strip .tt-navbar-link {
   color: var(--white-a-100);
 }
-.tt-navbar-strip.dark .tt-navbar-link::before {
+.tt-navbar.dark .tt-navbar-strip .tt-navbar-link::before {
   background-color: var(--white-a-5);
 }
-.tt-navbar-strip.dark .tt-navbar-link::after {
+.tt-navbar.dark .tt-navbar-strip .tt-navbar-link::after {
   background-color: var(--white-a-100);
 }
-.tt-navbar-strip.dark .tt-subnav-content {
+.tt-navbar.dark .tt-navbar-strip .tt-subnav-content {
   background-color: rgb(34, 34, 34);
   color: var(--white-a-100);
 }
-.tt-navbar-strip.dark .tt-subnav-content .tt-subnav-link::before {
+.tt-navbar.dark .tt-navbar-strip .tt-subnav-content .tt-subnav-link::before {
   background-color: var(--white-a-5);
 }
-.tt-navbar-strip.dark .tt-subnav-content .tt-subnav-link .tt-subnav-icon {
+.tt-navbar.dark .tt-navbar-strip .tt-subnav-content .tt-subnav-link .tt-subnav-icon {
   filter: invert(1);
 }
 
