@@ -457,7 +457,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* Navigation changer */ 
 document.addEventListener('DOMContentLoaded', function() {
-  const bgDarkElements = document.querySelectorAll('.bg-black-2');
+  const bgDarkElements = document.querySelectorAll('.bg-black');
   const headerElement = document.querySelector('header.tt-navbar-strip');
 
   function checkElementsInViewport() {
@@ -472,9 +472,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       if (addClass) {
-          headerElement.classList.add('dark');
+          headerElement.classList.add('dark-2');
       } else {
-          headerElement.classList.remove('dark');
+          headerElement.classList.remove('dark-2');
       }
   }
 
