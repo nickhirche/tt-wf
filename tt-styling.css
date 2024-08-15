@@ -110,6 +110,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Nav */
+.tt-navbar.dark {
+  color: var(--black-900);
+}
+.tt-navbar.dark .tt-navbar-menu {
+  background: rgba(43, 43, 43, 0.6);
+}
 .tt-navbar.dark .tt-navbar-strip {
   background: rgba(43, 43, 43, 0.6);
 }
@@ -132,8 +138,15 @@ h1, h2, h3, h4, h5, h6 {
 .tt-navbar.dark .tt-navbar-strip .tt-subnav-content .tt-subnav-link::before {
   background-color: var(--white-a-5);
 }
+.tt-navbar.dark .tt-navbar-strip .tt-subnav-content .tt-subnav-link.btn-primary {
+  color: var(--black-900);
+  background-color: var(--white-a-100);
+}
 .tt-navbar.dark .tt-navbar-strip .tt-subnav-content .tt-subnav-link .tt-subnav-icon {
   filter: invert(1);
+}
+.tt-navbar.dark .tt-navbar-strip .btn-burger-dots {
+  color: var(--white-a-100);
 }
 
 .tt-navbar-link, .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before, .tt-navbar-burger, .tt-navbar-burger *, .tt-navbar-burger::before, .tt-subnav-link, .tt-subnav-link *, .tt-subnav-link::before, .tt-subnav-container {
