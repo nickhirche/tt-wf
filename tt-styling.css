@@ -111,13 +111,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav */
 .tt-navbar.dark {
-  color: var(--black-900);
+  color: var(--white-a-100);
 }
 .tt-navbar.dark .tt-navbar-menu {
-  background: rgba(43, 43, 43, 0.6);
+  background: rgba(43, 43, 43, 0.7);
 }
 .tt-navbar.dark .tt-navbar-strip {
-  background: rgba(43, 43, 43, 0.6);
+  background: rgba(43, 43, 43, 0.7);
 }
 .tt-navbar.dark .tt-navbar-strip .w-nav-brand {
   color: var(--white-a-100);
@@ -173,7 +173,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 @media screen and (max-width: 767px) {
-  .tt-navbar-link:hover:before, .w--open.tt-navbar-link::before {
+  .w-nav-overlay .tt-navbar-link:hover:before, .w--open.tt-navbar-link::before {
     opacity: 0;
   }
 }
