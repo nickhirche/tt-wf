@@ -116,6 +116,9 @@ h1, h2, h3, h4, h5, h6 {
 .tt-navbar.dark .tt-navbar-menu {
   background: rgba(43, 43, 43, 0.7);
 }
+.tt-navbar.dark .tt-navbar-menu .tt-subnav-icon {
+  filter: invert(1);
+}
 .tt-navbar.dark .tt-navbar-strip {
   background: rgba(43, 43, 43, 0.7);
 }
@@ -129,7 +132,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: var(--white-a-5);
 }
 .tt-navbar.dark .tt-navbar-strip .tt-navbar-link::after {
-  background-color: var(--white-a-100);
+  background-color: var(--black-900);
 }
 .tt-navbar.dark .tt-navbar-strip .tt-navbar-link.btn-primary {
   color: var(--black-900);
