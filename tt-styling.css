@@ -1223,9 +1223,15 @@ ol.quickstart-list li::before {
 }
 
 /* QUOTES */
-.tt-quote-author:has(:not(.quote-author-image)) .quote-author-details {
+.tt-single-client-quote .tt-quote-author:has(:not(.quote-author-image)) .quote-author-details {
   align-items: center;
   text-align: center;
+}
+.tt-single-client-quote blockquote::before {
+  content: "»";
+}
+.tt-single-client-quote blockquote::after {
+  content: "«";
 }
 
 /* Blockquote  */
