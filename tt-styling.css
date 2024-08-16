@@ -1227,10 +1227,13 @@ ol.quickstart-list li::before {
   align-items: center;
   text-align: center;
 }
-.tt-single-client-quote blockquote::before {
+
+.tt-single-client-quote blockquote::before,
+.tt-client-achievement-wrap blockquote::before {
   content: "»";
 }
-.tt-single-client-quote blockquote::after {
+.tt-single-client-quote blockquote::after,
+.tt-client-achievement-wrap blockquote::after {
   content: "«";
 }
 
