@@ -502,7 +502,7 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.tt-usecase-slider .splide__track, .tt-accordion-media-slider .splide__track, .tt-feauture-content-slider .splide__track {
+.tt-usecase-slider .splide__track, .tt-accordion-media-slider .splide__track {
   overflow: hidden;
 }
 
