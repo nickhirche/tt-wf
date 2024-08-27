@@ -472,9 +472,9 @@ document.addEventListener('DOMContentLoaded', function() {
       });
 
       if (addClass) {
-          headerElement.classList.add('dark-2');
+          headerElement.classList.add('dark');
       } else {
-          headerElement.classList.remove('dark-2');
+          headerElement.classList.remove('dark');
       }
   }
 
