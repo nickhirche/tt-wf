@@ -138,10 +138,6 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--black-900);
   background-color: var(--white-a-100);
 }
-.tt-navbar.dark .tt-navbar-strip .tt-navbar-link .bacth-md {
-  background-color: var(--white-a-20);
-  color: var(--white-a-60);
-}
 .tt-navbar.dark .tt-navbar-strip .tt-subnav-content {
   background-color: rgb(34, 34, 34);
   color: var(--white-a-100);
@@ -158,6 +154,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 .tt-navbar.dark .tt-navbar-strip .btn-burger-dots {
   color: var(--white-a-100);
+}
+.tt-navbar.dark .tt-navbar-strip .bacth-md {
+  background-color: var(--white-a-20);
+  color: var(--white-a-60);
 }
 
 .tt-navbar-link, .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before, .tt-navbar-burger, .tt-navbar-burger *, .tt-navbar-burger::before, .tt-subnav-link, .tt-subnav-link *, .tt-subnav-link::before, .tt-subnav-container {
