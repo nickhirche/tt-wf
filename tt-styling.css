@@ -1564,7 +1564,7 @@ pre.w-code-block code {
   }
 }
 /* Cost calculator */
-.tt-cost-calculator .range::-webkit-slider-thumb {
+.tt-cost-calculator .range-slider input[type=range i]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   height: 30px;
@@ -1573,11 +1573,8 @@ pre.w-code-block code {
   background-image: url("https://ibaslogic.github.io/hosted-assets/smile.png");
   background-size: cover;
   border-radius: 50%;
-  -webkit-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
-  transform: rotateZ(var(--thumb-rotate, 0deg));
 }
-.tt-cost-calculator .range::-moz-range-thumb {
+.tt-cost-calculator .range-slider input[type=range i]::-moz-range-thumb {
   height: 30px;
   width: 30px;
   background: transparent;
@@ -1585,9 +1582,6 @@ pre.w-code-block code {
   background-size: cover;
   border: none;
   border-radius: 50%;
-  transform: rotateZ(var(--thumb-rotate, 0deg));
-  -moz-transition: 0.2s ease-in-out;
-  transition: 0.2s ease-in-out;
 }
 .tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance] {
   display: none;
