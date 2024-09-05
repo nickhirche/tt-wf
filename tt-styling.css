@@ -1564,6 +1564,15 @@ pre.w-code-block code {
   }
 }
 /* Cost calculator */
+.tt-cost-calculator .range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background: #4CAF50;
+  cursor: pointer;
+  border-radius: 50%;
+}
 .tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance] {
   display: none;
 }
