@@ -715,7 +715,7 @@ h1, h2, h3, h4, h5, h6 {
   top: 1rem;
   width: 2px;
   height: 0.6rem;
-  background-color: var(--black-a-0);
+  background-color: var(--black-a-100);
   transition: all 0.2s;
 }
 
@@ -1370,9 +1370,9 @@ blockquote em::after {
   font-size: 0.75rem;
   font-weight: 500;
   border-radius: 0.75rem;
-  background-color: var(--black-a-0) !important;
+  background-color: var(--black-a-100) !important;
   color: #EEFFFF !important;
-  scrollbar-color: #3D3D3D var(--black-a-0);
+  scrollbar-color: #3D3D3D var(--black-a-100);
   scrollbar-width: thin;
 }
 .w-code-block span[style="color:#dcc6e0"] {
@@ -1401,7 +1401,7 @@ blockquote em::after {
 .w-code-block ::-webkit-scrollbar-thumb {
   background-color: #3D3D3D;
   border-radius: 10px;
-  border: 2px solid var(--black-a-0);
+  border: 2px solid var(--black-a-100);
 }
 .w-code-block ::-webkit-scrollbar-button {
   display: block;
@@ -1569,6 +1569,15 @@ pre.w-code-block code {
 }
 .tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance].active {
   display: flex;
+}
+.tt-cost-calculator .range-description {
+  color: var(--black-a-60);
+}
+.tt-cost-calculator .range-description strong {
+  color: var(--black-a-100);
+}
+.tt-cost-calculator.dark .range-description {
+  color: var(--white-a-60);
 }
 
 /*Shiki */
