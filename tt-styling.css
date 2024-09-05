@@ -1563,6 +1563,14 @@ pre.w-code-block code {
     display: none;
   }
 }
+/* Cost calculator */
+.tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance] {
+  display: none;
+}
+.tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance].active {
+  display: flex;
+}
+
 /*Shiki */
 .code-output * {
   display: none;
