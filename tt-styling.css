@@ -1607,8 +1607,11 @@ pre.w-code-block code {
 .tt-cost-calculator .calculator-value#editable-value[data-custom-value=true]:hover {
   background-color: var(--white-a-100);
 }
-.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value {
-  background-color: var(black-a-6);
+.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value {
+  background-color: var(--black-a-6);
+}
+.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):has([data-custom-value=true]) .value-action.value-reset {
+  display: flex;
 }
 .tt-cost-calculator .range-description {
   color: var(--black-a-60);
