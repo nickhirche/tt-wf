@@ -1564,13 +1564,20 @@ pre.w-code-block code {
   }
 }
 /* Cost calculator */
+.tt-cost-calculator .range-slider input[type=range i] {
+  height: var(--s); /* needed for Firefox*/
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  background: linear-gradient(90deg, #0DF28F 0%, #8B33FF 50%, #000 51%);
+}
 .tt-cost-calculator .range-slider input[type=range i]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   height: 30px;
   width: 30px;
   background: transparent;
-  background-image: url("https://ibaslogic.github.io/hosted-assets/smile.png");
   background-size: cover;
   border-radius: 50%;
 }
