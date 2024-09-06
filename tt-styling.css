@@ -653,7 +653,7 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
   width: 0.4rem;
   height: 0.4rem;
-  background: var(--black-6-16);
+  background: var(--black-a-16);
   border-radius: 1rem;
 }
 
@@ -800,7 +800,7 @@ thead {
 }
 
 tr {
-  border-bottom: 1px solid var(--black-6-16);
+  border-bottom: 1px solid var(--black-a-16);
 }
 
 th,
@@ -1613,10 +1613,10 @@ pre.w-code-block code {
 .tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value[data-custom-value=true] {
   background-color: var(--white-a-100);
 }
-.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):has([data-custom-value=true]) .value-action {
+.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):has([data-custom-value=true]) .value-edit {
   display: none;
 }
-.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):has([data-custom-value=true]) .value-action.value-reset {
+.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):has([data-custom-value=true]) .value-reset {
   display: flex;
 }
 .tt-cost-calculator .range-description {
