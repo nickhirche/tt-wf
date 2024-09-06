@@ -1572,7 +1572,7 @@ pre.w-code-block code {
   appearance: none;
   cursor: pointer;
   background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(var(--range-value) * 1%), #000 calc(var(--range-value) * 1%));
-  border-radius: 50%;
+  border-radius: 8px;
 }
 .tt-cost-calculator .range-slider input[type=range i]::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -1580,6 +1580,7 @@ pre.w-code-block code {
   height: 1rem;
   width: 1rem;
   background: var(--black-900);
+  box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
   border-radius: 50%;
 }
 .tt-cost-calculator .range-slider input[type=range i]::-moz-range-thumb {
