@@ -1584,11 +1584,12 @@ pre.w-code-block code {
   border-radius: 50%;
 }
 .tt-cost-calculator .range-slider input[type=range i]::-moz-range-thumb {
-  height: 30px;
-  width: 30px;
-  background: red;
-  background-size: cover;
-  border: none;
+  -moz-appearance: none;
+  appearance: none;
+  height: 1rem;
+  width: 1rem;
+  background: var(--white-a-100);
+  box-shadow: 0px 0px 0px 2px var(--black-a-100);
   border-radius: 50%;
 }
 .tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance] {
