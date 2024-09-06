@@ -1571,6 +1571,7 @@ pre.w-code-block code {
   appearance: none;
   cursor: pointer;
   background: linear-gradient(90deg, #0DF28F 0%, #8B33FF 50%, #000 50%);
+  border-radius: 8px;
 }
 .tt-cost-calculator .range-slider input[type=range i]::-webkit-slider-thumb {
   -webkit-appearance: none;
