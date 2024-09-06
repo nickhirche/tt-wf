@@ -1598,6 +1598,18 @@ pre.w-code-block code {
 .tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance].active {
   display: flex;
 }
+.tt-cost-calculator .calculator-value#editable-value:hover {
+  background-color: var(--black-a-6);
+}
+.tt-cost-calculator .calculator-value#editable-value[data-custom-valu=true] {
+  background-color: var(--white-a-100);
+}
+.tt-cost-calculator .calculator-value#editable-value[data-custom-valu=true]:hover {
+  background-color: var(--white-a-100);
+}
+.tt-cost-calculator .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value {
+  background-color: var(black-a-6);
+}
 .tt-cost-calculator .range-description {
   color: var(--black-a-60);
 }
