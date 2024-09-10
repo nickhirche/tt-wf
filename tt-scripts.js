@@ -505,6 +505,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const editCustomValue = document.querySelector('.value-edit');
 
   let peopleCostOverride = false;
+  let eventFired = false; // Flag to track if the event has been fired
 
   const values = {
       0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
@@ -608,11 +609,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
       rangeInput.style.setProperty('--range-value', value);
 
-      // Fire the event to dataLayer
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-          'event': 'cost_calculator',
+      // Fire the event to dataLayer only once
+      if (!eventFired) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'event': 'cost_calculator',
       });
+      eventFired = true; // Set the flag to true after firing the event
+    }
   }
 
   rangeInput.addEventListener('input', updateValues);
@@ -650,14 +654,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const firstNameInput = document.getElementById('firstname');
 
   // Check if all elements exist
-  console.log('Contact Form:', contactForm);
-  console.log('CTA Link:', ctaLink);
-  console.log('First Name Input:', firstNameInput);
-
   if (contactForm && ctaLink && firstNameInput) {
       ctaLink.addEventListener('click', function(event) {
           event.preventDefault(); // Prevent default link behavior
-          console.log('CTA link clicked');
           firstNameInput.focus(); // Set focus on the firstname input
       });
   }
