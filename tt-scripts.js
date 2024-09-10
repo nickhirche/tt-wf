@@ -491,149 +491,155 @@ document.addEventListener('DOMContentLoaded', function() {
 
 /* COST CALCULATOR */ 
 document.addEventListener('DOMContentLoaded', function() {
-    const rangeInput = document.querySelector('input[data-type="calculator-range"]');
-    const workloadDiv = document.querySelector('div[data-value-type="workload"]');
-    const peopleCostDiv = document.getElementById('editable-value');
-    const peopleNumberDiv = document.querySelector('div[data-value-type="people-number"]');
-    const maintenanceDiv = document.querySelector('div[data-cost-type="maintenance"]');
-    const maintenanceValueDiv = document.querySelector('div[data-cost-value-type="maintenance"]');
-    const initialCostDiv = document.querySelector('div[data-cost-value-type="initial"]');
-    const mediumLabel = document.querySelector('label[data-range-label="medium"]');
-    const complexLabel = document.querySelector('label[data-range-label="complex"]');
-    const descriptions = document.querySelectorAll('.range-description');
-    const resetButton = document.querySelector('.value-reset');
-    const editCustomValue = document.querySelector('.value-edit');
+  const rangeInput = document.querySelector('input[data-type="calculator-range"]');
+  const workloadDiv = document.querySelector('div[data-value-type="workload"]');
+  const peopleCostDiv = document.getElementById('editable-value');
+  const peopleNumberDiv = document.querySelector('div[data-value-type="people-number"]');
+  const maintenanceDiv = document.querySelector('div[data-cost-type="maintenance"]');
+  const maintenanceValueDiv = document.querySelector('div[data-cost-value-type="maintenance"]');
+  const initialCostDiv = document.querySelector('div[data-cost-value-type="initial"]');
+  const mediumLabel = document.querySelector('label[data-range-label="medium"]');
+  const complexLabel = document.querySelector('label[data-range-label="complex"]');
+  const descriptions = document.querySelectorAll('.range-description');
+  const resetButton = document.querySelector('.value-reset');
+  const editCustomValue = document.querySelector('.value-edit');
 
-    let peopleCostOverride = false;
+  let peopleCostOverride = false;
 
-    const values = {
-        0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
-        25: { workload: 324, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
-        50: { workload: 408, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
-        75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '7,091.20' },
-        100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '15,000.00' }
-    };
+  const values = {
+      0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
+      25: { workload: 324, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
+      50: { workload: 408, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
+      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '7,091.20' },
+      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '15,000.00' }
+  };
 
-    function formatEditableValue() {
-        const sel = window.getSelection();
-        const range = sel.getRangeAt(0);
-        const preCursorPosition = range.endOffset;
+  function formatEditableValue() {
+      const sel = window.getSelection();
+      const range = sel.getRangeAt(0);
+      const preCursorPosition = range.endOffset;
 
-        let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
+      let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
 
-        if (value.length <= 2) {
-            peopleCostDiv.textContent = value;
-            setCursorPosition(preCursorPosition);
-            return;
-        }
+      if (value.length <= 2) {
+          peopleCostDiv.textContent = value;
+          setCursorPosition(preCursorPosition);
+          return;
+      }
 
-        const dollars = value.slice(0, -2);
-        const cents = value.slice(-2);
+      const dollars = value.slice(0, -2);
+      const cents = value.slice(-2);
 
-        const formattedDollars = dollars.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        const formattedValue = formattedDollars + '.' + cents;
+      const formattedDollars = dollars.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      const formattedValue = formattedDollars + '.' + cents;
 
-        const diff = formattedValue.length - value.length;
-        peopleCostDiv.textContent = formattedValue;
+      const diff = formattedValue.length - value.length;
+      peopleCostDiv.textContent = formattedValue;
 
-        setCursorPosition(preCursorPosition + diff);
-    }
+      setCursorPosition(preCursorPosition + diff);
+  }
 
-    function setCursorPosition(pos) {
-        const range = document.createRange();
-        const sel = window.getSelection();
-        range.setStart(peopleCostDiv.childNodes[0], Math.min(pos, peopleCostDiv.textContent.length));
-        range.collapse(true);
-        sel.removeAllRanges();
-        sel.addRange(range);
-    }
+  function setCursorPosition(pos) {
+      const range = document.createRange();
+      const sel = window.getSelection();
+      range.setStart(peopleCostDiv.childNodes[0], Math.min(pos, peopleCostDiv.textContent.length));
+      range.collapse(true);
+      sel.removeAllRanges();
+      sel.addRange(range);
+  }
 
-    function formatNumber(value) {
-        return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    }
+  function formatNumber(value) {
+      return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  }
 
-    function calculateInitialCost() {
-        const workload = parseFloat(workloadDiv.textContent);
-        const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
-        const initialCost = workload * peopleCost;
-        initialCostDiv.textContent = formatNumber(initialCost);
-    }
+  function calculateInitialCost() {
+      const workload = parseFloat(workloadDiv.textContent);
+      const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
+      const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-    function updateValues() {
-        const value = parseInt(rangeInput.value);
-        const data = values[value];
+      const factor = 1 + (peopleNumber * 0.015);
 
-        if (!peopleCostOverride) {
-            peopleCostDiv.textContent = data.peopleCost.toFixed(2);
-            peopleCostDiv.setAttribute('data-custom-value', 'false');
-        }
-        
-        workloadDiv.textContent = data.workload;
-        peopleNumberDiv.textContent = data.peopleNumber;
+      const initialCost = workload * peopleCost * factor;
+      initialCostDiv.textContent = formatNumber(initialCost);
+  }
 
-        descriptions.forEach(desc => {
-            if (desc.dataset.descriptionTyp === data.description) {
-                desc.classList.add('active');
-            } else {
-                desc.classList.remove('active');
-            }
-        });
+  function updateValues() {
+      const value = parseInt(rangeInput.value);
+      const data = values[value];
 
-        if (data.maintenance) {
-            maintenanceDiv.classList.add('active');
-            maintenanceValueDiv.textContent = data.maintenanceValue;
-        } else {
-            maintenanceDiv.classList.remove('active');
-            maintenanceValueDiv.textContent = '';
-        }
+      if (!peopleCostOverride) {
+          peopleCostDiv.textContent = data.peopleCost.toFixed(2);
+          peopleCostDiv.setAttribute('data-custom-value', 'false');
+      }
+      
+      workloadDiv.textContent = data.workload;
+      peopleNumberDiv.textContent = data.peopleNumber;
 
-        // Berechnung und Anzeige des initialen Kostenwerts
-        calculateInitialCost();
+      descriptions.forEach(desc => {
+          if (desc.dataset.descriptionTyp === data.description) {
+              desc.classList.add('active');
+          } else {
+              desc.classList.remove('active');
+          }
+      });
 
-        // Label-Klassen aktualisieren
-        if (value >= 50) {
-            mediumLabel.classList.add('active');
-        } else {
-            mediumLabel.classList.remove('active');
-        }
+      if (data.maintenance) {
+          maintenanceDiv.classList.add('active');
+          maintenanceValueDiv.textContent = data.maintenanceValue;
+      } else {
+          maintenanceDiv.classList.remove('active');
+          maintenanceValueDiv.textContent = '';
+      }
 
-        if (value === 100) {
-            complexLabel.classList.add('active');
-        } else {
-            complexLabel.classList.remove('active');
-        }
+      calculateInitialCost();
 
-        // Aktualisiere die CSS-Variable --range-value
-        rangeInput.style.setProperty('--range-value', value);
-    }
+      if (value >= 50) {
+          mediumLabel.classList.add('active');
+      } else {
+          mediumLabel.classList.remove('active');
+      }
 
-    rangeInput.addEventListener('input', updateValues);
+      if (value === 100) {
+          complexLabel.classList.add('active');
+      } else {
+          complexLabel.classList.remove('active');
+      }
 
-    peopleCostDiv.addEventListener('input', function() {
-        peopleCostOverride = true;
-        peopleCostDiv.setAttribute('data-custom-value', 'true');
-        formatEditableValue();
-        calculateInitialCost(); // Berechne den neuen Wert bei manueller Anpassung
-    });
+      rangeInput.style.setProperty('--range-value', value);
 
-    peopleCostDiv.addEventListener('focus', function() {
-        const range = document.createRange();
-        range.selectNodeContents(peopleCostDiv);
-        const sel = window.getSelection();
-        sel.removeAllRanges();
-        sel.addRange(range);
-    });
-    
-  	editCustomValue.addEventListener('click', function() {
-        peopleCostDiv.focus();
-    });
+      // Fire the event to dataLayer
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+          'event': 'cost_calculator',
+      });
+  }
 
-    resetButton.addEventListener('click', function() {
-        peopleCostOverride = false;
-        updateValues();
-    });
+  rangeInput.addEventListener('input', updateValues);
 
-    // Setze beim Initialisieren alle Werte auf die von 0
-    rangeInput.value = 0;
-    updateValues();
+  peopleCostDiv.addEventListener('input', function() {
+      peopleCostOverride = true;
+      peopleCostDiv.setAttribute('data-custom-value', 'true');
+      formatEditableValue();
+      calculateInitialCost();
+  });
+
+  peopleCostDiv.addEventListener('focus', function() {
+      const range = document.createRange();
+      range.selectNodeContents(peopleCostDiv);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+  });
+  
+  editCustomValue.addEventListener('click', function() {
+      peopleCostDiv.focus();
+  });
+
+  resetButton.addEventListener('click', function() {
+      peopleCostOverride = false;
+      updateValues();
+  });
+
+  rangeInput.value = 0;
+  updateValues();
 });
