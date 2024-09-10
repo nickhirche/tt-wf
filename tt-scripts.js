@@ -557,7 +557,8 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      const factor = 1 + (peopleNumber * 0.015);
+      // Apply the factor only if peopleNumber is greater than 1
+      const factor = peopleNumber > 1 ? 1 + ((peopleNumber - 1) * 0.015) : 1;
 
       const initialCost = workload * peopleCost * factor;
       initialCostDiv.textContent = formatNumber(initialCost);
