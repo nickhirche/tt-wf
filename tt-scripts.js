@@ -643,4 +643,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
   rangeInput.value = 0;
   updateValues();
+
+  // Check if the contact form exists
+  const contactForm = document.querySelector('form[data-name="Contact form"]');
+  const ctaButton = document.querySelector('#tt-calculator-cta button');
+  const firstNameInput = document.getElementById('firstname');
+
+  if (contactForm && ctaButton && firstNameInput) {
+      ctaButton.addEventListener('click', function() {
+          firstNameInput.focus();
+      });
+  }
 });
