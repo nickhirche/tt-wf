@@ -646,13 +646,18 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Check if the contact form exists
   const contactForm = document.querySelector('form[data-name="Contact form"]');
-  const ctaLink = document.querySelector('#tt-calculator-cta a');
+  const ctaLink = document.querySelector('.tt-calculator-cta a.tt-button');
   const firstNameInput = document.getElementById('firstname');
 
   // Check if all elements exist
+  console.log('Contact Form:', contactForm);
+  console.log('CTA Link:', ctaLink);
+  console.log('First Name Input:', firstNameInput);
+
   if (contactForm && ctaLink && firstNameInput) {
       ctaLink.addEventListener('click', function(event) {
           event.preventDefault(); // Prevent default link behavior
+          console.log('CTA link clicked');
           firstNameInput.focus(); // Set focus on the firstname input
       });
   }
