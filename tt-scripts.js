@@ -505,7 +505,6 @@ document.addEventListener('DOMContentLoaded', function() {
   const editCustomValue = document.querySelector('.value-edit');
 
   let peopleCostOverride = false;
-  let eventFired = false; // Flag to track if the event has been fired
 
   const values = {
       0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
@@ -558,7 +557,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      // Apply the factor only if peopleNumber is greater than 1
       const factor = peopleNumber > 1 ? 1 + ((peopleNumber - 1) * 0.015) : 1;
 
       const initialCost = workload * peopleCost * factor;
@@ -608,18 +606,16 @@ document.addEventListener('DOMContentLoaded', function() {
       }
 
       rangeInput.style.setProperty('--range-value', value);
-
-      // Fire the event to dataLayer only once
-      if (!eventFired) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'event': 'cost_calculator',
-      });
-      eventFired = true; // Set the flag to true after firing the event
-    }
   }
 
-  rangeInput.addEventListener('input', updateValues);
+  rangeInput.addEventListener('input', function() {
+      // Fire the event to dataLayer on every interaction
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+          'event': 'cost_calculator',
+      });
+      updateValues();
+  });
 
   peopleCostDiv.addEventListener('input', function() {
       peopleCostOverride = true;
