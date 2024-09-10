@@ -646,7 +646,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   // Check if the contact form exists
   const contactForm = document.querySelector('form[data-name="Contact form"]');
-  const ctaButton = document.querySelector('#tt-calculator-cta button');
+  const ctaButton = document.querySelector('#tt-calculator-cta a');
   const firstNameInput = document.getElementById('firstname');
 
   if (contactForm && ctaButton && firstNameInput) {
