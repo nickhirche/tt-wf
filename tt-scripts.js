@@ -550,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function formatNumber(value) {
-      return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+    return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function calculateInitialCost() {
