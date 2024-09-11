@@ -508,10 +508,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const values = {
       0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
-      25: { workload: 324, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
-      50: { workload: 408, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
-      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '85,094.00' },
-      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '180,000.00' }
+      25: { workload: 328, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
+      50: { workload: 422, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
+      75: { workload: 1721, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '85,094.00' },
+      100: { workload: 4082, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '180,000.00' }
   };
 
   function formatEditableValue() {
@@ -557,9 +557,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      const factor = peopleNumber > 1 ? 1 + ((peopleNumber - 1) * 0.015) : 1;
+      //const factor = peopleNumber > 1 ? 1 + ((peopleNumber - 1) * 0.015) : 1;
 
-      const initialCost = workload * peopleCost * factor;
+      const initialCost = workload * peopleCost;
       initialCostDiv.textContent = formatNumber(initialCost);
   }
 
