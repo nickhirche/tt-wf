@@ -511,8 +511,8 @@ document.addEventListener('DOMContentLoaded', function() {
       0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
       25: { workload: 324, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
       50: { workload: 408, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
-      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 128 },
-      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
+      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 7091.20 },
+      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 15000.00 }
   };
 
   function formatEditableValue() {
@@ -550,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function formatNumber(value) {
-    return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   }
 
   function calculateInitialCost() {
@@ -635,6 +635,9 @@ document.addEventListener('DOMContentLoaded', function() {
       peopleCostDiv.setAttribute('data-custom-value', 'true');
       formatEditableValue();
       calculateInitialCost();
+      const value = parseInt(rangeInput.value);
+      const data = values[value];
+      calculateMaintenanceCost(data); // Recalculate maintenance cost
   });
 
   peopleCostDiv.addEventListener('focus', function() {
