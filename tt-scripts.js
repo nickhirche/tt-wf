@@ -497,6 +497,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const peopleNumberDiv = document.querySelector('div[data-value-type="people-number"]');
   const maintenanceDiv = document.querySelector('div[data-cost-type="maintenance"]');
   const maintenanceValueDiv = document.querySelector('div[data-cost-value-type="maintenance"]');
+  const maintenanceHoursDiv = maintenanceDiv.querySelector('.maintenance-hours');
   const initialCostDiv = document.querySelector('div[data-cost-value-type="initial"]');
   const mediumLabel = document.querySelector('label[data-range-label="medium"]');
   const complexLabel = document.querySelector('label[data-range-label="complex"]');
@@ -508,10 +509,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const values = {
       0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
-      25: { workload: 328, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
-      50: { workload: 422, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
-      75: { workload: 1721, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '85,094.00' },
-      100: { workload: 4082, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '180,000.00' }
+      25: { workload: 324, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
+      50: { workload: 408, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
+      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 128 },
+      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
   };
 
   function formatEditableValue() {
@@ -549,7 +550,7 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   function formatNumber(value) {
-      return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
   }
 
   function calculateInitialCost() {
@@ -557,10 +558,22 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      //const factor = peopleNumber > 1 ? 1 + ((peopleNumber - 1) * 0.015) : 1;
-
       const initialCost = workload * peopleCost;
       initialCostDiv.textContent = formatNumber(initialCost);
+  }
+
+  function calculateMaintenanceCost(data) {
+      const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
+      const maintenanceValue = data.maintenanceValue;
+
+      if (maintenanceValue) {
+          const calculatedMaintenance = maintenanceValue * 12 * peopleCost;
+          maintenanceValueDiv.textContent = formatNumber(calculatedMaintenance);
+          maintenanceHoursDiv.textContent = maintenanceValue.toFixed(2); // Update maintenance hours
+      } else {
+          maintenanceValueDiv.textContent = '';
+          maintenanceHoursDiv.textContent = '';
+      }
   }
 
   function updateValues() {
@@ -585,10 +598,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
       if (data.maintenance) {
           maintenanceDiv.classList.add('active');
-          maintenanceValueDiv.textContent = data.maintenanceValue;
+          calculateMaintenanceCost(data);
       } else {
           maintenanceDiv.classList.remove('active');
           maintenanceValueDiv.textContent = '';
+          maintenanceHoursDiv.textContent = '';
       }
 
       calculateInitialCost();
@@ -609,7 +623,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   rangeInput.addEventListener('input', function() {
-      // Fire the event to dataLayer on every interaction
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({
           'event': 'cost_calculator',
