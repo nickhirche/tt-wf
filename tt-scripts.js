@@ -510,8 +510,8 @@ document.addEventListener('DOMContentLoaded', function() {
       0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
       25: { workload: 324, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
       50: { workload: 408, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
-      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '7,091.20' },
-      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '15,000.00' }
+      75: { workload: 1647, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: '85,094.00' },
+      100: { workload: 3851, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: '180,000.00' }
   };
 
   function formatEditableValue() {
