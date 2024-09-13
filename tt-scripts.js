@@ -514,7 +514,7 @@ document.addEventListener('DOMContentLoaded', function() {
     75: { workload: 215, peopleCost: 55, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 128 },
     100: { workload: 510, peopleCost: 63, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
   };
-
+  
   function formatEditableValue() {
     const sel = window.getSelection();
     const range = sel.getRangeAt(0);
@@ -522,19 +522,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
     value = parseInt(value) || 0;
-    peopleCostDiv.textContent = value.toLocaleString('en-US');
 
-    const newCursorPosition = Math.min(preCursorPosition, peopleCostDiv.textContent.length);
+    const formattedValue = value.toLocaleString('en-US');
+    peopleCostDiv.textContent = formattedValue;
+
+    // Calculate the new cursor position
+    const diff = formattedValue.length - value.toString().length;
+    const newCursorPosition = Math.min(preCursorPosition + diff, peopleCostDiv.textContent.length);
     setCursorPosition(newCursorPosition);
-  }
-
-  function setCursorPosition(pos) {
-    const range = document.createRange();
-    const sel = window.getSelection();
-    range.setStart(peopleCostDiv.childNodes[0], pos);
-    range.collapse(true);
-    sel.removeAllRanges();
-    sel.addRange(range);
   }
 
   function formatNumber(value) {
