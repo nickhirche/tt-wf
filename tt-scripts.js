@@ -552,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = values[value];
 
       if (!peopleCostOverride) {
-          peopleCostDiv.textContent = data.peopleCost.toString();
+          peopleCostDiv.textContent = (data.peopleCost * 8).toString();
           peopleCostDiv.setAttribute('data-custom-value', 'false');
       }
       
