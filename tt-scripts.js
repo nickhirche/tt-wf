@@ -534,15 +534,33 @@ document.addEventListener('DOMContentLoaded', function() {
     peopleCostDiv.textContent = formattedValue;
 
     // Calculate the new cursor position
-    let cursorPosition = preCursorPosition;
-    let commaCount = (formattedValue.slice(0, cursorPosition).match(/,/g) || []).length;
-    let originalCommaCount = (peopleCostDiv.textContent.slice(0, preCursorPosition).match(/,/g) || []).length;
+    let digitsBeforeCursor = 0;
+    for (let i = 0; i < preCursorPosition; i++) {
+        if (/\d/.test(peopleCostDiv.textContent[i])) {
+            digitsBeforeCursor++;
+        }
+    }
 
-    // Adjust cursor position for added commas
-    cursorPosition += commaCount - originalCommaCount;
+    let cursorPosition = 0;
+    let digitsCount = 0;
+    for (let i = 0; i < formattedValue.length; i++) {
+        if (/\d/.test(formattedValue[i])) {
+            digitsCount++;
+        }
+        if (digitsCount === digitsBeforeCursor + 1) {
+            cursorPosition = i + 1;
+            break;
+        }
+    }
 
-    // Ensure cursor position is within bounds
-    cursorPosition = Math.min(cursorPosition, peopleCostDiv.textContent.length);
+    // Ensure cursor position is at the end if necessary
+    if (digitsBeforeCursor === value.length) {
+        cursorPosition = formattedValue.length;
+    }
+
+    // Adjust for commas
+    const commaAdjustment = (formattedValue.slice(0, cursorPosition).match(/,/g) || []).length;
+    cursorPosition += commaAdjustment;
 
     // Set the cursor position
     const newRange = document.createRange();
@@ -550,17 +568,17 @@ document.addEventListener('DOMContentLoaded', function() {
     newRange.collapse(true);
     sel.removeAllRanges();
     sel.addRange(newRange);
-  }
+}
 
-  peopleCostDiv.addEventListener('input', function() {
-      peopleCostOverride = true;
-      peopleCostDiv.setAttribute('data-custom-value', 'true');
-      formatEditableValue();
-      calculateInitialCost();
-      const value = parseInt(rangeInput.value);
-      const data = values[value];
-      calculateMaintenanceCost(data); // Recalculate maintenance cost
-  });
+peopleCostDiv.addEventListener('input', function() {
+    peopleCostOverride = true;
+    peopleCostDiv.setAttribute('data-custom-value', 'true');
+    formatEditableValue();
+    calculateInitialCost();
+    const value = parseInt(rangeInput.value);
+    const data = values[value];
+    calculateMaintenanceCost(data); // Recalculate maintenance cost
+});
 
   function formatNumber(value) {
       return Math.round(value).toLocaleString('en-US');
