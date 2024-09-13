@@ -535,12 +535,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Calculate the new cursor position
     let cursorPosition = preCursorPosition;
-    let commaCount = (formattedValue.slice(0, cursorPosition).match(/,/g) || []).length;
+    let newCommaCount = (formattedValue.slice(0, cursorPosition).match(/,/g) || []).length;
     let originalCommaCount = (peopleCostDiv.textContent.slice(0, preCursorPosition).match(/,/g) || []).length;
 
     // Adjust cursor position for added commas
-    if (commaCount > originalCommaCount) {
-        cursorPosition += (commaCount - originalCommaCount) + 1; // Move one extra position
+    if (newCommaCount > originalCommaCount) {
+        cursorPosition += (newCommaCount - originalCommaCount);
     }
 
     // Ensure cursor position is within bounds
