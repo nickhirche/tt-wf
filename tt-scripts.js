@@ -520,25 +520,26 @@ document.addEventListener('DOMContentLoaded', function() {
     const range = sel.getRangeAt(0);
     const preCursorPosition = range.endOffset;
 
+    // Remove all non-digit characters
     let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
-    value = parseInt(value) || 0;
-
-    const formattedValue = value.toLocaleString('en-US');
+    
+    // Format the value with commas
+    const formattedValue = parseInt(value).toLocaleString('en-US');
     peopleCostDiv.textContent = formattedValue;
 
-    // Calculate new cursor position
+    // Calculate the new cursor position
     let cursorIndex = 0;
     let digitsCount = 0;
     let originalDigits = value.toString();
 
     for (let i = 0; i < formattedValue.length && digitsCount < originalDigits.length; i++) {
-        if (/\d/.test(formattedValue[i])) {
-            if (digitsCount === preCursorPosition) {
-                cursorIndex = i;
-                break;
-            }
-            digitsCount++;
+      if (/\d/.test(formattedValue[i])) {
+        if (digitsCount === preCursorPosition) {
+          cursorIndex = i;
+          break;
         }
+        digitsCount++;
+      }
     }
     if (digitsCount === originalDigits.length) {
         cursorIndex = formattedValue.length;
@@ -551,6 +552,16 @@ document.addEventListener('DOMContentLoaded', function() {
     sel.removeAllRanges();
     sel.addRange(newRange);
   }
+
+  peopleCostDiv.addEventListener('input', function() {
+    peopleCostOverride = true;
+    peopleCostDiv.setAttribute('data-custom-value', 'true');
+    formatEditableValue();
+    calculateInitialCost();
+    const value = parseInt(rangeInput.value);
+    const data = values[value];
+    calculateMaintenanceCost(data); // Recalculate maintenance cost
+  });
 
   function formatNumber(value) {
       return Math.round(value).toLocaleString('en-US');
