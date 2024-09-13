@@ -540,7 +540,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Adjust cursor position for added commas
     if (commaCount > originalCommaCount) {
-        cursorPosition += 1;
+        cursorPosition += (commaCount - originalCommaCount) + 1; // Move one extra position
     }
 
     // Ensure cursor position is within bounds
