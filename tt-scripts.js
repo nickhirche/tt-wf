@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Calculate the new cursor position
     let digitsBeforeCursor = 0;
     for (let i = 0; i < preCursorPosition; i++) {
-        if (/\d/.test(value[i])) {
+        if (/\d/.test(peopleCostDiv.textContent[i])) {
             digitsBeforeCursor++;
         }
     }
@@ -559,17 +559,17 @@ document.addEventListener('DOMContentLoaded', function() {
     newRange.collapse(true);
     sel.removeAllRanges();
     sel.addRange(newRange);
-  }
+}
 
-  peopleCostDiv.addEventListener('input', function() {
-      peopleCostOverride = true;
-      peopleCostDiv.setAttribute('data-custom-value', 'true');
-      formatEditableValue();
-      calculateInitialCost();
-      const value = parseInt(rangeInput.value);
-      const data = values[value];
-      calculateMaintenanceCost(data); // Recalculate maintenance cost
-  });
+peopleCostDiv.addEventListener('input', function() {
+    peopleCostOverride = true;
+    peopleCostDiv.setAttribute('data-custom-value', 'true');
+    formatEditableValue();
+    calculateInitialCost();
+    const value = parseInt(rangeInput.value);
+    const data = values[value];
+    calculateMaintenanceCost(data); // Recalculate maintenance cost
+});
 
   function formatNumber(value) {
       return Math.round(value).toLocaleString('en-US');
