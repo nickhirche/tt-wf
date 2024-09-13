@@ -529,7 +529,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Calculate the new cursor position
     const diff = formattedValue.length - value.toString().length;
     const newCursorPosition = Math.min(preCursorPosition + diff, peopleCostDiv.textContent.length);
-    setCursorPosition(newCursorPosition);
+
+    // Set the cursor position
+    const newRange = document.createRange();
+    newRange.setStart(peopleCostDiv.childNodes[0], newCursorPosition);
+    newRange.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(newRange);
   }
 
   function formatNumber(value) {
