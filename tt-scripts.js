@@ -523,44 +523,52 @@ document.addEventListener('DOMContentLoaded', function() {
     // Remove all non-digit characters
     let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
     
+    // Ensure the value is a valid number
+    if (value === '') {
+        peopleCostDiv.textContent = '';
+        return;
+    }
+
     // Format the value with commas
     const formattedValue = parseInt(value).toLocaleString('en-US');
     peopleCostDiv.textContent = formattedValue;
 
     // Calculate the new cursor position
-    let cursorIndex = 0;
-    let digitsCount = 0;
-    let originalDigits = value.toString();
-
-    for (let i = 0; i < formattedValue.length && digitsCount < originalDigits.length; i++) {
-      if (/\d/.test(formattedValue[i])) {
-        if (digitsCount === preCursorPosition) {
-          cursorIndex = i;
-          break;
+    let digitsBeforeCursor = 0;
+    for (let i = 0; i < preCursorPosition; i++) {
+        if (/\d/.test(value[i])) {
+            digitsBeforeCursor++;
         }
-        digitsCount++;
-      }
     }
-    if (digitsCount === originalDigits.length) {
-        cursorIndex = formattedValue.length;
+
+    let cursorPosition = 0;
+    let digitsCount = 0;
+    for (let i = 0; i < formattedValue.length; i++) {
+        if (/\d/.test(formattedValue[i])) {
+            digitsCount++;
+        }
+        if (digitsCount === digitsBeforeCursor + 1) {
+            cursorPosition = i + 1;
+            break;
+        }
     }
 
     // Set the cursor position
     const newRange = document.createRange();
-    newRange.setStart(peopleCostDiv.childNodes[0], cursorIndex);
+    newRange.setStart(peopleCostDiv.childNodes[0], cursorPosition);
     newRange.collapse(true);
     sel.removeAllRanges();
     sel.addRange(newRange);
   }
 
   peopleCostDiv.addEventListener('input', function() {
-    peopleCostOverride = true;
-    peopleCostDiv.setAttribute('data-custom-value', 'true');
-    formatEditableValue();
-    calculateInitialCost();
-    const value = parseInt(rangeInput.value);
-    const data = values[value];
-    calculateMaintenanceCost(data); // Recalculate maintenance cost
+      peopleCostOverride = true;
+      peopleCostDiv.setAttribute('data-custom-value', 'true');
+      formatEditableValue();
+      calculateInitialCost();
+      const value = parseInt(rangeInput.value);
+      const data = values[value];
+      calculateMaintenanceCost(data); // Recalculate maintenance cost
   });
 
   function formatNumber(value) {
