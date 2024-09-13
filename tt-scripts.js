@@ -548,9 +548,14 @@ document.addEventListener('DOMContentLoaded', function() {
             digitsCount++;
         }
         if (digitsCount === digitsBeforeCursor + 1) {
-            cursorPosition = i + 1;
+            cursorPosition = i;
             break;
         }
+    }
+
+    // Ensure cursor position is at the end if necessary
+    if (digitsBeforeCursor === value.length) {
+        cursorPosition = formattedValue.length;
     }
 
     // Set the cursor position
