@@ -520,19 +520,31 @@ document.addEventListener('DOMContentLoaded', function() {
     const range = sel.getRangeAt(0);
     const preCursorPosition = range.endOffset;
 
+    // Remove all non-digit characters
     let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
     value = parseInt(value) || 0;
 
+    // Format the value with commas
     const formattedValue = value.toLocaleString('en-US');
     peopleCostDiv.textContent = formattedValue;
 
     // Calculate the new cursor position
-    const diff = formattedValue.length - value.toString().length;
-    const newCursorPosition = Math.min(preCursorPosition + diff, peopleCostDiv.textContent.length);
+    let cursorIndex = 0;
+    let digitsCount = 0;
+
+    for (let i = 0; i < formattedValue.length; i++) {
+        if (/\d/.test(formattedValue[i])) {
+            digitsCount++;
+        }
+        if (digitsCount === preCursorPosition) {
+            cursorIndex = i + 1;
+            break;
+        }
+    }
 
     // Set the cursor position
     const newRange = document.createRange();
-    newRange.setStart(peopleCostDiv.childNodes[0], newCursorPosition);
+    newRange.setStart(peopleCostDiv.childNodes[0], cursorIndex);
     newRange.collapse(true);
     sel.removeAllRanges();
     sel.addRange(newRange);
@@ -547,7 +559,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      const initialCost = Math.round(workload * peopleCost);
+      const initialCost = Math.round(workload * peopleCost * 8);
       initialCostDiv.textContent = formatNumber(initialCost);
   }
 
@@ -570,53 +582,53 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = values[value];
 
       if (!peopleCostOverride) {
-          peopleCostDiv.textContent = (data.peopleCost * 8).toString();
-          peopleCostDiv.setAttribute('data-custom-value', 'false');
+        peopleCostDiv.textContent = data.peopleCost.toString();
+        peopleCostDiv.setAttribute('data-custom-value', 'false');
       }
       
       workloadDiv.textContent = data.workload;
       peopleNumberDiv.textContent = data.peopleNumber;
 
       descriptions.forEach(desc => {
-          if (desc.dataset.descriptionTyp === data.description) {
-              desc.classList.add('active');
-          } else {
-              desc.classList.remove('active');
-          }
+        if (desc.dataset.descriptionTyp === data.description) {
+          desc.classList.add('active');
+        } else {
+          desc.classList.remove('active');
+        }
       });
 
       if (data.maintenance) {
-          maintenanceDiv.classList.add('active');
-          calculateMaintenanceCost(data);
+        maintenanceDiv.classList.add('active');
+        calculateMaintenanceCost(data);
       } else {
-          maintenanceDiv.classList.remove('active');
-          maintenanceValueDiv.textContent = '';
-          maintenanceHoursDiv.textContent = '';
+        maintenanceDiv.classList.remove('active');
+        maintenanceValueDiv.textContent = '';
+        maintenanceHoursDiv.textContent = '';
       }
 
       calculateInitialCost();
 
       if (value >= 50) {
-          mediumLabel.classList.add('active');
+        mediumLabel.classList.add('active');
       } else {
-          mediumLabel.classList.remove('active');
+        mediumLabel.classList.remove('active');
       }
 
       if (value === 100) {
-          complexLabel.classList.add('active');
+        complexLabel.classList.add('active');
       } else {
-          complexLabel.classList.remove('active');
+        complexLabel.classList.remove('active');
       }
 
       rangeInput.style.setProperty('--range-value', value);
   }
 
   rangeInput.addEventListener('input', function() {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-          'event': 'cost_calculator',
-      });
-      updateValues();
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'cost_calculator',
+    });
+    updateValues();
   });
 
   peopleCostDiv.addEventListener('input', function() {
