@@ -529,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      const initialCost = Math.round(workload * peopleCost * 8);
+      const initialCost = Math.round(workload * peopleCost);
       initialCostDiv.textContent = formatNumber(initialCost);
   }
 
