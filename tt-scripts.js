@@ -520,26 +520,28 @@ document.addEventListener('DOMContentLoaded', function() {
     const range = sel.getRangeAt(0);
     const preCursorPosition = range.endOffset;
 
-    // Remove all non-digit characters
     let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
     value = parseInt(value) || 0;
 
-    // Format the value with commas
     const formattedValue = value.toLocaleString('en-US');
     peopleCostDiv.textContent = formattedValue;
 
-    // Calculate the new cursor position
+    // Calculate new cursor position
     let cursorIndex = 0;
     let digitsCount = 0;
+    let originalDigits = value.toString();
 
-    for (let i = 0; i < formattedValue.length; i++) {
+    for (let i = 0; i < formattedValue.length && digitsCount < originalDigits.length; i++) {
         if (/\d/.test(formattedValue[i])) {
+            if (digitsCount === preCursorPosition) {
+                cursorIndex = i;
+                break;
+            }
             digitsCount++;
         }
-        if (digitsCount === preCursorPosition) {
-            cursorIndex = i + 1;
-            break;
-        }
+    }
+    if (digitsCount === originalDigits.length) {
+        cursorIndex = formattedValue.length;
     }
 
     // Set the cursor position
