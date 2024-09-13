@@ -516,9 +516,25 @@ document.addEventListener('DOMContentLoaded', function() {
   };
 
   function formatEditableValue() {
+    const sel = window.getSelection();
+    const range = sel.getRangeAt(0);
+    const preCursorPosition = range.endOffset;
+
     let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
     value = parseInt(value) || 0;
     peopleCostDiv.textContent = value.toLocaleString('en-US');
+
+    const newCursorPosition = Math.min(preCursorPosition, peopleCostDiv.textContent.length);
+    setCursorPosition(newCursorPosition);
+  }
+
+  function setCursorPosition(pos) {
+    const range = document.createRange();
+    const sel = window.getSelection();
+    range.setStart(peopleCostDiv.childNodes[0], pos);
+    range.collapse(true);
+    sel.removeAllRanges();
+    sel.addRange(range);
   }
 
   function formatNumber(value) {
