@@ -543,9 +543,13 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let cursorPosition = 0;
     let digitsCount = 0;
+    let commaCount = 0;
     for (let i = 0; i < formattedValue.length; i++) {
         if (/\d/.test(formattedValue[i])) {
             digitsCount++;
+        }
+        if (formattedValue[i] === ',') {
+            commaCount++;
         }
         if (digitsCount === digitsBeforeCursor + 1) {
             cursorPosition = i + 1;
@@ -553,14 +557,13 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    // Ensure cursor position is at the end if necessary
-    if (digitsBeforeCursor === value.length) {
-        cursorPosition = formattedValue.length;
+    // Adjust cursor position for added commas
+    if (commaCount > 0) {
+        cursorPosition += 1;
     }
 
-    // Adjust for commas
-    const commaAdjustment = (formattedValue.slice(0, cursorPosition).match(/,/g) || []).length;
-    cursorPosition += commaAdjustment;
+    // Ensure cursor position is within bounds
+    cursorPosition = Math.min(cursorPosition, peopleCostDiv.textContent.length);
 
     // Set the cursor position
     const newRange = document.createRange();
