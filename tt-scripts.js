@@ -508,49 +508,20 @@ document.addEventListener('DOMContentLoaded', function() {
   let peopleCostOverride = false;
 
   const values = {
-      0: { workload: 193, peopleCost: 35.69, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
-      25: { workload: 329, peopleCost: 40.69, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
-      50: { workload: 420, peopleCost: 52.88, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
-      75: { workload: 1721, peopleCost: 55.40, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 128 },
-      100: { workload: 4082, peopleCost: 62.50, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
+    0: { workload: 24, peopleCost: 36, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
+    25: { workload: 41, peopleCost: 41, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
+    50: { workload: 53, peopleCost: 53, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
+    75: { workload: 215, peopleCost: 55, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 128 },
+    100: { workload: 510, peopleCost: 63, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
   };
 
   function formatEditableValue() {
-      const sel = window.getSelection();
-      const range = sel.getRangeAt(0);
-      const preCursorPosition = range.endOffset;
-
       let value = peopleCostDiv.textContent.replace(/[^\d]/g, '');
-
-      if (value.length <= 2) {
-          peopleCostDiv.textContent = value;
-          setCursorPosition(preCursorPosition);
-          return;
-      }
-
-      const dollars = value.slice(0, -2);
-      const cents = value.slice(-2);
-
-      const formattedDollars = dollars.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-      const formattedValue = formattedDollars + '.' + cents;
-
-      const diff = formattedValue.length - value.length;
-      peopleCostDiv.textContent = formattedValue;
-
-      setCursorPosition(preCursorPosition + diff);
-  }
-
-  function setCursorPosition(pos) {
-      const range = document.createRange();
-      const sel = window.getSelection();
-      range.setStart(peopleCostDiv.childNodes[0], Math.min(pos, peopleCostDiv.textContent.length));
-      range.collapse(true);
-      sel.removeAllRanges();
-      sel.addRange(range);
+      peopleCostDiv.textContent = value;
   }
 
   function formatNumber(value) {
-      return value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return Math.round(value).toLocaleString('en-US');
   }
 
   function calculateInitialCost() {
@@ -558,7 +529,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const peopleCost = parseFloat(peopleCostDiv.textContent.replace(/,/g, ''));
       const peopleNumber = parseInt(peopleNumberDiv.textContent);
 
-      const initialCost = workload * peopleCost;
+      const initialCost = Math.round(workload * peopleCost * 8);
       initialCostDiv.textContent = formatNumber(initialCost);
   }
 
@@ -567,9 +538,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const maintenanceValue = data.maintenanceValue;
 
       if (maintenanceValue) {
-          const calculatedMaintenance = maintenanceValue * 12 * peopleCost;
+          const calculatedMaintenance = Math.round(maintenanceValue * 12 * peopleCost);
           maintenanceValueDiv.textContent = formatNumber(calculatedMaintenance);
-          maintenanceHoursDiv.textContent = maintenanceValue.toFixed(2); // Update maintenance hours
+          maintenanceHoursDiv.textContent = Math.round(maintenanceValue).toString(); // Update maintenance hours
       } else {
           maintenanceValueDiv.textContent = '';
           maintenanceHoursDiv.textContent = '';
@@ -581,7 +552,7 @@ document.addEventListener('DOMContentLoaded', function() {
       const data = values[value];
 
       if (!peopleCostOverride) {
-          peopleCostDiv.textContent = data.peopleCost.toFixed(2);
+          peopleCostDiv.textContent = data.peopleCost.toString();
           peopleCostDiv.setAttribute('data-custom-value', 'false');
       }
       
