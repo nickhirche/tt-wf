@@ -1453,10 +1453,10 @@ pre.w-code-block code {
 }
 
 /* Pricing Cards */
-.range-slider .range-labels:first-child {
+.range-slider.pricing .range-labels :first-child {
   margin-left: -0.25rem;
 }
-.range-slider .range-labels:last-child {
+.range-slider.pricing .range-labels :last-child {
   margin-right: -0.25rem;
 }
 
