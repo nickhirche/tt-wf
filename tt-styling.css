@@ -106,7 +106,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Paragraphs */
-.label a {
+.bg-black .label a {
   color: rgba(239, 233, 251, 0.6);
 }
 
