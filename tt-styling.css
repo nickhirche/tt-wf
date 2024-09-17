@@ -1575,17 +1575,17 @@ pre.w-code-block code {
   }
 }
 /* Cost calculator */
-.tt-cost-calculator .range-slider input[type=range i] {
+input[type=range i] {
   --range-value: 0;
   height: 6px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
   cursor: pointer;
-  background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(var(--range-value) * 1%), #000 calc(var(--range-value) * 1%));
+  background: linear-gradient(90deg, var(--purple-600) 0%, var(--purple-600) calc(var(--range-value) * 1%), #000 calc(var(--range-value) * 1%));
   border-radius: 8px;
 }
-.tt-cost-calculator .range-slider input[type=range i]::-webkit-slider-thumb {
+input[type=range i]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
   height: 1rem;
@@ -1594,7 +1594,7 @@ pre.w-code-block code {
   box-shadow: 0px 0px 0px 2px var(--black-a-100);
   border-radius: 50%;
 }
-.tt-cost-calculator .range-slider input[type=range i]::-moz-range-thumb {
+input[type=range i]::-moz-range-thumb {
   -moz-appearance: none;
   appearance: none;
   height: 1rem;
@@ -1602,6 +1602,10 @@ pre.w-code-block code {
   background: var(--white-a-100);
   box-shadow: 0px 0px 0px 2px var(--black-a-100);
   border-radius: 50%;
+}
+
+.tt-cost-calculator .range-slider input[type=range i] {
+  background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(var(--range-value) * 1%), #000 calc(var(--range-value) * 1%));
 }
 .tt-cost-calculator .calculator-cost-item[data-cost-type=maintenance] {
   display: none;
