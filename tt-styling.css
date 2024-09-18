@@ -1463,6 +1463,23 @@ pre.w-code-block code {
   background: linear-gradient(90deg, #8B33FF 0%, #8B33FF calc(8.3333333333 * var(--range-value) * 1%), #000 calc(7.6923076923 * var(--range-value) * 1%));
 }
 
+.tt-pricing-card [data-plan-max=true] {
+  display: flex;
+}
+.tt-pricing-card.inactive .tt-button {
+  opacity: 0.15;
+}
+.tt-pricing-card.inactive .tt-pricing-card-head,
+.tt-pricing-card.inactive .plan-description {
+  opacity: 0.5;
+}
+.tt-pricing-card.inactive [data-plan-max=true] {
+  display: flex;
+}
+.tt-pricing-card.inactive [data-plan-max=true] {
+  display: none;
+}
+
 .tt-pricing-tab-menu {
   -webkit-backdrop-filter: blur(1rem);
   backdrop-filter: blur(1rem);
