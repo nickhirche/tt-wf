@@ -1454,10 +1454,10 @@ pre.w-code-block code {
 
 /* Pricing Cards */
 .range-slider.pricing .range-labels :first-child {
-  margin-left: -0.25rem;
+  margin-left: -0.5rem;
 }
 .range-slider.pricing .range-labels :last-child {
-  margin-right: -0.25rem;
+  margin-right: -0.5rem;
 }
 
 .tt-pricing-tab-menu {
