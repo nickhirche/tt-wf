@@ -1464,7 +1464,7 @@ pre.w-code-block code {
 }
 
 .tt-pricing-card [data-plan-max=true] {
-  display: flex;
+  display: none;
 }
 .tt-pricing-card.inactive .tt-button {
   opacity: 0.15;
@@ -1478,6 +1478,9 @@ pre.w-code-block code {
 }
 .tt-pricing-card.inactive [data-plan-max=true] {
   display: none;
+}
+.tt-pricing-card.inactive .tt-batch pricing {
+  background-color: var(--black-a-40);
 }
 
 .tt-pricing-tab-menu {
