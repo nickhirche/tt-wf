@@ -1459,6 +1459,9 @@ pre.w-code-block code {
 .range-slider.pricing .range-labels :last-child {
   margin-right: -0.5rem;
 }
+.range-slider.pricing input[type=range i] {
+  background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(7.6923076923 * var(--range-value) * 1%), #000 calc(7.6923076923 * var(--range-value) * 1%));
+}
 
 .tt-pricing-tab-menu {
   -webkit-backdrop-filter: blur(1rem);
