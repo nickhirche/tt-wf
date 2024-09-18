@@ -555,13 +555,13 @@ document.addEventListener('DOMContentLoaded', function() {
 }
 
 peopleCostDiv.addEventListener('input', function() {
-    peopleCostOverride = true;
-    peopleCostDiv.setAttribute('data-custom-value', 'true');
-    formatEditableValue();
-    calculateInitialCost();
-    const value = parseInt(rangeInput.value);
-    const data = values[value];
-    calculateMaintenanceCost(data); // Recalculate maintenance cost
+  peopleCostOverride = true;
+  peopleCostDiv.setAttribute('data-custom-value', 'true');
+  formatEditableValue();
+  calculateInitialCost();
+  const value = parseInt(rangeInput.value);
+  const data = values[value];
+  calculateMaintenanceCost(data); // Recalculate maintenance cost
 });
 
   function formatNumber(value) {
