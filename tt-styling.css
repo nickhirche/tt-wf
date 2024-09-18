@@ -1476,7 +1476,7 @@ pre.w-code-block code {
 .tt-pricing-card.inactive [data-plan-max=true] {
   display: flex;
 }
-.tt-pricing-card.inactive [data-plan-max=true] {
+.tt-pricing-card.inactive [data-plan-max=false] {
   display: none;
 }
 .tt-pricing-card.inactive .tt-batch pricing {
