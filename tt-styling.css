@@ -1467,10 +1467,14 @@ pre.w-code-block code {
   display: none;
 }
 .tt-pricing-card.inactive {
-  opacity: 0.5;
+  opacity: 0.75;
 }
 .tt-pricing-card.inactive .tt-button {
   opacity: 0.15;
+}
+.tt-pricing-card.inactive .tt-pricing-card-head,
+.tt-pricing-card.inactive .plan-description {
+  opacity: 0.75;
 }
 .tt-pricing-card.inactive [data-plan-max=true] {
   display: flex;
