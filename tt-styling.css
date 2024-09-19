@@ -1533,6 +1533,9 @@ pre.w-code-block code {
   height: 5rem;
   z-index: 61;
 }
+.tt-pricing-table::before:has(.tt-pricing-plans.cols-6) {
+  display: none;
+}
 
 @media screen and (max-width: 479px) {
   .tt-pricing-table::before {
