@@ -1543,7 +1543,6 @@ pre.w-code-block code {
 }
 
 .tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group {
-  padding-left: 0.8em;
   position: relative;
 }
 .tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group::before {
