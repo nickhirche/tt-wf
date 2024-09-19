@@ -582,7 +582,7 @@ peopleCostDiv.addEventListener('input', function() {
       const maintenanceValue = data.maintenanceValue;
 
       if (maintenanceValue) {
-          const calculatedMaintenance = Math.round(maintenanceValue * 12 * peopleCost / 8);
+          const calculatedMaintenance = Math.round(maintenanceValue * 12 * peopleCost);
           maintenanceValueDiv.textContent = formatNumber(calculatedMaintenance);
           maintenanceHoursDiv.textContent = Math.round(maintenanceValue).toString(); // Update maintenance hours
       } else {
