@@ -1511,6 +1511,7 @@ pre.w-code-block code {
   width: 100vw;
   height: 100%;
   background-color: var(--warm-grey-1);
+  z-index: -1;
 }
 
 /*.tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before {
