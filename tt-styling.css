@@ -1534,7 +1534,7 @@ pre.w-code-block code {
   height: 5rem;
   z-index: 61;
 }
-.tt-pricing-table::before:has(.tt-pricing-plans.cols-6) {
+.tt-pricing-table:has(.tt-pricing-plans.cols-6)::before {
   display: none;
 }
 
