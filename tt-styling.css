@@ -1503,6 +1503,16 @@ pre.w-code-block code {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
+.tt-pricing-plans.cols-6::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  height: 100%;
+  background-color: var(--warm-grey-1);
+}
+
 /*.tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before {
     content:"";
     display: inline-block;
