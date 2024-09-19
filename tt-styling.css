@@ -1546,13 +1546,12 @@ pre.w-code-block code {
   padding-left: 0.8em;
   position: relative;
 }
-
 .tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group::before {
   content: "";
   position: absolute;
   height: 0.8em;
   width: 0.8em;
-  left: -0.2rem;
+  left: -1rem;
   top: 0.1em;
   display: inline-block;
   background-size: contain;
