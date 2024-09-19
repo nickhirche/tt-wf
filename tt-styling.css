@@ -1453,6 +1453,10 @@ pre.w-code-block code {
 }
 
 /* Pricing Cards */
+[data-subscription-period].inactive {
+  display: none;
+}
+
 .range-slider.pricing .range-labels :first-child {
   margin-left: -0.5rem;
 }
