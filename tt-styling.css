@@ -1466,12 +1466,11 @@ pre.w-code-block code {
 .tt-pricing-card [data-plan-max=true] {
   display: none;
 }
+.tt-pricing-card.inactive {
+  opacity: 0.5;
+}
 .tt-pricing-card.inactive .tt-button {
   opacity: 0.15;
-}
-.tt-pricing-card.inactive .tt-pricing-card-head,
-.tt-pricing-card.inactive .plan-description {
-  opacity: 0.5;
 }
 .tt-pricing-card.inactive [data-plan-max=true] {
   display: flex;
