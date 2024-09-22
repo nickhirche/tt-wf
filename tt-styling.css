@@ -1464,7 +1464,7 @@ pre.w-code-block code {
   margin-right: -0.5rem;
 }
 .range-slider.pricing input[type=range i] {
-  background: linear-gradient(90deg, #8B33FF 0%, #8B33FF calc(9.0909090909 * var(--range-value) * 1%), #000 calc(9.0909090909 * var(--range-value) * 1%));
+  background: linear-gradient(90deg, #8B33FF 0%, #8B33FF calc(10 * var(--range-value) * 1%), #000 calc(10 * var(--range-value) * 1%));
 }
 
 .tt-pricing-card [data-plan-max=true] {
