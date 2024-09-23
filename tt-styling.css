@@ -1551,7 +1551,7 @@ pre.w-code-block code {
   }
 }
 .tt-pricing-table-wrap {
-  gap: 1rem;
+  gap: 0rem;
 }
 .tt-pricing-table-wrap .tt-pricing-category.first-group::before {
   content: "";
