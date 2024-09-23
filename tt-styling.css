@@ -1513,6 +1513,8 @@ pre.w-code-block code {
   position: absolute;
   top: 0;
   width: 100vw;
+  left: 50%;
+  transform: translateX(-50vw);
   height: 100%;
   background-color: var(--warm-grey-1);
   z-index: -1;
