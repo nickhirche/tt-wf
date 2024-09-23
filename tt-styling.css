@@ -1550,6 +1550,9 @@ pre.w-code-block code {
     height: 3.2rem;
   }
 }
+.tt-pricing-table-wrap {
+  gap: 1rem;
+}
 .tt-pricing-table-wrap .tt-pricing-category.first-group::before {
   content: "";
   display: inline-block;
@@ -1585,11 +1588,6 @@ pre.w-code-block code {
 
 .tt-pricing-feature-group.is-active .tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group::before {
   transform: rotate(90deg);
-}
-
-/* Pricing Plans */
-.tt-pricing-table-wrap {
-  gap: 0;
 }
 
 @media screen and (max-width: 479px) {
