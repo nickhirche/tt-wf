@@ -1550,15 +1550,20 @@ pre.w-code-block code {
     height: 3.2rem;
   }
 }
-.tt-pricing-category::after {
+tt-pricing-table-wrap tt-pricing-category:first-of-type::before {
+  content: "";
+  display: inline-block;
+  width: 100%;
+  height: 2rem;
+}
+tt-pricing-table-wrap tt-pricing-category::after {
   content: "";
   display: inline-block;
   top: 5rem;
   width: 100%;
   height: 2rem;
 }
-
-.tt-pricing-category > div:nth-child(2) {
+tt-pricing-table-wrap tt-pricing-category > div:nth-child(2) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
