@@ -1550,7 +1550,7 @@ pre.w-code-block code {
     height: 3.2rem;
   }
 }
-.tt-pricing-table-wrap .tt-pricing-category:first-of-type::before {
+.tt-pricing-table-wrap .tt-pricing-category:nth-of-type(1)::before {
   content: "";
   display: inline-block;
   width: 100%;
