@@ -1507,7 +1507,35 @@ pre.w-code-block code {
   font-variant-numeric: lining-nums tabular-nums;
 }
 
-.tt-pricing-plans.cols-6::before {
+/*.tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before {
+    content:"";
+    display: inline-block;
+    width: 100%;
+    height: 2rem;
+}*/
+.tt-pricing-table {
+  margin-top: 0;
+}
+.tt-pricing-table::before {
+  content: "";
+  display: inline-block;
+  position: sticky;
+  background-color: var(--warm-grey-1);
+  top: 0rem;
+  width: 100%;
+  height: 5rem;
+  z-index: 61;
+}
+@media screen and (max-width: 479px) {
+  .tt-pricing-table::before {
+    width: 95vw;
+    height: 3.2rem;
+  }
+}
+.tt-pricing-table:has(.tt-pricing-plans.cols-6)::before {
+  display: none;
+}
+.tt-pricing-table .tt-pricing-plans.cols-6::before {
   content: "";
   display: block;
   position: absolute;
@@ -1519,54 +1547,33 @@ pre.w-code-block code {
   background-color: var(--warm-grey-1);
   z-index: -1;
 }
-
-/*.tt-pricing-table .tt-pricing-category:not(.tt-pricing-category ~ .tt-pricing-category)::before {
-    content:"";
-    display: inline-block;
-    width: 100%;
-    height: 2rem;
-}*/
-.tt-pricing-table {
-  margin-top: 0;
-}
-
-.tt-pricing-table::before {
-  content: "";
-  display: inline-block;
-  position: sticky;
-  background-color: var(--warm-grey-1);
-  top: 0rem;
-  width: 100%;
-  height: 5rem;
-  z-index: 61;
-}
-.tt-pricing-table:has(.tt-pricing-plans.cols-6)::before {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=enterprise] .pricing-value-group:not([data-pricing-value-group=enterprise]) {
   display: none;
 }
-
-@media screen and (max-width: 479px) {
-  .tt-pricing-table::before {
-    width: 95vw;
-    height: 3.2rem;
-  }
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=opensource] .pricing-value-group:not([data-pricing-value-group=opensource]) {
+  display: none;
 }
-.tt-pricing-table-wrap {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]) .pricing-value-group[data-pricing-value-group=enterprise],
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]) .pricing-value-group[data-pricing-value-group=opensource] {
+  display: none;
+}
+.tt-pricing-table .tt-pricing-table-wrap {
   gap: 0rem;
 }
-.tt-pricing-table-wrap .tt-pricing-category.first-group::before {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category.first-group::before {
   content: "";
   display: inline-block;
   width: 100%;
   height: 2rem;
 }
-.tt-pricing-table-wrap .tt-pricing-category::after {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category::after {
   content: "";
   display: inline-block;
   top: 5rem;
   width: 100%;
   height: 2rem;
 }
-.tt-pricing-table-wrap .tt-pricing-category > div:nth-child(2) {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category > div:nth-child(2) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
 
