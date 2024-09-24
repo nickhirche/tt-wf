@@ -1576,6 +1576,21 @@ pre.w-code-block code {
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category > div:nth-child(2) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+@media screen and (max-width: 479px) {
+  .tt-pricing-table .tt-pricing-plan-col {
+    display: none;
+  }
+  .tt-pricing-table .tt-pricing-plan-col.plans {
+    display: flex;
+  }
+  .tt-pricing-table[data-active-col-first=opensource] .tt-pricing-plan-col[data-plan-type-col=opensource], .tt-pricing-table[data-active-col-first=enterprise] .tt-pricing-plan-col[data-plan-type-col=enterprise], .tt-pricing-table[data-active-col-first=start] .tt-pricing-plan-col[data-plan-type-col=start], .tt-pricing-table[data-active-col-first=team] .tt-pricing-plan-col[data-plan-type-col=team], .tt-pricing-table[data-active-col-first=growth] .tt-pricing-plan-col[data-plan-type-col=growth] {
+    display: flex;
+  }
+  .tt-pricing-table[data-active-col-second=opensource] .tt-pricing-plan-col[data-plan-type-col=opensource], .tt-pricing-table[data-active-col-second=enterprise] .tt-pricing-plan-col[data-plan-type-col=enterprise], .tt-pricing-table[data-active-col-second=start] .tt-pricing-plan-col[data-plan-type-col=start], .tt-pricing-table[data-active-col-second=team] .tt-pricing-plan-col[data-plan-type-col=team], .tt-pricing-table[data-active-col-second=growth] .tt-pricing-plan-col[data-plan-type-col=growth] {
+    display: flex;
+    order: 9999;
+  }
+}
 
 .tt-pricing-sub-toggle .tt-pricing-feature-col .tt-pricing-text-group {
   position: relative;
