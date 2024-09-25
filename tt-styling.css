@@ -699,10 +699,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 /* Blog Card */
+.tt-blog-card .three-lines {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  align-self: stretch;
+}
 .tt-blog-card .blog-card-media {
   transition: all var(--transition-base);
 }
-
 .tt-blog-card:hover .blog-card-media {
   transform: scale(110%);
 }
