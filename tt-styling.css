@@ -1576,7 +1576,7 @@ pre.w-code-block code {
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category > div:nth-child(2) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-@media screen and (max-width: 479px) {
+@media screen and (max-width: 767px) {
   .tt-pricing-table .tt-pricing-plan-col {
     display: none;
   }
