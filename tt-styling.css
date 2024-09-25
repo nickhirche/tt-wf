@@ -702,7 +702,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-blog-card .three-lines {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 4;
   align-self: stretch;
 }
 .tt-blog-card .blog-card-media {
