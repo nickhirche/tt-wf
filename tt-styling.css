@@ -716,7 +716,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-faq-container .ac-trigger:after, .tt-faq-container .ac-trigger:before {
   content: "";
   position: absolute;
-  left: 0.8rem;
+  left: 0.5rem;
   top: 1rem;
   width: 2px;
   height: 0.6rem;
