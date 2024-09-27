@@ -729,7 +729,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-faq .tt-faq-container .tt-faq-item.is-active .ac-trigger:before {
   transform: rotate(90deg);
 }
-.tt-faq.purple faq-group-heading {
+.tt-faq.purple .faq-group-heading {
   color: var(--purple-600);
 }
 
