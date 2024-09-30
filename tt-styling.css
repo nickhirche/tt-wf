@@ -1523,26 +1523,7 @@ pre.w-code-block code {
 .tt-pricing-table {
   margin-top: 0;
 }
-.tt-pricing-table::before {
-  content: "";
-  display: inline-block;
-  position: sticky;
-  background-color: var(--warm-grey-1);
-  top: 0rem;
-  width: 100%;
-  height: 5rem;
-  z-index: 61;
-}
-@media screen and (max-width: 479px) {
-  .tt-pricing-table::before {
-    width: 95vw;
-    height: 3.2rem;
-  }
-}
-.tt-pricing-table:has(.tt-pricing-plans.cols-6)::before {
-  display: none;
-}
-.tt-pricing-table .tt-pricing-plans.cols-6::before {
+.tt-pricing-table .tt-pricing-plans::before {
   content: "";
   display: block;
   position: absolute;
@@ -1654,44 +1635,6 @@ pre.w-code-block code {
   transform: rotate(90deg);
 }
 
-@media screen and (max-width: 479px) {
-  /* Tab 1 Col 1 */
-  .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-1 {
-    display: flex;
-  }
-  .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-2,
-  .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-3,
-  .tt-pricing-table[data-col="1"] .tt-pricing-plan-col.col-4 {
-    display: none;
-  }
-  /* Tab 2 Col 2 */
-  .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-2 {
-    display: flex;
-  }
-  .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-1,
-  .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-3,
-  .tt-pricing-table[data-col="2"] .tt-pricing-plan-col.col-4 {
-    display: none;
-  }
-  /* Tab 3 Col 3 */
-  .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-3 {
-    display: flex;
-  }
-  .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-1,
-  .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-2,
-  .tt-pricing-table[data-col="3"] .tt-pricing-plan-col.col-4 {
-    display: none;
-  }
-  /* Tab 4 Col 4 */
-  .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-4 {
-    display: flex;
-  }
-  .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-1,
-  .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-2,
-  .tt-pricing-table[data-col="4"] .tt-pricing-plan-col.col-3 {
-    display: none;
-  }
-}
 /* Cost calculator */
 input[type=range i] {
   --range-value: 0;
