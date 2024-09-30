@@ -688,3 +688,52 @@ peopleCostDiv.addEventListener('input', function() {
       });
   }
 });
+
+
+/* FAQ Google / Scrolling */
+document.addEventListener("DOMContentLoaded", function() {
+  if (document.querySelector('.tt-faq')) {
+    const faqOffset = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize); // 5rem in Pixel
+    const faqViewportThreshold = window.innerHeight * 0.2; // 20% of the viewport height
+    const faqTabButtons = document.querySelectorAll('.tt-faq-tab-btn');
+    const faqAccordionGroups = document.querySelectorAll('.tt-faq-accordion-group');
+
+    function updateActiveButton() {
+      faqAccordionGroups.forEach((group, index) => {
+        const rect = group.getBoundingClientRect();
+        if (rect.top <= faqViewportThreshold && rect.bottom >= faqViewportThreshold) {
+          faqTabButtons.forEach(button => button.classList.remove('is-active'));
+          faqTabButtons[index].classList.add('is-active');
+        }
+      });
+    }
+
+    faqTabButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        event.preventDefault();
+        const targetId = button.getAttribute('href').substring(1);
+        const targetGroup = document.getElementById(targetId);
+        if (targetGroup) {
+          const targetPosition = targetGroup.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: targetPosition - faqOffset,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    window.addEventListener('scroll', updateActiveButton);
+    updateActiveButton(); // Initial call to set the correct active button on page load
+
+    // JSON-LD Script
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": window.faqData
+    });
+    document.head.appendChild(script);
+  }
+});
