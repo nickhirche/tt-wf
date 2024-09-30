@@ -1620,7 +1620,7 @@ pre.w-code-block code {
   .tt-pricing-table.old-pricing[data-active-col-first=free] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=free], .tt-pricing-table.old-pricing[data-active-col-first=entry] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=entry], .tt-pricing-table.old-pricing[data-active-col-first=business] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=business], .tt-pricing-table.old-pricing[data-active-col-first=enterprise] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=enterprise] {
     display: flex;
   }
-  .tt-pricing-table.old-pricing[data-active-col-first=free] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=free], .tt-pricing-table.old-pricing[data-active-col-first=entry] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=entry], .tt-pricing-table.old-pricing[data-active-col-first=business] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=business], .tt-pricing-table.old-pricing[data-active-col-first=enterprise] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=enterprise] {
+  .tt-pricing-table.old-pricing[data-active-col-second=free] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=free], .tt-pricing-table.old-pricing[data-active-col-second=entry] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=entry], .tt-pricing-table.old-pricing[data-active-col-second=business] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=business], .tt-pricing-table.old-pricing[data-active-col-second=enterprise] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col=enterprise] {
     display: flex;
     order: 9999;
   }
