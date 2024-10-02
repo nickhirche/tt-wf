@@ -806,7 +806,7 @@ thead {
 }
 
 tfoot {
-  border-top: solid 1px var(--black-a-100);
+  border-top: solid 2px var(--black-a-100);
   font-family: Polysans median, sans-serif;
   font-weight: 600;
 }
@@ -819,6 +819,7 @@ th,
 td {
   padding: 0.75rem 0.5rem;
   text-align: left;
+  min-width: 14ch;
   vertical-align: top;
   text-wrap: pretty;
 }
