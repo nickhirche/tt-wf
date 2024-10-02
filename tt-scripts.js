@@ -510,9 +510,9 @@ document.addEventListener('DOMContentLoaded', function() {
   const values = {
     0: { workload: 24, peopleCost: 36, peopleNumber: 1, description: 'simple', maintenance: null, maintenanceValue: null },
     25: { workload: 41, peopleCost: 41, peopleNumber: 2, description: 'simple', maintenance: null, maintenanceValue: null },
-    50: { workload: 53, peopleCost: 53, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
+    50: { workload: 63, peopleCost: 53, peopleNumber: 3, description: 'medium', maintenance: null, maintenanceValue: null },
     75: { workload: 215, peopleCost: 55, peopleNumber: 5, description: 'medium', maintenance: 'active', maintenanceValue: 128 },
-    100: { workload: 510, peopleCost: 63, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
+    100: { workload: 560, peopleCost: 63, peopleNumber: 8, description: 'complex', maintenance: 'active', maintenanceValue: 220 }
   };
   
   function formatEditableValue() {
