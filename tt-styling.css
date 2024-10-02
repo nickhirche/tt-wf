@@ -805,6 +805,12 @@ thead {
   font-weight: 600;
 }
 
+tfoot {
+  border-top: solid 1px;
+  font-family: Polysans median, sans-serif;
+  font-weight: 600;
+}
+
 tr {
   border-bottom: 1px solid var(--black-a-16);
 }
