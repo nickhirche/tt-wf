@@ -819,7 +819,7 @@ th,
 td {
   padding: 0.75rem 0.5rem;
   text-align: left;
-  min-width: 14ch;
+  min-width: 10ch;
   vertical-align: top;
   text-wrap: pretty;
 }
