@@ -806,7 +806,7 @@ thead {
 }
 
 tfoot {
-  border-top: solid 1px;
+  border-top: solid 1px var(--black-a-100);
   font-family: Polysans median, sans-serif;
   font-weight: 600;
 }
