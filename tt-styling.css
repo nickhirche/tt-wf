@@ -1710,6 +1710,38 @@ input[type=range i]::-moz-range-thumb {
 .tt-cost-calculator.dark .range-description {
   color: var(--white-a-60);
 }
+.tt-cost-calculator.dark .range-description strong {
+  color: var(--white-a-100);
+}
+.tt-cost-calculator.dark .range-slider input[type=range i] {
+  background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(var(--range-value) * 1%), #fff calc(var(--range-value) * 1%));
+}
+.tt-cost-calculator.dark .range-slider input[type=range i]::-webkit-slider-thumb {
+  background: var(--black-a-100);
+  box-shadow: 0px 0px 0px 2px var(--white-a-100);
+}
+.tt-cost-calculator.dark .range-slider input[type=range i]::-moz-range-thumb {
+  background: var(--black-a-100);
+  box-shadow: 0px 0px 0px 2px var(--white-a-100);
+}
+.tt-cost-calculator.dark .calculator-value-item {
+  background-color: var(--white-a-5);
+}
+.tt-cost-calculator.dark .calculator-value-item .value-reset:hover {
+  background-color: var(--black-a-10);
+}
+.tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true] {
+  background-color: var(--black-a-96);
+}
+.tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true]:hover {
+  background-color: var(--black-a-96);
+}
+.tt-cost-calculator.dark .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value {
+  background-color: var(--white-a-5);
+}
+.tt-cost-calculator.dark .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value[data-custom-value=true] {
+  background-color: var(--black-a-96);
+}
 
 /*Shiki */
 .code-output * {
