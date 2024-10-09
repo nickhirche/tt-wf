@@ -1745,6 +1745,9 @@ input[type=range i]::-moz-range-thumb {
 .tt-cost-calculator.dark .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value[data-custom-value=true] {
   background-color: var(--black-a-96);
 }
+.tt-cost-calculator.dark .range-description-wrap {
+  border-color: var(--white-a-10);
+}
 
 /*Shiki */
 .code-output * {
