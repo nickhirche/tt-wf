@@ -631,6 +631,9 @@ h1, h2, h3, h4, h5, h6 {
 .bg-black .tt-accordion-content-slider .splide__slide:not(:last-child) {
   border-color: var(--white-a-10);
 }
+.bg-black .tt-accordion-media-slider.splide {
+  background-color: var(--black-a-96);
+}
 
 /* Pagination */
 .tt-accordion-content-slider ul.splide__pagination {
