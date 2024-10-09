@@ -1736,7 +1736,7 @@ input[type=range i]::-moz-range-thumb {
 .tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true]:hover {
   background-color: var(--black-a-96);
 }
-.tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true]:focus {
+.tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value:focus {
   background-color: var(--black-a-96);
 }
 .tt-cost-calculator.dark .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value {
