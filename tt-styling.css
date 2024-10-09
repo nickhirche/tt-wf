@@ -1727,13 +1727,16 @@ input[type=range i]::-moz-range-thumb {
 .tt-cost-calculator.dark .calculator-value-item {
   background-color: var(--white-a-5);
 }
-.tt-cost-calculator.dark .calculator-value-item .value-reset:hover {
-  background-color: var(--black-a-10);
+.tt-cost-calculator.dark .calculator-value-item .value-reset:hover, .tt-cost-calculator.dark .calculator-value-item .value-edit:hover {
+  background-color: var(--white-a-10);
 }
 .tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true] {
   background-color: var(--black-a-96);
 }
 .tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true]:hover {
+  background-color: var(--black-a-96);
+}
+.tt-cost-calculator.dark .calculator-value-item .calculator-value#editable-value[data-custom-value=true]:focus {
   background-color: var(--black-a-96);
 }
 .tt-cost-calculator.dark .calculator-value-item:has(.calculator-value#editable-value):hover .calculator-value#editable-value {
