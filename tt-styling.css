@@ -664,6 +664,10 @@ h1, h2, h3, h4, h5, h6 {
   width: 2rem;
 }
 
+.bg-black .tt-accordion-content-slider button.splide__pagination__page::before {
+  background: var(--white-a-10);
+}
+
 /* CARDS */
 /* Product Card */
 .tt-product-card, .tt-product-card:hover {
