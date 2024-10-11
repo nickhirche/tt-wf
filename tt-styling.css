@@ -506,6 +506,11 @@ h1, h2, h3, h4, h5, h6 {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
+.bg-black .tt-category-slider .splide__slide.is-active .usecase-category-wrap, .bg-black .tt-feature-nav-slider .splide__slide.is-active .feature-nav-wrap {
+  box-shadow: 0 0 0 2px var(--white-a-10);
+  background-color: var(--black-a-16);
+}
+
 .tt-usecase-slider .splide__track, .tt-accordion-media-slider .splide__track {
   overflow: hidden;
 }
