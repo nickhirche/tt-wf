@@ -221,8 +221,6 @@ document.addEventListener('DOMContentLoaded', function() {
               drag: true,
               updateOnMove: true,
               autoScroll: false,
-              pauseOnHover: false,
-              pauseOnFocus: false,
               autoplay: 'pause',
               intersection: {
                 rootMargin: '200px',
