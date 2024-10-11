@@ -241,8 +241,6 @@ document.addEventListener('DOMContentLoaded', function() {
             pagination: false,
             arrows: false,
             autoScroll: false,
-            pauseOnHover: true,
-            pauseOnFocus: true,
             breakpoints: {
               991: { // or less
                 type: 'loop',
@@ -257,6 +255,8 @@ document.addEventListener('DOMContentLoaded', function() {
                   rootMargin: '200px',
                   inView: {
                     autoplay: true,
+                    pauseOnHover: true,
+                    pauseOnFocus: true,
                   },
                   outView: {
                     autoplay: false,
