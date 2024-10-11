@@ -243,14 +243,16 @@ document.addEventListener('DOMContentLoaded', function() {
             pagination: false,
             arrows: false,
             autoScroll: false,
+            pauseOnHover: true,
+            pauseOnFocus: true,
             breakpoints: {
               991: { // or less
-                type     : 'loop',
-                focus    : 'center',
+                type: 'loop',
+                focus: 'center',
                 updateOnMove: true,
                 autoWidth: true,
                 isNavigation: true,
-                drag   : true,
+                drag: true,
                 cloneStatus: false,
                 autoplay: 'pause',
                 intersection: {

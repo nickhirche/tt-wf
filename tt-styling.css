@@ -665,7 +665,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .bg-black .tt-accordion-content-slider button.splide__pagination__page::before {
-  background: var(--white-a-10);
+  background: var(--white-a-20);
 }
 .bg-black .tt-accordion-content-slider button.splide__pagination__page.is-active ::before {
   background: var(--white-a-60);
