@@ -245,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function() {
               autoScroll: false,
               pauseOnHover: true, // Pause on hover
               pauseOnFocus: true, // Pause on focus
+              interval: 5000,
               breakpoints: {
                 991: { // or less
                   type: 'loop',
