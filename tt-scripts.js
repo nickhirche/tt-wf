@@ -212,64 +212,68 @@ document.addEventListener('DOMContentLoaded', function() {
             flickPower: '150',
             wheelSleep: '0',
           },
-          // Synced Accordion Slider Group
-          '.tt-accordion-media-slider': {
-              type: 'fade',
-              pagination: false,
-              arrows: false,
-              rewind: true,
-              drag: true,
-              updateOnMove: true,
-              autoScroll: false,
-              autoplay: 'pause',
-              intersection: {
-                rootMargin: '200px',
-                inView: {
-                  autoplay: true,
-                },
-                outView: {
-                  autoplay: false,
-                },
-              },
-          },  
-          '.tt-accordion-content-slider': {
-            autoWidth: false,
-            isNavigation: true,
-            updateOnMove: true,
-            drag: false,
-            rewind: true,
-            pagination: false,
-            arrows: false,
-            autoScroll: false,
-            breakpoints: {
-              991: { // or less
-                type: 'loop',
-                focus: 'center',
-                updateOnMove: true,
-                autoWidth: true,
-                isNavigation: true,
+            // Synced Accordion Slider Group
+            '.tt-accordion-media-slider': {
+                type: 'fade',
+                pagination: false,
+                arrows: false,
+                rewind: true,
                 drag: true,
-                cloneStatus: false,
+                updateOnMove: true,
+                autoScroll: false,
                 autoplay: 'pause',
+                pauseOnHover: true, // Pause on hover
+                pauseOnFocus: true, // Pause on focus
                 intersection: {
                   rootMargin: '200px',
                   inView: {
                     autoplay: true,
-                    pauseOnHover: true,
-                    pauseOnFocus: true,
                   },
                   outView: {
                     autoplay: false,
                   },
                 },
-                rewind: false,
-                pagination: true,
-                arrows: false,
-                flickPower: '150',
-                wheelSleep: '0',
+            },  
+            '.tt-accordion-content-slider': {
+              autoWidth: false,
+              isNavigation: true,
+              updateOnMove: true,
+              drag: false,
+              rewind: true,
+              pagination: false,
+              arrows: false,
+              autoScroll: false,
+              pauseOnHover: true, // Pause on hover
+              pauseOnFocus: true, // Pause on focus
+              breakpoints: {
+                991: { // or less
+                  type: 'loop',
+                  focus: 'center',
+                  updateOnMove: true,
+                  autoWidth: true,
+                  isNavigation: true,
+                  drag: true,
+                  cloneStatus: false,
+                  autoplay: 'pause',
+                  intersection: {
+                    rootMargin: '200px',
+                    inView: {
+                      autoplay: true,
+                      pauseOnHover: true,
+                      pauseOnFocus: true,
+                    },
+                    outView: {
+                      autoplay: false,
+                    },
+                  },
+                  rewind: false,
+                  pagination: true,
+                  arrows: false,
+                  flickPower: '150',
+                  wheelSleep: '0',
+                },
               },
             },
-          },
           // Usecase Card Slider
           '.tt-usecase-card-slider': {
             type     : 'loop',
