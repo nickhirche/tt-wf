@@ -718,6 +718,7 @@ h1, h2, h3, h4, h5, h6 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
+  line-clamp: 4;
   align-self: stretch;
 }
 .tt-blog-card .blog-card-media {
@@ -899,14 +900,6 @@ ul.checklist.circle-check li::before {
 }
 
 /* Requirements */
-.tt-feature-highlights {
-  /* Editor Feature Highlights */
-  /* AI Feature Highlights */
-  /* Comments Feature Highlights */
-  /* Collaboration Feature Highlights */
-  /* Documents Feature Highlights */
-  /* Template Feature Highlights */
-}
 .tt-feature-highlights.editor-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-editor-grading-1);
 }
@@ -1337,6 +1330,12 @@ blockquote em::after {
 
 .tt-richtext .w-embed {
   margin: 2rem 0;
+
+  iframe[title="YouTube video player"] {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 9;
+  }
 }
 .tt-richtext ul ul {
   margin-top: 0.4rem;
