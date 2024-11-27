@@ -1316,7 +1316,7 @@ blockquote em::after {
 }
 
 /* RICHTEXT */
-.tt-richtext.w-embed::before {
+.tt-richtext .w-embed::before {
   content: none;
 }
 
