@@ -718,7 +718,6 @@ h1, h2, h3, h4, h5, h6 {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 4;
-  line-clamp: 4;
   align-self: stretch;
 }
 .tt-blog-card .blog-card-media {
@@ -900,6 +899,14 @@ ul.checklist.circle-check li::before {
 }
 
 /* Requirements */
+.tt-feature-highlights {
+  /* Editor Feature Highlights */
+  /* AI Feature Highlights */
+  /* Comments Feature Highlights */
+  /* Collaboration Feature Highlights */
+  /* Documents Feature Highlights */
+  /* Template Feature Highlights */
+}
 .tt-feature-highlights.editor-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-editor-grading-1);
 }
@@ -1316,30 +1323,44 @@ blockquote em::after {
 }
 
 /* RICHTEXT */
-.tt-richtext .w-embed::before {
+.tt-richtext.w-embed::before {
   content: none;
+}
+.tt-richtext .w-embed {
+  margin: 2rem 0;
+}
+.tt-richtext ul ul {
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
 }
 
 .tt-richtext:first-child, .tt-introtext-wrap:first-child {
   margin-top: 0;
 }
-
 .tt-richtext:last-child, .tt-introtext-wrap:last-child {
-  margin-bottom: 0;
+  margin-top: 0;
 }
 
-.tt-richtext .w-embed {
-  margin: 2rem 0;
-
-  iframe[title="YouTube video player"] {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-  }
+/* RICHTEXT Terms */
+.tt-richtext.experiments {
+  list-style-type: none; /* Entfernt die Standard-Listenpunkte */
+  padding: 0;
 }
-.tt-richtext ul ul {
-  margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
+.tt-richtext.experiments li {
+  position: relative;
+  padding-left: 20px; /* Platz für den Punkt einfügen */
+  margin-bottom: 10px;
+}
+.tt-richtext.experiments li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0.8em; /* Breite des Punktes */
+  height: 0.8em; /* Höhe des Punktes */
+  background-color: #3498db; /* Farbe des Punktes */
+  border-radius: 50%; /* Macht den Punkt rund */
 }
 
 /* RICHTEXT Terms */
