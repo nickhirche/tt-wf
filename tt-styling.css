@@ -1357,8 +1357,8 @@ blockquote em::after {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  width: 0.8em; /* Breite des Punktes */
-  height: 0.8em; /* Höhe des Punktes */
+  width: 0.4em; /* Breite des Punktes */
+  height: 0.4em; /* Höhe des Punktes */
   background: linear-gradient(45deg, var(--color-experiments-grading-1), var(--color-experiments-grading-2));
   border-radius: 50%; /* Macht den Punkt rund */
 }
