@@ -1342,14 +1342,14 @@ blockquote em::after {
 }
 
 /* RICHTEXT Terms */
-.tt-richtext.experiments {
+.tt-richtext.experiments ul {
   list-style-type: none; /* Entfernt die Standard-Listenpunkte */
   padding: 0;
 }
 .tt-richtext.experiments li {
   position: relative;
-  padding-left: 20px; /* Platz für den Punkt einfügen */
-  margin-bottom: 10px;
+  padding-left: 1em;
+  margin-bottom: 0.25em;
 }
 .tt-richtext.experiments li::before {
   content: "";
@@ -1359,7 +1359,7 @@ blockquote em::after {
   transform: translateY(-50%);
   width: 0.8em; /* Breite des Punktes */
   height: 0.8em; /* Höhe des Punktes */
-  background-color: #3498db; /* Farbe des Punktes */
+  background: linear-gradient(45deg, var(--color-experiments-grading-1), var(--color-experiments-grading-2));
   border-radius: 50%; /* Macht den Punkt rund */
 }
 
