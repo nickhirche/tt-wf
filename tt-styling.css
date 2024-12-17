@@ -1329,6 +1329,11 @@ blockquote em::after {
 .tt-richtext .w-embed {
   margin: 2rem 0;
 }
+.tt-richtext .w-embed iframe[title="YouTube video player"] {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16/9;
+}
 .tt-richtext ul ul {
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
