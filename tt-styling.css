@@ -163,7 +163,17 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--white-a-60);
 }
 
-.tt-navbar-link, .tt-navbar-link *, .tt-navbar-link::after, .tt-navbar-link::before, .tt-navbar-burger, .tt-navbar-burger *, .tt-navbar-burger::before, .tt-subnav-link, .tt-subnav-link *, .tt-subnav-link::before, .tt-subnav-container {
+.tt-navbar-link,
+.tt-navbar-link *,
+.tt-navbar-link::after,
+.tt-navbar-link::before,
+.tt-navbar-burger,
+.tt-navbar-burger *,
+.tt-navbar-burger::before,
+.tt-subnav-link,
+.tt-subnav-link *,
+.tt-subnav-link::before,
+.tt-subnav-container {
   transition: scale var(--transition-base), transform var(--transition-base), border-radius var(--transition-base), opacity var(--transition-base);
 }
 
