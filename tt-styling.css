@@ -1504,6 +1504,23 @@ pre.w-code-block code {
   height: 100%;
 }
 
+/* Notifiaction bar */
+.tt-notification-bar {
+  background-size: 400% 400%;
+  animation: gradient-not-bar 15s ease infinite;
+}
+
+@keyframes gradient-not-bar {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
 /* Hintblock */
 .tt-hint-block::before {
   content: "💡";
