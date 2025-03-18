@@ -1630,7 +1630,7 @@ pre.w-code-block code {
   animation: gradient-not-bar 15s ease infinite;
 }
 
-@keyframes gradient {
+@keyframes gradient-not-bar {
   0% {
     background-position: 0% 50%;
   }
