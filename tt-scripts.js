@@ -742,3 +742,49 @@ document.addEventListener("DOMContentLoaded", function() {
     document.head.appendChild(script);
   }
 });
+
+
+/* Rive */
+document.addEventListener("DOMContentLoaded", () => {
+    const riveAnimation = new rive.Rive({
+        src: "https://nickhirche.github.io/tt-wf/files/bubble-conversion.riv",
+        canvas: document.getElementById("canvas"),
+        autoplay: false,
+        artboard: 'bubble',
+        animations: 'bubble-timeline',
+        onLoad: () => {
+            console.log("Rive-Datei geladen");
+            riveAnimation.resizeDrawingSurfaceToCanvas();
+            // Animation direkt abspielen, wenn geladen
+            riveAnimation.play('bubble-timeline', true);
+        },
+        onError: (error) => {
+            console.error("Fehler beim Laden der Rive-Datei:", error);
+        }
+    });
+
+    // Intersection Observer, um die Sichtbarkeit zu überwachen
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                console.log("Element im Viewport, Animation wird neu gestartet");
+                riveAnimation.stop('bubble-timeline'); // Stoppt die Animation
+                riveAnimation.play('bubble-timeline', true); // Startet die Animation von Anfang an
+            } else {
+                console.log("Element nicht im Viewport, Animation wird pausiert");
+                riveAnimation.pause();
+            }
+        });
+    }, {
+        threshold: 0.1 // Trigger, wenn 10% des Elements sichtbar sind
+    });
+
+    // Starte den Beobachtungsvorgang für das Element, das die Animation enthält
+    const riveElement = document.getElementById('canvas');
+    observer.observe(riveElement);
+
+    // Stelle sicher, dass die Zeichenfläche bei Größenänderungen des Fensters angepasst wird
+    window.addEventListener('resize', () => {
+        riveAnimation.resizeDrawingSurfaceToCanvas();
+    });
+});
