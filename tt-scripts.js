@@ -744,47 +744,53 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-/* Rive */
+/* RIVE */
 document.addEventListener("DOMContentLoaded", () => {
-    const riveAnimation = new rive.Rive({
-        src: "https://nickhirche.github.io/tt-wf/files/bubble-conversion.riv",
-        canvas: document.getElementById("canvas"),
-        autoplay: false,
-        artboard: 'bubble',
-        animations: 'bubble-timeline',
-        onLoad: () => {
-            console.log("Rive-Datei geladen");
-            riveAnimation.resizeDrawingSurfaceToCanvas();
-            // Animation direkt abspielen, wenn geladen
-            riveAnimation.play('bubble-timeline', true);
-        },
-        onError: (error) => {
-            console.error("Fehler beim Laden der Rive-Datei:", error);
-        }
-    });
+  const canvases = document.querySelectorAll('canvas[data-src][data-artboard][data-animation]');
+  
+  canvases.forEach(canvas => {
+      const baseUrl = "https://assets.tiptap.dev/media/";
+      const src = canvas.getAttribute('data-src');
+      const artboard = canvas.getAttribute('data-artboard');
+      const animation = canvas.getAttribute('data-animation');
 
-    // Intersection Observer, um die Sichtbarkeit zu überwachen
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                console.log("Element im Viewport, Animation wird neu gestartet");
-                riveAnimation.stop('bubble-timeline'); // Stoppt die Animation
-                riveAnimation.play('bubble-timeline', true); // Startet die Animation von Anfang an
-            } else {
-                console.log("Element nicht im Viewport, Animation wird pausiert");
-                riveAnimation.pause();
-            }
-        });
-    }, {
-        threshold: 0.1 // Trigger, wenn 10% des Elements sichtbar sind
-    });
+      if (src && artboard && animation) {
+          const fullSrc = baseUrl + src; // Kombiniert die Basis-URL mit dem data-src-Inhalt
 
-    // Starte den Beobachtungsvorgang für das Element, das die Animation enthält
-    const riveElement = document.getElementById('canvas');
-    observer.observe(riveElement);
+          const riveAnimation = new rive.Rive({
+              src: fullSrc,
+              canvas: canvas,
+              autoplay: false,
+              artboard: artboard,
+              animations: animation,
+              onLoad: () => {
+                  riveAnimation.resizeDrawingSurfaceToCanvas();
+                  riveAnimation.play(animation, true);
+              },
+              onError: (error) => {
+                  console.error("Fehler beim Laden der Rive-Datei:", error);
+              }
+          });
 
-    // Stelle sicher, dass die Zeichenfläche bei Größenänderungen des Fensters angepasst wird
-    window.addEventListener('resize', () => {
-        riveAnimation.resizeDrawingSurfaceToCanvas();
-    });
+          const observer = new IntersectionObserver((entries) => {
+              entries.forEach((entry) => {
+                  if (entry.isIntersecting) {
+                      riveAnimation.play(animation);
+                  } else {
+                      riveAnimation.pause(animation);
+                  }
+              });
+          }, {
+              threshold: 0.01
+          });
+
+          observer.observe(canvas);
+
+          window.addEventListener('resize', () => {
+              riveAnimation.resizeDrawingSurfaceToCanvas();
+          });
+      } else {
+          console.warn("Ein erforderliches Data-Attribut fehlt für ein Canvas-Element.");
+      }
+  });
 });
