@@ -349,6 +349,31 @@ document.addEventListener('DOMContentLoaded', function() {
               },
             },
           },
+
+          '.tt-marquee-slider.marquee-left-speed-slow': {
+            type     : 'loop',
+            focus    : 'center',
+            drag   : false,
+            autoWidth: true,
+            rewind: false,
+            pagination: false,
+            arrows: false,
+            autoScroll: {
+              autoStart: false,
+              speed: 0.5,
+              pauseOnHover: false,
+              pauseOnFocus: false,
+            },
+            intersection: {
+              rootMargin: '30%',
+              inView: {
+                autoScroll: true,
+              },
+              outView: {
+                autoScroll: false,
+              },
+            },
+          },
           '.tt-marquee-slider.marquee-right-speed-1': {
             type     : 'loop',
             focus    : 'center',
