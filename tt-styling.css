@@ -586,6 +586,13 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 3px 3px rgba(255, 255, 255, 0.6);
 }
 
+/* Toggle Menu */
+.bg-black .tt-toggle-menu {
+  border: 2px solid var(--black-900);
+  background-color: var(--black-a-16);
+  color: var(--white-a-100);
+}
+
 /* NAVIGATION */
 .navigation {
   -webkit-backdrop-filter: blur(1rem);
