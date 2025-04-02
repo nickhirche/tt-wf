@@ -588,7 +588,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Toggle Menu */
 .bg-black .tt-toggle-menu {
-  border: 2px solid var(--white-a-20);
+  border-color: var(--white-a-10);
   background-color: unset;
   color: var(--white-a-100);
 }
