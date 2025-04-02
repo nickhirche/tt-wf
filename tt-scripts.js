@@ -789,6 +789,7 @@ document.addEventListener("DOMContentLoaded", () => {
               artboard: artboard,
               animations: animation,
               onLoad: () => {
+                  console.log("Rive-Datei geladen: " + fullSrc);
                   riveAnimation.resizeDrawingSurfaceToCanvas();
                   riveAnimation.play(animation, true);
               },
@@ -800,8 +801,10 @@ document.addEventListener("DOMContentLoaded", () => {
           const observer = new IntersectionObserver((entries) => {
               entries.forEach((entry) => {
                   if (entry.isIntersecting) {
+                      console.log("Element im Viewport, Animation wird fortgesetzt");
                       riveAnimation.play(animation);
                   } else {
+                      console.log("Element nicht im Viewport, Animation wird pausiert");
                       riveAnimation.pause(animation);
                   }
               });
