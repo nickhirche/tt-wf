@@ -591,13 +591,15 @@ h1, h2, h3, h4, h5, h6 {
   border-color: var(--white-a-10);
   background-color: unset;
   color: var(--white-a-100);
-  /* Stile nur für .active, aber nicht für .active.subdued */
 }
 .bg-black .tt-toggle-menu .tt-toggle-tab-btn:hover {
   background-color: var(--white-a-10);
 }
-.bg-black .tt-toggle-menu .tt-toggle-tab-btn.active:not(.subdued):hover {
+.bg-black .tt-toggle-menu .tt-toggle-tab-btn.active:hover {
   background-color: var(--purple-600);
+}
+.bg-black .tt-toggle-menu.subdued .tt-toggle-tab-btn.active:hover {
+  background-color: var(--white-a-100);
 }
 
 /* NAVIGATION */
