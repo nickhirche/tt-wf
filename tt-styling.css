@@ -942,6 +942,14 @@ h1, h2, h3, h4, h5, h6 {
   display: block;
 }
 
+/* Tooltip */
+.tt-tooltip-text[data-tippy-content]:not([data-tippy-content=""]) {
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+  text-decoration-style: dashed;
+  text-decoration-color: var(--black-a-25);
+}
+
 /* GRADIENTS */
 .tt-gradient-container img, .tt-gradient::before {
   user-select: none;
