@@ -315,7 +315,7 @@
         // Nach einer Verzögerung wieder entfernen
         setTimeout(() => {
             element.classList.remove('tt-copied');
-        }, 2000); // 2 Sekunden Feedback
+        }, 1000); // 1 Sekunden Feedback
     }
 
     // ===== ANCHOR OFFSET HANDLING =====

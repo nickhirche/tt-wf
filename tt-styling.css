@@ -1847,7 +1847,7 @@ pre.w-code-block code {
   border-radius: 4px;
   font-size: 12px;
   opacity: 0;
-  animation: copied-fade-animation 2s ease-in-out;
+  animation: copied-fade-animation 1s ease-in-out;
   white-space: nowrap;
 }
 @media screen and (max-width: 767px) {
