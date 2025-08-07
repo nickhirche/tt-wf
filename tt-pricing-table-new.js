@@ -119,7 +119,7 @@
         updateDropdownTitles(firstDropdown, firstActiveOption, secondDropdown, secondActiveOption);
         
         // 5. Setze Custom Values
-        updateCustomValues(firstDropdown, firstActiveOption, secondDropdown, secondActiveOption);
+        // updateCustomValues(firstDropdown, firstActiveOption, secondDropdown, secondActiveOption);
     }
     
     // Separate Funktion für das Update der Dropdown-Titel
