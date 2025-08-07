@@ -945,7 +945,7 @@ h1, h2, h3, h4, h5, h6 {
 /* Tooltip */
 .tt-tooltip-text[data-tippy-content]:not([data-tippy-content=""]) {
   text-decoration: underline;
-  text-underline-offset: 0.15em;
+  text-underline-offset: 0.2em;
   text-decoration-style: dashed;
   text-decoration-color: var(--black-a-25);
 }
