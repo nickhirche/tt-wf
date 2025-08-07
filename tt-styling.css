@@ -1833,13 +1833,15 @@ pre.w-code-block code {
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id] {
   position: relative;
   cursor: pointer;
-  /* Link-Icon, das bei Hover erscheint */
-  /* Icon bei Hover einblenden */
+  /* Link-Icon mit Grundstil */
+  /* Icon bei Hover auf dem Titel einblenden */
+  /* Icon bleibt sichtbar, wenn direkt darüber gehovert wird */
+  /* Verzögerung beim Ausblenden für bessere Benutzererfahrung */
   /* Bei aktivem Zustand (während des Klicks) */
   /* Feedback-Animation, wenn kopiert wurde */
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]::before {
-  content: "🔗"; /* Link-Symbol als Unicode */
+  content: "🔗";
   position: absolute;
   left: -24px;
   top: 50%;
@@ -1847,9 +1849,19 @@ pre.w-code-block code {
   opacity: 0;
   transition: opacity 0.2s ease;
   font-size: 16px;
+  padding: 10px;
+  margin: -10px;
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:hover::before {
   opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]::before:hover {
+  opacity: 1 !important;
+  transition: opacity 0s;
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:not(:hover)::before:not(:hover) {
+  transition: opacity 0.2s ease 0.5s;
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:active::before {
   opacity: 1;
