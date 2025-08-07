@@ -1,8 +1,8 @@
-// Tiptap Pricing Table System - Mit präzisen Selektoren
+// Tiptap Pricing Table System - Vereinfachte Version mit :not(option)
 (function() {
     // Hauptinitialisierungsfunktion
     function initPricingTableSystem() {
-        console.log('Initialisiere Pricing-System mit präzisen Selektoren');
+        console.log('Initialisiere vereinfachtes Pricing-System');
         
         // Event-Listener für Billing-Period-Änderungen
         document.addEventListener('billingPeriodChanged', function(event) {
@@ -31,13 +31,12 @@
         console.log('Aktualisiere Preisanzeige für Periode:', activePeriod);
         
         // WICHTIG: Wir schließen option-Elemente explizit aus!
-        // 1. Preise in der tt-pricing-table-head ersetzen
+        // 1. Preise ersetzen
         document.querySelectorAll(':not(option)[data-price-monthly][data-price-yearly]').forEach(el => {
             const price = (activePeriod === 'yearly')
                 ? el.getAttribute('data-price-yearly')
                 : el.getAttribute('data-price-monthly');
             if (price !== null) {
-                console.log('Setze Preis für Element:', el.tagName, 'auf', price);
                 el.textContent = price;
             }
         });
@@ -46,7 +45,6 @@
         document.querySelectorAll(':not(option)[data-price-yearly-total]').forEach(el => {
             const total = el.getAttribute('data-price-yearly-total');
             if (total !== null) {
-                console.log('Setze Jahresgesamtpreis für Element:', el.tagName, 'auf', total);
                 el.textContent = total;
             }
         });
@@ -125,45 +123,32 @@
             valueType: activeOption.getAttribute('data-value-type')
         };
         
-        console.log('Daten aus Option:', optionData);
-        
         // 1. Titel aktualisieren
         const titleElement = dropdown.querySelector('.tt-pricing-plan-title');
         if (titleElement) {
-            console.log('Setze Titel:', optionData.text);
             titleElement.textContent = optionData.text;
         }
         
-        // 2. Custom Value aktualisieren - WICHTIG: Präziser Selektor!
-        const customValueElement = dropdown.querySelector('div[data-custom-value]');
+        // 2. Custom Value aktualisieren - WICHTIG: :not(option) Selektor!
+        const customValueElement = dropdown.querySelector(':not(option)[data-custom-value]');
         if (customValueElement && optionData.customValue) {
-            console.log('Setze Custom Value:', optionData.customValue);
             customValueElement.textContent = optionData.customValue;
         }
         
-        // 3. Preise aktualisieren - WICHTIG: Präzise Selektoren!
+        // 3. Preise aktualisieren - WICHTIG: :not(option) Selektor!
         if (optionData.priceMonthly) {
-            const monthlyEl = dropdown.querySelector('div [data-price-monthly], span[data-price-monthly]');
-            if (monthlyEl) {
-                console.log('Setze Monatspreis:', optionData.priceMonthly);
-                monthlyEl.textContent = optionData.priceMonthly;
-            }
+            const monthlyEl = dropdown.querySelector(':not(option)[data-price-monthly]');
+            if (monthlyEl) monthlyEl.textContent = optionData.priceMonthly;
         }
         
         if (optionData.priceYearly) {
-            const yearlyEl = dropdown.querySelector('div [data-price-yearly], span[data-price-yearly]');
-            if (yearlyEl) {
-                console.log('Setze Jahrespreis:', optionData.priceYearly);
-                yearlyEl.textContent = optionData.priceYearly;
-            }
+            const yearlyEl = dropdown.querySelector(':not(option)[data-price-yearly]');
+            if (yearlyEl) yearlyEl.textContent = optionData.priceYearly;
         }
         
         if (optionData.priceYearlyTotal) {
-            const totalEl = dropdown.querySelector('div [data-price-yearly-total], span[data-price-yearly-total]');
-            if (totalEl) {
-                console.log('Setze Jahresgesamtpreis:', optionData.priceYearlyTotal);
-                totalEl.textContent = optionData.priceYearlyTotal;
-            }
+            const totalEl = dropdown.querySelector(':not(option)[data-price-yearly-total]');
+            if (totalEl) totalEl.textContent = optionData.priceYearlyTotal;
         }
         
         // 4. Value-Gruppen je nach aktiver Option updaten
@@ -172,8 +157,6 @@
     
     function updateValueGroups(dropdown, valueType) {
         if (!valueType) return;
-        
-        console.log('Aktualisiere Value-Gruppen für Typ:', valueType);
         
         const groups = dropdown.querySelectorAll('.pricing-value-group[data-value-type]');
         groups.forEach(group => {
@@ -200,15 +183,8 @@
         const col1 = firstActiveOption.getAttribute('data-col');
         const col2 = secondActiveOption.getAttribute('data-col');
         
-        if (col1) {
-            console.log('Setze aktive Spalte 1:', col1);
-            table.setAttribute('data-active-col-first', col1);
-        }
-        
-        if (col2) {
-            console.log('Setze aktive Spalte 2:', col2);
-            table.setAttribute('data-active-col-second', col2);
-        }
+        if (col1) table.setAttribute('data-active-col-first', col1);
+        if (col2) table.setAttribute('data-active-col-second', col2);
     }
 
     // ===== INITIALIZATION =====
