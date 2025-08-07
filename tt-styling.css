@@ -1778,21 +1778,23 @@ pre.w-code-block code {
   background-color: var(--warm-grey-1);
   z-index: -1;
 }
-.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=enterprise] .pricing-value-group:not([data-pricing-value-group=enterprise]) {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=enterprise] .pricing-value-group:not([data-pricing-value-group=enterprise]), .tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans[data-plan-type-col=enterprise] .pricing-value-group:not([data-pricing-value-group=enterprise]) {
   display: none;
 }
-.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=opensource] .pricing-value-group:not([data-pricing-value-group=opensource]) {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=opensource] .pricing-value-group:not([data-pricing-value-group=opensource]), .tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans[data-plan-type-col=opensource] .pricing-value-group:not([data-pricing-value-group=opensource]) {
   display: none;
 }
-.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=free] .pricing-value-group:not([data-pricing-value-group=free]) {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans[data-plan-type-col=free] .pricing-value-group:not([data-pricing-value-group=free]), .tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans[data-plan-type-col=free] .pricing-value-group:not([data-pricing-value-group=free]) {
   display: none;
 }
 .tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=enterprise],
 .tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=free],
-.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=opensource] {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=opensource], .tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=enterprise],
+.tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=free],
+.tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans:not([data-plan-type-col=opensource]):not([data-plan-type-col=enterprise]):not([data-plan-type-col=free]) .pricing-value-group[data-pricing-value-group=opensource] {
   display: none;
 }
-.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans .plan-dropdown::after {
+.tt-pricing-table .tt-pricing-plans.mobile .tt-pricing-plan-col.plans .plan-dropdown::after, .tt-pricing-table .tt-pricing-plans.mobile-new .tt-pricing-plan-col.plans .plan-dropdown::after {
   content: "";
   position: absolute;
   height: 1rem;
