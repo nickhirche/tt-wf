@@ -321,69 +321,72 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-        function correctAnchorOffset() {
+        // Hilfsfunktion, die den Scroll zur richtigen Position setzt
+        function scrollToAnchorWithOffset() {
             if (window.location.hash) {
-                // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
-                setTimeout(() => {
-                    const targetElement = document.querySelector(window.location.hash);
-                    if (targetElement && targetElement.closest('.tt-pricing-table')) {
-                        // Offset berechnen
-                        const offset = calculateTotalOffset(targetElement);
-                        
-                        // Aktuelle Position anpassen
-                        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
-                        window.scrollTo({
-                            top: currentPos - offset,
-                            behavior: 'smooth'
-                        });
-                        
-                        // Optionales Highlight
-                        targetElement.classList.add('tt-anchor-highlight');
-                        setTimeout(() => {
-                            targetElement.classList.remove('tt-anchor-highlight');
-                        }, 2000);
-                    }
-                }, 100); // Kurze Verzögerung nach dem Standard-Sprung
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement && targetElement.closest('.tt-pricing-table')) {
+                    // Berechne die Position des Zielelements relativ zum Dokument
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    // Berechne den Offset
+                    const offset = calculateTotalOffset();
+                    
+                    // Scrolle zur Position des Elements minus Offset
+                    window.scrollTo({
+                        top: targetPosition - offset,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Optionales Highlight
+                    targetElement.classList.add('tt-anchor-highlight');
+                    setTimeout(() => {
+                        targetElement.classList.remove('tt-anchor-highlight');
+                    }, 2000);
+                }
             }
         }
         
         // Funktion zur Berechnung des gesamten Offsets
-        function calculateTotalOffset(targetElement) {
+        function calculateTotalOffset() {
             let totalOffset = 0;
             
-            // 1. Höhe des Table-Head
+            // Höhe des Table-Head
             const tableHead = document.querySelector('.tt-pricing-table-head');
             if (tableHead) {
                 totalOffset += tableHead.offsetHeight;
             }
             
-            // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
+            // Zusätzlicher Abstand für bessere Sichtbarkeit
             totalOffset += 20;
             
             return totalOffset;
         }
         
-        // Bei initialem Laden
-        if (document.readyState === 'complete') {
-            correctAnchorOffset();
-        } else {
-            window.addEventListener('load', correctAnchorOffset);
+        // Bei initialem Laden mit Verzögerung
+        if (window.location.hash) {
+            // Wir brauchen eine längere Verzögerung, um sicherzustellen,
+            // dass alle Elemente vollständig geladen sind
+            setTimeout(scrollToAnchorWithOffset, 500);
         }
         
         // Bei Hash-Änderungen
-        window.addEventListener('hashchange', correctAnchorOffset);
+        window.addEventListener('hashchange', function() {
+            // Kurze Verzögerung für bessere Benutzererfahrung
+            setTimeout(scrollToAnchorWithOffset, 100);
+        });
         
         // Bei Resize (falls sich die Header-Höhe ändert)
         window.addEventListener('resize', function() {
             clearTimeout(window.resizeTimer);
             window.resizeTimer = setTimeout(function() {
                 if (window.location.hash) {
-                    correctAnchorOffset();
+                    scrollToAnchorWithOffset();
                 }
             }, 250);
         });
     }
+
 
 
     // ===== INITIALIZATION =====
