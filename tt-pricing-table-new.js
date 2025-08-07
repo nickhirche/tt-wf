@@ -10,7 +10,7 @@
             // Preise in der Tabelle aktualisieren
             updatePricingDisplay(activePeriod);
             
-            // NEU: Auch die Dropdown-Werte aktualisieren
+            // Auch die Dropdown-Werte aktualisieren
             updateDropdownsForBillingPeriod(activePeriod);
         });
 
@@ -26,6 +26,9 @@
 
         // Klick-zu-Kopieren-Funktionalität initialisieren
         initCopyToClipboard();
+
+        // Anker-Offset-Handling initialisieren
+        initAnchorOffsetHandling();
     }
 
     function getInitialBillingPeriod() {
@@ -305,6 +308,76 @@
             element.classList.remove('tt-copied');
         }, 2000); // 2 Sekunden Feedback
     }
+
+    // ===== ANCHOR OFFSET HANDLING =====
+    // Funktion für das Handling von Anker-Sprüngen
+    function initAnchorOffsetHandling() {
+        // Prüfen, ob ein Hash in der URL vorhanden ist
+        if (window.location.hash) {
+            adjustScrollPositionForAnchor(window.location.hash);
+        }
+        
+        // Event-Listener für Änderungen des Hashes (z.B. durch Klicks auf interne Links)
+        window.addEventListener('hashchange', function() {
+            adjustScrollPositionForAnchor(window.location.hash);
+        });
+    }
+
+    // Funktion zum Anpassen der Scroll-Position für Anker innerhalb der Tabelle
+    function adjustScrollPositionForAnchor(hash) {
+        if (!hash) return;
+        
+        // Das Element mit der ID finden
+        const targetElement = document.querySelector(hash);
+        if (!targetElement) return;
+        
+        // Prüfen, ob das Element innerhalb der Pricing-Tabelle ist
+        const isInPricingTable = targetElement.closest('.tt-pricing-table') !== null;
+        if (!isInPricingTable) return;
+        
+        // Verzögerung, um sicherzustellen, dass der Browser zuerst zum Anker scrollt
+        setTimeout(function() {
+            // Aktuellen Scroll-Position ermitteln
+            const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Header-Höhe ermitteln (entweder aus CSS-Variable oder direkt berechnen)
+            const pricingTable = document.querySelector('.tt-pricing-table');
+            let headerOffset = 0;
+            
+            if (pricingTable) {
+                // Versuchen, die CSS-Variable zu lesen
+                const computedStyle = getComputedStyle(pricingTable);
+                const cssVarValue = computedStyle.getPropertyValue('--tt-table-category-sticky-offset');
+                
+                if (cssVarValue) {
+                    // CSS-Variable in Pixel umwandeln
+                    headerOffset = parseInt(cssVarValue, 10);
+                } else {
+                    // Fallback: Header-Höhe direkt berechnen
+                    const tableHead = document.querySelector('.tt-pricing-table-head');
+                    if (tableHead) {
+                        headerOffset = tableHead.offsetHeight;
+                    }
+                }
+                
+                // Zusätzlichen Abstand hinzufügen (z.B. 20px)
+                headerOffset += 20;
+            }
+            
+            // Zu einer Position scrollen, die den Header-Offset berücksichtigt
+            window.scrollTo({
+                top: currentScrollPos - headerOffset,
+                behavior: 'smooth'
+            });
+            
+            // Visuelles Feedback für den Anker (optional)
+            targetElement.classList.add('tt-anchor-highlight');
+            setTimeout(function() {
+                targetElement.classList.remove('tt-anchor-highlight');
+            }, 2000);
+        }, 100); // Kurze Verzögerung, um dem Browser Zeit zum initialen Scrollen zu geben
+    }
+
 
 
     // ===== INITIALIZATION =====
