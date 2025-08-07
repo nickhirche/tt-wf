@@ -116,7 +116,7 @@
         setActiveCols(firstActiveOption, secondActiveOption);
 
         // 4. Setze den Titel innerhalb von plan-dropdown auf den Namen der aktiven Option
-        updateDropdownTitles(firstDropdown, firstActiveOption, secondDropdown, secondActiveOption);
+        // updateDropdownTitles(firstDropdown, firstActiveOption, secondDropdown, secondActiveOption);
         
         // 5. Setze Custom Values
         // updateCustomValues(firstDropdown, firstActiveOption, secondDropdown, secondActiveOption);
