@@ -272,8 +272,8 @@
     // ===== COPY ANCHOR LINK HANDLING =====
     // Funktion für die Klick-zu-Kopieren-Funktionalität
     function initCopyToClipboard() {
-        // Alle Kategorie-Titel mit IDs finden
-        document.querySelectorAll('.tt-pricing-category-title[id]').forEach(categoryTitle => {
+        // Alle Kategorie-Titel finden
+        document.querySelectorAll('.tt-pricing-category-title').forEach(categoryTitle => {
             // Cursor-Stil anpassen, um zu zeigen, dass es klickbar ist
             categoryTitle.style.cursor = 'pointer';
             
@@ -282,8 +282,17 @@
             
             // Klick-Event hinzufügen
             categoryTitle.addEventListener('click', function() {
+                // ID vom übergeordneten Kategorie-Element holen (falls vorhanden)
+                const parentCategory = this.closest('.tt-pricing-category');
+                const idToUse = parentCategory && parentCategory.id ? parentCategory.id : this.id;
+                
+                if (!idToUse) {
+                    console.warn('Keine ID gefunden, die kopiert werden kann');
+                    return;
+                }
+                
                 // URL mit ID erstellen
-                const url = window.location.href.split('#')[0] + '#' + this.id;
+                const url = window.location.href.split('#')[0] + '#' + idToUse;
                 
                 // In die Zwischenablage kopieren
                 navigator.clipboard.writeText(url).then(() => {
@@ -374,29 +383,21 @@
     function calculateTotalOffset(targetElement) {
         let totalOffset = 0;
         
-        // 1. Höhe des Table-Head
+        // 1. Höhe des Table-Head (immer berücksichtigen)
         const tableHead = document.querySelector('.tt-pricing-table-head');
         if (tableHead) {
             totalOffset += tableHead.offsetHeight;
+            console.log('Table-Head Höhe:', tableHead.offsetHeight + 'px');
         }
         
-        // 2. Höhe der Kategorie, falls das Ziel ein Kategorie-Titel ist
-        // oder sich innerhalb einer Kategorie befindet
-        const categoryElement = targetElement.closest('.tt-pricing-category');
-        if (categoryElement) {
-            const categoryTitle = categoryElement.querySelector('.tt-pricing-category-title');
-            if (categoryTitle && categoryTitle !== targetElement) {
-                totalOffset += categoryTitle.offsetHeight;
-            }
-        }
-        
-        // 3. Zusätzlicher Abstand für bessere Sichtbarkeit
+        // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
         totalOffset += 20;
         
         console.log('Berechneter Gesamt-Offset:', totalOffset + 'px');
         
         return totalOffset;
     }
+
 
     // Funktion zum erneuten Anwenden des Offsets
     // (kann bei Bedarf aufgerufen werden, z.B. nach Größenänderungen)
