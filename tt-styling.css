@@ -1827,18 +1827,15 @@ pre.w-code-block code {
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category > div:nth-child(2) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title {
-  /* Basis-Stil für den Kategorie-Titel mit ID */
-}
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id] {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title {
   cursor: pointer;
   /* Icon bei Hover einblenden */
   /* Feedback-Animation, wenn kopiert wurde */
 }
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:hover .tt-copy-anchor {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title:hover .tt-copy-anchor {
   opacity: 1;
 }
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id].tt-copied .tt-pricing-sub-title-group::before {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title.tt-copied .tt-pricing-sub-title-group::before {
   content: "Copied";
   position: absolute;
   left: 0;
