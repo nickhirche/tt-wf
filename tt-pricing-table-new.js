@@ -2,12 +2,10 @@
 (function() {
     // Hauptinitialisierungsfunktion
     function initPricingTableSystem() {
-        console.log('Initialisiere Pricing-System mit TabMenu-Synchronisierung');
         
         // Event-Listener für Billing-Period-Änderungen
         document.addEventListener('billingPeriodChanged', function(event) {
             const activePeriod = event.detail.period;
-            console.log('Event billingPeriodChanged empfangen:', activePeriod);
             
             // Preise in der Tabelle aktualisieren
             updatePricingDisplay(activePeriod);
@@ -22,6 +20,9 @@
         
         // Mobile Dropdown-Auswahl initialisieren
         initPlanDropdowns();
+
+        // Sticky-Header-Anpassung initialisieren
+        initStickyHeader();
     }
 
     function getInitialBillingPeriod() {
@@ -34,7 +35,6 @@
     
     // --------- PRICE DISPLAY FUNCTIONS ---------
     function updatePricingDisplay(activePeriod) {
-        console.log('Aktualisiere Preisanzeige für Periode:', activePeriod);
         
         // WICHTIG: Wir schließen option-Elemente explizit aus!
         // 1. Preise ersetzen
@@ -65,9 +65,8 @@
         });
     }
     
-    // NEU: Funktion zum Aktualisieren der Dropdown-Werte bei Billing-Period-Änderung
+    // Funktion zum Aktualisieren der Dropdown-Werte bei Billing-Period-Änderung
     function updateDropdownsForBillingPeriod(activePeriod) {
-        console.log('Aktualisiere Dropdowns für Billing-Periode:', activePeriod);
         
         // Hole alle Dropdowns
         const dropdowns = document.querySelectorAll('.plan-dropdown[data-plan-selection]');
@@ -133,7 +132,6 @@
     }
 
     function updatePlanDropdowns() {
-        console.log('updatePlanDropdowns wurde aufgerufen');
         
         // Hole beide Dropdowns
         const dropdowns = document.querySelectorAll('.plan-dropdown[data-plan-selection]');
@@ -226,6 +224,43 @@
         
         if (col1) table.setAttribute('data-active-col-first', col1);
         if (col2) table.setAttribute('data-active-col-second', col2);
+    }
+
+    // ===== STICKY HEADER ANPASSUNG =====
+    function initStickyHeader() {
+        // Initial einmal ausführen
+        updateStickyOffset();
+        
+        // Bei Resize erneut ausführen
+        window.addEventListener('resize', function() {
+            // Debounce-Funktion, um nicht zu viele Updates auszuführen
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function() {
+                updateStickyOffset();
+            }, 250);
+        });
+        
+        // Bei Orientierungsänderung auf Mobilgeräten
+        window.addEventListener('orientationchange', function() {
+            // Kurze Verzögerung, um sicherzustellen, dass die Größenänderung abgeschlossen ist
+            setTimeout(updateStickyOffset, 100);
+        });
+        
+        // Nach Laden aller Bilder und Ressourcen (kann die Größe beeinflussen)
+        window.addEventListener('load', updateStickyOffset);
+    }
+    
+    function updateStickyOffset() {
+        const tableHead = document.querySelector('.tt-pricing-table-head');
+        const pricingTable = document.querySelector('.tt-pricing-table');
+        
+        if (tableHead && pricingTable) {
+            // Höhe des Headers messen
+            const headerHeight = tableHead.offsetHeight;
+            
+            // CSS-Variable setzen
+            pricingTable.style.setProperty('--tt-table-category-sticky-offset', headerHeight + 'px');
+        }
     }
 
     // ===== INITIALIZATION =====
