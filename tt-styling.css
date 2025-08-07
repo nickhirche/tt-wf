@@ -1832,34 +1832,22 @@ pre.w-code-block code {
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id] {
   cursor: pointer;
-  /* Link-Icon, das bei Hover erscheint */
   /* Icon bei Hover einblenden */
-  /* Bei aktivem Zustand (während des Klicks) */
   /* Feedback-Animation, wenn kopiert wurde */
 }
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]::before {
-  content: "🔗"; /* Link-Symbol als Unicode */
-  position: absolute;
-  left: -24px;
-  top: 50%;
-  transform: translateY(-50%);
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  font-size: 16px;
-}
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:hover::before {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:hover .tt-copy-anchor {
   opacity: 0.7;
 }
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:active::before {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id] .tt-copy-anchor:hover {
   opacity: 1;
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id].tt-copied::after {
   content: "Copied";
   position: absolute;
-  right: -70px;
+  left: 0;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #4CAF50;
+  background-color: var(--black-900);
   color: white;
   padding: 4px 8px;
   border-radius: 4px;
