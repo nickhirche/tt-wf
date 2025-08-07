@@ -1836,12 +1836,9 @@ pre.w-code-block code {
   /* Feedback-Animation, wenn kopiert wurde */
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:hover .tt-copy-anchor {
-  opacity: 0.7;
-}
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id] .tt-copy-anchor:hover {
   opacity: 1;
 }
-.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id].tt-copied::after {
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id].tt-copied .tt-pricing-sub-title-group::before {
   content: "Copied";
   position: absolute;
   left: 0;
@@ -1849,9 +1846,9 @@ pre.w-code-block code {
   transform: translateY(-50%);
   background-color: var(--black-900);
   color: white;
-  padding: 4px 8px;
+  padding: 6px 8px;
   border-radius: 4px;
-  font-size: 12px;
+  font-size: 14px;
   opacity: 0;
   animation: copied-fade-animation 2s ease-in-out;
   white-space: nowrap;
