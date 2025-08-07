@@ -1848,7 +1848,7 @@ pre.w-code-block code {
   color: white;
   padding: 6px 8px;
   border-radius: 4px;
-  font-size: 14px;
+  font-size: 12px;
   opacity: 0;
   animation: copied-fade-animation 2s ease-in-out;
   white-space: nowrap;

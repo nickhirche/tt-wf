@@ -314,12 +314,25 @@
     function initAnchorOffsetHandling() {
         // Prüfen, ob ein Hash in der URL vorhanden ist
         if (window.location.hash) {
-            adjustScrollPositionForAnchor(window.location.hash);
+            // Verzögerung für initiales Laden, damit alle Elemente vollständig gerendert sind
+            setTimeout(() => {
+                adjustScrollPositionForAnchor(window.location.hash);
+            }, 300);
         }
         
         // Event-Listener für Änderungen des Hashes (z.B. durch Klicks auf interne Links)
         window.addEventListener('hashchange', function() {
             adjustScrollPositionForAnchor(window.location.hash);
+        });
+        
+        // Für manuelles Neuladen der Seite mit dem gleichen Hash
+        // (z.B. wenn der Benutzer Enter in der URL-Leiste drückt)
+        window.addEventListener('load', function() {
+            if (window.location.hash) {
+                setTimeout(() => {
+                    adjustScrollPositionForAnchor(window.location.hash);
+                }, 300);
+            }
         });
     }
 
@@ -337,36 +350,15 @@
         
         // Verzögerung, um sicherzustellen, dass der Browser zuerst zum Anker scrollt
         setTimeout(function() {
+            // Berechne den gesamten Offset
+            const offset = calculateTotalOffset(targetElement);
+            
             // Aktuellen Scroll-Position ermitteln
             const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Header-Höhe ermitteln (entweder aus CSS-Variable oder direkt berechnen)
-            const pricingTable = document.querySelector('.tt-pricing-table');
-            let headerOffset = 0;
-            
-            if (pricingTable) {
-                // Versuchen, die CSS-Variable zu lesen
-                const computedStyle = getComputedStyle(pricingTable);
-                const cssVarValue = computedStyle.getPropertyValue('--tt-table-category-sticky-offset');
-                
-                if (cssVarValue) {
-                    // CSS-Variable in Pixel umwandeln
-                    headerOffset = parseInt(cssVarValue, 10);
-                } else {
-                    // Fallback: Header-Höhe direkt berechnen
-                    const tableHead = document.querySelector('.tt-pricing-table-head');
-                    if (tableHead) {
-                        headerOffset = tableHead.offsetHeight;
-                    }
-                }
-                
-                // Zusätzlichen Abstand hinzufügen (z.B. 20px)
-                headerOffset += 20;
-            }
-            
-            // Zu einer Position scrollen, die den Header-Offset berücksichtigt
+            // Zu einer Position scrollen, die den berechneten Offset berücksichtigt
             window.scrollTo({
-                top: currentScrollPos - headerOffset,
+                top: currentScrollPos - offset,
                 behavior: 'smooth'
             });
             
@@ -375,9 +367,44 @@
             setTimeout(function() {
                 targetElement.classList.remove('tt-anchor-highlight');
             }, 2000);
-        }, 100); // Kurze Verzögerung, um dem Browser Zeit zum initialen Scrollen zu geben
+        }, 100);
     }
 
+    // Funktion zur Berechnung des gesamten Offsets
+    function calculateTotalOffset(targetElement) {
+        let totalOffset = 0;
+        
+        // 1. Höhe des Table-Head
+        const tableHead = document.querySelector('.tt-pricing-table-head');
+        if (tableHead) {
+            totalOffset += tableHead.offsetHeight;
+        }
+        
+        // 2. Höhe der Kategorie, falls das Ziel ein Kategorie-Titel ist
+        // oder sich innerhalb einer Kategorie befindet
+        const categoryElement = targetElement.closest('.tt-pricing-category');
+        if (categoryElement) {
+            const categoryTitle = categoryElement.querySelector('.tt-pricing-category-title');
+            if (categoryTitle && categoryTitle !== targetElement) {
+                totalOffset += categoryTitle.offsetHeight;
+            }
+        }
+        
+        // 3. Zusätzlicher Abstand für bessere Sichtbarkeit
+        totalOffset += 20;
+        
+        console.log('Berechneter Gesamt-Offset:', totalOffset + 'px');
+        
+        return totalOffset;
+    }
+
+    // Funktion zum erneuten Anwenden des Offsets
+    // (kann bei Bedarf aufgerufen werden, z.B. nach Größenänderungen)
+    function reapplyAnchorOffset() {
+        if (window.location.hash) {
+            adjustScrollPositionForAnchor(window.location.hash);
+        }
+    }
 
 
     // ===== INITIALIZATION =====
