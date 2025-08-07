@@ -321,90 +321,68 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Prüfen, ob ein Hash in der URL vorhanden ist
-        if (window.location.hash) {
-            // Verzögerung für initiales Laden, damit alle Elemente vollständig gerendert sind
-            setTimeout(() => {
-                adjustScrollPositionForAnchor(window.location.hash);
-            }, 300);
-        }
-        
-        // Event-Listener für Änderungen des Hashes (z.B. durch Klicks auf interne Links)
-        window.addEventListener('hashchange', function() {
-            adjustScrollPositionForAnchor(window.location.hash);
-        });
-        
-        // Für manuelles Neuladen der Seite mit dem gleichen Hash
-        // (z.B. wenn der Benutzer Enter in der URL-Leiste drückt)
-        window.addEventListener('load', function() {
+        // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
+        function correctAnchorOffset() {
             if (window.location.hash) {
+                // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
                 setTimeout(() => {
-                    adjustScrollPositionForAnchor(window.location.hash);
-                }, 300);
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement && targetElement.closest('.tt-pricing-table')) {
+                        // Offset berechnen
+                        const offset = calculateTotalOffset(targetElement);
+                        
+                        // Aktuelle Position anpassen
+                        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+                        window.scrollTo({
+                            top: currentPos - offset,
+                            behavior: 'smooth'
+                        });
+                        
+                        // Optionales Highlight
+                        targetElement.classList.add('tt-anchor-highlight');
+                        setTimeout(() => {
+                            targetElement.classList.remove('tt-anchor-highlight');
+                        }, 2000);
+                    }
+                }, 100); // Kurze Verzögerung nach dem Standard-Sprung
             }
+        }
+        
+        // Funktion zur Berechnung des gesamten Offsets
+        function calculateTotalOffset(targetElement) {
+            let totalOffset = 0;
+            
+            // 1. Höhe des Table-Head
+            const tableHead = document.querySelector('.tt-pricing-table-head');
+            if (tableHead) {
+                totalOffset += tableHead.offsetHeight;
+            }
+            
+            // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
+            totalOffset += 20;
+            
+            return totalOffset;
+        }
+        
+        // Bei initialem Laden
+        if (document.readyState === 'complete') {
+            correctAnchorOffset();
+        } else {
+            window.addEventListener('load', correctAnchorOffset);
+        }
+        
+        // Bei Hash-Änderungen
+        window.addEventListener('hashchange', correctAnchorOffset);
+        
+        // Bei Resize (falls sich die Header-Höhe ändert)
+        window.addEventListener('resize', function() {
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function() {
+                if (window.location.hash) {
+                    correctAnchorOffset();
+                }
+            }, 250);
         });
-    }
-
-    // Funktion zum Anpassen der Scroll-Position für Anker innerhalb der Tabelle
-    function adjustScrollPositionForAnchor(hash) {
-        if (!hash) return;
-        
-        // Das Element mit der ID finden
-        const targetElement = document.querySelector(hash);
-        if (!targetElement) return;
-        
-        // Prüfen, ob das Element innerhalb der Pricing-Tabelle ist
-        const isInPricingTable = targetElement.closest('.tt-pricing-table') !== null;
-        if (!isInPricingTable) return;
-        
-        // Verzögerung, um sicherzustellen, dass der Browser zuerst zum Anker scrollt
-        setTimeout(function() {
-            // Berechne den gesamten Offset
-            const offset = calculateTotalOffset(targetElement);
-            
-            // Aktuellen Scroll-Position ermitteln
-            const currentScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-            
-            // Zu einer Position scrollen, die den berechneten Offset berücksichtigt
-            window.scrollTo({
-                top: currentScrollPos - offset,
-                behavior: 'smooth'
-            });
-            
-            // Visuelles Feedback für den Anker (optional)
-            targetElement.classList.add('tt-anchor-highlight');
-            setTimeout(function() {
-                targetElement.classList.remove('tt-anchor-highlight');
-            }, 2000);
-        }, 100);
-    }
-
-    // Funktion zur Berechnung des gesamten Offsets
-    function calculateTotalOffset(targetElement) {
-        let totalOffset = 0;
-        
-        // 1. Höhe des Table-Head (immer berücksichtigen)
-        const tableHead = document.querySelector('.tt-pricing-table-head');
-        if (tableHead) {
-            totalOffset += tableHead.offsetHeight;
-            console.log('Table-Head Höhe:', tableHead.offsetHeight + 'px');
-        }
-        
-        // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
-        totalOffset += 20;
-        
-        console.log('Berechneter Gesamt-Offset:', totalOffset + 'px');
-        
-        return totalOffset;
-    }
-
-
-    // Funktion zum erneuten Anwenden des Offsets
-    // (kann bei Bedarf aufgerufen werden, z.B. nach Größenänderungen)
-    function reapplyAnchorOffset() {
-        if (window.location.hash) {
-            adjustScrollPositionForAnchor(window.location.hash);
-        }
     }
 
 
