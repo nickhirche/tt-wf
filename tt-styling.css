@@ -1825,6 +1825,48 @@ pre.w-code-block code {
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category > div:nth-child(2) {
   border-top: 1px solid rgba(0, 0, 0, 0.1);
 }
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title {
+  /* Basis-Stil für den Kategorie-Titel mit ID */
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id] {
+  position: relative;
+  cursor: pointer;
+  /* Link-Icon, das bei Hover erscheint */
+  /* Icon bei Hover einblenden */
+  /* Bei aktivem Zustand (während des Klicks) */
+  /* Feedback-Animation, wenn kopiert wurde */
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]::before {
+  content: "🔗"; /* Link-Symbol als Unicode */
+  position: absolute;
+  left: -24px;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  font-size: 16px;
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:hover::before {
+  opacity: 0.7;
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id]:active::before {
+  opacity: 1;
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category .tt-pricing-category-title[id].tt-copied::after {
+  content: "Copied";
+  position: absolute;
+  right: -70px;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #4CAF50;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  opacity: 0;
+  animation: copied-fade-animation 2s ease-in-out;
+  white-space: nowrap;
+}
 @media screen and (max-width: 767px) {
   .tt-pricing-table .tt-pricing-plan-col {
     display: none;
@@ -2123,4 +2165,24 @@ input[type=range i]::-moz-range-thumb {
 }
 .tt-customer-card:hover .btn-content {
   width: 100%;
+}
+
+/* Animation für das Einblenden und Ausblenden */
+@keyframes copied-fade-animation {
+  0% {
+    opacity: 0;
+    transform: translate(10px, -50%);
+  }
+  20% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  80% {
+    opacity: 1;
+    transform: translate(0, -50%);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(10px, -50%);
+  }
 }/*# sourceMappingURL=tt-styling.css.map */

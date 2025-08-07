@@ -275,7 +275,7 @@
             categoryTitle.style.cursor = 'pointer';
             
             // Optionaler Tooltip
-            categoryTitle.setAttribute('title', 'Klicken, um Link zu kopieren');
+            categoryTitle.setAttribute('title', 'Click to copy link');
             
             // Klick-Event hinzufügen
             categoryTitle.addEventListener('click', function() {
