@@ -1,13 +1,19 @@
-// Tiptap Pricing Table System - Vereinfachte Version mit :not(option)
+// Tiptap Pricing Table System - Mit TabMenu-Synchronisierung
 (function() {
     // Hauptinitialisierungsfunktion
     function initPricingTableSystem() {
-        console.log('Initialisiere vereinfachtes Pricing-System');
+        console.log('Initialisiere Pricing-System mit TabMenu-Synchronisierung');
         
         // Event-Listener für Billing-Period-Änderungen
         document.addEventListener('billingPeriodChanged', function(event) {
             const activePeriod = event.detail.period;
+            console.log('Event billingPeriodChanged empfangen:', activePeriod);
+            
+            // Preise in der Tabelle aktualisieren
             updatePricingDisplay(activePeriod);
+            
+            // NEU: Auch die Dropdown-Werte aktualisieren
+            updateDropdownsForBillingPeriod(activePeriod);
         });
 
         // Initial mit dem aktuellen Wert aktualisieren
@@ -58,6 +64,63 @@
             }
         });
     }
+    
+    // NEU: Funktion zum Aktualisieren der Dropdown-Werte bei Billing-Period-Änderung
+    function updateDropdownsForBillingPeriod(activePeriod) {
+        console.log('Aktualisiere Dropdowns für Billing-Periode:', activePeriod);
+        
+        // Hole alle Dropdowns
+        const dropdowns = document.querySelectorAll('.plan-dropdown[data-plan-selection]');
+        if (dropdowns.length === 0) return;
+        
+        dropdowns.forEach(dropdown => {
+            // Finde das aktive Select und die aktive Option
+            const select = dropdown.querySelector('.plan-select');
+            if (!select) return;
+            
+            const activeOption = select.options[select.selectedIndex];
+            if (!activeOption) return;
+            
+            // Aktualisiere die Preise basierend auf der aktiven Option und Billing-Periode
+            updateDropdownPricesForPeriod(dropdown, activeOption, activePeriod);
+        });
+    }
+    
+    function updateDropdownPricesForPeriod(dropdown, activeOption, activePeriod) {
+        // Preise aus der Option auslesen
+        const priceMonthly = activeOption.getAttribute('data-price-monthly');
+        const priceYearly = activeOption.getAttribute('data-price-yearly');
+        const priceYearlyTotal = activeOption.getAttribute('data-price-yearly-total');
+        
+        // Aktuellen Preis basierend auf der Periode bestimmen
+        const currentPrice = activePeriod === 'yearly' ? priceYearly : priceMonthly;
+        
+        // Preis-Element im Dropdown aktualisieren
+        const priceElement = dropdown.querySelector(':not(option)[data-price-monthly][data-price-yearly]');
+        if (priceElement && currentPrice) {
+            priceElement.textContent = currentPrice;
+        }
+        
+        // Jahresgesamtpreis-Element aktualisieren
+        const totalElement = dropdown.querySelector(':not(option)[data-price-yearly-total]');
+        if (totalElement) {
+            if (activePeriod === 'yearly' && priceYearlyTotal) {
+                totalElement.textContent = priceYearlyTotal;
+                
+                // Jahresgesamtpreis-Gruppe anzeigen
+                const yearlyTotalGroup = dropdown.querySelector('[data-group="yearly-total"]');
+                if (yearlyTotalGroup) {
+                    yearlyTotalGroup.classList.remove('inactive');
+                }
+            } else {
+                // Jahresgesamtpreis-Gruppe ausblenden
+                const yearlyTotalGroup = dropdown.querySelector('[data-group="yearly-total"]');
+                if (yearlyTotalGroup) {
+                    yearlyTotalGroup.classList.add('inactive');
+                }
+            }
+        }
+    }
 
     // ===== MOBILE DROPDOWN HEADER =====
     function initPlanDropdowns() {
@@ -89,10 +152,6 @@
         const secondActiveOption = secondSelect.options[secondSelect.selectedIndex];
         
         if (!firstActiveOption || !secondActiveOption) return;
-        
-        // Debug-Ausgaben für Option-Texte
-        console.log('Option 1:', firstActiveOption.value, 'Text:', firstActiveOption.textContent);
-        console.log('Option 2:', secondActiveOption.value, 'Text:', secondActiveOption.textContent);
 
         // 1. Options inaktiv setzen, wenn sie in der anderen Auswahl aktiv sind
         syncOptionsDisabled(firstSelect, secondActiveOption);
@@ -105,9 +164,10 @@
         // 3. Aktive Spalten in der Tabelle setzen
         setActiveCols(firstActiveOption, secondActiveOption);
         
-        // Debug-Ausgaben nach der Aktualisierung
-        console.log('Nach Update - Option 1:', firstActiveOption.textContent);
-        console.log('Nach Update - Option 2:', secondActiveOption.textContent);
+        // 4. Preise entsprechend der aktuellen Billing-Periode aktualisieren
+        const currentPeriod = getInitialBillingPeriod();
+        updateDropdownPricesForPeriod(firstDropdown, firstActiveOption, currentPeriod);
+        updateDropdownPricesForPeriod(secondDropdown, secondActiveOption, currentPeriod);
     }
     
     function updateDropdownContent(dropdown, activeOption) {
@@ -117,9 +177,6 @@
         const optionData = {
             text: activeOption.textContent,
             customValue: activeOption.getAttribute('data-custom-value'),
-            priceMonthly: activeOption.getAttribute('data-price-monthly'),
-            priceYearly: activeOption.getAttribute('data-price-yearly'),
-            priceYearlyTotal: activeOption.getAttribute('data-price-yearly-total'),
             valueType: activeOption.getAttribute('data-value-type')
         };
         
@@ -135,23 +192,7 @@
             customValueElement.textContent = optionData.customValue;
         }
         
-        // 3. Preise aktualisieren - WICHTIG: :not(option) Selektor!
-        if (optionData.priceMonthly) {
-            const monthlyEl = dropdown.querySelector(':not(option)[data-price-monthly]');
-            if (monthlyEl) monthlyEl.textContent = optionData.priceMonthly;
-        }
-        
-        if (optionData.priceYearly) {
-            const yearlyEl = dropdown.querySelector(':not(option)[data-price-yearly]');
-            if (yearlyEl) yearlyEl.textContent = optionData.priceYearly;
-        }
-        
-        if (optionData.priceYearlyTotal) {
-            const totalEl = dropdown.querySelector(':not(option)[data-price-yearly-total]');
-            if (totalEl) totalEl.textContent = optionData.priceYearlyTotal;
-        }
-        
-        // 4. Value-Gruppen je nach aktiver Option updaten
+        // 3. Value-Gruppen je nach aktiver Option updaten
         updateValueGroups(dropdown, optionData.valueType);
     }
     
