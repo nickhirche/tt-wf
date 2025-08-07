@@ -23,6 +23,9 @@
 
         // Sticky-Header-Anpassung initialisieren
         initStickyHeader();
+
+        // Klick-zu-Kopieren-Funktionalität initialisieren
+        initCopyToClipboard();
     }
 
     function getInitialBillingPeriod() {
@@ -262,6 +265,47 @@
             pricingTable.style.setProperty('--tt-table-category-sticky-offset', headerHeight + 'px');
         }
     }
+
+    // ===== COPY ANCHOR LINK HANDLING =====
+    // Funktion für die Klick-zu-Kopieren-Funktionalität
+    function initCopyToClipboard() {
+        // Alle Kategorie-Titel mit IDs finden
+        document.querySelectorAll('.tt-pricing-category-title[id]').forEach(categoryTitle => {
+            // Cursor-Stil anpassen, um zu zeigen, dass es klickbar ist
+            categoryTitle.style.cursor = 'pointer';
+            
+            // Optionaler Tooltip
+            categoryTitle.setAttribute('title', 'Klicken, um Link zu kopieren');
+            
+            // Klick-Event hinzufügen
+            categoryTitle.addEventListener('click', function() {
+                // URL mit ID erstellen
+                const url = window.location.href.split('#')[0] + '#' + this.id;
+                
+                // In die Zwischenablage kopieren
+                navigator.clipboard.writeText(url).then(() => {
+                    console.log('URL kopiert:', url);
+                    
+                    // Visuelles Feedback hinzufügen
+                    showCopiedFeedback(this);
+                }).catch(err => {
+                    console.error('Fehler beim Kopieren:', err);
+                });
+            });
+        });
+    }
+
+    // Funktion für das visuelle Feedback
+    function showCopiedFeedback(element) {
+        // Klasse für das Feedback hinzufügen
+        element.classList.add('tt-copied');
+        
+        // Nach einer Verzögerung wieder entfernen
+        setTimeout(() => {
+            element.classList.remove('tt-copied');
+        }, 2000); // 2 Sekunden Feedback
+    }
+
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
