@@ -321,10 +321,18 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
+        // Flag, um zu verfolgen, ob wir bereits einen Offset angewendet haben
+        let hasAppliedOffset = false;
+        
         // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-        function correctAnchorOffset() {
+        function correctAnchorOffset(isReload = false) {
             if (window.location.hash) {
-                // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
+                // Bei Reload: Nur ausführen, wenn wir noch keinen Offset angewendet haben
+                if (isReload && hasAppliedOffset) {
+                    return;
+                }
+                
+                // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
                 setTimeout(() => {
                     const targetElement = document.querySelector(window.location.hash);
                     if (targetElement && targetElement.closest('.tt-pricing-table')) {
@@ -335,16 +343,13 @@
                         const currentPos = window.pageYOffset || document.documentElement.scrollTop;
                         window.scrollTo({
                             top: currentPos - offset,
-                            behavior: 'smooth'
+                            behavior: 'auto'
                         });
                         
-                        // Optionales Highlight
-                        targetElement.classList.add('tt-anchor-highlight');
-                        setTimeout(() => {
-                            targetElement.classList.remove('tt-anchor-highlight');
-                        }, 2000);
+                        // Flag setzen, dass wir den Offset angewendet haben
+                        hasAppliedOffset = true;
                     }
-                }, 100); // Kurze Verzögerung nach dem Standard-Sprung
+                }, 50);
             }
         }
         
@@ -366,33 +371,46 @@
         
         // Bei initialem Laden
         if (document.readyState === 'complete') {
-            correctAnchorOffset();
+            correctAnchorOffset(false); // Kein Reload
         } else {
-            window.addEventListener('load', correctAnchorOffset);
+            window.addEventListener('load', () => correctAnchorOffset(false)); // Kein Reload
         }
         
-        // Bei Hash-Änderungen
-        window.addEventListener('hashchange', correctAnchorOffset);
+        // Bei Hash-Änderungen (Links, manuelle Änderungen)
+        window.addEventListener('hashchange', () => {
+            hasAppliedOffset = false; // Reset Flag bei Hash-Änderung
+            correctAnchorOffset(false);
+        });
         
         // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', correctAnchorOffset);
+        window.addEventListener('popstate', () => {
+            hasAppliedOffset = false; // Reset Flag bei Popstate
+            correctAnchorOffset(false);
+        });
         
-        // NEU: Direkte Überwachung der URL-Änderungen
-        let lastUrl = location.href;
-        new MutationObserver(() => {
-            const url = location.href;
-            if (url !== lastUrl) {
-                lastUrl = url;
-                correctAnchorOffset();
-            }
-        }).observe(document, {subtree: true, childList: true});
+        // Performance API nutzen, um Reload zu erkennen
+        const navEntries = performance.getEntriesByType('navigation');
+        if (navEntries.length > 0 && navEntries[0].type === 'reload') {
+            // Es ist ein Reload - Flag setzen, damit wir den Offset nur einmal anwenden
+            correctAnchorOffset(true);
+        }
         
-        // Bei Resize (falls sich die Header-Höhe ändert)
+        // Bei Resize nur ausführen, wenn sich die Header-Höhe ändert
+        let lastHeaderHeight = 0;
+        const tableHead = document.querySelector('.tt-pricing-table-head');
+        if (tableHead) {
+            lastHeaderHeight = tableHead.offsetHeight;
+        }
+        
         window.addEventListener('resize', function() {
             clearTimeout(window.resizeTimer);
             window.resizeTimer = setTimeout(function() {
-                if (window.location.hash) {
-                    correctAnchorOffset();
+                // Nur ausführen, wenn sich die Header-Höhe geändert hat
+                const tableHead = document.querySelector('.tt-pricing-table-head');
+                if (tableHead && tableHead.offsetHeight !== lastHeaderHeight) {
+                    lastHeaderHeight = tableHead.offsetHeight;
+                    hasAppliedOffset = false; // Reset Flag, da sich die Höhe geändert hat
+                    correctAnchorOffset(false);
                 }
             }, 250);
         });
