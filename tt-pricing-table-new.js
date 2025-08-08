@@ -355,47 +355,52 @@
         return totalOffset;
     }
     
-    // Bei Hash-Änderungen (z.B. durch manuelle Eingabe + Enter)
-    window.addEventListener('hashchange', function(event) {
-        // Kurze Verzögerung, damit der Browser Zeit hat, zum Anker zu scrollen
+    // Bei Hash-Änderungen (funktioniert in Chrome gut)
+    window.addEventListener('hashchange', function() {
         setTimeout(() => {
         scrollToElementWithOffset(window.location.hash);
         }, 50);
     });
     
-    // Bei popstate-Events (wird bei Enter-Drücken in der Adressleiste ausgelöst)
+    // Bei popstate-Events (funktioniert in Chrome gut)
     window.addEventListener('popstate', function() {
         if (window.location.hash) {
-        // Kurze Verzögerung, damit der Browser Zeit hat, zum Anker zu scrollen
         setTimeout(() => {
             scrollToElementWithOffset(window.location.hash);
         }, 50);
         }
     });
     
-    // Bei initialem Laden mit Hash
-    if (window.location.hash) {
+    // Firefox-spezifische Lösung: window.onload verwenden
+    window.addEventListener('load', function() {
+        if (window.location.hash) {
         // Prüfen, ob es ein Reload ist
         const isReload = performance.getEntriesByType('navigation').length > 0 && 
                         performance.getEntriesByType('navigation')[0].type === 'reload';
         
         if (!isReload) {
-        // Warten, bis die Seite geladen ist
-        if (document.readyState === 'complete') {
+            // Kurze Verzögerung für Firefox
             setTimeout(() => {
             scrollToElementWithOffset(window.location.hash);
-            }, 50);
-        } else {
-            window.addEventListener('load', function() {
+            }, 100); // Etwas längere Verzögerung für Firefox
+        }
+        }
+    });
+    
+    // Spezielle Lösung für Firefox und Enter-Drücken
+    // Diese Lösung basiert auf dem Ansatz von getgui.com
+    if (navigator.userAgent.indexOf('Firefox') !== -1) {
+        // Nur in Firefox ausführen
+        document.addEventListener('DOMContentLoaded', function() {
+        if (window.location.hash) {
+            // Längere Verzögerung, um sicherzustellen, dass Firefox die Seite vollständig geladen hat
             setTimeout(() => {
-                scrollToElementWithOffset(window.location.hash);
-            }, 50);
-            }, { once: true });
+            scrollToElementWithOffset(window.location.hash);
+            }, 500);
         }
-        }
+        });
     }
     }
-
 
 
     // ===== INITIALIZATION =====
