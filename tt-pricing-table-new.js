@@ -324,21 +324,19 @@
         // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
         function correctAnchorOffset() {
             if (window.location.hash) {
-                // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
-                setTimeout(() => {
-                    const targetElement = document.querySelector(window.location.hash);
-                    if (targetElement && targetElement.closest('.tt-pricing-table')) {
-                        // Offset berechnen
-                        const offset = calculateTotalOffset(targetElement);
-                        
-                        // Aktuelle Position anpassen
-                        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
-                        window.scrollTo({
-                            top: currentPos - offset,
-                            behavior: 'smooth'  // Du könntest auch 'auto' verwenden für sofortiges Scrollen
-                        });
-                    }
-                }, 50); // Reduzierte Verzögerung auf 50ms
+                // Das Element mit der ID finden
+                const targetElement = document.querySelector(window.location.hash);
+                if (targetElement && targetElement.closest('.tt-pricing-table')) {
+                    // Offset berechnen
+                    const offset = calculateTotalOffset(targetElement);
+                    
+                    // Aktuelle Position anpassen
+                    const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+                    window.scrollTo({
+                        top: currentPos - offset,
+                        behavior: 'smooth'
+                    });
+                }
             }
         }
         
@@ -358,19 +356,27 @@
             return totalOffset;
         }
         
-        // Bei initialem Laden
-        if (document.readyState === 'complete') {
-            correctAnchorOffset();
-        } else {
-            window.addEventListener('load', correctAnchorOffset);
+        // Verzögerte Ausführung, um dem Browser Zeit zu geben, zum Anker zu scrollen
+        function delayedCorrection() {
+            setTimeout(correctAnchorOffset, 50);
         }
         
-        // Bei Hash-Änderungen
-        window.addEventListener('hashchange', correctAnchorOffset);
+        // Bei allen relevanten Ereignissen ausführen
         
-        // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', correctAnchorOffset);
+        // 1. Bei initialem Laden oder Reload
+        if (window.location.hash) {
+            if (document.readyState === 'complete') {
+                delayedCorrection();
+            } else {
+                window.addEventListener('load', delayedCorrection);
+            }
+        }
         
+        // 2. Bei Hash-Änderungen (Links, manuelle Änderungen)
+        window.addEventListener('hashchange', delayedCorrection);
+        
+        // 3. Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
+        window.addEventListener('popstate', delayedCorrection);
     }
 
     // ===== INITIALIZATION =====
