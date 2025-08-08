@@ -321,29 +321,20 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Nur einmal beim initialen Laden ausführen
-        function handleInitialAnchor() {
-            // Prüfen, ob ein Hash in der URL vorhanden ist
+        // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
+        function correctAnchorOffset() {
             if (window.location.hash) {
-                const targetElement = document.querySelector(window.location.hash);
-                
-                // Nur fortfahren, wenn das Element existiert und in der Pricing-Tabelle ist
-                if (targetElement && targetElement.closest('.tt-pricing-table')) {
-                    // Warten, bis alles geladen ist
-                    setTimeout(() => {
+                // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
+                setTimeout(() => {
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement && targetElement.closest('.tt-pricing-table')) {
                         // Offset berechnen
-                        let offset = 0;
-                        const tableHead = document.querySelector('.tt-pricing-table-head');
-                        if (tableHead) {
-                            offset = tableHead.offsetHeight + 20; // 20px zusätzlicher Abstand
-                        }
+                        const offset = calculateTotalOffset(targetElement);
                         
-                        // Position des Elements berechnen
-                        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                        
-                        // Einmalig zur korrigierten Position scrollen
+                        // Aktuelle Position anpassen
+                        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
                         window.scrollTo({
-                            top: targetPosition - offset,
+                            top: currentPos - offset,
                             behavior: 'smooth'
                         });
                         
@@ -352,49 +343,59 @@
                         setTimeout(() => {
                             targetElement.classList.remove('tt-anchor-highlight');
                         }, 2000);
-                    }, 500);
-                }
-            }
-        }
-        
-        // Nur bei Hash-Änderungen durch Klicks
-        function handleHashChange() {
-            // Gleiche Logik wie oben, aber nur ausführen, wenn sich der Hash ändert
-            const targetElement = document.querySelector(window.location.hash);
-            if (targetElement && targetElement.closest('.tt-pricing-table')) {
-                setTimeout(() => {
-                    let offset = 0;
-                    const tableHead = document.querySelector('.tt-pricing-table-head');
-                    if (tableHead) {
-                        offset = tableHead.offsetHeight + 20;
                     }
-                    
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    
-                    window.scrollTo({
-                        top: targetPosition - offset,
-                        behavior: 'smooth'
-                    });
-                    
-                    targetElement.classList.add('tt-anchor-highlight');
-                    setTimeout(() => {
-                        targetElement.classList.remove('tt-anchor-highlight');
-                    }, 2000);
-                }, 100);
+                }, 100); // Kurze Verzögerung nach dem Standard-Sprung
             }
         }
         
-        // Nur diese beiden Event-Listener
-        // 1. Beim initialen Laden
-        if (document.readyState === 'complete') {
-            handleInitialAnchor();
-        } else {
-            window.addEventListener('load', handleInitialAnchor, { once: true }); // once: true = nur einmal ausführen
+        // Funktion zur Berechnung des gesamten Offsets
+        function calculateTotalOffset(targetElement) {
+            let totalOffset = 0;
+            
+            // 1. Höhe des Table-Head
+            const tableHead = document.querySelector('.tt-pricing-table-head');
+            if (tableHead) {
+                totalOffset += tableHead.offsetHeight;
+            }
+            
+            // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
+            totalOffset += 20;
+            
+            return totalOffset;
         }
         
-        // 2. Bei Hash-Änderungen
-        window.addEventListener('hashchange', handleHashChange);
-      
+        // Bei initialem Laden
+        if (document.readyState === 'complete') {
+            correctAnchorOffset();
+        } else {
+            window.addEventListener('load', correctAnchorOffset);
+        }
+        
+        // Bei Hash-Änderungen
+        window.addEventListener('hashchange', correctAnchorOffset);
+        
+        // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
+        window.addEventListener('popstate', correctAnchorOffset);
+        
+        // NEU: Direkte Überwachung der URL-Änderungen
+        let lastUrl = location.href;
+        new MutationObserver(() => {
+            const url = location.href;
+            if (url !== lastUrl) {
+                lastUrl = url;
+                correctAnchorOffset();
+            }
+        }).observe(document, {subtree: true, childList: true});
+        
+        // Bei Resize (falls sich die Header-Höhe ändert)
+        window.addEventListener('resize', function() {
+            clearTimeout(window.resizeTimer);
+            window.resizeTimer = setTimeout(function() {
+                if (window.location.hash) {
+                    correctAnchorOffset();
+                }
+            }, 250);
+        });
     }
 
 
