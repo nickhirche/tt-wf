@@ -321,32 +321,24 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Hilfsfunktion, die den Anker-Sprung vollständig übernimmt
-        function handleAnchorJump() {
+        // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
+        function correctAnchorOffset() {
             if (window.location.hash) {
-                // Das Element mit der ID finden
-                const targetElement = document.querySelector(window.location.hash);
-                if (targetElement && targetElement.closest('.tt-pricing-table')) {
-                    // Offset berechnen
-                    const offset = calculateTotalOffset(targetElement);
-                    
-                    // Position des Elements ermitteln
-                    const elementPos = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    
-                    // Zu der Position scrollen, abzüglich des Offsets
-                    window.scrollTo({
-                        top: elementPos - offset,
-                        behavior: 'smooth'
-                    });
-                    
-                    // Standard-Sprung verhindern
-                    if (history.replaceState) {
-                        history.replaceState(null, null, window.location.pathname + window.location.search);
-                        setTimeout(() => {
-                            history.replaceState(null, null, window.location.pathname + window.location.search + window.location.hash);
-                        }, 0);
+                // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
+                setTimeout(() => {
+                    const targetElement = document.querySelector(window.location.hash);
+                    if (targetElement && targetElement.closest('.tt-pricing-table')) {
+                        // Offset berechnen
+                        const offset = calculateTotalOffset(targetElement);
+                        
+                        // Aktuelle Position anpassen
+                        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+                        window.scrollTo({
+                            top: currentPos - offset,
+                            behavior: 'smooth'
+                        });
                     }
-                }
+                }, 50);
             }
         }
         
@@ -366,24 +358,35 @@
             return totalOffset;
         }
         
-        // Bei allen relevanten Ereignissen ausführen
+        // Bei Hash-Änderungen (Links, manuelle Änderungen, Enter in URL)
+        window.addEventListener('hashchange', correctAnchorOffset);
         
-        // 1. Bei initialem Laden oder Reload
+        // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
+        window.addEventListener('popstate', correctAnchorOffset);
+        
+        // Bei initialem Laden
         if (window.location.hash) {
             if (document.readyState === 'complete') {
-                handleAnchorJump();
+                correctAnchorOffset();
             } else {
-                window.addEventListener('load', handleAnchorJump);
+                window.addEventListener('load', correctAnchorOffset, { once: true });
             }
         }
         
-        // 2. Bei Hash-Änderungen (Links, manuelle Änderungen)
-        window.addEventListener('hashchange', handleAnchorJump);
-        
-        // 3. Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', handleAnchorJump);
+        // Prüfen, ob es sich um ein Reload handelt und ggf. manuell ein popstate-Event auslösen
+        if (performance && performance.getEntriesByType && performance.getEntriesByType('navigation').length > 0) {
+            if (performance.getEntriesByType('navigation')[0].type === 'reload' && window.location.hash) {
+                // Bei einem Reload mit Hash manuell ein popstate-Event auslösen
+                window.addEventListener('load', () => {
+                    // Kurze Verzögerung, um sicherzustellen, dass der Browser zuerst zum Anker scrollt
+                    setTimeout(() => {
+                        // Manuell ein popstate-Event auslösen
+                        window.dispatchEvent(new Event('popstate'));
+                    }, 0);
+                });
+            }
+        }
     }
-
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
