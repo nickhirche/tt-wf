@@ -19,9 +19,6 @@
 
         // Event-Listener für alle Dropdowns in Cards setzen
         initDocumentDropdowns();
-        
-        // Debug-Ausgabe für Entwicklung
-        console.log('Tiptap Pricing Cards System initialisiert. Aktive Periode:', initialPeriod);
     }
 
     /**
@@ -55,11 +52,8 @@
      * - Aktualisiert ggf. den Jahresgesamtpreis.
      */
     function updateCardPrices(card, activePeriod) {
-        // Hauptpreis-Element innerhalb von tt-price-wrap suchen
-        const priceWrap = card.querySelector(`[data-billing-period="${activePeriod}"].tt-price-wrap`);
-        if (!priceWrap) return;
-        
-        const priceElement = priceWrap.querySelector('.price-value');
+        // Hauptpreis-Element
+        const priceElement = card.querySelector('.price-value');
         if (!priceElement) return;
 
         // Dropdown innerhalb der Card suchen
@@ -78,14 +72,12 @@
                 }
 
                 // Jahresgesamtpreis nur für 'yearly'-Period setzen
-                if (activePeriod === 'yearly') {
-                    const yearlyTotalElements = priceWrap.querySelectorAll('.price-value-yearly');
-                    yearlyTotalElements.forEach(yearlyTotalElement => {
-                        const yearlyTotal = selectedOption.getAttribute('data-price-yearly-total');
-                        if (yearlyTotal) {
-                            yearlyTotalElement.textContent = yearlyTotal;
-                        }
-                    });
+                const yearlyTotalElement = card.querySelector('.price-value-yearly');
+                if (yearlyTotalElement && activePeriod === 'yearly') {
+                    const yearlyTotal = selectedOption.getAttribute('data-price-yearly-total');
+                    if (yearlyTotal) {
+                        yearlyTotalElement.textContent = yearlyTotal;
+                    }
                 }
             }
         } else {
@@ -98,14 +90,12 @@
             }
             
             // Jahresgesamtpreis nur für 'yearly'-Period setzen
-            if (activePeriod === 'yearly') {
-                const yearlyTotalElements = priceWrap.querySelectorAll('.price-value-yearly');
-                yearlyTotalElements.forEach(yearlyTotalElement => {
-                    const yearlyTotal = yearlyTotalElement.getAttribute('data-price-yearly-total');
-                    if (yearlyTotal) {
-                        yearlyTotalElement.textContent = yearlyTotal;
-                    }
-                });
+            const yearlyTotalElement = card.querySelector('.price-value-yearly');
+            if (yearlyTotalElement && activePeriod === 'yearly') {
+                const yearlyTotal = yearlyTotalElement.getAttribute('data-price-yearly-total');
+                if (yearlyTotal) {
+                    yearlyTotalElement.textContent = yearlyTotal;
+                }
             }
         }
     }
@@ -116,17 +106,6 @@
      *   bekommen 'inactive' je nach Auswahl.
      */
     function updatePeriodVisibility(card, activePeriod) {
-        // Alle tt-price-wrap Elemente in der Card
-        const priceWraps = card.querySelectorAll('.tt-price-wrap');
-        priceWraps.forEach(wrap => {
-            const wrapPeriod = wrap.getAttribute('data-billing-period');
-            if (wrapPeriod === activePeriod) {
-                wrap.classList.remove('inactive');
-            } else {
-                wrap.classList.add('inactive');
-            }
-        });
-
         // Monatlich-Bereiche
         card.querySelectorAll('[data-subscription-period="monthly"]').forEach(el => {
             if (activePeriod === 'monthly') {
@@ -163,9 +142,6 @@
                 updateCardPrices(card, activePeriod);
                 // Vergleichssynchronisation auslösen
                 syncComparisonCards(card);
-                
-                // Debug-Ausgabe
-                console.log('Dropdown geändert:', this.value, 'Aktive Periode:', activePeriod);
             });
         });
     }
