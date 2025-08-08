@@ -362,46 +362,28 @@
         }, 50);
     });
     
-    // Bei popstate-Events (funktioniert in Chrome gut)
-    window.addEventListener('popstate', function() {
-        if (window.location.hash) {
-        setTimeout(() => {
-            scrollToElementWithOffset(window.location.hash);
-        }, 50);
-        }
-    });
-    
-    // Firefox-spezifische Lösung: window.onload verwenden
-    window.addEventListener('load', function() {
-        if (window.location.hash) {
+    // Bei initialem Laden mit Hash
+    if (window.location.hash) {
         // Prüfen, ob es ein Reload ist
         const isReload = performance.getEntriesByType('navigation').length > 0 && 
                         performance.getEntriesByType('navigation')[0].type === 'reload';
         
         if (!isReload) {
-            // Kurze Verzögerung für Firefox
+        // Warten, bis die Seite geladen ist
+        if (document.readyState === 'complete') {
             setTimeout(() => {
             scrollToElementWithOffset(window.location.hash);
-            }, 100); // Etwas längere Verzögerung für Firefox
-        }
-        }
-    });
-    
-    // Spezielle Lösung für Firefox und Enter-Drücken
-    // Diese Lösung basiert auf dem Ansatz von getgui.com
-    if (navigator.userAgent.indexOf('Firefox') !== -1) {
-        // Nur in Firefox ausführen
-        document.addEventListener('DOMContentLoaded', function() {
-        if (window.location.hash) {
-            // Längere Verzögerung, um sicherzustellen, dass Firefox die Seite vollständig geladen hat
+            }, 50);
+        } else {
+            window.addEventListener('load', function() {
             setTimeout(() => {
-            scrollToElementWithOffset(window.location.hash);
-            }, 500);
+                scrollToElementWithOffset(window.location.hash);
+            }, 50);
+            }, { once: true });
         }
-        });
+        }
     }
     }
-
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
