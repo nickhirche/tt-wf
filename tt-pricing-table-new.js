@@ -318,12 +318,10 @@
         }, 1000); // 1 Sekunden Feedback
     }
 
+
     // ===== ANCHOR OFFSET HANDLING =====
     function initAnchorOffsetHandling() {
-    // Speichern des aktuellen Hash-Werts für Vergleiche
-    let lastHash = window.location.hash;
-    
-    // Hilfsfunktion für direktes Scrollen zum Element mit Offset
+    // Funktion zum direkten Scrollen zum Element mit Offset
     function scrollToElementWithOffset(hash) {
         if (!hash) return;
         
@@ -357,56 +355,38 @@
         return totalOffset;
     }
     
-    // Funktion, die bei allen Hash-Änderungen aufgerufen wird
-    function handleHashChange() {
-        // Prüfen, ob es ein Reload ist
-        const isReload = performance.getEntriesByType('navigation').length > 0 && 
-                        performance.getEntriesByType('navigation')[0].type === 'reload';
-        
-        // Bei Reload keine Anpassung vornehmen
-        if (isReload) return;
-        
-        // Bei Hash-Änderung direkt zum Element scrollen
+    // Bei Hash-Änderungen (z.B. durch manuelle Eingabe + Enter)
+    window.addEventListener('hashchange', function(event) {
+        // Kurze Verzögerung, damit der Browser Zeit hat, zum Anker zu scrollen
+        setTimeout(() => {
+        scrollToElementWithOffset(window.location.hash);
+        }, 50);
+    });
+    
+    // Bei popstate-Events (wird bei Enter-Drücken in der Adressleiste ausgelöst)
+    window.addEventListener('popstate', function() {
         if (window.location.hash) {
-        // Warten, bis der Browser zum Anker gescrollt hat
+        // Kurze Verzögerung, damit der Browser Zeit hat, zum Anker zu scrollen
         setTimeout(() => {
             scrollToElementWithOffset(window.location.hash);
         }, 50);
         }
-        
-        // Hash für späteren Vergleich aktualisieren
-        lastHash = window.location.hash;
-    }
+    });
     
-    // Manuelles Polling für Firefox und andere Browser, die popstate nicht zuverlässig auslösen
-    function pollHashChange() {
-        if (window.location.hash !== lastHash) {
-        // Hash hat sich geändert (z.B. durch Enter in der Adressleiste)
-        handleHashChange();
-        }
-    }
-    
-    // Regelmäßiges Polling starten (alle 100ms)
-    const pollInterval = setInterval(pollHashChange, 100);
-    
-    // Event-Listener für Hash-Änderungen
-    window.addEventListener('hashchange', handleHashChange);
-    
-    // Bei initialem Laden
+    // Bei initialem Laden mit Hash
     if (window.location.hash) {
         // Prüfen, ob es ein Reload ist
         const isReload = performance.getEntriesByType('navigation').length > 0 && 
                         performance.getEntriesByType('navigation')[0].type === 'reload';
         
         if (!isReload) {
+        // Warten, bis die Seite geladen ist
         if (document.readyState === 'complete') {
-            // Sofort ausführen, wenn die Seite bereits geladen ist
             setTimeout(() => {
             scrollToElementWithOffset(window.location.hash);
             }, 50);
         } else {
-            // Warten, bis die Seite vollständig geladen ist
-            window.addEventListener('load', () => {
+            window.addEventListener('load', function() {
             setTimeout(() => {
                 scrollToElementWithOffset(window.location.hash);
             }, 50);
@@ -414,12 +394,8 @@
         }
         }
     }
-    
-    // Aufräumen beim Verlassen der Seite
-    window.addEventListener('beforeunload', () => {
-        clearInterval(pollInterval);
-    });
     }
+
 
 
     // ===== INITIALIZATION =====
