@@ -320,38 +320,21 @@
 
     // ===== ANCHOR OFFSET HANDLING =====
     function initAnchorOffsetHandling() {
-    // Flag um zu verfolgen, ob die Korrektur bereits angewendet wurde
-    let offsetCorrectionApplied = false;
-    
     // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-    function correctAnchorOffset(event) {
-        // Bei Reload-Events prüfen, ob die Korrektur bereits angewendet wurde
-        const isReload = event && event.type === 'load' && 
-        performance.getEntriesByType('navigation')[0]?.type === 'reload';
-        
-        if (isReload && offsetCorrectionApplied) {
-        return; // Keine erneute Korrektur bei Reload, wenn bereits korrigiert
-        }
-        
+    function correctAnchorOffset() {
         if (window.location.hash) {
-        // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
-        setTimeout(() => {
-            const targetElement = document.querySelector(window.location.hash);
-            if (targetElement && targetElement.closest('.tt-pricing-table')) {
+        const targetElement = document.querySelector(window.location.hash);
+        if (targetElement && targetElement.closest('.tt-pricing-table')) {
             // Offset berechnen
             const offset = calculateTotalOffset(targetElement);
             
-            // Aktuelle Position anpassen
-            const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+            // Zum Element springen und Offset berücksichtigen
+            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
             window.scrollTo({
-                top: currentPos - offset,
-                behavior: 'smooth'
+            top: elementPosition - offset,
+            behavior: 'smooth'
             });
-            
-            // Markieren, dass die Korrektur angewendet wurde
-            offsetCorrectionApplied = true;
-            }
-        }, 50);
+        }
         }
     }
 
@@ -372,23 +355,30 @@
     }
 
     // Bei Hash-Änderungen (Links, manuelle Änderungen)
-    window.addEventListener('hashchange', correctAnchorOffset);
+    window.addEventListener('hashchange', function() {
+        // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
+        setTimeout(correctAnchorOffset, 50);
+    });
     
     // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-    window.addEventListener('popstate', correctAnchorOffset);
-    
-    // Bei initialem Laden
-    if (window.location.hash) {
-        // Einmalige Korrektur nach Seitenladen
-        window.addEventListener('load', correctAnchorOffset, { once: true });
-    }
-    
-    // Zurücksetzen des Flags bei Hash-Änderungen
-    window.addEventListener('hashchange', () => {
-        offsetCorrectionApplied = false;
+    window.addEventListener('popstate', function() {
+        // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
+        setTimeout(correctAnchorOffset, 50);
     });
+    
+    // Bei initialem Laden oder Reload
+    if (window.location.hash) {
+        if (document.readyState === 'complete') {
+        // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
+        setTimeout(correctAnchorOffset, 50);
+        } else {
+        window.addEventListener('load', function() {
+            // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
+            setTimeout(correctAnchorOffset, 50);
+        }, { once: true });
+        }
     }
-
+    }
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
