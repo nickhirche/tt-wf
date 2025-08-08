@@ -321,67 +321,72 @@
 
     // ===== ANCHOR OFFSET HANDLING =====
     function initAnchorOffsetHandling() {
-    // Funktion zum direkten Scrollen zum Element mit Offset
-    function scrollToElementWithOffset(hash) {
-        if (!hash) return;
-        
-        const targetElement = document.querySelector(hash);
-        if (!targetElement || !targetElement.closest('.tt-pricing-table')) return;
-        
-        // Offset berechnen
-        const offset = calculateTotalOffset(targetElement);
-        
-        // Zum Element scrollen mit Berücksichtigung des Offsets
-        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-        window.scrollTo({
-        top: elementPosition - offset,
-        behavior: 'smooth'
-        });
-    }
+    // Globale Variable, um zu verfolgen, ob wir gerade scrollen
+    let isAdjustingScroll = false;
     
-    // Funktion zur Berechnung des gesamten Offsets
-    function calculateTotalOffset(targetElement) {
-        let totalOffset = 0;
+    // Funktion zum Anpassen der Scroll-Position
+    function adjustScrollForAnchor() {
+        // Wenn kein Hash vorhanden ist oder wir bereits scrollen, nichts tun
+        if (!window.location.hash || isAdjustingScroll) return;
         
-        // 1. Höhe des Table-Head
-        const tableHead = document.querySelector('.tt-pricing-table-head');
-        if (tableHead) {
-        totalOffset += tableHead.offsetHeight;
-        }
-        
-        // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
-        totalOffset += 20;
-        
-        return totalOffset;
-    }
-    
-    // Bei Hash-Änderungen (funktioniert in Chrome gut)
-    window.addEventListener('hashchange', function() {
-        setTimeout(() => {
-        scrollToElementWithOffset(window.location.hash);
-        }, 50);
-    });
-    
-    // Bei initialem Laden mit Hash
-    if (window.location.hash) {
         // Prüfen, ob es ein Reload ist
         const isReload = performance.getEntriesByType('navigation').length > 0 && 
                         performance.getEntriesByType('navigation')[0].type === 'reload';
         
-        if (!isReload) {
-        // Warten, bis die Seite geladen ist
+        // Bei Reload nichts tun
+        if (isReload) return;
+        
+        const targetElement = document.querySelector(window.location.hash);
+        if (!targetElement || !targetElement.closest('.tt-pricing-table')) return;
+        
+        // Flag setzen, dass wir gerade scrollen
+        isAdjustingScroll = true;
+        
+        // Offset berechnen
+        let offset = 0;
+        const tableHead = document.querySelector('.tt-pricing-table-head');
+        if (tableHead) {
+        offset += tableHead.offsetHeight;
+        }
+        offset += 20; // Zusätzlicher Abstand
+        
+        // Zum Element scrollen mit Offset
+        setTimeout(() => {
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+            top: elementPosition - offset,
+            behavior: 'smooth'
+        });
+        
+        // Nach dem Scrollen das Flag zurücksetzen
+        setTimeout(() => {
+            isAdjustingScroll = false;
+        }, 100);
+        }, 50);
+    }
+    
+    // Direkte Event-Handler für alle relevanten Events
+    
+    // 1. Bei Hash-Änderungen (z.B. durch Klick auf einen Link)
+    window.addEventListener('hashchange', adjustScrollForAnchor);
+    
+    // 2. Bei Enter-Drücken in der Adressleiste (funktioniert in Chrome)
+    window.addEventListener('popstate', adjustScrollForAnchor);
+    
+    // 3. Bei initialem Laden mit Hash
+    if (window.location.hash) {
+        // Wenn die Seite bereits geladen ist
         if (document.readyState === 'complete') {
-            setTimeout(() => {
-            scrollToElementWithOffset(window.location.hash);
-            }, 50);
+        adjustScrollForAnchor();
         } else {
-            window.addEventListener('load', function() {
-            setTimeout(() => {
-                scrollToElementWithOffset(window.location.hash);
-            }, 50);
-            }, { once: true });
+        // Wenn die Seite noch lädt
+        window.addEventListener('load', adjustScrollForAnchor, { once: true });
         }
-        }
+    }
+    
+    // 4. Zusätzlicher Event-Listener für DOMContentLoaded (früher als 'load')
+    if (window.location.hash) {
+        document.addEventListener('DOMContentLoaded', adjustScrollForAnchor, { once: true });
     }
     }
 
