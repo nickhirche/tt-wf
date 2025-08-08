@@ -320,24 +320,27 @@
 
     // ===== ANCHOR OFFSET HANDLING =====
     function initAnchorOffsetHandling() {
-    // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-    function correctAnchorOffset() {
-        if (window.location.hash) {
-        const targetElement = document.querySelector(window.location.hash);
-        if (targetElement && targetElement.closest('.tt-pricing-table')) {
-            // Offset berechnen
-            const offset = calculateTotalOffset(targetElement);
-            
-            // Zum Element springen und Offset berücksichtigen
-            const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            window.scrollTo({
-            top: elementPosition - offset,
-            behavior: 'smooth'
-            });
-        }
-        }
+    // Speichern des aktuellen Hash-Werts für Vergleiche
+    let lastHash = window.location.hash;
+    
+    // Hilfsfunktion für direktes Scrollen zum Element mit Offset
+    function scrollToElementWithOffset(hash) {
+        if (!hash) return;
+        
+        const targetElement = document.querySelector(hash);
+        if (!targetElement || !targetElement.closest('.tt-pricing-table')) return;
+        
+        // Offset berechnen
+        const offset = calculateTotalOffset(targetElement);
+        
+        // Zum Element scrollen mit Berücksichtigung des Offsets
+        const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        window.scrollTo({
+        top: elementPosition - offset,
+        behavior: 'smooth'
+        });
     }
-
+    
     // Funktion zur Berechnung des gesamten Offsets
     function calculateTotalOffset(targetElement) {
         let totalOffset = 0;
@@ -353,32 +356,71 @@
         
         return totalOffset;
     }
-
-    // Bei Hash-Änderungen (Links, manuelle Änderungen)
-    window.addEventListener('hashchange', function() {
-        // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
-        setTimeout(correctAnchorOffset, 50);
-    });
     
-    // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-    window.addEventListener('popstate', function() {
-        // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
-        setTimeout(correctAnchorOffset, 50);
-    });
+    // Funktion, die bei allen Hash-Änderungen aufgerufen wird
+    function handleHashChange() {
+        // Prüfen, ob es ein Reload ist
+        const isReload = performance.getEntriesByType('navigation').length > 0 && 
+                        performance.getEntriesByType('navigation')[0].type === 'reload';
+        
+        // Bei Reload keine Anpassung vornehmen
+        if (isReload) return;
+        
+        // Bei Hash-Änderung direkt zum Element scrollen
+        if (window.location.hash) {
+        // Warten, bis der Browser zum Anker gescrollt hat
+        setTimeout(() => {
+            scrollToElementWithOffset(window.location.hash);
+        }, 50);
+        }
+        
+        // Hash für späteren Vergleich aktualisieren
+        lastHash = window.location.hash;
+    }
     
-    // Bei initialem Laden oder Reload
-    if (window.location.hash) {
-        if (document.readyState === 'complete') {
-        // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
-        setTimeout(correctAnchorOffset, 50);
-        } else {
-        window.addEventListener('load', function() {
-            // Kurze Verzögerung, damit der Browser zuerst zum Anker springen kann
-            setTimeout(correctAnchorOffset, 50);
-        }, { once: true });
+    // Manuelles Polling für Firefox und andere Browser, die popstate nicht zuverlässig auslösen
+    function pollHashChange() {
+        if (window.location.hash !== lastHash) {
+        // Hash hat sich geändert (z.B. durch Enter in der Adressleiste)
+        handleHashChange();
         }
     }
+    
+    // Regelmäßiges Polling starten (alle 100ms)
+    const pollInterval = setInterval(pollHashChange, 100);
+    
+    // Event-Listener für Hash-Änderungen
+    window.addEventListener('hashchange', handleHashChange);
+    
+    // Bei initialem Laden
+    if (window.location.hash) {
+        // Prüfen, ob es ein Reload ist
+        const isReload = performance.getEntriesByType('navigation').length > 0 && 
+                        performance.getEntriesByType('navigation')[0].type === 'reload';
+        
+        if (!isReload) {
+        if (document.readyState === 'complete') {
+            // Sofort ausführen, wenn die Seite bereits geladen ist
+            setTimeout(() => {
+            scrollToElementWithOffset(window.location.hash);
+            }, 50);
+        } else {
+            // Warten, bis die Seite vollständig geladen ist
+            window.addEventListener('load', () => {
+            setTimeout(() => {
+                scrollToElementWithOffset(window.location.hash);
+            }, 50);
+            }, { once: true });
+        }
+        }
     }
+    
+    // Aufräumen beim Verlassen der Seite
+    window.addEventListener('beforeunload', () => {
+        clearInterval(pollInterval);
+    });
+    }
+
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
