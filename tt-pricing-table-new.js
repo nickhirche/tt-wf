@@ -321,9 +321,12 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
+        // Flag, um zu verfolgen, ob wir bereits einen Offset angewendet haben
+        let hasAppliedOffset = false;
+        
         // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
         function correctAnchorOffset() {
-            if (window.location.hash) {
+            if (window.location.hash && !hasAppliedOffset) {
                 // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
                 setTimeout(() => {
                     const targetElement = document.querySelector(window.location.hash);
@@ -335,10 +338,13 @@
                         const currentPos = window.pageYOffset || document.documentElement.scrollTop;
                         window.scrollTo({
                             top: currentPos - offset,
-                            behavior: 'smooth'  // Du könntest auch 'auto' verwenden für sofortiges Scrollen
+                            behavior: 'smooth'
                         });
+                        
+                        // Flag setzen, dass wir den Offset angewendet haben
+                        hasAppliedOffset = true;
                     }
-                }, 50); // Reduzierte Verzögerung auf 50ms
+                }, 50);
             }
         }
         
@@ -365,12 +371,17 @@
             window.addEventListener('load', correctAnchorOffset);
         }
         
-        // Bei Hash-Änderungen
-        window.addEventListener('hashchange', correctAnchorOffset);
+        // Bei Hash-Änderungen (Links, manuelle Änderungen)
+        window.addEventListener('hashchange', () => {
+            hasAppliedOffset = false; // Reset Flag bei Hash-Änderung
+            correctAnchorOffset();
+        });
         
         // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', correctAnchorOffset);
-        
+        window.addEventListener('popstate', () => {
+            hasAppliedOffset = false; // Reset Flag bei Popstate
+            correctAnchorOffset();
+        });
     }
 
     // ===== INITIALIZATION =====
