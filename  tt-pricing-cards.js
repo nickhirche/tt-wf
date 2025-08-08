@@ -1,53 +1,72 @@
 // Tiptap Pricing Cards System
 (function() {
-    // Hauptinitialisierungsfunktion
+    /**
+     * Initialisiert das Pricing Cards System.
+     * - Setzt Event-Listener auf das billingPeriodChanged Event.
+     * - Initialisiert die Anzeige nach aktuellem Tab-Status.
+     * - Setzt Listener auf alle Dropdowns innerhalb der Pricing Cards.
+     */
     function initPricingCardsSystem() {
-        // Event-Listener für Billing-Period-Änderungen
+        // Reaktion auf Wechsel der Abrechnungsperiode (z.B. TabMenu)
         document.addEventListener('billingPeriodChanged', function(event) {
             const activePeriod = event.detail.period;
             updatePricingCardsDisplay(activePeriod);
         });
 
-        // Initialisierung mit dem aktuellen Wert
+        // Initiale Anzeige (z.B. bei Page Load)
         const initialPeriod = getInitialBillingPeriod();
         updatePricingCardsDisplay(initialPeriod);
 
-        // Dropdown-Änderungen überwachen
+        // Event-Listener für alle Dropdowns in Cards setzen
         initDocumentDropdowns();
+        
+        // Debug-Ausgabe für Entwicklung
+        console.log('Tiptap Pricing Cards System initialisiert. Aktive Periode:', initialPeriod);
     }
 
-    // Ermittelt die aktuelle Abrechnungsperiode
+    /**
+     * Liest die aktuell ausgewählte Billing Periode aus den Tabs.
+     * Fällt auf 'monthly' zurück, falls kein aktiver Tab gefunden.
+     */
     function getInitialBillingPeriod() {
         const activeButton = document.querySelector('.tt-billing-tab-btn.active, .tt-billing-tab-btn.is-active');
         if (activeButton) {
             return activeButton.getAttribute('data-billing-period');
         }
-        return 'monthly'; // Default
+        return 'monthly'; // Default-Fallback
     }
 
-    // Aktualisiert die Anzeige der Pricing Cards basierend auf der aktiven Abrechnungsperiode
+    /**
+     * Aktualisiert alle Pricing Cards für die gewählte Abrechnungsperiode.
+     * - Preise und Features werden entsprechend angepasst.
+     * - Periodenspezifische Bereiche werden ein-/ausgeblendet.
+     */
     function updatePricingCardsDisplay(activePeriod) {
-        // Alle Pricing Cards durchgehen
         document.querySelectorAll('.tt-pricing-card').forEach(card => {
-            // Preise aktualisieren
             updateCardPrices(card, activePeriod);
-            
-            // Sichtbarkeit der periodenspezifischen Elemente aktualisieren
             updatePeriodVisibility(card, activePeriod);
         });
     }
 
-    // Aktualisiert die Preise in einer Pricing Card
+    /**
+     * Aktualisiert die Preisanzeige einer einzelnen Pricing Card.
+     * - Holt den Wert aus dem aktiven Dropdown (falls vorhanden).
+     * - Setzt die Preise im .price-value Element.
+     * - Aktualisiert ggf. den Jahresgesamtpreis.
+     */
     function updateCardPrices(card, activePeriod) {
-        // Preis-Element finden
-        const priceElement = card.querySelector('.price-value');
+        // Hauptpreis-Element innerhalb von tt-price-wrap suchen
+        const priceWrap = card.querySelector(`[data-billing-period="${activePeriod}"].tt-price-wrap`);
+        if (!priceWrap) return;
+        
+        const priceElement = priceWrap.querySelector('.price-value');
         if (!priceElement) return;
 
-        // Dropdown finden, falls vorhanden
+        // Dropdown innerhalb der Card suchen
         const dropdown = card.querySelector('.document-dropdown select');
         
         if (dropdown) {
-            // Wenn ein Dropdown vorhanden ist, den Preis aus der ausgewählten Option nehmen
+            // Preis aus ausgewählter Option im Dropdown holen
             const selectedOption = dropdown.options[dropdown.selectedIndex];
             if (selectedOption) {
                 const price = activePeriod === 'yearly' 
@@ -58,17 +77,19 @@
                     priceElement.textContent = price;
                 }
 
-                // Jahresgesamtpreis aktualisieren, falls vorhanden
-                const yearlyTotalElement = card.querySelector('.price-value-yearly');
-                if (yearlyTotalElement && activePeriod === 'yearly') {
-                    const yearlyTotal = selectedOption.getAttribute('data-price-yearly-total');
-                    if (yearlyTotal) {
-                        yearlyTotalElement.textContent = yearlyTotal;
-                    }
+                // Jahresgesamtpreis nur für 'yearly'-Period setzen
+                if (activePeriod === 'yearly') {
+                    const yearlyTotalElements = priceWrap.querySelectorAll('.price-value-yearly');
+                    yearlyTotalElements.forEach(yearlyTotalElement => {
+                        const yearlyTotal = selectedOption.getAttribute('data-price-yearly-total');
+                        if (yearlyTotal) {
+                            yearlyTotalElement.textContent = yearlyTotal;
+                        }
+                    });
                 }
             }
         } else {
-            // Wenn kein Dropdown vorhanden ist, direkt die Attribute des Preis-Elements verwenden
+            // Ohne Dropdown: Preis aus data-Attributen des Preis-Elements
             const priceMonthly = priceElement.getAttribute('data-price-monthly');
             const priceYearly = priceElement.getAttribute('data-price-yearly');
             
@@ -76,20 +97,37 @@
                 priceElement.textContent = activePeriod === 'yearly' ? priceYearly : priceMonthly;
             }
             
-            // Jahresgesamtpreis aktualisieren, falls vorhanden
-            const yearlyTotalElement = card.querySelector('.price-value-yearly');
-            if (yearlyTotalElement && activePeriod === 'yearly') {
-                const yearlyTotal = yearlyTotalElement.getAttribute('data-price-yearly-total');
-                if (yearlyTotal) {
-                    yearlyTotalElement.textContent = yearlyTotal;
-                }
+            // Jahresgesamtpreis nur für 'yearly'-Period setzen
+            if (activePeriod === 'yearly') {
+                const yearlyTotalElements = priceWrap.querySelectorAll('.price-value-yearly');
+                yearlyTotalElements.forEach(yearlyTotalElement => {
+                    const yearlyTotal = yearlyTotalElement.getAttribute('data-price-yearly-total');
+                    if (yearlyTotal) {
+                        yearlyTotalElement.textContent = yearlyTotal;
+                    }
+                });
             }
         }
     }
 
-    // Aktualisiert die Sichtbarkeit der periodenspezifischen Elemente
+    /**
+     * Zeigt/Versteckt periodenspezifische Bereiche innerhalb der Card.
+     * - Elemente mit data-subscription-period='monthly' bzw. 'yearly'
+     *   bekommen 'inactive' je nach Auswahl.
+     */
     function updatePeriodVisibility(card, activePeriod) {
-        // Monatliche Elemente
+        // Alle tt-price-wrap Elemente in der Card
+        const priceWraps = card.querySelectorAll('.tt-price-wrap');
+        priceWraps.forEach(wrap => {
+            const wrapPeriod = wrap.getAttribute('data-billing-period');
+            if (wrapPeriod === activePeriod) {
+                wrap.classList.remove('inactive');
+            } else {
+                wrap.classList.add('inactive');
+            }
+        });
+
+        // Monatlich-Bereiche
         card.querySelectorAll('[data-subscription-period="monthly"]').forEach(el => {
             if (activePeriod === 'monthly') {
                 el.classList.remove('inactive');
@@ -98,7 +136,7 @@
             }
         });
 
-        // Jährliche Elemente
+        // Jährlich-Bereiche
         card.querySelectorAll('[data-subscription-period="yearly"]').forEach(el => {
             if (activePeriod === 'yearly') {
                 el.classList.remove('inactive');
@@ -108,73 +146,62 @@
         });
     }
 
-    // Initialisiert die Dropdown-Funktionalität für Dokument-Vergleiche
+    /**
+     * Initialisiert die Dropdown-Vergleichslogik:
+     * - Setzt Change-Listener auf alle .document-dropdown selects in Cards.
+     * - Synchronisiert beim Wechsel alle anderen Vergleichs-Cards auf den gleichen Wert.
+     */
     function initDocumentDropdowns() {
-        // Alle Dropdowns finden
         document.querySelectorAll('.tt-pricing-card .document-dropdown select').forEach(select => {
-            // Change-Event-Listener hinzufügen
             select.addEventListener('change', function() {
-                // Aktuelle Abrechnungsperiode ermitteln
+                // Aktive Periode holen
                 const activePeriod = getInitialBillingPeriod();
-                
-                // Die zugehörige Card finden
+                // Zugehörige Card finden
                 const card = this.closest('.tt-pricing-card');
                 if (!card) return;
-                
-                // Preise in der Card aktualisieren
+                // Preise aktualisieren
                 updateCardPrices(card, activePeriod);
+                // Vergleichssynchronisation auslösen
+                syncComparisonCards(card);
                 
-                // Wenn diese Card zum Vergleich markiert ist, alle anderen Vergleichs-Cards aktualisieren
-                if (card.querySelector('.document-dropdown') || card.hasAttribute('data-document-comparison')) {
-                    syncComparisonCards(card);
-                }
+                // Debug-Ausgabe
+                console.log('Dropdown geändert:', this.value, 'Aktive Periode:', activePeriod);
             });
         });
     }
 
-    // Synchronisiert alle Vergleichs-Cards
+    /**
+     * Synchronisiert alle Cards, die ein Dropdown besitzen:
+     * - Sucht alle .tt-pricing-card .document-dropdown selects.
+     * - Setzt in allen (außer der geänderten Card) den gleichen Wert wie im geänderten Dropdown.
+     */
     function syncComparisonCards(changedCard) {
-        // Alle Cards mit Dropdown oder data-document-comparison Attribut finden
-        const comparisonCards = document.querySelectorAll('.tt-pricing-card .document-dropdown, .tt-pricing-card[data-document-comparison="true"]');
-        
-        // Wenn es weniger als 2 Cards gibt, nichts tun
-        if (comparisonCards.length < 2) return;
-        
-        // Die geänderte Card identifizieren
+        // Alle Dropdown-Selects in Cards finden
+        const comparisonDropdowns = document.querySelectorAll('.tt-pricing-card .document-dropdown select');
+        if (comparisonDropdowns.length < 2) return; // Mindestens zwei für Vergleich nötig
+
+        // Geändertes Dropdown holen
         const changedDropdown = changedCard.querySelector('.document-dropdown select');
         if (!changedDropdown) return;
-        
-        // Den ausgewählten Wert aus der geänderten Card holen
         const selectedValue = changedDropdown.value;
-        
-        // Alle anderen Vergleichs-Cards aktualisieren
-        comparisonCards.forEach(comparisonElement => {
-            // Die zugehörige Card finden
-            const card = comparisonElement.closest('.tt-pricing-card');
+
+        // Restliche Dropdowns synchronisieren
+        comparisonDropdowns.forEach(dropdown => {
+            const card = dropdown.closest('.tt-pricing-card');
             if (!card || card === changedCard) return;
-            
-            // Das Dropdown in dieser Card finden
-            const dropdown = card.querySelector('.document-dropdown select');
-            if (!dropdown) return;
-            
-            // Den gleichen Wert auswählen wie in der geänderten Card
+
+            // Nur synchronisieren, wenn Option existiert und Wert unterschiedlich
             if (dropdown.value !== selectedValue) {
-                // Prüfen, ob die Option existiert
                 const optionExists = Array.from(dropdown.options).some(option => option.value === selectedValue);
-                
                 if (optionExists) {
                     dropdown.value = selectedValue;
-                    
-                    // Ein Change-Event auslösen, um die Preise zu aktualisieren
-                    const event = new Event('change');
-                    dropdown.dispatchEvent(event);
+                    dropdown.dispatchEvent(new Event('change'));
                 }
             }
         });
     }
 
-    // ===== INITIALIZATION =====
-    // Warten, bis das DOM vollständig geladen ist
+    // Initialisierung nach DOM-Load
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initPricingCardsSystem);
     } else {
