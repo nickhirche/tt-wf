@@ -321,8 +321,8 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-        function correctAnchorOffset() {
+        // Hilfsfunktion, die den Anker-Sprung vollständig übernimmt
+        function handleAnchorJump() {
             if (window.location.hash) {
                 // Das Element mit der ID finden
                 const targetElement = document.querySelector(window.location.hash);
@@ -330,12 +330,22 @@
                     // Offset berechnen
                     const offset = calculateTotalOffset(targetElement);
                     
-                    // Aktuelle Position anpassen
-                    const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+                    // Position des Elements ermitteln
+                    const elementPos = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    // Zu der Position scrollen, abzüglich des Offsets
                     window.scrollTo({
-                        top: currentPos - offset,
+                        top: elementPos - offset,
                         behavior: 'smooth'
                     });
+                    
+                    // Standard-Sprung verhindern
+                    if (history.replaceState) {
+                        history.replaceState(null, null, window.location.pathname + window.location.search);
+                        setTimeout(() => {
+                            history.replaceState(null, null, window.location.pathname + window.location.search + window.location.hash);
+                        }, 0);
+                    }
                 }
             }
         }
@@ -356,28 +366,24 @@
             return totalOffset;
         }
         
-        // Verzögerte Ausführung, um dem Browser Zeit zu geben, zum Anker zu scrollen
-        function delayedCorrection() {
-            setTimeout(correctAnchorOffset, 50);
-        }
-        
         // Bei allen relevanten Ereignissen ausführen
         
         // 1. Bei initialem Laden oder Reload
         if (window.location.hash) {
             if (document.readyState === 'complete') {
-                delayedCorrection();
+                handleAnchorJump();
             } else {
-                window.addEventListener('load', delayedCorrection);
+                window.addEventListener('load', handleAnchorJump);
             }
         }
         
         // 2. Bei Hash-Änderungen (Links, manuelle Änderungen)
-        window.addEventListener('hashchange', delayedCorrection);
+        window.addEventListener('hashchange', handleAnchorJump);
         
         // 3. Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', delayedCorrection);
+        window.addEventListener('popstate', handleAnchorJump);
     }
+
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
