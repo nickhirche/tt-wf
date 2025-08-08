@@ -319,74 +319,76 @@
     }
 
     // ===== ANCHOR OFFSET HANDLING =====
-    // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-        function correctAnchorOffset() {
-            if (window.location.hash) {
-                // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
-                setTimeout(() => {
-                    const targetElement = document.querySelector(window.location.hash);
-                    if (targetElement && targetElement.closest('.tt-pricing-table')) {
-                        // Offset berechnen
-                        const offset = calculateTotalOffset(targetElement);
-                        
-                        // Aktuelle Position anpassen
-                        const currentPos = window.pageYOffset || document.documentElement.scrollTop;
-                        window.scrollTo({
-                            top: currentPos - offset,
-                            behavior: 'smooth'
-                        });
-                    }
-                }, 50);
-            }
+    // Flag um zu verfolgen, ob die Korrektur bereits angewendet wurde
+    let offsetCorrectionApplied = false;
+    
+    // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
+    function correctAnchorOffset(event) {
+        // Bei Reload-Events prüfen, ob die Korrektur bereits angewendet wurde
+        const isReload = event && event.type === 'load' && 
+        performance.getEntriesByType('navigation')[0]?.type === 'reload';
+        
+        if (isReload && offsetCorrectionApplied) {
+        return; // Keine erneute Korrektur bei Reload, wenn bereits korrigiert
         }
         
-        // Funktion zur Berechnung des gesamten Offsets
-        function calculateTotalOffset(targetElement) {
-            let totalOffset = 0;
-            
-            // 1. Höhe des Table-Head
-            const tableHead = document.querySelector('.tt-pricing-table-head');
-            if (tableHead) {
-                totalOffset += tableHead.offsetHeight;
-            }
-            
-            // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
-            totalOffset += 20;
-            
-            return totalOffset;
-        }
-        
-        // Bei Hash-Änderungen (Links, manuelle Änderungen, Enter in URL)
-        window.addEventListener('hashchange', correctAnchorOffset);
-        
-        // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', correctAnchorOffset);
-        
-        // Bei initialem Laden
         if (window.location.hash) {
-            if (document.readyState === 'complete') {
-                correctAnchorOffset();
-            } else {
-                window.addEventListener('load', correctAnchorOffset, { once: true });
+        // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
+        setTimeout(() => {
+            const targetElement = document.querySelector(window.location.hash);
+            if (targetElement && targetElement.closest('.tt-pricing-table')) {
+            // Offset berechnen
+            const offset = calculateTotalOffset(targetElement);
+            
+            // Aktuelle Position anpassen
+            const currentPos = window.pageYOffset || document.documentElement.scrollTop;
+            window.scrollTo({
+                top: currentPos - offset,
+                behavior: 'smooth'
+            });
+            
+            // Markieren, dass die Korrektur angewendet wurde
+            offsetCorrectionApplied = true;
             }
-        }
-        
-        // Prüfen, ob es sich um ein Reload handelt und ggf. manuell ein popstate-Event auslösen
-        if (performance && performance.getEntriesByType && performance.getEntriesByType('navigation').length > 0) {
-            if (performance.getEntriesByType('navigation')[0].type === 'reload' && window.location.hash) {
-                // Bei einem Reload mit Hash manuell ein popstate-Event auslösen
-                window.addEventListener('load', () => {
-                    // Kurze Verzögerung, um sicherzustellen, dass der Browser zuerst zum Anker scrollt
-                    setTimeout(() => {
-                        // Manuell ein popstate-Event auslösen
-                        window.dispatchEvent(new Event('popstate'));
-                    }, 0);
-                });
-            }
+        }, 50);
         }
     }
+
+    // Funktion zur Berechnung des gesamten Offsets
+    function calculateTotalOffset(targetElement) {
+        let totalOffset = 0;
+        
+        // 1. Höhe des Table-Head
+        const tableHead = document.querySelector('.tt-pricing-table-head');
+        if (tableHead) {
+        totalOffset += tableHead.offsetHeight;
+        }
+        
+        // 2. Zusätzlicher Abstand für bessere Sichtbarkeit
+        totalOffset += 20;
+        
+        return totalOffset;
+    }
+
+    // Bei Hash-Änderungen (Links, manuelle Änderungen)
+    window.addEventListener('hashchange', correctAnchorOffset);
+    
+    // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
+    window.addEventListener('popstate', correctAnchorOffset);
+    
+    // Bei initialem Laden
+    if (window.location.hash) {
+        // Einmalige Korrektur nach Seitenladen
+        window.addEventListener('load', correctAnchorOffset, { once: true });
+    }
+    
+    // Zurücksetzen des Flags bei Hash-Änderungen
+    window.addEventListener('hashchange', () => {
+        offsetCorrectionApplied = false;
+    });
+    }
+
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
