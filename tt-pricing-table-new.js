@@ -321,17 +321,9 @@
     // ===== ANCHOR OFFSET HANDLING =====
     // Funktion für das Handling von Anker-Sprüngen
     function initAnchorOffsetHandling() {
-        // Flag, um zu verfolgen, ob wir bereits einen Offset angewendet haben
-        let hasAppliedOffset = false;
-        
         // Hilfsfunktion, die den Offset nach dem Standard-Sprung korrigiert
-        function correctAnchorOffset(isReload = false) {
+        function correctAnchorOffset() {
             if (window.location.hash) {
-                // Bei Reload: Nur ausführen, wenn wir noch keinen Offset angewendet haben
-                if (isReload && hasAppliedOffset) {
-                    return;
-                }
-                
                 // Minimale Verzögerung, damit der Browser zuerst zum Anker springen kann
                 setTimeout(() => {
                     const targetElement = document.querySelector(window.location.hash);
@@ -343,13 +335,10 @@
                         const currentPos = window.pageYOffset || document.documentElement.scrollTop;
                         window.scrollTo({
                             top: currentPos - offset,
-                            behavior: 'auto'
+                            behavior: 'smooth'  // Du könntest auch 'auto' verwenden für sofortiges Scrollen
                         });
-                        
-                        // Flag setzen, dass wir den Offset angewendet haben
-                        hasAppliedOffset = true;
                     }
-                }, 50);
+                }, 50); // Reduzierte Verzögerung auf 50ms
             }
         }
         
@@ -371,51 +360,18 @@
         
         // Bei initialem Laden
         if (document.readyState === 'complete') {
-            correctAnchorOffset(false); // Kein Reload
+            correctAnchorOffset();
         } else {
-            window.addEventListener('load', () => correctAnchorOffset(false)); // Kein Reload
+            window.addEventListener('load', correctAnchorOffset);
         }
         
-        // Bei Hash-Änderungen (Links, manuelle Änderungen)
-        window.addEventListener('hashchange', () => {
-            hasAppliedOffset = false; // Reset Flag bei Hash-Änderung
-            correctAnchorOffset(false);
-        });
+        // Bei Hash-Änderungen
+        window.addEventListener('hashchange', correctAnchorOffset);
         
         // Bei Popstate-Ereignissen (z.B. Enter in der URL-Leiste)
-        window.addEventListener('popstate', () => {
-            hasAppliedOffset = false; // Reset Flag bei Popstate
-            correctAnchorOffset(false);
-        });
+        window.addEventListener('popstate', correctAnchorOffset);
         
-        // Performance API nutzen, um Reload zu erkennen
-        const navEntries = performance.getEntriesByType('navigation');
-        if (navEntries.length > 0 && navEntries[0].type === 'reload') {
-            // Es ist ein Reload - Flag setzen, damit wir den Offset nur einmal anwenden
-            correctAnchorOffset(true);
-        }
-        
-        // Bei Resize nur ausführen, wenn sich die Header-Höhe ändert
-        let lastHeaderHeight = 0;
-        const tableHead = document.querySelector('.tt-pricing-table-head');
-        if (tableHead) {
-            lastHeaderHeight = tableHead.offsetHeight;
-        }
-        
-        window.addEventListener('resize', function() {
-            clearTimeout(window.resizeTimer);
-            window.resizeTimer = setTimeout(function() {
-                // Nur ausführen, wenn sich die Header-Höhe geändert hat
-                const tableHead = document.querySelector('.tt-pricing-table-head');
-                if (tableHead && tableHead.offsetHeight !== lastHeaderHeight) {
-                    lastHeaderHeight = tableHead.offsetHeight;
-                    hasAppliedOffset = false; // Reset Flag, da sich die Höhe geändert hat
-                    correctAnchorOffset(false);
-                }
-            }, 250);
-        });
     }
-
 
     // ===== INITIALIZATION =====
     // Warten, bis das DOM vollständig geladen ist
