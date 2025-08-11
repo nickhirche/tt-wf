@@ -785,11 +785,15 @@ document.addEventListener("DOMContentLoaded", function() {
         console.log('Offset:', faqOffset);
         console.log('Final position:', targetPosition - faqOffset);
         
-        // Force scroll with offset
-        window.scrollTo({
-          top: targetPosition - faqOffset,
-          behavior: 'smooth'
-        });
+        // Try to ensure we override any default browser behavior
+        // by using setTimeout with a small delay
+        setTimeout(() => {
+          // Force scroll with offset
+          window.scrollTo({
+            top: targetPosition - faqOffset,
+            behavior: 'smooth'
+          });
+        }, 10);
       }
     }
 
