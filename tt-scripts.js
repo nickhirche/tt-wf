@@ -727,22 +727,36 @@ document.addEventListener("DOMContentLoaded", function() {
     const categoriesElement = document.querySelector('.tt-faq-categories');
     let faqOffset;
     
-    if (categoriesElement) {
-      const topStyle = window.getComputedStyle(categoriesElement).top;
+    // Function to calculate the offset based on screen width
+    function calculateOffset() {
+      // Check if we're on mobile/tablet (991px or less)
+      const isMobile = window.innerWidth <= 991;
       
-      // Check if the value is in rem
-      if (topStyle.endsWith('rem')) {
-        // Convert rem to pixels by multiplying with the font-size of the root element
-        const remValue = parseFloat(topStyle);
-        faqOffset = remValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
+      if (categoriesElement) {
+        const topStyle = window.getComputedStyle(categoriesElement).top;
+        
+        // Check if the value is in rem
+        if (topStyle.endsWith('rem')) {
+          // Convert rem to pixels by multiplying with the font-size of the root element
+          const remValue = parseFloat(topStyle);
+          const baseOffset = remValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
+          
+          // Use different offset for mobile devices
+          return isMobile ? 80 : baseOffset; // Use 80px for mobile or adjust as needed
+        } else {
+          // Try to parse as pixels or other units
+          const baseOffset = parseInt(topStyle);
+          return isMobile ? 80 : baseOffset; // Use 80px for mobile or adjust as needed
+        }
       } else {
-        // Try to parse as pixels or other units
-        faqOffset = parseInt(topStyle);
+        // Fallback
+        const baseOffset = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        return isMobile ? 80 : baseOffset; // Use 80px for mobile or adjust as needed
       }
-    } else {
-      // Fallback to 5rem
-      faqOffset = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
     }
+    
+    // Initial calculation
+    faqOffset = calculateOffset();
 
     const faqViewportThreshold = window.innerHeight * 0.2; // 20% of the viewport height
     const faqTabButtons = document.querySelectorAll('.tt-faq-tab-btn');
@@ -758,6 +772,11 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
+    // Recalculate offset on window resize
+    window.addEventListener('resize', function() {
+      faqOffset = calculateOffset();
+    });
+    
     // Handle tab button clicks with custom scroll behavior
     faqTabButtons.forEach((button) => {
       // Remove the href attribute but store its value
