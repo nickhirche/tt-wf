@@ -110,6 +110,7 @@
      * Zeigt/Versteckt periodenspezifische Bereiche innerhalb der Card.
      * - Elemente mit data-subscription-period='monthly' bzw. 'yearly'
      *   bekommen 'inactive' je nach Auswahl.
+     * - Diese Funktion ist unabhängig vom 'inactive' Status der gesamten Card.
      */
     function updatePeriodVisibility(card, activePeriod) {
         // Monatlich-Bereiche
@@ -154,46 +155,53 @@
     }
 
     /**
-     * Vergleicht die numerischen Werte aller Dropdowns und markiert Cards als inaktiv,
-     * wenn ihr Wert nicht gleich oder größer als der Wert einer anderen Card ist.
+     * Vergleicht die Werte aller Dropdowns und markiert Cards als inaktiv,
+     * wenn ihr maximaler Wert kleiner ist als der aktuell ausgewählte Wert einer anderen Card.
      */
     function compareCardValues() {
         // Alle Cards mit Dropdowns sammeln
         const cardsWithDropdowns = document.querySelectorAll('.tt-pricing-card .document-dropdown');
         if (cardsWithDropdowns.length < 2) return; // Mindestens 2 für Vergleich nötig
         
-        // Werte und Cards sammeln
-        const cardValues = [];
+        // Aktuelle Werte und maximale Werte für jede Card sammeln
+        const cardInfo = [];
         cardsWithDropdowns.forEach(dropdownContainer => {
             const card = dropdownContainer.closest('.tt-pricing-card');
             const dropdown = dropdownContainer.querySelector('select');
             if (!card || !dropdown) return;
             
+            // Aktuell ausgewählten Wert ermitteln
             const selectedOption = dropdown.options[dropdown.selectedIndex];
             if (!selectedOption) return;
+            const currentValue = parseFloat(selectedOption.value) || 0;
             
-            // Numerischen Wert aus value extrahieren
-            const value = selectedOption.value;
-            const numericValue = parseFloat(value) || 0; // Falls value keine Zahl ist, 0 verwenden
+            // Maximalen Wert im Dropdown ermitteln
+            let maxValue = 0;
+            Array.from(dropdown.options).forEach(option => {
+                const value = parseFloat(option.value) || 0;
+                if (value > maxValue) maxValue = value;
+            });
             
-            cardValues.push({
+            cardInfo.push({
                 card: card,
-                value: numericValue
+                currentValue: currentValue,
+                maxValue: maxValue
             });
         });
         
-        // Für jede Card prüfen, ob es eine andere Card mit gleichem oder größerem Wert gibt
-        cardValues.forEach(currentCard => {
-            // Wir suchen nach einer anderen Card mit gleichem oder höherem Wert
-            const hasEqualOrHigherValue = cardValues.some(otherCard => 
-                otherCard.card !== currentCard.card && otherCard.value >= currentCard.value
+        // Für jede Card prüfen, ob sie inaktiv sein sollte
+        cardInfo.forEach(info => {
+            // Eine Card ist inaktiv, wenn ihr maximaler Wert kleiner ist als
+            // der aktuell ausgewählte Wert einer anderen Card
+            const shouldBeInactive = cardInfo.some(otherInfo => 
+                otherInfo.card !== info.card && info.maxValue < otherInfo.currentValue
             );
             
-            // Card markieren, wenn keine andere Card mit gleichem oder höherem Wert gefunden wurde
-            if (!hasEqualOrHigherValue) {
-                currentCard.card.classList.add('inactive');
+            // Status der Card aktualisieren
+            if (shouldBeInactive) {
+                info.card.classList.add('inactive');
             } else {
-                currentCard.card.classList.remove('inactive');
+                info.card.classList.remove('inactive');
             }
         });
     }
