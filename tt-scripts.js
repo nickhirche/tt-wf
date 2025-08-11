@@ -761,56 +761,122 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
-    // Two-step approach: let browser handle the anchor, then adjust position
+    // Enhanced debugging and more robust approach
     faqTabButtons.forEach(button => {
       button.addEventListener('click', function(event) {
-        // Don't prevent default - let the browser handle the anchor jump first
-        // event.preventDefault();
+        // Prevent default to have full control
+        event.preventDefault();
         
         const targetId = button.getAttribute('href').substring(1);
-        console.log('Clicked button for:', targetId);
+        const targetElement = document.getElementById(targetId);
         
-        // After the browser has jumped to the anchor, adjust the position
-        setTimeout(() => {
-          // Get current scroll position
-          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-          console.log('Current scroll position after browser jump:', currentScroll);
-          console.log('Applying offset:', faqOffset);
+        console.log('===== CLICK DEBUG =====');
+        console.log('Clicked button for:', targetId);
+        console.log('Target element exists:', !!targetElement);
+        console.log('Current scroll before:', window.pageYOffset);
+        console.log('Offset to apply:', faqOffset);
+        
+        if (targetElement) {
+          // Try a different approach to calculate position
+          const targetRect = targetElement.getBoundingClientRect();
+          const absoluteTargetTop = targetRect.top + window.pageYOffset;
           
-          // Adjust by scrolling up by the offset amount
+          console.log('Element rect:', {
+            top: targetRect.top,
+            bottom: targetRect.bottom,
+            height: targetRect.height
+          });
+          console.log('Absolute target top:', absoluteTargetTop);
+          console.log('Will scroll to:', absoluteTargetTop - faqOffset);
+          
+          // First scroll to get close to target
           window.scrollTo({
-            top: currentScroll - faqOffset,
+            top: absoluteTargetTop - faqOffset,
             behavior: 'smooth'
           });
-        }, 10); // Small delay to let browser handle the anchor jump first
+          
+          // Then double-check position after a delay
+          setTimeout(() => {
+            // Get updated position after first scroll
+            const newRect = targetElement.getBoundingClientRect();
+            console.log('After scroll rect:', {
+              top: newRect.top,
+              bottom: newRect.bottom
+            });
+            console.log('Current scroll after:', window.pageYOffset);
+            
+            // If element is not positioned correctly, adjust again
+            if (Math.abs(newRect.top - faqOffset) > 5) { // Allow small margin of error
+              const adjustedPosition = window.pageYOffset + (newRect.top - faqOffset);
+              console.log('Position not correct, adjusting to:', adjustedPosition);
+              
+              window.scrollTo({
+                top: adjustedPosition,
+                behavior: 'smooth'
+              });
+            }
+          }, 500); // Longer delay to let first scroll complete
+        }
       });
     });
 
-    // Handle URL with hash on page load
+    // Handle URL with hash on page load with enhanced debugging
     if (window.location.hash) {
+      // Immediately prevent default scroll
+      if (window.history && window.history.scrollRestoration) {
+        window.history.scrollRestoration = 'manual';
+      }
+      
       // Wait for everything to be fully loaded
       window.addEventListener('load', function() {
+        console.log('===== HASH LOAD DEBUG =====');
+        console.log('Hash detected:', window.location.hash);
+        
         setTimeout(() => {
           const targetId = window.location.hash.substring(1);
           const targetElement = document.getElementById(targetId);
           
+          console.log('Target element exists:', !!targetElement);
+          console.log('Current scroll position:', window.pageYOffset);
+          console.log('Offset to apply:', faqOffset);
+          
           if (targetElement) {
             const rect = targetElement.getBoundingClientRect();
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            const targetPosition = rect.top + scrollTop;
+            const absoluteTargetTop = rect.top + window.pageYOffset;
             
-            console.log('Hash scroll to:', targetId);
-            console.log('Hash target position:', targetPosition);
-            console.log('Hash offset:', faqOffset);
-            console.log('Hash final position:', targetPosition - faqOffset);
+            console.log('Element rect:', {
+              top: rect.top,
+              bottom: rect.bottom,
+              height: rect.height
+            });
+            console.log('Absolute target top:', absoluteTargetTop);
+            console.log('Will scroll to:', absoluteTargetTop - faqOffset);
             
             window.scrollTo({
-              top: targetPosition - faqOffset,
+              top: absoluteTargetTop - faqOffset,
               behavior: 'smooth'
             });
+            
+            // Double-check position after scroll
+            setTimeout(() => {
+              const newRect = targetElement.getBoundingClientRect();
+              console.log('After hash scroll rect:', {
+                top: newRect.top,
+                bottom: newRect.bottom
+              });
+              console.log('Final scroll position:', window.pageYOffset);
+            }, 600);
           }
         }, 100);
       });
+      
+      // Also try to handle immediate scroll that might happen
+      setTimeout(() => {
+        if (window.pageYOffset > 0) {
+          console.log('Early scroll detected, adjusting...');
+          window.scrollTo(0, 0);
+        }
+      }, 5);
     }
 
     window.addEventListener('scroll', updateActiveButton);
