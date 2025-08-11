@@ -723,6 +723,8 @@ peopleCostDiv.addEventListener('input', function() {
 /* FAQ Google / Scrolling */
 document.addEventListener("DOMContentLoaded", function() {
   if (document.querySelector('.tt-faq')) {
+    console.log('FAQ script initialized');
+    
     // Get the computed top value of the sticky categories element
     const categoriesElement = document.querySelector('.tt-faq-categories');
     let faqOffset;
@@ -761,122 +763,79 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
-    // Enhanced debugging and more robust approach
-    faqTabButtons.forEach(button => {
-      button.addEventListener('click', function(event) {
-        // Prevent default to have full control
-        event.preventDefault();
+    // Most direct approach - modify the default anchor behavior
+    faqTabButtons.forEach((button, index) => {
+      // Remove the href attribute but store its value
+      const href = button.getAttribute('href');
+      const targetId = href.substring(1);
+      
+      // Replace href with data attribute to prevent default anchor behavior
+      button.removeAttribute('href');
+      button.setAttribute('data-target', targetId);
+      
+      button.addEventListener('click', function() {
+        console.log(`Clicked button ${index} for target: ${targetId}`);
         
-        const targetId = button.getAttribute('href').substring(1);
         const targetElement = document.getElementById(targetId);
+        if (!targetElement) {
+          console.error(`Target element #${targetId} not found`);
+          return;
+        }
         
-        console.log('===== CLICK DEBUG =====');
-        console.log('Clicked button for:', targetId);
-        console.log('Target element exists:', !!targetElement);
-        console.log('Current scroll before:', window.pageYOffset);
-        console.log('Offset to apply:', faqOffset);
+        // Calculate the correct position
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+        const scrollToPosition = targetPosition - faqOffset;
         
-        if (targetElement) {
-          // Try a different approach to calculate position
-          const targetRect = targetElement.getBoundingClientRect();
-          const absoluteTargetTop = targetRect.top + window.pageYOffset;
-          
-          console.log('Element rect:', {
-            top: targetRect.top,
-            bottom: targetRect.bottom,
-            height: targetRect.height
-          });
-          console.log('Absolute target top:', absoluteTargetTop);
-          console.log('Will scroll to:', absoluteTargetTop - faqOffset);
-          
-          // First scroll to get close to target
+        console.log('Target position:', targetPosition);
+        console.log('Offset:', faqOffset);
+        console.log('Scrolling to:', scrollToPosition);
+        
+        // Perform the scroll
+        try {
           window.scrollTo({
-            top: absoluteTargetTop - faqOffset,
+            top: scrollToPosition,
             behavior: 'smooth'
           });
-          
-          // Then double-check position after a delay
-          setTimeout(() => {
-            // Get updated position after first scroll
-            const newRect = targetElement.getBoundingClientRect();
-            console.log('After scroll rect:', {
-              top: newRect.top,
-              bottom: newRect.bottom
-            });
-            console.log('Current scroll after:', window.pageYOffset);
-            
-            // If element is not positioned correctly, adjust again
-            if (Math.abs(newRect.top - faqOffset) > 5) { // Allow small margin of error
-              const adjustedPosition = window.pageYOffset + (newRect.top - faqOffset);
-              console.log('Position not correct, adjusting to:', adjustedPosition);
-              
-              window.scrollTo({
-                top: adjustedPosition,
-                behavior: 'smooth'
-              });
-            }
-          }, 500); // Longer delay to let first scroll complete
+        } catch (e) {
+          console.error('Error during scroll:', e);
+          // Fallback for older browsers
+          window.scrollTo(0, scrollToPosition);
         }
       });
     });
 
-    // Handle URL with hash on page load with enhanced debugging
+    // Handle URL with hash on page load
     if (window.location.hash) {
-      // Immediately prevent default scroll
-      if (window.history && window.history.scrollRestoration) {
-        window.history.scrollRestoration = 'manual';
-      }
-      
-      // Wait for everything to be fully loaded
       window.addEventListener('load', function() {
-        console.log('===== HASH LOAD DEBUG =====');
-        console.log('Hash detected:', window.location.hash);
+        const targetId = window.location.hash.substring(1);
+        console.log('Hash detected:', targetId);
         
+        const targetElement = document.getElementById(targetId);
+        if (!targetElement) {
+          console.error(`Target element #${targetId} not found for hash`);
+          return;
+        }
+        
+        // Calculate position after page is fully loaded
         setTimeout(() => {
-          const targetId = window.location.hash.substring(1);
-          const targetElement = document.getElementById(targetId);
+          const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+          const scrollToPosition = targetPosition - faqOffset;
           
-          console.log('Target element exists:', !!targetElement);
-          console.log('Current scroll position:', window.pageYOffset);
-          console.log('Offset to apply:', faqOffset);
+          console.log('Hash target position:', targetPosition);
+          console.log('Hash offset:', faqOffset);
+          console.log('Hash scrolling to:', scrollToPosition);
           
-          if (targetElement) {
-            const rect = targetElement.getBoundingClientRect();
-            const absoluteTargetTop = rect.top + window.pageYOffset;
-            
-            console.log('Element rect:', {
-              top: rect.top,
-              bottom: rect.bottom,
-              height: rect.height
-            });
-            console.log('Absolute target top:', absoluteTargetTop);
-            console.log('Will scroll to:', absoluteTargetTop - faqOffset);
-            
+          try {
             window.scrollTo({
-              top: absoluteTargetTop - faqOffset,
+              top: scrollToPosition,
               behavior: 'smooth'
             });
-            
-            // Double-check position after scroll
-            setTimeout(() => {
-              const newRect = targetElement.getBoundingClientRect();
-              console.log('After hash scroll rect:', {
-                top: newRect.top,
-                bottom: newRect.bottom
-              });
-              console.log('Final scroll position:', window.pageYOffset);
-            }, 600);
+          } catch (e) {
+            console.error('Error during hash scroll:', e);
+            window.scrollTo(0, scrollToPosition);
           }
         }, 100);
       });
-      
-      // Also try to handle immediate scroll that might happen
-      setTimeout(() => {
-        if (window.pageYOffset > 0) {
-          console.log('Early scroll detected, adjusting...');
-          window.scrollTo(0, 0);
-        }
-      }, 5);
     }
 
     window.addEventListener('scroll', updateActiveButton);
