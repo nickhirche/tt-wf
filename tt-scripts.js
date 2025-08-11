@@ -725,9 +725,27 @@ document.addEventListener("DOMContentLoaded", function() {
   if (document.querySelector('.tt-faq')) {
     // Get the computed top value of the sticky categories element
     const categoriesElement = document.querySelector('.tt-faq-categories');
-    const categoriesTopValue = categoriesElement ? 
-      parseInt(window.getComputedStyle(categoriesElement).top) : 
-      5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    let categoriesTopValue;
+    
+    if (categoriesElement) {
+      const topStyle = window.getComputedStyle(categoriesElement).top;
+      
+      // Check if the value is in rem
+      if (topStyle.endsWith('rem')) {
+        // Convert rem to pixels by multiplying with the font-size of the root element
+        const remValue = parseFloat(topStyle);
+        categoriesTopValue = remValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        console.log('Converted top value from', topStyle, 'to', categoriesTopValue, 'pixels');
+      } else {
+        // Try to parse as pixels or other units
+        categoriesTopValue = parseInt(topStyle);
+        console.log('Using top value:', categoriesTopValue, 'pixels');
+      }
+    } else {
+      // Fallback to 5rem
+      categoriesTopValue = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+      console.log('Using fallback top value:', categoriesTopValue, 'pixels');
+    }
     
     // Use the actual top value from the categories element as offset
     const faqOffset = categoriesTopValue;
