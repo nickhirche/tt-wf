@@ -723,8 +723,6 @@ peopleCostDiv.addEventListener('input', function() {
 /* FAQ Google / Scrolling */
 document.addEventListener("DOMContentLoaded", function() {
   if (document.querySelector('.tt-faq')) {
-    console.log('FAQ script initialized');
-    
     // Get the computed top value of the sticky categories element
     const categoriesElement = document.querySelector('.tt-faq-categories');
     let faqOffset;
@@ -737,16 +735,13 @@ document.addEventListener("DOMContentLoaded", function() {
         // Convert rem to pixels by multiplying with the font-size of the root element
         const remValue = parseFloat(topStyle);
         faqOffset = remValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
-        console.log('Converted top value from', topStyle, 'to', faqOffset, 'pixels');
       } else {
         // Try to parse as pixels or other units
         faqOffset = parseInt(topStyle);
-        console.log('Using top value:', faqOffset, 'pixels');
       }
     } else {
       // Fallback to 5rem
       faqOffset = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
-      console.log('Using fallback top value:', faqOffset, 'pixels');
     }
 
     const faqViewportThreshold = window.innerHeight * 0.2; // 20% of the viewport height
@@ -763,8 +758,8 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
-    // Most direct approach - modify the default anchor behavior
-    faqTabButtons.forEach((button, index) => {
+    // Handle tab button clicks with custom scroll behavior
+    faqTabButtons.forEach((button) => {
       // Remove the href attribute but store its value
       const href = button.getAttribute('href');
       const targetId = href.substring(1);
@@ -774,21 +769,12 @@ document.addEventListener("DOMContentLoaded", function() {
       button.setAttribute('data-target', targetId);
       
       button.addEventListener('click', function() {
-        console.log(`Clicked button ${index} for target: ${targetId}`);
-        
         const targetElement = document.getElementById(targetId);
-        if (!targetElement) {
-          console.error(`Target element #${targetId} not found`);
-          return;
-        }
+        if (!targetElement) return;
         
-        // Calculate the correct position
+        // Calculate the correct position with offset
         const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
         const scrollToPosition = targetPosition - faqOffset;
-        
-        console.log('Target position:', targetPosition);
-        console.log('Offset:', faqOffset);
-        console.log('Scrolling to:', scrollToPosition);
         
         // Perform the scroll
         try {
@@ -797,7 +783,6 @@ document.addEventListener("DOMContentLoaded", function() {
             behavior: 'smooth'
           });
         } catch (e) {
-          console.error('Error during scroll:', e);
           // Fallback for older browsers
           window.scrollTo(0, scrollToPosition);
         }
@@ -808,22 +793,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (window.location.hash) {
       window.addEventListener('load', function() {
         const targetId = window.location.hash.substring(1);
-        console.log('Hash detected:', targetId);
-        
         const targetElement = document.getElementById(targetId);
-        if (!targetElement) {
-          console.error(`Target element #${targetId} not found for hash`);
-          return;
-        }
+        
+        if (!targetElement) return;
         
         // Calculate position after page is fully loaded
         setTimeout(() => {
           const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
           const scrollToPosition = targetPosition - faqOffset;
-          
-          console.log('Hash target position:', targetPosition);
-          console.log('Hash offset:', faqOffset);
-          console.log('Hash scrolling to:', scrollToPosition);
           
           try {
             window.scrollTo({
@@ -831,7 +808,6 @@ document.addEventListener("DOMContentLoaded", function() {
               behavior: 'smooth'
             });
           } catch (e) {
-            console.error('Error during hash scroll:', e);
             window.scrollTo(0, scrollToPosition);
           }
         }, 100);
