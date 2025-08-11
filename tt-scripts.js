@@ -758,7 +758,16 @@ document.addEventListener("DOMContentLoaded", function() {
     function scrollToElement(targetId) {
       const targetGroup = document.getElementById(targetId);
       if (targetGroup) {
+        // Calculate position with the offset
         const targetPosition = targetGroup.getBoundingClientRect().top + window.scrollY;
+        
+        // Log for debugging
+        console.log('Scrolling to element', targetId);
+        console.log('Target position:', targetPosition);
+        console.log('Offset:', faqOffset);
+        console.log('Final position:', targetPosition - faqOffset);
+        
+        // Force scroll with offset
         window.scrollTo({
           top: targetPosition - faqOffset,
           behavior: 'smooth'
@@ -768,11 +777,19 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Handle URL with hash on page load
     if (window.location.hash) {
-      const targetId = window.location.hash.substring(1);
-      // Use setTimeout to ensure the page is fully loaded
-      setTimeout(() => {
-        scrollToElement(targetId);
-      }, 100);
+      // Prevent the default browser scroll to anchor
+      window.addEventListener('load', function() {
+        // Use setTimeout to ensure the page is fully loaded and to override any default browser behavior
+        setTimeout(() => {
+          const targetId = window.location.hash.substring(1);
+          scrollToElement(targetId);
+        }, 100);
+      });
+      
+      // Also prevent immediate scroll that might happen before load event
+      if (window.location.hash) {
+        window.scrollTo(0, 0);
+      }
     }
 
     window.addEventListener('scroll', updateActiveButton);
