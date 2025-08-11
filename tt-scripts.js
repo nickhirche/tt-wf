@@ -725,7 +725,7 @@ document.addEventListener("DOMContentLoaded", function() {
   if (document.querySelector('.tt-faq')) {
     // Get the computed top value of the sticky categories element
     const categoriesElement = document.querySelector('.tt-faq-categories');
-    let categoriesTopValue;
+    let faqOffset;
     
     if (categoriesElement) {
       const topStyle = window.getComputedStyle(categoriesElement).top;
@@ -734,21 +734,19 @@ document.addEventListener("DOMContentLoaded", function() {
       if (topStyle.endsWith('rem')) {
         // Convert rem to pixels by multiplying with the font-size of the root element
         const remValue = parseFloat(topStyle);
-        categoriesTopValue = remValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
-        console.log('Converted top value from', topStyle, 'to', categoriesTopValue, 'pixels');
+        faqOffset = remValue * parseFloat(getComputedStyle(document.documentElement).fontSize);
+        console.log('Converted top value from', topStyle, 'to', faqOffset, 'pixels');
       } else {
         // Try to parse as pixels or other units
-        categoriesTopValue = parseInt(topStyle);
-        console.log('Using top value:', categoriesTopValue, 'pixels');
+        faqOffset = parseInt(topStyle);
+        console.log('Using top value:', faqOffset, 'pixels');
       }
     } else {
       // Fallback to 5rem
-      categoriesTopValue = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
-      console.log('Using fallback top value:', categoriesTopValue, 'pixels');
+      faqOffset = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+      console.log('Using fallback top value:', faqOffset, 'pixels');
     }
-    
-    // Use the actual top value from the categories element as offset
-    const faqOffset = categoriesTopValue;
+
     const faqViewportThreshold = window.innerHeight * 0.2; // 20% of the viewport height
     const faqTabButtons = document.querySelectorAll('.tt-faq-tab-btn');
     const faqAccordionGroups = document.querySelectorAll('.tt-faq-accordion-group');
@@ -763,55 +761,56 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
-    // Handle click on tab buttons
+    // Two-step approach: let browser handle the anchor, then adjust position
     faqTabButtons.forEach(button => {
       button.addEventListener('click', function(event) {
-        event.preventDefault();
+        // Don't prevent default - let the browser handle the anchor jump first
+        // event.preventDefault();
+        
         const targetId = button.getAttribute('href').substring(1);
-        scrollToElement(targetId);
+        console.log('Clicked button for:', targetId);
+        
+        // After the browser has jumped to the anchor, adjust the position
+        setTimeout(() => {
+          // Get current scroll position
+          const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+          console.log('Current scroll position after browser jump:', currentScroll);
+          console.log('Applying offset:', faqOffset);
+          
+          // Adjust by scrolling up by the offset amount
+          window.scrollTo({
+            top: currentScroll - faqOffset,
+            behavior: 'smooth'
+          });
+        }, 10); // Small delay to let browser handle the anchor jump first
       });
     });
 
-    // Function to scroll to element with offset
-    function scrollToElement(targetId) {
-      const targetGroup = document.getElementById(targetId);
-      if (targetGroup) {
-        // Calculate position with the offset
-        const targetPosition = targetGroup.getBoundingClientRect().top + window.scrollY;
-        
-        // Log for debugging
-        console.log('Scrolling to element', targetId);
-        console.log('Target position:', targetPosition);
-        console.log('Offset:', faqOffset);
-        console.log('Final position:', targetPosition - faqOffset);
-        
-        // Try to ensure we override any default browser behavior
-        // by using setTimeout with a small delay
-        setTimeout(() => {
-          // Force scroll with offset
-          window.scrollTo({
-            top: targetPosition - faqOffset,
-            behavior: 'smooth'
-          });
-        }, 10);
-      }
-    }
-
     // Handle URL with hash on page load
     if (window.location.hash) {
-      // Prevent the default browser scroll to anchor
+      // Wait for everything to be fully loaded
       window.addEventListener('load', function() {
-        // Use setTimeout to ensure the page is fully loaded and to override any default browser behavior
         setTimeout(() => {
           const targetId = window.location.hash.substring(1);
-          scrollToElement(targetId);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            const rect = targetElement.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const targetPosition = rect.top + scrollTop;
+            
+            console.log('Hash scroll to:', targetId);
+            console.log('Hash target position:', targetPosition);
+            console.log('Hash offset:', faqOffset);
+            console.log('Hash final position:', targetPosition - faqOffset);
+            
+            window.scrollTo({
+              top: targetPosition - faqOffset,
+              behavior: 'smooth'
+            });
+          }
         }, 100);
       });
-      
-      // Also prevent immediate scroll that might happen before load event
-      if (window.location.hash) {
-        window.scrollTo(0, 0);
-      }
     }
 
     window.addEventListener('scroll', updateActiveButton);
