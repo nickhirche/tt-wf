@@ -903,7 +903,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-faq .tt-faq-container .tt-faq-item .ac-trigger::before, .tt-faq .tt-faq-container .tt-faq-item .ac-trigger::after {
   content: "";
   position: absolute;
-  left: 0.5rem;
+  right: 0.5rem;
   top: 1rem;
   width: 2px;
   height: 0.6rem;
