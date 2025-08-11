@@ -19,6 +19,9 @@
 
         // Event-Listener für alle Dropdowns in Cards setzen
         initDocumentDropdowns();
+        
+        // Initial einmal Vergleich durchführen
+        compareCardValues();
     }
 
     /**
@@ -43,6 +46,9 @@
             updateCardPrices(card, activePeriod);
             updatePeriodVisibility(card, activePeriod);
         });
+        
+        // Nach dem Update der Preise auch den Vergleich aktualisieren
+        compareCardValues();
     }
 
     /**
@@ -126,9 +132,10 @@
     }
 
     /**
-     * Initialisiert die Dropdown-Vergleichslogik:
+     * Initialisiert die Dropdown-Funktionalität:
      * - Setzt Change-Listener auf alle .document-dropdown selects in Cards.
-     * - Synchronisiert beim Wechsel alle anderen Vergleichs-Cards auf den gleichen Wert.
+     * - Aktualisiert die Preise in der jeweiligen Card.
+     * - Führt nach Änderung einen Vergleich aller Cards durch.
      */
     function initDocumentDropdowns() {
         document.querySelectorAll('.tt-pricing-card .document-dropdown select').forEach(select => {
@@ -138,41 +145,55 @@
                 // Zugehörige Card finden
                 const card = this.closest('.tt-pricing-card');
                 if (!card) return;
-                // Preise aktualisieren
+                // Nur die Preise in dieser Card aktualisieren
                 updateCardPrices(card, activePeriod);
-                // Vergleichssynchronisation auslösen
-                syncComparisonCards(card);
+                // Vergleich aller Cards durchführen
+                compareCardValues();
             });
         });
     }
 
     /**
-     * Synchronisiert alle Cards, die ein Dropdown besitzen:
-     * - Sucht alle .tt-pricing-card .document-dropdown selects.
-     * - Setzt in allen (außer der geänderten Card) den gleichen Wert wie im geänderten Dropdown.
+     * Vergleicht die numerischen Werte aller Dropdowns und markiert Cards als inaktiv,
+     * wenn ihr Wert nicht gleich oder größer als der Wert einer anderen Card ist.
      */
-    function syncComparisonCards(changedCard) {
-        // Alle Dropdown-Selects in Cards finden
-        const comparisonDropdowns = document.querySelectorAll('.tt-pricing-card .document-dropdown select');
-        if (comparisonDropdowns.length < 2) return; // Mindestens zwei für Vergleich nötig
-
-        // Geändertes Dropdown holen
-        const changedDropdown = changedCard.querySelector('.document-dropdown select');
-        if (!changedDropdown) return;
-        const selectedValue = changedDropdown.value;
-
-        // Restliche Dropdowns synchronisieren
-        comparisonDropdowns.forEach(dropdown => {
-            const card = dropdown.closest('.tt-pricing-card');
-            if (!card || card === changedCard) return;
-
-            // Nur synchronisieren, wenn Option existiert und Wert unterschiedlich
-            if (dropdown.value !== selectedValue) {
-                const optionExists = Array.from(dropdown.options).some(option => option.value === selectedValue);
-                if (optionExists) {
-                    dropdown.value = selectedValue;
-                    dropdown.dispatchEvent(new Event('change'));
-                }
+    function compareCardValues() {
+        // Alle Cards mit Dropdowns sammeln
+        const cardsWithDropdowns = document.querySelectorAll('.tt-pricing-card .document-dropdown');
+        if (cardsWithDropdowns.length < 2) return; // Mindestens 2 für Vergleich nötig
+        
+        // Werte und Cards sammeln
+        const cardValues = [];
+        cardsWithDropdowns.forEach(dropdownContainer => {
+            const card = dropdownContainer.closest('.tt-pricing-card');
+            const dropdown = dropdownContainer.querySelector('select');
+            if (!card || !dropdown) return;
+            
+            const selectedOption = dropdown.options[dropdown.selectedIndex];
+            if (!selectedOption) return;
+            
+            // Numerischen Wert aus value extrahieren
+            const value = selectedOption.value;
+            const numericValue = parseFloat(value) || 0; // Falls value keine Zahl ist, 0 verwenden
+            
+            cardValues.push({
+                card: card,
+                value: numericValue
+            });
+        });
+        
+        // Für jede Card prüfen, ob es eine andere Card mit gleichem oder größerem Wert gibt
+        cardValues.forEach(currentCard => {
+            // Wir suchen nach einer anderen Card mit gleichem oder höherem Wert
+            const hasEqualOrHigherValue = cardValues.some(otherCard => 
+                otherCard.card !== currentCard.card && otherCard.value >= currentCard.value
+            );
+            
+            // Card markieren, wenn keine andere Card mit gleichem oder höherem Wert gefunden wurde
+            if (!hasEqualOrHigherValue) {
+                currentCard.card.classList.add('inactive');
+            } else {
+                currentCard.card.classList.remove('inactive');
             }
         });
     }
