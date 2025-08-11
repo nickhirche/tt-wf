@@ -1073,6 +1073,12 @@ ul.checklist.circle-check li::before {
   -webkit-mask-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 18" height="18" width="18"><path fill="%23000" fill-rule="evenodd" d="M9 18c4.97 0 9-4.03 9-9s-4.03-9-9-9-9 4.03-9 9 4.03 9 9 9zm4.5-11.29c.33-.42.27-1.03-.15-1.36-.42-.33-1.03-.27-1.36.15L7.44 11.2 5.61 9.84c-.43-.32-1.03-.23-1.35.19-.32.43-.23 1.03.19 1.35l2.57 1.93c.42.31 1.01.24 1.33-.17l5.14-6.43z" clip-rule="evenodd"></path></svg>');
   background-color: currentColor;
 }
+ul.checklist.pricing li::before {
+  background-color: var(--purple-600);
+}
+ul.checklist.pricing.dark li::before {
+  background-color: var(--purple-400);
+}
 
 .tt-pricing-card-list ul.checklist li::before {
   background-color: var(--purple-600);
@@ -1404,19 +1410,19 @@ ol.quickstart-list li::before {
   background: linear-gradient(to bottom right, #0df28f, #8b33ff);
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(1) .achievement-head {
-  background: linear-gradient(to bottom right, #0df28f, #4c93c7);
+  background: linear-gradient(to bottom right, #0df28f, rgb(76, 146.5, 199));
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(2)) .achievement-item:nth-child(2) .achievement-head {
-  background: linear-gradient(to bottom right, #4c93c7, #8b33ff);
+  background: linear-gradient(to bottom right, rgb(76, 146.5, 199), #8b33ff);
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(1) .achievement-head {
-  background: linear-gradient(to bottom right, #0df28f, #37b2b4);
+  background: linear-gradient(to bottom right, #0df28f, rgb(55, 178.3333333333, 180.3333333333));
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(2) .achievement-head {
-  background: linear-gradient(to bottom right, #37b2b4, #6173da);
+  background: linear-gradient(to bottom right, rgb(55, 178.3333333333, 180.3333333333), rgb(97, 114.6666666667, 217.6666666667));
 }
 .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3)::after, .tt-customer-achievements.color-enterprise:has(.achievement-item:nth-child(3)) .achievement-item:nth-child(3) .achievement-head {
-  background: linear-gradient(to bottom right, #6173da, #8b33ff);
+  background: linear-gradient(to bottom right, rgb(97, 114.6666666667, 217.6666666667), #8b33ff);
 }
 
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(1)) .meta-feature-item:nth-child(1) .meta-text-gradient {
@@ -1425,23 +1431,23 @@ ol.quickstart-list li::before {
 }
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(2)) .meta-feature-item:nth-child(1) .meta-text-gradient {
   background-color: #0df28f;
-  background-image: linear-gradient(to bottom right, #0df28f, #4c93c7);
+  background-image: linear-gradient(to bottom right, #0df28f, rgb(76, 146.5, 199));
 }
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(2)) .meta-feature-item:nth-child(2) .meta-text-gradient {
-  background-color: #4c93c7;
-  background-image: linear-gradient(to bottom right, #4c93c7, #8b33ff);
+  background-color: rgb(76, 146.5, 199);
+  background-image: linear-gradient(to bottom right, rgb(76, 146.5, 199), #8b33ff);
 }
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(3)) .meta-feature-item:nth-child(1) .meta-text-gradient {
   background-color: #0df28f;
-  background-image: linear-gradient(to bottom right, #0df28f, #37b2b4);
+  background-image: linear-gradient(to bottom right, #0df28f, rgb(55, 178.3333333333, 180.3333333333));
 }
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(3)) .meta-feature-item:nth-child(2) .meta-text-gradient {
-  background-color: #37b2b4;
-  background-image: linear-gradient(to bottom right, #37b2b4, #6173da);
+  background-color: rgb(55, 178.3333333333, 180.3333333333);
+  background-image: linear-gradient(to bottom right, rgb(55, 178.3333333333, 180.3333333333), rgb(97, 114.6666666667, 217.6666666667));
 }
 .tt-meta-feature-group.color-enterprise:has(.meta-feature-item:nth-child(3)) .meta-feature-item:nth-child(3) .meta-text-gradient {
-  background-color: #6173da;
-  background-image: linear-gradient(to bottom right, #6173da, #8b33ff);
+  background-color: rgb(97, 114.6666666667, 217.6666666667);
+  background-image: linear-gradient(to bottom right, rgb(97, 114.6666666667, 217.6666666667), #8b33ff);
 }
 
 /* QUOTES */
