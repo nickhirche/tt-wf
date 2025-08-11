@@ -723,7 +723,14 @@ peopleCostDiv.addEventListener('input', function() {
 /* FAQ Google / Scrolling */
 document.addEventListener("DOMContentLoaded", function() {
   if (document.querySelector('.tt-faq')) {
-    const faqOffset = 5 * parseFloat(getComputedStyle(document.documentElement).fontSize); // 5rem in Pixel
+    // Get the computed top value of the sticky categories element
+    const categoriesElement = document.querySelector('.tt-faq-categories');
+    const categoriesTopValue = categoriesElement ? 
+      parseInt(window.getComputedStyle(categoriesElement).top) : 
+      5 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+    
+    // Use the actual top value from the categories element as offset
+    const faqOffset = categoriesTopValue;
     const faqViewportThreshold = window.innerHeight * 0.2; // 20% of the viewport height
     const faqTabButtons = document.querySelectorAll('.tt-faq-tab-btn');
     const faqAccordionGroups = document.querySelectorAll('.tt-faq-accordion-group');
@@ -738,20 +745,35 @@ document.addEventListener("DOMContentLoaded", function() {
       });
     }
 
+    // Handle click on tab buttons
     faqTabButtons.forEach(button => {
       button.addEventListener('click', function(event) {
         event.preventDefault();
         const targetId = button.getAttribute('href').substring(1);
-        const targetGroup = document.getElementById(targetId);
-        if (targetGroup) {
-          const targetPosition = targetGroup.getBoundingClientRect().top + window.scrollY;
-          window.scrollTo({
-            top: targetPosition - faqOffset,
-            behavior: 'smooth'
-          });
-        }
+        scrollToElement(targetId);
       });
     });
+
+    // Function to scroll to element with offset
+    function scrollToElement(targetId) {
+      const targetGroup = document.getElementById(targetId);
+      if (targetGroup) {
+        const targetPosition = targetGroup.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+          top: targetPosition - faqOffset,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Handle URL with hash on page load
+    if (window.location.hash) {
+      const targetId = window.location.hash.substring(1);
+      // Use setTimeout to ensure the page is fully loaded
+      setTimeout(() => {
+        scrollToElement(targetId);
+      }, 100);
+    }
 
     window.addEventListener('scroll', updateActiveButton);
     updateActiveButton(); // Initial call to set the correct active button on page load
