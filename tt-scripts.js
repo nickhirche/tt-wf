@@ -848,6 +848,55 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
+/* GITHUB STARS */
+// GitHub Stars Counter - Simplified Version
+document.addEventListener('DOMContentLoaded', function() {
+  // Find all elements with data-github-stars="true"
+  const elements = document.querySelectorAll('[data-github-stars="true"]');
+  
+  if (elements.length === 0) return;
+  
+  // Fetch stars for the specific repository
+  fetchRepoStars('ueberdosis/tiptap')
+    .then(starCount => {
+      // Update all elements with the formatted star count
+      elements.forEach(element => {
+        element.textContent = formatNumber(starCount);
+      });
+    })
+    .catch(error => {
+      console.error('Error fetching repo stars:', error);
+      elements.forEach(element => {
+        element.textContent = 'Error';
+      });
+    });
+    
+  // Fetch stars for a specific repository
+  async function fetchRepoStars(repoFullName) {
+    const response = await fetch(`https://api.github.com/repos/${repoFullName}`);
+    
+    if (!response.ok) {
+      throw new Error(`GitHub API error: ${response.status}`);
+    }
+    
+    const repoData = await response.json();
+    return repoData.stargazers_count;
+  }
+  
+  // Format number according to the rules (e.g., 30147 -> 30,1k)
+  function formatNumber(num) {
+    if (num < 1000) {
+      return num.toString();
+    } else if (num < 1000000) {
+      // For numbers between 1000-999999, show one decimal
+      return (Math.floor(num / 100) / 10).toFixed(1).replace('.', ',') + 'k';
+    } else {
+      // For millions, show one decimal
+      return (Math.floor(num / 100000) / 10).toFixed(1).replace('.', ',') + 'M';
+    }
+  }
+});
+
 
 /* RIVE */
 document.addEventListener("DOMContentLoaded", () => {
