@@ -202,21 +202,27 @@
      * Hinweis: Der Text steht bereits im Markup; wir toggeln nur die Anzeige.
      */
     function updateNotes() {
-        const selects = document.querySelectorAll('.tt-pricing-card .document-dropdown select');
+        const selects = Array.from(document.querySelectorAll('.tt-pricing-card .document-dropdown select'));
+
         selects.forEach(select => {
+            const card = select.closest('.tt-pricing-card');
+            if (!card) return;
+
             const { maxValue } = getMinMax(select);
 
             // Prüfe alle anderen aktuellen Werte
-            let someoneExceeds = false;
-            selects.forEach(other => {
-                if (other === select) return;
+            const someoneExceeds = selects.some(other => {
+                if (other === select) return false;
                 const selOpt = other.options[other.selectedIndex];
                 const val = selOpt ? toNumber(selOpt.value) : NaN;
-                if (!isNaN(val) && val > maxValue) someoneExceeds = true;
+                return !isNaN(val) && val > maxValue;
             });
 
-            if (someoneExceeds) showNote(select);
-            else hideNote(select);
+            if (someoneExceeds) {
+                showNote(select);
+            } else {
+                hideNote(select);
+            }
         });
     }
 
@@ -225,17 +231,17 @@
     // =======================
 
     function showNote(select) {
-        const dd = select.closest('.document-dropdown');
-        if (!dd) return;
-        const note = dd.querySelector('.tt-select-note');
-        if (note) note.classList.remove('inactive');
+        const card = select.closest('.tt-pricing-card');
+        if (!card) return;
+        const notes = card.querySelectorAll('.tt-select-note');
+        notes.forEach(n => n.classList.remove('inactive'));
     }
 
     function hideNote(select) {
-        const dd = select.closest('.document-dropdown');
-        if (!dd) return;
-        const note = dd.querySelector('.tt-select-note');
-        if (note) note.classList.add('inactive');
+        const card = select.closest('.tt-pricing-card');
+        if (!card) return;
+        const notes = card.querySelectorAll('.tt-select-note');
+        notes.forEach(n => n.classList.add('inactive'));
     }
 
     // =======================
