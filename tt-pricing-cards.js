@@ -1,10 +1,10 @@
 // Tiptap Pricing Cards System
 (function() {
-    // Guard gegen Endlosschleifen durch programmgesteuerte Änderungen
+    // Guard gegen Endlosschleifen bei programmgesteuerten Änderungen
     let isProgrammaticUpdate = false;
 
     function initPricingCardsSystem() {
-        // Reagiere auf Periodenwechsel (TabMenu)
+        // Auf Periodenwechsel (TabMenu) reagieren
         document.addEventListener('billingPeriodChanged', function(event) {
             const activePeriod = event.detail.period;
             updatePricingCardsDisplay(activePeriod);
@@ -13,27 +13,31 @@
         const initialPeriod = getInitialBillingPeriod();
         updatePricingCardsDisplay(initialPeriod);
 
-        // Dropdown-Änderungen
+        // Dropdown-Änderungen initialisieren
         initDocumentDropdowns();
 
-        // Initiale Inaktivitätsprüfung
+        // Erste globale Auswertung
         compareCardValues();
+        updateNotes();
     }
 
+    // Liest die aktuell aktive Periode (monthly/yearly) aus dem TabMenu
     function getInitialBillingPeriod() {
         const btn = document.querySelector('.tt-billing-tab-btn.active, .tt-billing-tab-btn.is-active');
         return btn ? btn.getAttribute('data-billing-period') : 'monthly';
     }
 
+    // Aktualisiert Preise, periodenspezifische Sichtbarkeit und globale Zustände
     function updatePricingCardsDisplay(activePeriod) {
         document.querySelectorAll('.tt-pricing-card').forEach(card => {
             updateCardPrices(card, activePeriod);
             updatePeriodVisibility(card, activePeriod);
         });
         compareCardValues();
+        updateNotes();
     }
 
-    // Preise je Card aktualisieren (basierend auf Select und Periode)
+    // Preise in einer Card anhand der aktiven Periode und der Select-Option setzen
     function updateCardPrices(card, activePeriod) {
         const priceEl = card.querySelector('.price-value');
         if (!priceEl) return;
@@ -41,7 +45,6 @@
         const select = card.querySelector('.document-dropdown select');
 
         if (select) {
-            // Wenn ein valider Wert gewählt ist, Preis setzen
             if (select.selectedIndex >= 0) {
                 const opt = select.options[select.selectedIndex];
                 if (opt) {
@@ -73,7 +76,7 @@
         }
     }
 
-    // Periodensichtbarkeit unabhängig vom Card-Status
+    // Periodensichtbarkeit unabhängig vom Card-Inaktiv-Status
     function updatePeriodVisibility(card, activePeriod) {
         card.querySelectorAll('[data-subscription-period="monthly"]').forEach(el => {
             if (activePeriod === 'monthly') el.classList.remove('inactive');
@@ -85,6 +88,7 @@
         });
     }
 
+    // Change-Listener für alle Dropdowns
     function initDocumentDropdowns() {
         document.querySelectorAll('.tt-pricing-card .document-dropdown select').forEach(select => {
             select.addEventListener('change', function() {
@@ -97,13 +101,14 @@
                 // Eigene Card-Preise updaten
                 updateCardPrices(card, activePeriod);
 
-                // Cross-Card-Regeln anwenden (ohne Sperren, nur setzen + Hinweis)
+                // Cross-Card-Regeln anwenden (Selects bleiben klickbar)
                 applyCrossCardRules(this);
 
-                // Inaktivitäts-Status aktualisieren
+                // Globale Zustände neu bewerten
                 compareCardValues();
+                updateNotes();
 
-                // Alle Card-Preise updaten (falls andere Selects geändert wurden)
+                // Preise aller Cards aktualisieren (falls andere Selects geändert wurden)
                 document.querySelectorAll('.tt-pricing-card').forEach(c => {
                     updateCardPrices(c, activePeriod);
                 });
@@ -113,12 +118,14 @@
 
     /**
      * Cross-Card-Regeln:
-     * - Wenn selectedValue > max(other) → other = max(other) + Hinweistext anzeigen
-     * - Else wenn selectedValue >= min(other) und Wert existiert → other = selectedValue
-     * - Else → other = min(other)
+     * - Wenn selectedValue > max(other):
+     *     -> setze other auf max(other) und zeige dessen .tt-select-note (inactive entfernen)
+     * - Else wenn selectedValue >= min(other) und Wert existiert in other:
+     *     -> setze other = selectedValue (Note ausblenden)
+     * - Else:
+     *     -> setze other = min(other) (Note ausblenden)
      */
     function applyCrossCardRules(changedSelect) {
-        const changedCard = changedSelect.closest('.tt-pricing-card');
         const changedOpt = changedSelect.options[changedSelect.selectedIndex];
         if (!changedOpt) return;
 
@@ -134,23 +141,23 @@
 
                 const { minValue, maxValue, minOpt, maxOpt } = getMinMaxWithRefs(otherSelect);
 
-                // 1) Größer als Max → setze auf Max + Hinweis
-                if (selectedValue > maxValue && maxOpt) {
-                    setSelectToOption(otherSelect, maxOpt);
-                    setInfoNote(otherSelect, makeMaxNote(selectedValue, maxValue));
+                // 1) größer als Maximum -> auf Max setzen + Note zeigen
+                if (selectedValue > maxValue) {
+                    if (maxOpt) setSelectToOption(otherSelect, maxOpt);
+                    showNote(otherSelect);
                     return;
                 }
 
-                // Für alle anderen Fälle: Hinweise entfernen
-                clearInfoNote(otherSelect);
+                // Unter/gleich max -> Note ausblenden
+                hideNote(otherSelect);
 
-                // 2) Wert existiert in anderer Card und >= Min → auf diesen Wert setzen
+                // 2) Wenn Wert existiert und >= min -> exakt auf diesen Wert setzen
                 if (selectedValue >= minValue && hasOptionValue(otherSelect, selectedValue)) {
                     setSelectToValue(otherSelect, selectedValue);
                     return;
                 }
 
-                // 3) Sonst → Minimum setzen
+                // 3) Sonst -> Minimum setzen
                 if (minOpt) setSelectToOption(otherSelect, minOpt);
             });
         } finally {
@@ -159,7 +166,7 @@
     }
 
     /**
-     * Markiert Cards als inaktiv, wenn irgendeine andere Card einen aktuell
+     * Card als inaktiv markieren, wenn irgendeine andere Card einen aktuell
      * gewählten Wert hat, der größer als das Maximum dieser Card ist.
      */
     function compareCardValues() {
@@ -188,55 +195,56 @@
         });
     }
 
-    // =======================
-    // Hinweis-Mechanik (Note)
-    // =======================
+    /**
+     * Notes global aktualisieren:
+     * - Für jedes Select prüfen, ob irgendein anderer aktuell gewählter Wert > dessen Max ist.
+     * - Falls ja: Note zeigen (inactive entfernen), sonst: Note ausblenden (inactive hinzufügen).
+     * Hinweis: Der Text steht bereits im Markup; wir toggeln nur die Anzeige.
+     */
+    function updateNotes() {
+        const selects = document.querySelectorAll('.tt-pricing-card .document-dropdown select');
+        selects.forEach(select => {
+            const { maxValue } = getMinMax(select);
 
-    // Erstellt einen Hinweistext wie gewünscht, z. B.:
-    // "Max limit from 100,000 cloud documents reached. Set to 50,000."
-    function makeMaxNote(requiredValue, setToMaxValue) {
-        const required = formatNumber(requiredValue);
-        const maxv = formatNumber(setToMaxValue);
-        return `Max limit from ${required} cloud documents reached. Set to ${maxv}.`;
+            // Prüfe alle anderen aktuellen Werte
+            let someoneExceeds = false;
+            selects.forEach(other => {
+                if (other === select) return;
+                const selOpt = other.options[other.selectedIndex];
+                const val = selOpt ? toNumber(selOpt.value) : NaN;
+                if (!isNaN(val) && val > maxValue) someoneExceeds = true;
+            });
+
+            if (someoneExceeds) showNote(select);
+            else hideNote(select);
+        });
     }
 
-    // Hinweis an/bei einer .document-dropdown anzeigen (keine Blockade, nur Info)
-    function setInfoNote(select, text) {
-        const dd = select.closest('.document-dropdown');
-        if (!dd) return;
-        let note = dd.querySelector('.tt-select-note');
-        if (!note) {
-            note = document.createElement('div');
-            note.className = 'tt-select-note';
-            dd.appendChild(note);
-        }
-        note.textContent = text;
-    }
+    // =======================
+    // Hilfsfunktionen Anzeige Note
+    // =======================
 
-    // Hinweis entfernen
-    function clearInfoNote(select) {
+    function showNote(select) {
         const dd = select.closest('.document-dropdown');
         if (!dd) return;
         const note = dd.querySelector('.tt-select-note');
-        if (note) note.remove();
+        if (note) note.classList.remove('inactive');
+    }
+
+    function hideNote(select) {
+        const dd = select.closest('.document-dropdown');
+        if (!dd) return;
+        const note = dd.querySelector('.tt-select-note');
+        if (note) note.classList.add('inactive');
     }
 
     // =======================
-    // Hilfsfunktionen (Values)
+    // Hilfsfunktionen Werte/Optionen
     // =======================
 
     function toNumber(val) {
         const n = parseFloat(String(val).replace(/[^\d.-]/g, ''));
         return isNaN(n) ? NaN : n;
-    }
-
-    function formatNumber(n) {
-        try {
-            return new Intl.NumberFormat('en-US').format(n);
-        } catch {
-            // Fallback simple
-            return (n + '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        }
     }
 
     function getNumericOptions(select) {
@@ -255,7 +263,12 @@
     function getMinMaxWithRefs(select) {
         const items = getNumericOptions(select);
         if (items.length === 0) return { minValue: -Infinity, maxValue: -Infinity, minOpt: null, maxOpt: null };
-        return { minValue: items[0].value, maxValue: items[items.length - 1].value, minOpt: items[0].opt, maxOpt: items[items.length - 1].opt };
+        return {
+            minValue: items[0].value,
+            maxValue: items[items.length - 1].value,
+            minOpt: items[0].opt,
+            maxOpt: items[items.length - 1].opt
+        };
     }
 
     function hasOptionValue(select, val) {
