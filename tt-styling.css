@@ -1725,6 +1725,22 @@ pre.w-code-block code {
   background: linear-gradient(90deg, #8B33FF 0%, #8B33FF calc(10 * var(--range-value) * 1%), #000 calc(10 * var(--range-value) * 1%));
 }
 
+/* PRICING CARDS */
+.tt-pricing-cards .document-dropdown::after {
+  content: "";
+  position: absolute;
+  height: 1rem;
+  width: 1rem;
+  right: 0.25rem;
+  top: calc(50% - 0.5rem);
+  display: inline-block;
+  background-size: 0.6rem;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.96967 9.53033C3.67678 9.23744 3.67678 8.76256 3.96967 8.46967L6.43934 6L3.96967 3.53033C3.67678 3.23744 3.67678 2.76256 3.96967 2.46967C4.26256 2.17678 4.73744 2.17678 5.03033 2.46967L8.03033 5.46967C8.17098 5.61032 8.25 5.80109 8.25 6C8.25 6.19891 8.17098 6.38968 8.03033 6.53033L5.03033 9.53033C4.73744 9.82322 4.26256 9.82322 3.96967 9.53033Z' fill='%236F00FF'/%3E%3C/svg%3E%0A");
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: rotate(90deg);
+}
+
 .tt-pricing-card [data-plan-max=true] {
   display: none;
 }
