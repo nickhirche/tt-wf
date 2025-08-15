@@ -1,83 +1,73 @@
 // Tiptap Pricing Cards System
 (function() {
+    // Reentrancy-Guard, um Endlosschleifen bei programmgesteuerten Änderungen zu vermeiden
+    let isProgrammaticUpdate = false;
+
     /**
      * Initialisiert das Pricing Cards System.
-     * - Setzt Event-Listener auf das billingPeriodChanged Event.
-     * - Initialisiert die Anzeige nach aktuellem Tab-Status.
-     * - Setzt Listener auf alle Dropdowns innerhalb der Pricing Cards.
      */
     function initPricingCardsSystem() {
-        // Reaktion auf Wechsel der Abrechnungsperiode (z.B. TabMenu)
+        // Auf Periodenwechsel reagieren (TabMenu)
         document.addEventListener('billingPeriodChanged', function(event) {
             const activePeriod = event.detail.period;
             updatePricingCardsDisplay(activePeriod);
         });
 
-        // Initiale Anzeige (z.B. bei Page Load)
+        // Initiale Anzeige
         const initialPeriod = getInitialBillingPeriod();
         updatePricingCardsDisplay(initialPeriod);
 
-        // Event-Listener für alle Dropdowns in Cards setzen
+        // Dropdown-Änderungen überwachen
         initDocumentDropdowns();
-        
-        // Initial einmal Vergleich durchführen
+
+        // Initiale Vergleichslogik (inactive-Status)
         compareCardValues();
     }
 
     /**
-     * Liest die aktuell ausgewählte Billing Periode aus den Tabs.
-     * Fällt auf 'monthly' zurück, falls kein aktiver Tab gefunden.
+     * Ermittelt die aktuelle Abrechnungsperiode (monthly/yearly).
      */
     function getInitialBillingPeriod() {
         const activeButton = document.querySelector('.tt-billing-tab-btn.active, .tt-billing-tab-btn.is-active');
         if (activeButton) {
             return activeButton.getAttribute('data-billing-period');
         }
-        return 'monthly'; // Default-Fallback
+        return 'monthly';
     }
 
     /**
-     * Aktualisiert alle Pricing Cards für die gewählte Abrechnungsperiode.
-     * - Preise und Features werden entsprechend angepasst.
-     * - Periodenspezifische Bereiche werden ein-/ausgeblendet.
+     * Aktualisiert alle Cards auf Basis der Periodenwahl.
      */
     function updatePricingCardsDisplay(activePeriod) {
         document.querySelectorAll('.tt-pricing-card').forEach(card => {
             updateCardPrices(card, activePeriod);
             updatePeriodVisibility(card, activePeriod);
         });
-        
-        // Nach dem Update der Preise auch den Vergleich aktualisieren
+        // inactive-Status nach Preisupdates erneut evaluieren
         compareCardValues();
     }
 
     /**
-     * Aktualisiert die Preisanzeige einer einzelnen Pricing Card.
-     * - Holt den Wert aus dem aktiven Dropdown (falls vorhanden).
-     * - Setzt die Preise im .price-value Element.
-     * - Aktualisiert ggf. den Jahresgesamtpreis.
+     * Aktualisiert Preise in einer Card basierend auf der aktiven Periode
+     * und dem aktuell ausgewählten Dropdown-Wert (falls vorhanden).
      */
     function updateCardPrices(card, activePeriod) {
-        // Hauptpreis-Element
         const priceElement = card.querySelector('.price-value');
         if (!priceElement) return;
 
-        // Dropdown innerhalb der Card suchen
         const dropdown = card.querySelector('.document-dropdown select');
-        
-        if (dropdown) {
-            // Preis aus ausgewählter Option im Dropdown holen
+
+        if (dropdown && dropdown.selectedIndex >= 0) {
             const selectedOption = dropdown.options[dropdown.selectedIndex];
-            if (selectedOption) {
-                const price = activePeriod === 'yearly' 
+            if (selectedOption && !isPlaceholderOption(selectedOption)) {
+                const price = activePeriod === 'yearly'
                     ? selectedOption.getAttribute('data-price-yearly')
                     : selectedOption.getAttribute('data-price-monthly');
-                
+
                 if (price) {
                     priceElement.textContent = price;
                 }
 
-                // Jahresgesamtpreis nur für 'yearly'-Period setzen
                 const yearlyTotalElement = card.querySelector('.price-value-yearly');
                 if (yearlyTotalElement && activePeriod === 'yearly') {
                     const yearlyTotal = selectedOption.getAttribute('data-price-yearly-total');
@@ -85,17 +75,19 @@
                         yearlyTotalElement.textContent = yearlyTotal;
                     }
                 }
+            } else {
+                // Kein valider select (z. B. Placeholder) -> Preis ggf. leeren/neutral lassen
+                // Optional: priceElement.textContent = '';
             }
         } else {
-            // Ohne Dropdown: Preis aus data-Attributen des Preis-Elements
+            // Kein Dropdown: Fallback auf data-Attribute am Preis-Element
             const priceMonthly = priceElement.getAttribute('data-price-monthly');
             const priceYearly = priceElement.getAttribute('data-price-yearly');
-            
+
             if (priceMonthly && priceYearly) {
                 priceElement.textContent = activePeriod === 'yearly' ? priceYearly : priceMonthly;
             }
-            
-            // Jahresgesamtpreis nur für 'yearly'-Period setzen
+
             const yearlyTotalElement = card.querySelector('.price-value-yearly');
             if (yearlyTotalElement && activePeriod === 'yearly') {
                 const yearlyTotal = yearlyTotalElement.getAttribute('data-price-yearly-total');
@@ -107,106 +99,223 @@
     }
 
     /**
-     * Zeigt/Versteckt periodenspezifische Bereiche innerhalb der Card.
-     * - Elemente mit data-subscription-period='monthly' bzw. 'yearly'
-     *   bekommen 'inactive' je nach Auswahl.
-     * - Diese Funktion ist unabhängig vom 'inactive' Status der gesamten Card.
+     * Steuert die Sichtbarkeit periodenspezifischer Elemente.
+     * Unabhängig vom inactive-Status der gesamten Card.
      */
     function updatePeriodVisibility(card, activePeriod) {
-        // Monatlich-Bereiche
         card.querySelectorAll('[data-subscription-period="monthly"]').forEach(el => {
-            if (activePeriod === 'monthly') {
-                el.classList.remove('inactive');
-            } else {
-                el.classList.add('inactive');
-            }
+            if (activePeriod === 'monthly') el.classList.remove('inactive');
+            else el.classList.add('inactive');
         });
 
-        // Jährlich-Bereiche
         card.querySelectorAll('[data-subscription-period="yearly"]').forEach(el => {
-            if (activePeriod === 'yearly') {
-                el.classList.remove('inactive');
-            } else {
-                el.classList.add('inactive');
-            }
+            if (activePeriod === 'yearly') el.classList.remove('inactive');
+            else el.classList.add('inactive');
         });
     }
 
     /**
-     * Initialisiert die Dropdown-Funktionalität:
-     * - Setzt Change-Listener auf alle .document-dropdown selects in Cards.
-     * - Aktualisiert die Preise in der jeweiligen Card.
-     * - Führt nach Änderung einen Vergleich aller Cards durch.
+     * Change-Listener für alle Dropdowns setzen.
+     * Führt die Cross-Card-Regeln aus und aktualisiert anschließend die Preise und Inaktivität.
      */
     function initDocumentDropdowns() {
         document.querySelectorAll('.tt-pricing-card .document-dropdown select').forEach(select => {
             select.addEventListener('change', function() {
-                // Aktive Periode holen
+                if (isProgrammaticUpdate) return; // Programmatische Updates ignorieren
+
                 const activePeriod = getInitialBillingPeriod();
-                // Zugehörige Card finden
                 const card = this.closest('.tt-pricing-card');
                 if (!card) return;
-                // Nur die Preise in dieser Card aktualisieren
+
+                // Eigene Card-Preise updaten
                 updateCardPrices(card, activePeriod);
-                // Vergleich aller Cards durchführen
+
+                // Regeln auf andere Dropdowns anwenden
+                applyCrossCardRules(this);
+
+                // inactive-Status evaluieren
                 compareCardValues();
+
+                // Nach allen Anpassungen auch die Preise der anderen Cards aktualisieren
+                // (weil sich deren Auswahl eventuell geändert hat)
+                document.querySelectorAll('.tt-pricing-card').forEach(c => {
+                    updateCardPrices(c, activePeriod);
+                });
             });
         });
     }
 
     /**
-     * Vergleicht die Werte aller Dropdowns und markiert Cards als inaktiv,
-     * wenn ihr maximaler Wert kleiner ist als der aktuell ausgewählte Wert einer anderen Card.
+     * Cross-Card-Regeln:
+     * - Wenn selectedValue > max(other) -> other: keine Auswahl + dynamischer Placeholder
+     * - Else wenn selectedValue >= min(other) und Wert existiert in other -> other = selectedValue
+     * - Else -> other = min(other)
+     */
+    function applyCrossCardRules(changedSelect) {
+        const changedCard = changedSelect.closest('.tt-pricing-card');
+        const changedOption = changedSelect.options[changedSelect.selectedIndex];
+        if (!changedOption || isPlaceholderOption(changedOption)) return;
+
+        const selectedValue = toNumber(changedSelect.value);
+        if (isNaN(selectedValue)) return;
+
+        const allSelects = Array.from(document.querySelectorAll('.tt-pricing-card .document-dropdown select'));
+
+        // Placeholder-Text: Optionstext des geänderten Dropdowns (z. B. "100000 Team")
+        const placeholderText = getOptionLabel(changedOption, changedCard);
+
+        isProgrammaticUpdate = true;
+        try {
+            allSelects.forEach(otherSelect => {
+                if (otherSelect === changedSelect) return;
+
+                const { minValue, maxValue } = getMinMax(otherSelect);
+                const otherCard = otherSelect.closest('.tt-pricing-card');
+
+                // 1) Größer als Max -> Placeholder in anderer Card
+                if (selectedValue > maxValue) {
+                    setPlaceholderSelection(otherSelect, placeholderText);
+                    return;
+                }
+
+                // 2) Gleich/über Min und Option vorhanden -> auf diesen Wert setzen
+                if (selectedValue >= minValue && hasOptionValue(otherSelect, selectedValue)) {
+                    clearPlaceholderIfAny(otherSelect);
+                    setSelectToValue(otherSelect, selectedValue);
+                    return;
+                }
+
+                // 3) Sonst -> auf Minimum setzen
+                clearPlaceholderIfAny(otherSelect);
+                setSelectToMin(otherSelect);
+            });
+        } finally {
+            isProgrammaticUpdate = false;
+        }
+    }
+
+    /**
+     * Markiert Cards als inaktiv, wenn deren maximaler Wert
+     * kleiner ist als der aktuell ausgewählte Wert einer anderen Card.
      */
     function compareCardValues() {
-        // Alle Cards mit Dropdowns sammeln
-        const cardsWithDropdowns = document.querySelectorAll('.tt-pricing-card .document-dropdown');
-        if (cardsWithDropdowns.length < 2) return; // Mindestens 2 für Vergleich nötig
-        
-        // Aktuelle Werte und maximale Werte für jede Card sammeln
-        const cardInfo = [];
-        cardsWithDropdowns.forEach(dropdownContainer => {
-            const card = dropdownContainer.closest('.tt-pricing-card');
-            const dropdown = dropdownContainer.querySelector('select');
-            if (!card || !dropdown) return;
-            
-            // Aktuell ausgewählten Wert ermitteln
-            const selectedOption = dropdown.options[dropdown.selectedIndex];
-            if (!selectedOption) return;
-            const currentValue = parseFloat(selectedOption.value) || 0;
-            
-            // Maximalen Wert im Dropdown ermitteln
-            let maxValue = 0;
-            Array.from(dropdown.options).forEach(option => {
-                const value = parseFloat(option.value) || 0;
-                if (value > maxValue) maxValue = value;
-            });
-            
-            cardInfo.push({
-                card: card,
-                currentValue: currentValue,
-                maxValue: maxValue
-            });
-        });
-        
-        // Für jede Card prüfen, ob sie inaktiv sein sollte
-        cardInfo.forEach(info => {
-            // Eine Card ist inaktiv, wenn ihr maximaler Wert kleiner ist als
-            // der aktuell ausgewählte Wert einer anderen Card
-            const shouldBeInactive = cardInfo.some(otherInfo => 
-                otherInfo.card !== info.card && info.maxValue < otherInfo.currentValue
-            );
-            
-            // Status der Card aktualisieren
-            if (shouldBeInactive) {
-                info.card.classList.add('inactive');
-            } else {
-                info.card.classList.remove('inactive');
+        const cardsWithDropdowns = document.querySelectorAll('.tt-pricing-card .document-dropdown select');
+        if (cardsWithDropdowns.length < 2) return;
+
+        // Aktuelle Auswahlwerte und Maxima je Card
+        const info = [];
+        cardsWithDropdowns.forEach(select => {
+            const card = select.closest('.tt-pricing-card');
+            const { maxValue } = getMinMax(select);
+
+            const selected = select.options[select.selectedIndex];
+            let currentValue = -Infinity; // Falls Placeholder/keine Auswahl, kleiner als alles
+            if (selected && !isPlaceholderOption(selected)) {
+                currentValue = toNumber(selected.value);
             }
+
+            info.push({ card, select, maxValue, currentValue });
+        });
+
+        // Für jede Card prüfen, ob irgendeine andere Card einen Wert > max dieser Card hat
+        info.forEach(a => {
+            const shouldBeInactive = info.some(b => b.card !== a.card && b.currentValue > a.maxValue);
+            if (shouldBeInactive) a.card.classList.add('inactive');
+            else a.card.classList.remove('inactive');
         });
     }
 
-    // Initialisierung nach DOM-Load
+    // =======================
+    // Hilfsfunktionen
+    // =======================
+
+    function toNumber(val) {
+        const n = parseFloat(String(val).replace(/[^\d.-]/g, ''));
+        return isNaN(n) ? NaN : n;
+    }
+
+    function getNumericOptions(select) {
+        return Array.from(select.options)
+            .filter(opt => !isPlaceholderOption(opt))
+            .map(opt => ({ opt, value: toNumber(opt.value) }))
+            .filter(item => !isNaN(item.value))
+            .sort((a, b) => a.value - b.value);
+    }
+
+    function getMinMax(select) {
+        const items = getNumericOptions(select);
+        if (items.length === 0) return { minValue: -Infinity, maxValue: -Infinity };
+        return { minValue: items[0].value, maxValue: items[items.length - 1].value };
+    }
+
+    function hasOptionValue(select, val) {
+        const target = toNumber(val);
+        return Array.from(select.options).some(opt => !isPlaceholderOption(opt) && toNumber(opt.value) === target);
+    }
+
+    function setSelectToValue(select, val) {
+        const target = toNumber(val);
+        const idx = Array.from(select.options).findIndex(opt => !isPlaceholderOption(opt) && toNumber(opt.value) === target);
+        if (idx >= 0) {
+            select.selectedIndex = idx;
+        }
+    }
+
+    function setSelectToMin(select) {
+        const items = getNumericOptions(select);
+        if (items.length > 0) {
+            const firstIndex = Array.from(select.options).indexOf(items[0].opt);
+            if (firstIndex >= 0) select.selectedIndex = firstIndex;
+        }
+    }
+
+    function isPlaceholderOption(option) {
+        return option && option.hasAttribute && option.hasAttribute('data-tt-placeholder');
+    }
+
+    function setPlaceholderSelection(select, text) {
+        // Prüfen, ob bereits ein Placeholder existiert
+        let placeholder = Array.from(select.options).find(opt => isPlaceholderOption(opt));
+
+        if (!placeholder) {
+            // Neuen Placeholder-Optionseintrag an den Anfang setzen
+            placeholder = document.createElement('option');
+            placeholder.setAttribute('data-tt-placeholder', 'true');
+            placeholder.value = '';
+            placeholder.disabled = true;
+            // hidden weglassen, damit Text sichtbar ist
+            select.insertBefore(placeholder, select.firstChild);
+        }
+
+        // Placeholder-Text setzen (z. B. der Labeltext des blockierenden Plans)
+        placeholder.textContent = text || 'Nicht verfügbar';
+
+        // Placeholder als ausgewählt setzen
+        select.selectedIndex = Array.from(select.options).indexOf(placeholder);
+    }
+
+    function clearPlaceholderIfAny(select) {
+        const placeholder = Array.from(select.options).find(opt => isPlaceholderOption(opt));
+        if (placeholder) {
+            // Placeholder nicht zwingend löschen, aber falls er gerade ausgewählt ist,
+            // sorgen wir dafür, dass anschließend ein echter Wert gesetzt wird.
+            // Optional: placeholder entfernen, um die Liste sauber zu halten:
+            select.removeChild(placeholder);
+        }
+    }
+
+    function getOptionLabel(option, cardEl) {
+        // Basis: Optionstext
+        const optionText = option.textContent?.trim() || '';
+        // Optional: Card-spezifischen Titel ergänzen (falls vorhanden)
+        const cardTitleEl = cardEl ? cardEl.querySelector('.tt-pricing-plan-title') : null;
+        const cardTitle = cardTitleEl ? cardTitleEl.textContent.trim() : '';
+
+        // Wenn ein Card-Titel existiert, kombinieren wir beides
+        return cardTitle ? `${optionText} – ${cardTitle}` : optionText || 'Nicht verfügbar';
+    }
+
+    // Initialisierung
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initPricingCardsSystem);
     } else {
