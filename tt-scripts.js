@@ -848,29 +848,75 @@ document.addEventListener("DOMContentLoaded", function() {
   }
 });
 
-/* GITHUB STARS */
-// GitHub Stars Counter - Simplified Version
+/* GITHUB NPM COUNTS */
+// Stats Counter for GitHub Stars and NPM Downloads
 document.addEventListener('DOMContentLoaded', function() {
-  // Find all elements with data-github-stars="true"
-  const elements = document.querySelectorAll('[data-github-stars="true"]');
-  
-  if (elements.length === 0) return;
-  
-  // Fetch stars for the specific repository
-  fetchRepoStars('ueberdosis/tiptap')
-    .then(starCount => {
-      // Update all elements with the formatted star count
-      elements.forEach(element => {
-        element.textContent = formatNumber(starCount);
+  // Format number according to the rules (e.g., 30147 -> 30,1k)
+  function formatNumber(num) {
+    if (num < 1000) {
+      return num.toString();
+    } else if (num < 1000000) {
+      // For numbers between 1000-999999, show one decimal if needed
+      const rounded = Math.floor(num / 100) / 10;
+      // Check if the decimal part is 0
+      if (rounded % 1 === 0) {
+        return Math.floor(rounded) + 'k';
+      } else {
+        return rounded.toFixed(1).replace('.', ',') + 'k';
+      }
+    } else {
+      // For millions, show one decimal if needed
+      const rounded = Math.floor(num / 100000) / 10;
+      // Check if the decimal part is 0
+      if (rounded % 1 === 0) {
+        return Math.floor(rounded) + 'M';
+      } else {
+        return rounded.toFixed(1).replace('.', ',') + 'M';
+      }
+    }
+  }
+
+  // GitHub Stars Counter
+  const githubElements = document.querySelectorAll('[data-github-stars="true"]');
+  if (githubElements.length > 0) {
+    // Fetch stars for the specific repository
+    fetchRepoStars('ueberdosis/tiptap')
+      .then(starCount => {
+        // Update all elements with the formatted star count
+        githubElements.forEach(element => {
+          element.textContent = formatNumber(starCount);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching repo stars:', error);
+        githubElements.forEach(element => {
+          element.textContent = 'Error';
+        });
       });
-    })
-    .catch(error => {
-      console.error('Error fetching repo stars:', error);
-      elements.forEach(element => {
-        element.textContent = 'Error';
-      });
-    });
+  }
+  
+  // NPM Downloads Counter
+  const npmElements = document.querySelectorAll('[data-npm-downloads="true"]');
+  if (npmElements.length > 0) {
+    // NPM package name
+    const packageName = '@tiptap/core';
     
+    // Fetch NPM download stats
+    fetchNpmDownloads(packageName)
+      .then(downloadCount => {
+        // Update all elements with the formatted download count
+        npmElements.forEach(element => {
+          element.textContent = formatNumber(downloadCount);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching NPM downloads:', error);
+        npmElements.forEach(element => {
+          element.textContent = 'Error';
+        });
+      });
+  }
+  
   // Fetch stars for a specific repository
   async function fetchRepoStars(repoFullName) {
     const response = await fetch(`https://api.github.com/repos/${repoFullName}`);
@@ -883,17 +929,17 @@ document.addEventListener('DOMContentLoaded', function() {
     return repoData.stargazers_count;
   }
   
-  // Format number according to the rules (e.g., 30147 -> 30,1k)
-  function formatNumber(num) {
-    if (num < 1000) {
-      return num.toString();
-    } else if (num < 1000000) {
-      // For numbers between 1000-999999, show one decimal
-      return (Math.floor(num / 100) / 10).toFixed(1).replace('.', ',') + 'k';
-    } else {
-      // For millions, show one decimal
-      return (Math.floor(num / 100000) / 10).toFixed(1).replace('.', ',') + 'M';
+  // Fetch NPM download stats for a package
+  async function fetchNpmDownloads(packageName) {
+    // Get downloads for the last month
+    const response = await fetch(`https://api.npmjs.org/downloads/point/last-month/${packageName}`);
+    
+    if (!response.ok) {
+      throw new Error(`NPM API error: ${response.status}`);
     }
+    
+    const data = await response.json();
+    return data.downloads || 0;
   }
 });
 
