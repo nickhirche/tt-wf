@@ -117,7 +117,7 @@ h1, h2, h3, h4, h5, h6 {
 .tt-navbar.dark .tt-navbar-menu .tt-subnav-icon {
   filter: invert(1);
 }
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 991px) {
   .tt-navbar.dark .tt-navbar-menu {
     background: rgba(43, 43, 43, 0.7);
   }
