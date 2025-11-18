@@ -138,9 +138,6 @@ h1, h2, h3, h4, h5, h6 {
 .tt-navbar.dark .tt-navbar-strip .w-nav-brand {
   color: var(--white-a-100);
 }
-.tt-navbar.dark .tt-navbar-strip .tt-navbar-link {
-  color: var(--white-a-100);
-}
 .tt-navbar.dark .tt-navbar-strip .tt-navbar-link::before {
   background-color: var(--white-a-5);
 }
