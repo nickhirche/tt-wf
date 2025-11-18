@@ -335,7 +335,7 @@ h1, h2, h3, h4, h5, h6 {
     overflow-y: auto;
     overflow-x: hidden;
   }
-  .tt-navbar-menu .tt-navbar-link {
+  .tt-navbar-menu .tt-navbar-link:not(.btn-primary):not(.btn-secondary) {
     font-size: 1.1rem;
     padding: 0.8rem 1rem;
   }
