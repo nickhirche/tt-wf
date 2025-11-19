@@ -1552,7 +1552,7 @@ blockquote em::after {
 .tt-richtext figure, .tt-introtext-wrap figure {
   margin-bottom: 3rem;
 }
-.tt-richtext h2 + figure, .tt-introtext-wrap h2 + figure {
+.tt-richtext h2 + figure, .tt-richtext h3 + figure, .tt-introtext-wrap h2 + figure, .tt-introtext-wrap h3 + figure {
   margin-top: 0;
 }
 
