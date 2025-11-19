@@ -1549,6 +1549,9 @@ blockquote em::after {
 .tt-richtext:last-child, .tt-introtext-wrap:last-child {
   margin-top: 0;
 }
+.tt-richtext figure, .tt-introtext-wrap figure {
+  margin-bottom: 3rem;
+}
 .tt-richtext h2 + figure, .tt-introtext-wrap h2 + figure {
   margin-top: 0;
 }
