@@ -2069,13 +2069,8 @@ input[type=range i]::-moz-range-thumb {
 
 /* Batch */
 .batch-gradient {
-  position: relative;
-  padding: 6px 14px;
-  border-radius: 12px;
-  display: inline-block;
-  background: transparent; /* transparent! */
-  color: black; /* Beispiel */
   z-index: 0;
+  border-color: transparent;
 }
 
 /* Gradient-Border Layer */
@@ -2093,6 +2088,11 @@ input[type=range i]::-moz-range-thumb {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   z-index: -1;
+}
+
+.batch-gradient.blue-purple-subdued::before {
+  opacity: 0.4;
+  background: linear-gradient(45deg, #2D5EFF, #DC7BFF);
 }
 
 /*Shiki */
