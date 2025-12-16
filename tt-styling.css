@@ -924,6 +924,7 @@ label.checkbox:hover .tt-input-checkbox {
 .tt-description-collapsable[data-collapse-state=expanded] .text-truncated {
   -webkit-line-clamp: unset;
   overflow: visible;
+  color: var(--black-a-60);
 }
 
 /* FAQ Accordion */
