@@ -2067,6 +2067,34 @@ input[type=range i]::-moz-range-thumb {
   border-color: var(--white-a-10);
 }
 
+/* Batch */
+.batch-gradient {
+  position: relative;
+  padding: 6px 14px;
+  border-radius: 12px;
+  display: inline-block;
+  background: transparent; /* transparent! */
+  color: black; /* Beispiel */
+  z-index: 0;
+}
+
+/* Gradient-Border Layer */
+.batch-gradient::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px; /* Border width */
+  /* Der sichtbare Gradient */
+  background: linear-gradient(45deg, #ff4d4d, #7d4dff);
+  /* Die Maske schneidet die Innenseite aus */
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  z-index: -1;
+}
+
 /*Shiki */
 .code-output * {
   display: none;
