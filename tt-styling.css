@@ -914,6 +914,18 @@ label.checkbox:hover .tt-input-checkbox {
   transform: scale(110%);
 }
 
+/* Roadmap Cards */
+.tt-description-collapsable[data-collapse-state=collapsed] .text-truncated {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tt-description-collapsable[data-collapse-state=expanded] .text-truncated {
+  -webkit-line-clamp: unset;
+  overflow: visible;
+}
+
 /* FAQ Accordion */
 .tt-faq .tt-faq-container .tt-faq-item .ac-trigger::before, .tt-faq .tt-faq-container .tt-faq-item .ac-trigger::after {
   content: "";
