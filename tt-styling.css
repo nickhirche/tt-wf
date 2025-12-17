@@ -2095,6 +2095,10 @@ input[type=range i]::-moz-range-thumb {
   background: linear-gradient(45deg, #2D5EFF, #DC7BFF);
 }
 
+a.batch-gradient.blue-purple-subdued:hover {
+  opacity: 1;
+}
+
 /*Shiki */
 .code-output * {
   display: none;
