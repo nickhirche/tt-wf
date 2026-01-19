@@ -45,11 +45,11 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  // Versatz nach oben: 4rem
+  // Versatz nach oben: 5rem
   var rootFontSize = parseFloat(
     window.getComputedStyle(document.documentElement).fontSize
   );
-  var scrollOffset = 4 * rootFontSize; // 4rem
+  var scrollOffset = 5 * rootFontSize; // 5rem
 
   var buttons = [];
 
@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
       var viewportHeight =
         window.innerHeight || document.documentElement.clientHeight || 0;
       var activationThreshold = viewportHeight * 0.2; // 20 % des Viewports
+      var bottomThreshold = viewportHeight * 0.4; // 40 % vom unteren Viewport entfernt
 
       headings.forEach(function (h2) {
         var rect = h2.getBoundingClientRect();
@@ -187,8 +188,16 @@ document.addEventListener('DOMContentLoaded', function () {
         var isVisibleEnough =
           visiblePercentage >= 0.2 || visibleHeight >= activationThreshold;
 
+        // Bedingung 3: Beim Runter-Scrollen – Heading muss mehr als 40 % vom unteren Viewport entfernt sein
+        // D. h.: rect.top muss kleiner sein als viewportHeight - bottomThreshold = viewportHeight * 0.6
+        var isFarEnoughFromBottom = rect.top < viewportHeight - bottomThreshold;
+
         // Nur H2s berücksichtigen, die unsere Aktivierungs-Regel erfüllen
-        if ((hasPassedOffset || isVisibleEnough) && rect.top < minTop) {
+        if (
+          (hasPassedOffset || isVisibleEnough) &&
+          isFarEnoughFromBottom &&
+          rect.top < minTop
+        ) {
           minTop = rect.top;
           activeId = h2.id;
         }
