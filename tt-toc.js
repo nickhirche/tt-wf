@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveButtonById('toc-overview');
   var currentActiveId = 'toc-overview';
 
-  // IntersectionObserver zur Ermittlung der aktiven Section
+  // IntersectionObserver: aktive Section = letzte H2, deren top <= 60% Viewporthöhe ist
   var observer = new IntersectionObserver(
     function () {
       var scrollTop =
@@ -162,63 +162,24 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-      var activeId = null;
+      var bestId = null;
+      var bestTop = -Infinity;
 
-      // RUNTERSCROLLEN:
-      // Finde die unterste Heading, deren top <= activationLine ist
-      var bestCandidateId = null;
-      var bestCandidateTop = -Infinity;
-
+      // Finde die letzte Heading, deren top <= activationLine ist
       headings.forEach(function (h2) {
         var rect = h2.getBoundingClientRect();
-        var h2Top = rect.top;
-        var inView = rect.bottom > 0 && rect.top < viewportHeight;
+        var top = rect.top;
 
-        if (!inView) {
-          return;
-        }
-
-        // Heading hat die 60%-Linie erreicht (oder überschritten)
-        if (h2Top <= activationLine && h2Top > bestCandidateTop) {
-          bestCandidateTop = h2Top;
-          bestCandidateId = h2.id;
+        if (top <= activationLine && top > bestTop) {
+          bestTop = top;
+          bestId = h2.id;
         }
       });
 
-      if (bestCandidateId) {
-        activeId = bestCandidateId;
-      } else {
-        // HOCHSCROLLEN:
-        // Keine Heading hat die 60%-Linie erreicht
-        // -> suche die nächst höhere Heading oberhalb der 60%-Linie
-        var nextHigherId = null;
-        var nextHigherTop = Infinity;
+      var activeId = bestId || 'toc-overview';
 
-        headings.forEach(function (h2) {
-          var rect = h2.getBoundingClientRect();
-          var h2Top = rect.top;
-
-          // Heading ist über der 60%-Linie
-          if (h2Top > activationLine && h2Top < nextHigherTop) {
-            nextHigherTop = h2Top;
-            nextHigherId = h2.id;
-          }
-        });
-
-        if (nextHigherId) {
-          activeId = nextHigherId;
-        } else {
-          // Keine passende Heading gefunden -> Overview aktivieren
-          activeId = 'toc-overview';
-        }
-      }
-
-      if (activeId) {
-        currentActiveId = activeId;
-        setActiveButtonById(activeId);
-      } else {
-        setActiveButtonById(currentActiveId);
-      }
+      currentActiveId = activeId;
+      setActiveButtonById(activeId);
     },
     {
       root: null,
