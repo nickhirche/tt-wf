@@ -1589,13 +1589,13 @@ blockquote em::after {
 }
 
 /* RICHTEXT Terms */
-.tt-richtext.cta-rte ul.checklist {
+.tt-richtext.cta-rte ul {
   list-style: none;
 }
-.tt-richtext.cta-rte ul.checklist li {
+.tt-richtext.cta-rte ul li {
   position: relative;
 }
-.tt-richtext.cta-rte ul.checklist li::before {
+.tt-richtext.cta-rte ul li::before {
   content: "";
   height: 1em;
   width: 1em;
