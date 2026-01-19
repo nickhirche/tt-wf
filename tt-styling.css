@@ -1547,9 +1547,27 @@ blockquote em::after {
   height: auto;
   aspect-ratio: 16/9;
 }
+.tt-richtext .w-embed:has(hr) {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
 .tt-richtext ul ul {
   margin-top: 0.4rem;
   margin-bottom: 0.4rem;
+}
+.tt-richtext aside {
+  grid-column-gap: 0.75rem;
+  grid-row-gap: 0.75rem;
+  background-color: var(--black-a-6);
+  border-radius: 0.75rem;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 1rem;
+  font-size: 0.9rem;
+  display: flex;
+}
+.tt-richtext aside span {
+  font-family: Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, Android Emoji, EmojiSymbols, EmojiOne Mozilla, Twemoji Mozilla, Segoe UI Symbol, Noto Color Emoji Compat, emoji;
 }
 
 .tt-richtext:first-child, .tt-introtext-wrap:first-child {
