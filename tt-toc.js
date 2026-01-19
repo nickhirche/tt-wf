@@ -45,6 +45,12 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
+  // Versatz nach oben: 4rem
+  var rootFontSize = parseFloat(
+    window.getComputedStyle(document.documentElement).fontSize
+  );
+  var scrollOffset = 4 * rootFontSize; // 4rem
+
   var buttons = [];
 
   function setActiveButtonById(id) {
@@ -58,6 +64,27 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     });
   }
+
+  // Overview-Button erstellen (springt ganz nach oben)
+  var overviewBtn = document.createElement('button');
+  overviewBtn.type = 'button';
+  overviewBtn.textContent = 'Overview';
+  overviewBtn.setAttribute('data-toc-target', 'toc-overview');
+
+  overviewBtn.addEventListener('click', function () {
+    setActiveButtonById('toc-overview');
+    try {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    } catch (e) {
+      window.scrollTo(0, 0);
+    }
+  });
+
+  tocEl.appendChild(overviewBtn);
+  buttons.push(overviewBtn);
 
   // IDs erzeugen und Buttons bauen – nur so viele, wie es Überschriften gibt
   var count = Math.min(tocItems.length, headings.length);
@@ -88,16 +115,19 @@ document.addEventListener('DOMContentLoaded', function () {
         // Active-State direkt setzen
         setActiveButtonById(targetId);
 
+        var rect = target.getBoundingClientRect();
+        var scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop || 0;
+        var targetY = rect.top + scrollTop - scrollOffset;
+
         try {
-          target.scrollIntoView({
+          window.scrollTo({
+            top: targetY,
             behavior: 'smooth',
-            block: 'start'
           });
         } catch (e) {
           // Fallback für ältere Browser
-          var rect = target.getBoundingClientRect();
-          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || 0;
-          window.scrollTo(0, rect.top + scrollTop);
+          window.scrollTo(0, targetY);
         }
       };
     })(id));
@@ -110,15 +140,28 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
-  // Ersten Eintrag initial aktiv setzen
-  setActiveButtonById(headings[0].id);
+  // Overview initial aktiv setzen und aktuellen Active-State merken
+  setActiveButtonById('toc-overview');
+  var currentActiveId = 'toc-overview';
 
-  // IntersectionObserver zur Ermittlung des obersten sichtbaren H2
+  // IntersectionObserver zur Ermittlung der aktiven Section
   var observer = new IntersectionObserver(
     function () {
+      var scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || 0;
+
+      // Wenn ganz oben, Overview aktivieren
+      if (scrollTop < scrollOffset) {
+        currentActiveId = 'toc-overview';
+        setActiveButtonById('toc-overview');
+        return;
+      }
+
       var activeId = null;
       var minTop = Infinity;
-      var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+      var viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+      var activationThreshold = viewportHeight * 0.2; // 20 % des Viewports
 
       headings.forEach(function (h2) {
         var rect = h2.getBoundingClientRect();
@@ -128,20 +171,38 @@ document.addEventListener('DOMContentLoaded', function () {
           return;
         }
 
-        // Der H2, der dem oberen Viewport-Rand am nächsten ist (kleinstes top)
-        if (rect.top < minTop) {
+        // sichtbare Höhe des Elements
+        var visibleHeight =
+          Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+        var elementHeight = rect.height;
+        var visiblePercentage =
+          elementHeight > 0 ? visibleHeight / elementHeight : 0;
+
+        // Bedingung 1: H2 hat den oberen Offset überschritten
+        var hasPassedOffset = rect.top <= scrollOffset;
+
+        // Bedingung 2: Mindestens 20 % sichtbar (oder 20 % des Viewports)
+        var isVisibleEnough =
+          visiblePercentage >= 0.2 || visibleHeight >= activationThreshold;
+
+        // Nur H2s berücksichtigen, die unsere Aktivierungs-Regel erfüllen
+        if ((hasPassedOffset || isVisibleEnough) && rect.top < minTop) {
           minTop = rect.top;
           activeId = h2.id;
         }
       });
 
       if (activeId) {
+        currentActiveId = activeId;
         setActiveButtonById(activeId);
+      } else {
+        // Keine neue Section qualifiziert sich -> vorherige aktiv lassen
+        setActiveButtonById(currentActiveId);
       }
     },
     {
       root: null,
-      threshold: [0, 0.01, 0.1, 0.25]
+      threshold: [0, 0.2, 0.5]
     }
   );
 
