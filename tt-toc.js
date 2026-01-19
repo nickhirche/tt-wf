@@ -155,14 +155,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // IntersectionObserver nur initialisieren, wenn es Headings gibt
   if (headings.length) {
-    // IntersectionObserver: aktive Section = letzte H2, deren top <= 60% Viewporthöhe ist
+    // IntersectionObserver: aktive Section = letzte H2, die die 40%-Linie erreicht hat
     var observer = new IntersectionObserver(
       function () {
         var scrollTop =
           window.pageYOffset || document.documentElement.scrollTop || 0;
         var viewportHeight =
           window.innerHeight || document.documentElement.clientHeight || 0;
-        var activationLine = viewportHeight * 0.6; // 60 % vom oberen Rand
+        var activationLine = viewportHeight * 0.4; // 40 % vom oberen Rand
 
         // Wenn ganz oben, Overview aktivieren
         if (scrollTop < scrollOffset) {
@@ -173,15 +173,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
         var bestId = null;
         var bestTop = -Infinity;
+        var activationLineAbsolute = scrollTop + activationLine; // Absolute Position der 40%-Linie
 
-        // Finde die letzte Heading, deren top <= activationLine ist
+        // Finde die letzte Heading, die die 40%-Linie erreicht hat
+        // (auch wenn sie jetzt außerhalb des Viewports ist)
         headings.forEach(function (h2) {
           var rect = h2.getBoundingClientRect();
-          var top = rect.top;
+          var h2TopAbsolute = rect.top + scrollTop; // Absolute Position der Heading
 
-          if (top <= activationLine && top > bestTop) {
-            bestTop = top;
-            bestId = h2.id;
+          // Heading hat die 40%-Linie erreicht (ist oberhalb oder auf der Linie)
+          if (h2TopAbsolute <= activationLineAbsolute) {
+            // Nimm die unterste Heading, die diese Bedingung erfüllt
+            if (h2TopAbsolute > bestTop) {
+              bestTop = h2TopAbsolute;
+              bestId = h2.id;
+            }
           }
         });
 
@@ -192,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
       },
       {
         root: null,
-        threshold: [0, 0.6]
+        threshold: [0, 0.4]
       }
     );
 
