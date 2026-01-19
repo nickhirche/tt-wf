@@ -1566,7 +1566,8 @@ blockquote em::after {
   font-size: 0.9rem;
   display: flex;
 }
-.tt-richtext aside span {
+.tt-richtext aside > span:first-child:nth-last-child(2) {
+  /* Icon-Style */
   font-family: Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, Android Emoji, EmojiSymbols, EmojiOne Mozilla, Twemoji Mozilla, Segoe UI Symbol, Noto Color Emoji Compat, emoji;
 }
 
