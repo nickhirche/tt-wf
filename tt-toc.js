@@ -13,22 +13,32 @@ document.addEventListener('DOMContentLoaded', function () {
   var tocItems = [];
 
   if (presetBtn) {
-    // Case A: Vorlage-Button mit kommaseparierter Liste
-    var rawText = presetBtn.innerText || presetBtn.textContent || '';
+    // Text der Vorlage holen
+    var rawText = (presetBtn.innerText || presetBtn.textContent || '').trim();
 
-    tocItems = rawText
-      .split(',')
-      .map(function (t) {
-        return t.trim();
-      })
-      .filter(function (t) {
-        return !!t;
-      });
+    // Wenn kein Komma vorhanden oder leerer Text -> wie Case B behandeln
+    if (!rawText || rawText.indexOf(',') === -1) {
+      // Dummy-Vorlage entfernen, damit wir aus H2 generieren können
+      presetBtn.parentNode.removeChild(presetBtn);
+      presetBtn = null;
+    } else {
+      // Case A: echte kommaseparierte Liste
+      tocItems = rawText
+        .split(',')
+        .map(function (t) {
+          return t.trim();
+        })
+        .filter(function (t) {
+          return !!t;
+        });
 
-    // Vorlage entfernen
-    presetBtn.parentNode.removeChild(presetBtn);
-  } else if (headings.length) {
-    // Case B: Automatisch aus den H2-Texten erzeugen
+      // Vorlage entfernen
+      presetBtn.parentNode.removeChild(presetBtn);
+    }
+  }
+
+  // Case B: Automatisch aus den H2-Texten erzeugen, wenn keine gültige Vorlage existiert
+  if (!presetBtn && headings.length && !tocItems.length) {
     tocItems = headings
       .map(function (h) {
         return (h.textContent || '').trim();
