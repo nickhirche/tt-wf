@@ -1548,8 +1548,12 @@ blockquote em::after {
   aspect-ratio: 16/9;
 }
 .tt-richtext .w-embed:has(hr) {
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 3.5rem;
+  margin-bottom: 3.5rem;
+}
+.tt-richtext .w-embed:has(hr) hr {
+  border: 0;
+  border-top: 1px solid var(--black-a-16);
 }
 .tt-richtext ul ul {
   margin-top: 0.4rem;
@@ -1566,7 +1570,7 @@ blockquote em::after {
   font-size: 0.9rem;
   display: flex;
 }
-.tt-richtext aside > span:first-child:nth-last-child(2) {
+.tt-richtext aside > span:first-of-type:nth-of-type(1):nth-last-of-type(2) {
   /* Icon-Style */
   font-family: Apple Color Emoji, Segoe UI Emoji, Noto Color Emoji, Android Emoji, EmojiSymbols, EmojiOne Mozilla, Twemoji Mozilla, Segoe UI Symbol, Noto Color Emoji Compat, emoji;
 }
