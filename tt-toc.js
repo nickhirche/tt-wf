@@ -151,6 +151,9 @@ document.addEventListener('DOMContentLoaded', function () {
     function () {
       var scrollTop =
         window.pageYOffset || document.documentElement.scrollTop || 0;
+      var viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+      var activationLine = viewportHeight * 0.6; // 60 % vom oberen Rand
 
       // Wenn ganz oben, Overview aktivieren
       if (scrollTop < scrollOffset) {
@@ -160,67 +163,53 @@ document.addEventListener('DOMContentLoaded', function () {
       }
 
       var activeId = null;
-      var minTop = Infinity;
-      var viewportHeight =
-        window.innerHeight || document.documentElement.clientHeight || 0;
-      var activationThreshold = viewportHeight * 0.2; // 20 % des Viewports
-      var bottomThreshold = viewportHeight * 0.4; // 40 % vom unteren Viewport entfernt
+
+      // RUNTERSCROLLEN:
+      // Finde die unterste Heading, deren top <= activationLine ist
+      var bestCandidateId = null;
+      var bestCandidateTop = -Infinity;
 
       headings.forEach(function (h2) {
         var rect = h2.getBoundingClientRect();
+        var h2Top = rect.top;
         var inView = rect.bottom > 0 && rect.top < viewportHeight;
 
         if (!inView) {
           return;
         }
 
-        // sichtbare Höhe des Elements
-        var visibleHeight =
-          Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
-        var elementHeight = rect.height;
-        var visiblePercentage =
-          elementHeight > 0 ? visibleHeight / elementHeight : 0;
-
-        // Bedingung 1: H2 hat den oberen Offset überschritten
-        var hasPassedOffset = rect.top <= scrollOffset;
-
-        // Bedingung 2: Mindestens 20 % sichtbar (oder 20 % des Viewports)
-        var isVisibleEnough =
-          visiblePercentage >= 0.2 || visibleHeight >= activationThreshold;
-
-        // Bedingung 3: Beim Runter-Scrollen – Heading muss mehr als 40 % vom unteren Viewport entfernt sein
-        // D. h.: rect.top muss kleiner sein als viewportHeight - bottomThreshold = viewportHeight * 0.6
-        var isFarEnoughFromBottom = rect.top < viewportHeight - bottomThreshold;
-
-        // Nur H2s berücksichtigen, die unsere Aktivierungs-Regel erfüllen
-        if (
-          (hasPassedOffset || isVisibleEnough) &&
-          isFarEnoughFromBottom &&
-          rect.top < minTop
-        ) {
-          minTop = rect.top;
-          activeId = h2.id;
+        // Heading hat die 60%-Linie erreicht (oder überschritten)
+        if (h2Top <= activationLine && h2Top > bestCandidateTop) {
+          bestCandidateTop = h2Top;
+          bestCandidateId = h2.id;
         }
       });
 
-      // Wenn keine Heading die Bedingung erfüllt (z.B. beim Hochscrollen)
-      // → finde die oberste Heading, die bereits den Offset überschritten hat
-      if (!activeId) {
-        var lastPassedId = null;
-        var lastPassedTop = -Infinity;
+      if (bestCandidateId) {
+        activeId = bestCandidateId;
+      } else {
+        // HOCHSCROLLEN:
+        // Keine Heading hat die 60%-Linie erreicht
+        // -> suche die nächst höhere Heading oberhalb der 60%-Linie
+        var nextHigherId = null;
+        var nextHigherTop = Infinity;
 
         headings.forEach(function (h2) {
-          var h2Top = h2.getBoundingClientRect().top + scrollTop;
+          var rect = h2.getBoundingClientRect();
+          var h2Top = rect.top;
 
-          // Heading hat den Offset bereits überschritten UND ist oberhalb der aktuellen Scroll-Position
-          if (h2Top <= scrollTop + scrollOffset && h2Top > lastPassedTop) {
-            lastPassedTop = h2Top;
-            lastPassedId = h2.id;
+          // Heading ist über der 60%-Linie
+          if (h2Top > activationLine && h2Top < nextHigherTop) {
+            nextHigherTop = h2Top;
+            nextHigherId = h2.id;
           }
         });
 
-        if (lastPassedId) {
-          activeId = lastPassedId;
+        if (nextHigherId) {
+          activeId = nextHigherId;
+        } else {
+          // Keine passende Heading gefunden -> Overview aktivieren
+          activeId = 'toc-overview';
         }
       }
 
@@ -228,13 +217,12 @@ document.addEventListener('DOMContentLoaded', function () {
         currentActiveId = activeId;
         setActiveButtonById(activeId);
       } else {
-        // Fallback: vorherige aktiv lassen
         setActiveButtonById(currentActiveId);
       }
     },
     {
       root: null,
-      threshold: [0, 0.2, 0.5]
+      threshold: [0, 0.6]
     }
   );
 
