@@ -68,6 +68,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Overview-Button erstellen (springt ganz nach oben)
   var overviewBtn = document.createElement('button');
   overviewBtn.type = 'button';
+  overviewBtn.className = 'tt-toc-button w-button';
   overviewBtn.textContent = 'Overview';
   overviewBtn.setAttribute('data-toc-target', 'toc-overview');
 
@@ -104,6 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Button erzeugen
     var btn = document.createElement('button');
     btn.type = 'button';
+    btn.className = 'tt-toc-button w-button';
     btn.textContent = label;
     btn.setAttribute('data-toc-target', id);
 
@@ -192,11 +194,32 @@ document.addEventListener('DOMContentLoaded', function () {
         }
       });
 
+      // Wenn keine Heading die Bedingung erfüllt (z.B. beim Hochscrollen)
+      // → finde die oberste Heading, die bereits den Offset überschritten hat
+      if (!activeId) {
+        var lastPassedId = null;
+        var lastPassedTop = -Infinity;
+
+        headings.forEach(function (h2) {
+          var h2Top = h2.getBoundingClientRect().top + scrollTop;
+
+          // Heading hat den Offset bereits überschritten UND ist oberhalb der aktuellen Scroll-Position
+          if (h2Top <= scrollTop + scrollOffset && h2Top > lastPassedTop) {
+            lastPassedTop = h2Top;
+            lastPassedId = h2.id;
+          }
+        });
+
+        if (lastPassedId) {
+          activeId = lastPassedId;
+        }
+      }
+
       if (activeId) {
         currentActiveId = activeId;
         setActiveButtonById(activeId);
       } else {
-        // Keine neue Section qualifiziert sich -> vorherige aktiv lassen
+        // Fallback: vorherige aktiv lassen
         setActiveButtonById(currentActiveId);
       }
     },
