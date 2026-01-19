@@ -8,6 +8,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var headings = Array.prototype.slice.call(srcEl.querySelectorAll('h2'));
 
+  // Case A/B: ToC-Items bestimmen (MUSS vor Overview-Button passieren!)
+  var presetBtn = tocEl.querySelector('.tt-toc-button');
+  var tocItems = [];
+
+  if (presetBtn) {
+    // Case A: Vorlage-Button mit kommaseparierter Liste
+    var rawText = presetBtn.innerText || presetBtn.textContent || '';
+
+    tocItems = rawText
+      .split(',')
+      .map(function (t) {
+        return t.trim();
+      })
+      .filter(function (t) {
+        return !!t;
+      });
+
+    // Vorlage entfernen
+    presetBtn.parentNode.removeChild(presetBtn);
+  } else if (headings.length) {
+    // Case B: Automatisch aus den H2-Texten erzeugen
+    tocItems = headings
+      .map(function (h) {
+        return (h.textContent || '').trim();
+      })
+      .filter(function (t) {
+        return !!t;
+      });
+  }
+
   // Versatz nach oben: 5rem
   var rootFontSize = parseFloat(
     window.getComputedStyle(document.documentElement).fontSize
@@ -50,42 +80,12 @@ document.addEventListener('DOMContentLoaded', function () {
   tocEl.appendChild(overviewBtn);
   buttons.push(overviewBtn);
 
-  // Nur wenn es Headings gibt, weiter mit H2-Button-Erstellung
-  if (headings.length) {
-    // Case A: Vorlage-Button mit kommaseparierter Liste
-    var presetBtn = tocEl.querySelector('.tt-toc-button');
-    var tocItems = [];
-
-    if (presetBtn) {
-      var rawText = presetBtn.innerText || presetBtn.textContent || '';
-
-      tocItems = rawText
-        .split(',')
-        .map(function (t) {
-          return t.trim();
-        })
-        .filter(function (t) {
-          return !!t;
-        });
-
-      // Vorlage entfernen
-      presetBtn.parentNode.removeChild(presetBtn);
-    } else {
-      // Case B: Automatisch aus den H2-Texten erzeugen
-      tocItems = headings
-        .map(function (h) {
-          return (h.textContent || '').trim();
-        })
-        .filter(function (t) {
-          return !!t;
-        });
-    }
-
+  // H2-Buttons erstellen, wenn es Headings UND tocItems gibt
+  if (headings.length && tocItems.length) {
     // IDs erzeugen und Buttons bauen – nur so viele, wie es Überschriften gibt
-    if (tocItems.length) {
-      var count = Math.min(tocItems.length, headings.length);
+    var count = Math.min(tocItems.length, headings.length);
 
-      for (var index = 0; index < count; index++) {
+    for (var index = 0; index < count; index++) {
         var label = tocItems[index];
         var id = 'toc-' + index;
         var h2 = headings[index];
@@ -132,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
         tocEl.appendChild(btn);
         buttons.push(btn);
       }
-    }
   }
 
   // Prüfung ob Buttons vorhanden (sollte immer mindestens Overview sein)
