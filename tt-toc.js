@@ -153,58 +153,64 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveButtonById('toc-overview');
   var currentActiveId = 'toc-overview';
 
-  // IntersectionObserver nur initialisieren, wenn es Headings gibt
+  // Scroll-Listener nur initialisieren, wenn es Headings gibt
   if (headings.length) {
-    // IntersectionObserver: aktive Section = letzte H2, die die 40%-Linie erreicht hat
-    var observer = new IntersectionObserver(
-      function () {
-        var scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop || 0;
-        var viewportHeight =
-          window.innerHeight || document.documentElement.clientHeight || 0;
-        var activationLine = viewportHeight * 0.4; // 40 % vom oberen Rand
+    var rafId = null;
 
-        // Wenn ganz oben, Overview aktivieren
-        if (scrollTop < scrollOffset) {
+    function updateActiveByScroll() {
+      rafId = null;
+      var scrollTop =
+        window.pageYOffset || document.documentElement.scrollTop || 0;
+      var viewportHeight =
+        window.innerHeight || document.documentElement.clientHeight || 0;
+      var activationLine = viewportHeight * 0.4; // 40 % vom oberen Rand
+
+      // Wenn ganz oben, Overview aktivieren
+      if (scrollTop < scrollOffset) {
+        if (currentActiveId !== 'toc-overview') {
           currentActiveId = 'toc-overview';
           setActiveButtonById('toc-overview');
-          return;
         }
+        return;
+      }
 
-        var bestId = null;
-        var bestTop = -Infinity;
-        var activationLineAbsolute = scrollTop + activationLine; // Absolute Position der 40%-Linie
+      var bestId = null;
+      var bestTop = -Infinity;
+      var activationLineAbsolute = scrollTop + activationLine; // Absolute Position der 40%-Linie
 
-        // Finde die letzte Heading, die die 40%-Linie erreicht hat
-        // (auch wenn sie jetzt außerhalb des Viewports ist)
-        headings.forEach(function (h2) {
-          var rect = h2.getBoundingClientRect();
-          var h2TopAbsolute = rect.top + scrollTop; // Absolute Position der Heading
+      // Finde die letzte Heading, die die 40%-Linie erreicht hat
+      // (auch wenn sie jetzt außerhalb des Viewports ist)
+      headings.forEach(function (h2) {
+        var rect = h2.getBoundingClientRect();
+        var h2TopAbsolute = rect.top + scrollTop; // Absolute Position der Heading
 
-          // Heading hat die 40%-Linie erreicht (ist oberhalb oder auf der Linie)
-          if (h2TopAbsolute <= activationLineAbsolute) {
-            // Nimm die unterste Heading, die diese Bedingung erfüllt
-            if (h2TopAbsolute > bestTop) {
-              bestTop = h2TopAbsolute;
-              bestId = h2.id;
-            }
+        // Heading hat die 40%-Linie erreicht (ist oberhalb oder auf der Linie)
+        if (h2TopAbsolute <= activationLineAbsolute) {
+          // Nimm die unterste Heading, die diese Bedingung erfüllt
+          if (h2TopAbsolute > bestTop) {
+            bestTop = h2TopAbsolute;
+            bestId = h2.id;
           }
-        });
+        }
+      });
 
-        var activeId = bestId || 'toc-overview';
-
+      var activeId = bestId || 'toc-overview';
+      if (activeId !== currentActiveId) {
         currentActiveId = activeId;
         setActiveButtonById(activeId);
-      },
-      {
-        root: null,
-        threshold: [0, 0.4]
       }
-    );
+    }
 
-    headings.forEach(function (h2) {
-      observer.observe(h2);
-    });
+    function onScrollOrResize() {
+      if (rafId !== null) return;
+      rafId = window.requestAnimationFrame(updateActiveByScroll);
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+
+    // Initial berechnen
+    updateActiveByScroll();
   }
 });
 
