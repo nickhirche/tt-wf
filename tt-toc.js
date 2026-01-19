@@ -8,43 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   var headings = Array.prototype.slice.call(srcEl.querySelectorAll('h2'));
 
-  if (!headings.length) {
-    return;
-  }
-
-  // Case A: Vorlage-Button mit kommaseparierter Liste
-  var presetBtn = tocEl.querySelector('.tt-toc-button');
-  var tocItems = [];
-
-  if (presetBtn) {
-    var rawText = presetBtn.innerText || presetBtn.textContent || '';
-
-    tocItems = rawText
-      .split(',')
-      .map(function (t) {
-        return t.trim();
-      })
-      .filter(function (t) {
-        return !!t;
-      });
-
-    // Vorlage entfernen
-    presetBtn.parentNode.removeChild(presetBtn);
-  } else {
-    // Case B: Automatisch aus den H2-Texten erzeugen
-    tocItems = headings
-      .map(function (h) {
-        return (h.textContent || '').trim();
-      })
-      .filter(function (t) {
-        return !!t;
-      });
-  }
-
-  if (!tocItems.length) {
-    return;
-  }
-
   // Versatz nach oben: 5rem
   var rootFontSize = parseFloat(
     window.getComputedStyle(document.documentElement).fontSize
@@ -65,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Overview-Button erstellen (springt ganz nach oben)
+  // Overview-Button IMMER erstellen (auch wenn keine H2-Items vorhanden)
   var overviewBtn = document.createElement('button');
   overviewBtn.type = 'button';
   overviewBtn.className = 'tt-toc-button w-button';
@@ -87,57 +50,92 @@ document.addEventListener('DOMContentLoaded', function () {
   tocEl.appendChild(overviewBtn);
   buttons.push(overviewBtn);
 
-  // IDs erzeugen und Buttons bauen – nur so viele, wie es Überschriften gibt
-  var count = Math.min(tocItems.length, headings.length);
+  // Nur wenn es Headings gibt, weiter mit H2-Button-Erstellung
+  if (headings.length) {
+    // Case A: Vorlage-Button mit kommaseparierter Liste
+    var presetBtn = tocEl.querySelector('.tt-toc-button');
+    var tocItems = [];
 
-  for (var index = 0; index < count; index++) {
-    var label = tocItems[index];
-    var id = 'toc-' + index;
-    var h2 = headings[index];
+    if (presetBtn) {
+      var rawText = presetBtn.innerText || presetBtn.textContent || '';
 
-    if (!h2) {
-      continue;
+      tocItems = rawText
+        .split(',')
+        .map(function (t) {
+          return t.trim();
+        })
+        .filter(function (t) {
+          return !!t;
+        });
+
+      // Vorlage entfernen
+      presetBtn.parentNode.removeChild(presetBtn);
+    } else {
+      // Case B: Automatisch aus den H2-Texten erzeugen
+      tocItems = headings
+        .map(function (h) {
+          return (h.textContent || '').trim();
+        })
+        .filter(function (t) {
+          return !!t;
+        });
     }
 
-    // H2 bekommt ID
-    h2.id = id;
+    // IDs erzeugen und Buttons bauen – nur so viele, wie es Überschriften gibt
+    if (tocItems.length) {
+      var count = Math.min(tocItems.length, headings.length);
 
-    // Button erzeugen
-    var btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'tt-toc-button w-button';
-    btn.textContent = label;
-    btn.setAttribute('data-toc-target', id);
+      for (var index = 0; index < count; index++) {
+        var label = tocItems[index];
+        var id = 'toc-' + index;
+        var h2 = headings[index];
 
-    btn.addEventListener('click', (function (targetId) {
-      return function () {
-        var target = document.getElementById(targetId);
-        if (!target) return;
-
-        // Active-State direkt setzen
-        setActiveButtonById(targetId);
-
-        var rect = target.getBoundingClientRect();
-        var scrollTop =
-          window.pageYOffset || document.documentElement.scrollTop || 0;
-        var targetY = rect.top + scrollTop - scrollOffset;
-
-        try {
-          window.scrollTo({
-            top: targetY,
-            behavior: 'smooth',
-          });
-        } catch (e) {
-          // Fallback für ältere Browser
-          window.scrollTo(0, targetY);
+        if (!h2) {
+          continue;
         }
-      };
-    })(id));
 
-    tocEl.appendChild(btn);
-    buttons.push(btn);
+        // H2 bekommt ID
+        h2.id = id;
+
+        // Button erzeugen
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tt-toc-button w-button';
+        btn.textContent = label;
+        btn.setAttribute('data-toc-target', id);
+
+        btn.addEventListener('click', (function (targetId) {
+          return function () {
+            var target = document.getElementById(targetId);
+            if (!target) return;
+
+            // Active-State direkt setzen
+            setActiveButtonById(targetId);
+
+            var rect = target.getBoundingClientRect();
+            var scrollTop =
+              window.pageYOffset || document.documentElement.scrollTop || 0;
+            var targetY = rect.top + scrollTop - scrollOffset;
+
+            try {
+              window.scrollTo({
+                top: targetY,
+                behavior: 'smooth',
+              });
+            } catch (e) {
+              // Fallback für ältere Browser
+              window.scrollTo(0, targetY);
+            }
+          };
+        })(id));
+
+        tocEl.appendChild(btn);
+        buttons.push(btn);
+      }
+    }
   }
 
+  // Prüfung ob Buttons vorhanden (sollte immer mindestens Overview sein)
   if (!buttons.length) {
     return;
   }
@@ -146,49 +144,52 @@ document.addEventListener('DOMContentLoaded', function () {
   setActiveButtonById('toc-overview');
   var currentActiveId = 'toc-overview';
 
-  // IntersectionObserver: aktive Section = letzte H2, deren top <= 60% Viewporthöhe ist
-  var observer = new IntersectionObserver(
-    function () {
-      var scrollTop =
-        window.pageYOffset || document.documentElement.scrollTop || 0;
-      var viewportHeight =
-        window.innerHeight || document.documentElement.clientHeight || 0;
-      var activationLine = viewportHeight * 0.6; // 60 % vom oberen Rand
+  // IntersectionObserver nur initialisieren, wenn es Headings gibt
+  if (headings.length) {
+    // IntersectionObserver: aktive Section = letzte H2, deren top <= 60% Viewporthöhe ist
+    var observer = new IntersectionObserver(
+      function () {
+        var scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop || 0;
+        var viewportHeight =
+          window.innerHeight || document.documentElement.clientHeight || 0;
+        var activationLine = viewportHeight * 0.6; // 60 % vom oberen Rand
 
-      // Wenn ganz oben, Overview aktivieren
-      if (scrollTop < scrollOffset) {
-        currentActiveId = 'toc-overview';
-        setActiveButtonById('toc-overview');
-        return;
-      }
-
-      var bestId = null;
-      var bestTop = -Infinity;
-
-      // Finde die letzte Heading, deren top <= activationLine ist
-      headings.forEach(function (h2) {
-        var rect = h2.getBoundingClientRect();
-        var top = rect.top;
-
-        if (top <= activationLine && top > bestTop) {
-          bestTop = top;
-          bestId = h2.id;
+        // Wenn ganz oben, Overview aktivieren
+        if (scrollTop < scrollOffset) {
+          currentActiveId = 'toc-overview';
+          setActiveButtonById('toc-overview');
+          return;
         }
-      });
 
-      var activeId = bestId || 'toc-overview';
+        var bestId = null;
+        var bestTop = -Infinity;
 
-      currentActiveId = activeId;
-      setActiveButtonById(activeId);
-    },
-    {
-      root: null,
-      threshold: [0, 0.6]
-    }
-  );
+        // Finde die letzte Heading, deren top <= activationLine ist
+        headings.forEach(function (h2) {
+          var rect = h2.getBoundingClientRect();
+          var top = rect.top;
 
-  headings.forEach(function (h2) {
-    observer.observe(h2);
-  });
+          if (top <= activationLine && top > bestTop) {
+            bestTop = top;
+            bestId = h2.id;
+          }
+        });
+
+        var activeId = bestId || 'toc-overview';
+
+        currentActiveId = activeId;
+        setActiveButtonById(activeId);
+      },
+      {
+        root: null,
+        threshold: [0, 0.6]
+      }
+    );
+
+    headings.forEach(function (h2) {
+      observer.observe(h2);
+    });
+  }
 });
 
