@@ -1687,12 +1687,14 @@ blockquote em::after {
 
 .tt-richtext.tt-rte-terms ol > li {
   font-size: 1.4rem;
-  font-family: Polysans median, sans-serif;
-  font-weight: 600;
+  font-family: Ssb, Arial, sans-serif;
+  font-weight: 700;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol li {
   font-size: 1rem;
+  font-family: Ssr, Arial, sans-serif;
+  font-weight: 400;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li {
