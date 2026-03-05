@@ -1114,11 +1114,6 @@ ul.checklist.pricing.dark li::before {
 /* Requirements */
 .tt-feature-highlights {
   /* Editor Feature Highlights */
-  /* AI Feature Highlights */
-  /* Comments Feature Highlights */
-  /* Collaboration Feature Highlights */
-  /* Documents Feature Highlights */
-  /* Template Feature Highlights */
 }
 .tt-feature-highlights.editor-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-editor-grading-1);
@@ -1150,6 +1145,9 @@ ul.checklist.pricing.dark li::before {
 .tt-feature-highlights.editor-colors .tt-feature-cards .tt-feature-card:nth-child(5) .feature-count {
   -webkit-text-stroke-color: var(--color-editor-grading-5);
 }
+.tt-feature-highlights {
+  /* AI Feature Highlights */
+}
 .tt-feature-highlights.ai-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-ai-grading-1);
 }
@@ -1179,6 +1177,9 @@ ul.checklist.pricing.dark li::before {
 }
 .tt-feature-highlights.ai-colors .tt-feature-cards .tt-feature-card:nth-child(5) .feature-count {
   -webkit-text-stroke-color: var(--color-ai-grading-5);
+}
+.tt-feature-highlights {
+  /* Comments Feature Highlights */
 }
 .tt-feature-highlights.comments-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-comments-grading-1);
@@ -1210,6 +1211,9 @@ ul.checklist.pricing.dark li::before {
 .tt-feature-highlights.comments-colors .tt-feature-cards .tt-feature-card:nth-child(5) .feature-count {
   -webkit-text-stroke-color: var(--color-comments-grading-5);
 }
+.tt-feature-highlights {
+  /* Collaboration Feature Highlights */
+}
 .tt-feature-highlights.collaboration-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-collaboration-grading-1);
 }
@@ -1240,6 +1244,9 @@ ul.checklist.pricing.dark li::before {
 .tt-feature-highlights.collaboration-colors .tt-feature-cards .tt-feature-card:nth-child(5) .feature-count {
   -webkit-text-stroke-color: var(--color-collaboration-grading-5);
 }
+.tt-feature-highlights {
+  /* Documents Feature Highlights */
+}
 .tt-feature-highlights.documents-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-documents-grading-1);
 }
@@ -1269,6 +1276,9 @@ ul.checklist.pricing.dark li::before {
 }
 .tt-feature-highlights.documents-colors .tt-feature-cards .tt-feature-card:nth-child(5) .feature-count {
   -webkit-text-stroke-color: var(--color-documents-grading-5);
+}
+.tt-feature-highlights {
+  /* Template Feature Highlights */
 }
 .tt-feature-highlights.template-colors .tt-feature-cards .tt-feature-card:nth-child(1) {
   border-color: var(--color-template-grading-1);
@@ -1648,9 +1658,14 @@ blockquote em::after {
   display: block;
 }
 
-.tt-richtext.tt-rte-terms li:before {
+.tt-richtext.tt-rte-terms ol > li::before {
   content: counters(item, ".") ". ";
   counter-increment: item;
+}
+
+.tt-richtext.tt-rte-terms ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
 }
 
 .tt-richtext.tt-rte-terms ol > li {
@@ -1702,8 +1717,6 @@ blockquote em::after {
   border-radius: 0.75rem;
   background-color: var(--black-a-100) !important;
   color: #EEFFFF !important;
-  scrollbar-color: #3D3D3D var(--black-a-100);
-  scrollbar-width: thin;
 }
 .w-code-block span[style="color:#dcc6e0"] {
   color: #89DDFF !important;
@@ -1740,6 +1753,10 @@ blockquote em::after {
 }
 .w-code-block ::-webkit-scrollbar-corner {
   background-color: black;
+}
+.w-code-block {
+  scrollbar-color: #3D3D3D var(--black-a-100);
+  scrollbar-width: thin;
 }
 
 .tt-richtext .w-code-block {
@@ -1933,10 +1950,12 @@ pre.w-code-block code {
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title {
   cursor: pointer;
   /* Icon bei Hover einblenden */
-  /* Feedback-Animation, wenn kopiert wurde */
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title:hover .tt-copy-anchor {
   opacity: 1;
+}
+.tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title {
+  /* Feedback-Animation, wenn kopiert wurde */
 }
 .tt-pricing-table .tt-pricing-table-wrap .tt-pricing-category[id] .tt-pricing-category-title.tt-copied .tt-pricing-sub-title-group::before {
   content: "Copied";
