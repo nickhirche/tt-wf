@@ -1651,7 +1651,6 @@ blockquote em::after {
   list-style-type: none; /* Entfernt die Standard-Nummerierung */
   width: 100%;
   padding-left: 0;
-  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .tt-richtext.tt-rte-terms li {
@@ -1661,11 +1660,29 @@ blockquote em::after {
 .tt-richtext.tt-rte-terms ol > li::before {
   content: counters(item, ".") ". ";
   counter-increment: item;
+  font-variant-numeric: lining-nums tabular-nums;
 }
 
 .tt-richtext.tt-rte-terms ul {
-  list-style-type: disc;
+  list-style: none;
   padding-left: 1.5rem;
+}
+
+.tt-richtext.tt-rte-terms ul li {
+  position: relative;
+  padding-left: 1rem;
+}
+
+.tt-richtext.tt-rte-terms ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.65em;
+  transform: translateY(-50%);
+  width: 0.35em;
+  height: 0.35em;
+  border-radius: 50%;
+  background-color: currentColor;
 }
 
 .tt-richtext.tt-rte-terms ol > li {
@@ -1676,8 +1693,6 @@ blockquote em::after {
 
 .tt-richtext.tt-rte-terms ol > li > ol li {
   font-size: 1rem;
-  font-family: Polysans slim, sans-serif;
-  font-weight: 300;
 }
 
 .tt-richtext.tt-rte-terms ol > li > ol > li {
