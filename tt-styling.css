@@ -614,7 +614,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hover behavior variant (data-btn-hover=...) */
 .tt-btn-root[data-btn-hover=arrow] {
+  /* Default Arrow-Shift (solid/glass Varianten) */
   --tt-btn-icon-hover-x: 1.8rem;
+  --tt-btn-text-hover-x: 0.8rem;
+}
+
+/* Spezielle Arrow-Shift-Werte für Text-Buttons */
+.tt-btn-root[data-btn-hover=arrow] .tt-btn[data-wf--button--type=text-white],
+.tt-btn-root[data-btn-hover=arrow] .tt-btn[data-wf--button--type=text-black] {
+  --tt-btn-icon-hover-x: 1rem;
   --tt-btn-text-hover-x: 0.8rem;
 }
 
