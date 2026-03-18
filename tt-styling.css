@@ -564,8 +564,8 @@ h1, h2, h3, h4, h5, h6 {
   --tt-btn-icon-hover-x: 0;
   --tt-btn-text-hover-x: 0;
   --tt-btn-transition: var(--transition-base, 0.25s cubic-bezier(0.65, 0, 0.35, 1));
-  --tt-btn-transition-press: 0.05s cubic-bezier(0.65, 0, 0.35, 1);
-  --tt-btn-press-scale: 0.97;
+  --tt-btn-transition-press: 0.09s cubic-bezier(0.4, 0, 0.2, 1);
+  --tt-btn-press-scale: 0.95;
   /* reveal vars set by JS */
   --tt-reveal-r: 0px;
   --tt-reveal-x: 50%;
@@ -591,21 +591,15 @@ h1, h2, h3, h4, h5, h6 {
 /* =========================
    Presets
    ========================= */
-.tt-btn-root[data-bg-grow=scale][data-wf--button-root--size=sm],
-.tt-btn-root[data-bg-grow=scale][data-wf--button-root--size=sm-text] {
-  --tt-btn-bg-grow: 4px;
+.tt-btn-root[data-bg-grow=scale] {
+  --tt-btn-bg-grow: 0.1em;
 }
 
-.tt-btn-root[data-bg-grow=scale][data-wf--button-root--size=md],
-.tt-btn-root[data-bg-grow=scale][data-wf--button-root--size=md-text] {
-  --tt-btn-bg-grow: 6px;
-}
-
-.tt-btn-root[data-bg-grow=scale][data-wf--button-root--size=lg],
-.tt-btn-root[data-bg-grow=scale][data-wf--button-root--size=lg-text] {
-  --tt-btn-bg-grow: 8px;
-}
-
+/* Alte Lösung nur auskommentieren
+// .tt-btn-root[data-bg-grow="scale"][data-wf--button-root--size="sm"] { --tt-btn-bg-grow: 4px; }
+// .tt-btn-root[data-bg-grow="scale"][data-wf--button-root--size="md"] { --tt-btn-bg-grow: 6px; }
+// .tt-btn-root[data-bg-grow="scale"][data-wf--button-root--size="lg"] { --tt-btn-bg-grow: 8px; }
+*/
 /* =========================
    Variants
    ========================= */
