@@ -629,6 +629,7 @@ h1, h2, h3, h4, h5, h6 {
 :is(.tt-btn-root:hover,
 .tt-btn-root:active,
 .tt-btn-root:focus-visible,
+.tt-btn-root.is-touch-hover,
 a[data-tt-hover=btn]:hover .tt-btn-root,
 a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn-bg {
   inset: calc(var(--tt-btn-bg-grow) * -1);
@@ -689,16 +690,20 @@ a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn-bg {
 
 :is(.tt-btn-root:hover:not(:active),
 .tt-btn-root:focus-visible:not(:active),
-a[data-tt-hover=btn]:hover .tt-btn-root:not(:active)) .tt-btn[data-wf--button--type=glass-outline-white]::after,
+a[data-tt-hover=btn]:hover .tt-btn-root:not(:active),
+.tt-btn-root.is-touch-hover:not(.is-touch-active)) .tt-btn[data-wf--button--type=glass-outline-white]::after,
 :is(.tt-btn-root:hover:not(:active),
 .tt-btn-root:focus-visible:not(:active),
-a[data-tt-hover=btn]:hover .tt-btn-root:not(:active)) .tt-btn[data-wf--button--type=glass-outline-black]::after,
+a[data-tt-hover=btn]:hover .tt-btn-root:not(:active),
+.tt-btn-root.is-touch-hover:not(.is-touch-active)) .tt-btn[data-wf--button--type=glass-outline-black]::after,
 :is(.tt-btn-root:hover:not(:active),
 .tt-btn-root:focus-visible:not(:active),
-a[data-tt-hover=btn]:hover .tt-btn-root:not(:active)) .tt-btn[data-wf--button--type=solid-white]::after,
+a[data-tt-hover=btn]:hover .tt-btn-root:not(:active),
+.tt-btn-root.is-touch-hover:not(.is-touch-active)) .tt-btn[data-wf--button--type=solid-white]::after,
 :is(.tt-btn-root:hover:not(:active),
 .tt-btn-root:focus-visible:not(:active),
-a[data-tt-hover=btn]:hover .tt-btn-root:not(:active)) .tt-btn[data-wf--button--type=solid-black]::after {
+a[data-tt-hover=btn]:hover .tt-btn-root:not(:active),
+.tt-btn-root.is-touch-hover:not(.is-touch-active)) .tt-btn[data-wf--button--type=solid-black]::after {
   opacity: 1;
   transform: translateY(2px);
 }
@@ -707,7 +712,11 @@ a[data-tt-hover=btn]:hover .tt-btn-root:not(:active)) .tt-btn[data-wf--button--t
 .tt-btn-root:active .tt-btn[data-wf--button--type=glass-outline-white]::after,
 .tt-btn-root:active .tt-btn[data-wf--button--type=glass-outline-black]::after,
 .tt-btn-root:active .tt-btn[data-wf--button--type=solid-white]::after,
-.tt-btn-root:active .tt-btn[data-wf--button--type=solid-black]::after {
+.tt-btn-root:active .tt-btn[data-wf--button--type=solid-black]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type=glass-outline-white]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type=glass-outline-black]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type=solid-white]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type=solid-black]::after {
   opacity: 0;
   transform: translateY(0);
 }
@@ -732,6 +741,7 @@ a[data-tt-hover=btn]:hover .tt-btn-root:not(:active)) .tt-btn[data-wf--button--t
 :is(.tt-btn-root:hover,
 .tt-btn-root:active,
 .tt-btn-root:focus-visible,
+.tt-btn-root.is-touch-hover,
 a[data-tt-hover=btn]:hover .tt-btn-root,
 a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn-icon {
   transform: translateX(var(--tt-btn-icon-hover-x));
@@ -740,18 +750,23 @@ a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn-icon {
 :is(.tt-btn-root:hover,
 .tt-btn-root:active,
 .tt-btn-root:focus-visible,
+.tt-btn-root.is-touch-hover,
 a[data-tt-hover=btn]:hover .tt-btn-root,
 a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn-text {
   transform: translateX(var(--tt-btn-text-hover-x));
 }
 
-.tt-btn-root:active {
+.tt-btn-root:active,
+.tt-btn-root.is-touch-active {
   transform: scale(var(--tt-btn-press-scale));
 }
 
 .tt-btn-root:active .tt-btn-bg,
 .tt-btn-root:active .tt-btn-icon,
-.tt-btn-root:active .tt-btn-text {
+.tt-btn-root:active .tt-btn-text,
+.tt-btn-root.is-touch-active .tt-btn-bg,
+.tt-btn-root.is-touch-active .tt-btn-icon,
+.tt-btn-root.is-touch-active .tt-btn-text {
   transition-duration: var(--tt-btn-transition-press);
 }
 
