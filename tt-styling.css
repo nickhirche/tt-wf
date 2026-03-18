@@ -603,11 +603,12 @@ h1, h2, h3, h4, h5, h6 {
 /* =========================
    Variants
    ========================= */
-/* Button type -> hover shadow preset */
-.tt-btn[data-wf--button--type=glass-outline-white] .tt-btn-bg,
-.tt-btn[data-wf--button--type=glass-outline-black] .tt-btn-bg,
-.tt-btn[data-wf--button--type=solid-white] .tt-btn-bg,
-.tt-btn[data-wf--button--type=solid-black] .tt-btn-bg {
+/* Button type -> shadow presets (used by ::before/::after) */
+.tt-btn[data-wf--button--type=glass-outline-white],
+.tt-btn[data-wf--button--type=glass-outline-black],
+.tt-btn[data-wf--button--type=solid-white],
+.tt-btn[data-wf--button--type=solid-black] {
+  --tt-btn-shadow-rest: 0 3.562px 5.386px 0 rgba(0, 0, 0, 0.06), 0 1.408px 2.13px 0 rgba(142, 105, 192, 0.04);
   --tt-btn-hover-shadow: 0 20px 52px 0 rgba(79, 29, 229, 0.13), 0 14.966px 22.631px 0 rgba(0, 0, 0, 0.09), 0 7.266px 10.987px 0 rgba(0, 0, 0, 0.07), 0 3.562px 5.386px 0 rgba(0, 0, 0, 0.06), 0 1.408px 2.13px 0 rgba(142, 105, 192, 0.04);
 }
 
@@ -628,7 +629,83 @@ h1, h2, h3, h4, h5, h6 {
 :is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn-bg {
   inset: calc(var(--tt-btn-bg-grow) * -1);
   border-radius: var(--_button-sizes---tt-btn-radius-hover);
+}
+
+.tt-btn[data-wf--button--type=glass-outline-white],
+.tt-btn[data-wf--button--type=glass-outline-black],
+.tt-btn[data-wf--button--type=solid-white],
+.tt-btn[data-wf--button--type=solid-black] {
+  position: relative;
+  isolation: isolate;
+}
+
+.tt-btn[data-wf--button--type=glass-outline-white]::before,
+.tt-btn[data-wf--button--type=glass-outline-black]::before,
+.tt-btn[data-wf--button--type=solid-white]::before,
+.tt-btn[data-wf--button--type=solid-black]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--_button-sizes---tt-btn-radius-hover);
+  box-shadow: var(--tt-btn-shadow-rest);
+  opacity: 1;
+}
+
+.tt-btn[data-wf--button--type=glass-outline-white]::after,
+.tt-btn[data-wf--button--type=glass-outline-black]::after,
+.tt-btn[data-wf--button--type=solid-white]::after,
+.tt-btn[data-wf--button--type=solid-black]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--_button-sizes---tt-btn-radius-hover);
   box-shadow: var(--tt-btn-hover-shadow);
+  opacity: 0;
+  transform: translateY(0);
+  transition: opacity var(--tt-btn-transition), transform var(--tt-btn-transition);
+}
+
+/* shadow behind bg + content (no negative z-index) */
+.tt-btn[data-wf--button--type=glass-outline-white] .tt-btn-bg,
+.tt-btn[data-wf--button--type=glass-outline-black] .tt-btn-bg,
+.tt-btn[data-wf--button--type=solid-white] .tt-btn-bg,
+.tt-btn[data-wf--button--type=solid-black] .tt-btn-bg {
+  z-index: 1;
+}
+
+.tt-btn[data-wf--button--type=glass-outline-white] .tt-btn-inner,
+.tt-btn[data-wf--button--type=glass-outline-black] .tt-btn-inner,
+.tt-btn[data-wf--button--type=solid-white] .tt-btn-inner,
+.tt-btn[data-wf--button--type=solid-black] .tt-btn-inner {
+  position: relative;
+  z-index: 2;
+}
+
+:is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=glass-outline-white]::after,
+:is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=glass-outline-black]::after,
+:is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=solid-white]::after,
+:is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=solid-black]::after {
+  opacity: 1;
+  transform: translateY(2px);
+}
+
+/* optional blend mode for pseudo shadow layer */
+.tt-btn[data-shadow-blend=multiply]::after {
+  mix-blend-mode: multiply;
+}
+
+.tt-btn[data-shadow-blend=overlay]::after {
+  mix-blend-mode: overlay;
+}
+
+.tt-btn[data-shadow-blend=screen]::after {
+  mix-blend-mode: screen;
+}
+
+.tt-btn[data-shadow-blend=soft-light]::after {
+  mix-blend-mode: soft-light;
 }
 
 :is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn-icon {
