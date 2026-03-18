@@ -688,25 +688,17 @@ a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn-bg {
 }
 
 :is(.tt-btn-root:hover,
-.tt-btn-root:active,
 .tt-btn-root:focus-visible,
-a[data-tt-hover=btn]:hover .tt-btn-root,
-a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn[data-wf--button--type=glass-outline-white]::after,
+a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=glass-outline-white]::after,
 :is(.tt-btn-root:hover,
-.tt-btn-root:active,
 .tt-btn-root:focus-visible,
-a[data-tt-hover=btn]:hover .tt-btn-root,
-a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn[data-wf--button--type=glass-outline-black]::after,
+a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=glass-outline-black]::after,
 :is(.tt-btn-root:hover,
-.tt-btn-root:active,
 .tt-btn-root:focus-visible,
-a[data-tt-hover=btn]:hover .tt-btn-root,
-a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn[data-wf--button--type=solid-white]::after,
+a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=solid-white]::after,
 :is(.tt-btn-root:hover,
-.tt-btn-root:active,
 .tt-btn-root:focus-visible,
-a[data-tt-hover=btn]:hover .tt-btn-root,
-a[data-tt-hover=btn]:active .tt-btn-root) .tt-btn[data-wf--button--type=solid-black]::after {
+a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn[data-wf--button--type=solid-black]::after {
   opacity: 1;
   transform: translateY(2px);
 }
