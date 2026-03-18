@@ -592,7 +592,7 @@ h1, h2, h3, h4, h5, h6 {
 /* bg uses the var */
 .tt-btn-root:hover .tt-btn-bg {
   inset: calc(var(--tt-btn-bg-grow) * -1);
-  border-radius: var(--tt-btn-radius-hover);
+  border-radius: var(--_button-sizes---tt-btn-radius-hover);
   /* optional ring */
   box-shadow: var(--tt-btn-hover-shadow);
 }
