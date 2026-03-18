@@ -564,7 +564,7 @@ h1, h2, h3, h4, h5, h6 {
   --tt-btn-icon-hover-x: 0;
   --tt-btn-text-hover-x: 0;
   --tt-btn-transition: var(--transition-base, 0.25s cubic-bezier(0.65, 0, 0.35, 1));
-  --tt-btn-transition-press: 0.09s cubic-bezier(0.4, 0, 0.2, 1);
+  --tt-btn-transition-press: 0.08s cubic-bezier(0.3, 0, 0.7, 1);
   --tt-btn-press-scale: 0.95;
   /* reveal vars set by JS */
   --tt-reveal-r: 0px;
@@ -627,7 +627,7 @@ h1, h2, h3, h4, h5, h6 {
    ========================= */
 :is(.tt-btn-root:hover, a[data-tt-hover=btn]:hover .tt-btn-root) .tt-btn-bg {
   inset: calc(var(--tt-btn-bg-grow) * -1);
-  border-radius: calc(var(--_button-sizes---tt-btn-radius-hover) + var(--tt-btn-bg-grow));
+  border-radius: var(--_button-sizes---tt-btn-radius-hover);
   box-shadow: var(--tt-btn-hover-shadow);
 }
 
