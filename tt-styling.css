@@ -1743,6 +1743,24 @@ tbody th {
   height: auto;
 }
 
+/* Pagination */
+.tt-slider-pagination-item {
+  padding: 0.5rem 0.2rem;
+}
+.tt-slider-pagination-item .tt-slider-pagination-chip {
+  width: 1rem;
+  height: 0.2rem;
+  background-color: currentColor;
+  opacity: 0.2;
+  transition: opacity var(--transition-base);
+}
+.tt-slider-pagination-item.is-active .tt-slider-pagination-chip {
+  opacity: 1;
+}
+.tt-slider-pagination-item:hover .tt-slider-pagination-chip {
+  opacity: 0.5;
+}
+
 /* Forms */
 .tt-form-wrap > div:not(.tt-form-fields) {
   display: none !important;
