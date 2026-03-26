@@ -537,13 +537,33 @@ document.addEventListener('DOMContentLoaded', function() {
   const peopleNumberDiv = document.querySelector('div[data-value-type="people-number"]');
   const maintenanceDiv = document.querySelector('div[data-cost-type="maintenance"]');
   const maintenanceValueDiv = document.querySelector('div[data-cost-value-type="maintenance"]');
-  const maintenanceHoursDiv = maintenanceDiv.querySelector('.maintenance-hours');
   const initialCostDiv = document.querySelector('div[data-cost-value-type="initial"]');
   const mediumLabel = document.querySelector('label[data-range-label="medium"]');
   const complexLabel = document.querySelector('label[data-range-label="complex"]');
   const descriptions = document.querySelectorAll('.range-description');
   const resetButton = document.querySelector('.value-reset');
   const editCustomValue = document.querySelector('.value-edit');
+
+  // Script laeuft global; auf Seiten ohne Calculator sauber aussteigen.
+  if (
+    !rangeInput ||
+    !workloadDiv ||
+    !peopleCostDiv ||
+    !peopleNumberDiv ||
+    !maintenanceDiv ||
+    !maintenanceValueDiv ||
+    !initialCostDiv ||
+    !mediumLabel ||
+    !complexLabel ||
+    !descriptions.length ||
+    !resetButton ||
+    !editCustomValue
+  ) {
+    return;
+  }
+
+  const maintenanceHoursDiv = maintenanceDiv.querySelector('.maintenance-hours');
+  if (!maintenanceHoursDiv) return;
 
   let peopleCostOverride = false;
 
