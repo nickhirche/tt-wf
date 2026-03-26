@@ -1,0 +1,46 @@
+/* Table */
+
+.w-embed:has(table) {
+    overflow-x: auto; /* Ermöglicht horizontales Scrollen */
+    width: 90vw;
+    max-width: 38rem;
+}
+
+table {
+    border-collapse: collapse;
+    border: 0;
+    font-size: 0.8rem;
+    width: 100%;
+    line-height: 1.3;
+}
+  
+thead {
+  border-bottom: solid 2px;
+  font-family: Polysans median, sans-serif;
+  font-weight: 600;
+}
+  
+tfoot {
+  border-top: solid 2px var(--black-a-100);
+  font-family: Polysans median, sans-serif;
+  font-weight: 600;
+}
+    
+tr {
+    border-bottom: 1px solid var(--black-a-16);  
+}
+  
+th,
+td {
+  padding: 0.75rem 0.5rem;
+  text-align: left;
+  min-width: 10ch;
+  vertical-align: top;
+  text-wrap: pretty;
+}
+
+tbody th {
+  font-family: Polysans slim, sans-serif;
+  font-weight: 300;
+}
+

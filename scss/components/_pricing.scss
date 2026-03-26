@@ -1,0 +1,315 @@
+/* Pricing: cards, tabs, table, feature groups */
+
+/* Range slider (pricing-specific) */
+.range-slider.pricing {
+  .range-labels {
+    :first-child {
+      margin-left: -0.50rem;
+    }
+
+    :last-child {
+      margin-right: -0.50rem;
+    }
+  }
+  input[type="range" i] {
+    background: linear-gradient(90deg, #8B33FF 0%, #8B33FF calc(100 / 10 * var(--range-value) * 1%), #000 calc(100 / 10 * var(--range-value) * 1%));
+  }
+}
+
+/* PRICING CARDS */
+
+.tt-pricing-cards {
+  .document-dropdown {
+    &::after {
+      content: "";
+      position: absolute;
+      height: 1rem;
+      width: 1rem;
+      right: 0.25rem;
+      top: calc(50% - 0.5rem);
+      display: inline-block;
+      background-size: 0.6rem;
+      background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.96967 9.53033C3.67678 9.23744 3.67678 8.76256 3.96967 8.46967L6.43934 6L3.96967 3.53033C3.67678 3.23744 3.67678 2.76256 3.96967 2.46967C4.26256 2.17678 4.73744 2.17678 5.03033 2.46967L8.03033 5.46967C8.17098 5.61032 8.25 5.80109 8.25 6C8.25 6.19891 8.17098 6.38968 8.03033 6.53033L5.03033 9.53033C4.73744 9.82322 4.26256 9.82322 3.96967 9.53033Z' fill='%236F00FF'/%3E%3C/svg%3E%0A");
+      background-position: center;
+      background-repeat: no-repeat;
+      transform: rotate(90deg);
+    }
+  }
+}
+
+.tt-pricing-card {
+  [data-plan-max="true"] {
+    display: none;
+  }
+
+  &.inactive {
+    opacity: 0.75;
+    
+    .tt-button {
+      opacity: 0.15;
+    }
+
+    .tt-pricing-card-head,
+    .plan-description {
+      opacity: 0.75;
+    }
+
+    [data-plan-max="true"] {
+      display: flex;
+    }
+    [data-plan-max="false"] {
+      display: none;
+    }
+
+    .tt-batch.pricing {
+      background-color: var(--black-a-40);
+    }
+  }
+} 
+
+.tt-pricing-tab-menu {
+    -webkit-backdrop-filter: blur(1rem);
+    backdrop-filter: blur(1rem);
+}
+
+.tt-pricing-tabs .tt-price-wrap {
+    display: none;
+}
+.tt-pricing-tabs .tt-price-wrap.is-active {
+    display: flex;
+}
+
+.tt-pricing-plan-col {
+    font-variant-numeric: lining-nums tabular-nums;
+}
+ 
+/* PRICING TABLE */
+.tt-pricing-table {
+  margin-top: 0;
+
+  .tt-pricing-plans {
+    &::before {
+      content:"";
+      display: block;
+      position: absolute;
+      top: 0;
+      width: 100vw;
+      left: 50%;
+      transform: translateX(-50vw);
+      height: 100%;
+      background-color: var(--warm-grey-1);
+      z-index: -1; //remove after fix it
+    }
+
+    &.mobile, &.mobile-new {
+      .tt-pricing-plan-col {
+        &.plans {
+          &[data-plan-type-col="enterprise"] {
+            .pricing-value-group:not([data-pricing-value-group="enterprise"]) {
+              display: none;
+            }
+          }
+
+          &[data-plan-type-col="opensource"] {
+            .pricing-value-group:not([data-pricing-value-group="opensource"]) {
+              display: none;
+            }
+          }
+
+          &[data-plan-type-col="free"] {
+            .pricing-value-group:not([data-pricing-value-group="free"]) {
+              display: none;
+            }
+          }
+
+          &:not([data-plan-type-col="opensource"]):not([data-plan-type-col="enterprise"]):not([data-plan-type-col="free"]) {
+            .pricing-value-group[data-pricing-value-group="enterprise"],
+            .pricing-value-group[data-pricing-value-group="free"],
+            .pricing-value-group[data-pricing-value-group="opensource"] {
+              display: none;
+            }
+          }
+
+          .plan-dropdown {
+            &::after {
+              content: "";
+              position: absolute;
+              height: 1rem;
+              width: 1rem;
+              right: 0.25rem;
+              top: calc(50% - 0.5rem);
+              display: inline-block;
+              background-size: 0.6rem;
+              background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.96967 9.53033C3.67678 9.23744 3.67678 8.76256 3.96967 8.46967L6.43934 6L3.96967 3.53033C3.67678 3.23744 3.67678 2.76256 3.96967 2.46967C4.26256 2.17678 4.73744 2.17678 5.03033 2.46967L8.03033 5.46967C8.17098 5.61032 8.25 5.80109 8.25 6C8.25 6.19891 8.17098 6.38968 8.03033 6.53033L5.03033 9.53033C4.73744 9.82322 4.26256 9.82322 3.96967 9.53033Z' fill='%236F00FF'/%3E%3C/svg%3E%0A");
+              background-position: center;
+              background-repeat: no-repeat;
+              transform: rotate(90deg);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .tt-pricing-table-wrap {
+    gap: 0rem; //for a seamless change of labels
+  
+    .tt-pricing-category {
+      &.first-group {
+        &::before {
+          content: "";
+          display: inline-block;
+          width: 100%;
+          height: 2rem;
+        }
+      }
+
+      &::after {
+        content: "";
+        display: inline-block;
+        top: 5rem;
+        width: 100%;
+        height: 2rem;
+      }
+
+      > div:nth-child(2) {
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+      }
+
+      // Copy Anchor Link styling
+      &[id] {
+        .tt-pricing-category-title {
+          cursor: pointer; // Zeigt an, dass es klickbar ist
+          
+          /* Icon bei Hover einblenden */
+          &:hover .tt-copy-anchor {
+            opacity: 1;
+          }
+          
+          /* Feedback-Animation, wenn kopiert wurde */
+          &.tt-copied .tt-pricing-sub-title-group::before {
+            content: "Copied";
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: var(--black-900);
+            color: white;
+            padding: 6px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            opacity: 0;
+            animation: copied-fade-animation 1s ease-in-out;
+            white-space: nowrap; // Verhindert Umbruch
+          }
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .tt-pricing-plan-col {
+      display: none; // Standardmäßig ausblenden
+      
+      &.plans {
+        display: flex; // Plan anzeigen
+      }
+    }
+  
+    // Für data-active-col-first
+    &[data-active-col-first="1"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="1"],
+    &[data-active-col-first="2"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="2"],
+    &[data-active-col-first="3"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="3"],
+    &[data-active-col-first="4"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="4"],
+    &[data-active-col-first="5"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="5"]
+    {
+      display: flex; // Das erste aktive Element anzeigen
+    }
+  
+    // Für data-active-col-second
+    &[data-active-col-second="1"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="1"],
+    &[data-active-col-second="2"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="2"],
+    &[data-active-col-second="3"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="3"],
+    &[data-active-col-second="4"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="4"],
+    &[data-active-col-second="5"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="5"]    
+    {
+      display: flex; // Das zweite aktive Element anzeigen
+      order: 9999; // Reihenfolge anpassen
+    }
+  }
+
+  &.old-pricing {
+    @media screen and (max-width: 767px) {
+      // Für data-active-col-first
+      &[data-active-col-first="free"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="free"],
+      &[data-active-col-first="entry"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="entry"],
+      &[data-active-col-first="business"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="business"],
+      &[data-active-col-first="enterprise"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="enterprise"] {
+        display: flex; // Das erste aktive Element anzeigen
+      }
+    
+      // Für data-active-col-second
+      &[data-active-col-second="free"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="free"],
+      &[data-active-col-second="entry"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="entry"],
+      &[data-active-col-second="business"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="business"],
+      &[data-active-col-second="enterprise"] .tt-pricing-row .tt-pricing-plan-col[data-plan-type-col="enterprise"] {
+        display: flex; // Das zweite aktive Element anzeigen
+        order: 9999; // Reihenfolge anpassen
+      }
+    }
+  }
+}
+
+/* Pricing feature groups (sub-rows) */
+
+.tt-pricing-feature-group {
+  .tt-pricing-sub-toggle {
+    .tt-pricing-feature-col {
+      .tt-pricing-text-group {
+        position: relative;
+    
+        &::before {
+          content: '';
+          position: absolute;
+          height: 1.2em;
+          width: 1.2em;
+          left: -1.4em;
+          top: 0;
+          display: inline-block;
+          background-size: 0.8em;
+          background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M3.96967 9.53033C3.67678 9.23744 3.67678 8.76256 3.96967 8.46967L6.43934 6L3.96967 3.53033C3.67678 3.23744 3.67678 2.76256 3.96967 2.46967C4.26256 2.17678 4.73744 2.17678 5.03033 2.46967L8.03033 5.46967C8.17098 5.61032 8.25 5.80109 8.25 6C8.25 6.19891 8.17098 6.38968 8.03033 6.53033L5.03033 9.53033C4.73744 9.82322 4.26256 9.82322 3.96967 9.53033Z' fill='%236F00FF'/%3E%3C/svg%3E%0A");
+          background-position: center;
+          background-repeat: no-repeat;
+          -webkit-transition: all var(--transition-base);
+          transition: all var(--transition-base);
+          border-radius: 0.2rem;
+        }
+      }
+    }
+
+    &:hover {
+      .tt-pricing-text-group {
+        &::before {
+          background-color: var(--black-a-6);
+        }
+      }
+    }
+  }
+
+  .tt-pricing-sub-row {
+    :last-child {
+      border-bottom-color: rgba(0, 0, 0, 0.1);
+    }
+  }
+
+  &.is-active {
+    .tt-pricing-sub-toggle {
+      .tt-pricing-feature-col {
+        .tt-pricing-text-group::before {
+          transform: rotate(90deg);
+        }
+      } 
+    } 
+  }
+}
+

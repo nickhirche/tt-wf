@@ -1,0 +1,268 @@
+/* BUTTONS */
+
+.tt-button, .tt-button *, .tt-button::after  {
+    -webkit-transition: all var(--transition-base);
+    transition: all var(--transition-base);
+}
+
+.tt-button:active {
+    -webkit-transition: all 0.05s cubic-bezier(0.65, 0, 0.35, 1);
+    transition: all 0.05s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.tt-button-text {
+  display: inline-flex;
+  vertical-align: top;
+  align-items: center;
+  flex: 0 0 auto;
+  --lh: 1.2;
+  line-height: var(--lh);
+  overflow: hidden;
+  backface-visibility: hidden;
+}
+.tt-button-text > * {
+  flex: 0 0 auto;
+  backface-visibility: hidden;
+  text-shadow: 0 calc(var(--lh) * 1em) 0 currentColor;
+  transform: translate3d(0, 0, 0);
+  transition: transform 0.4s ease;
+  --delay: 0.05s;
+}
+.tt-button-text:has(> *:nth-child(10)) > * {
+  --delay: 0.04s;
+}
+.tt-button-text:has(> *:nth-child(20)) > * {
+  --delay: 0.03s;
+}
+@media (pointer:fine) {
+  .tt-button:hover .tt-button-text > * {
+      transform: translate3d(0, calc(var(--lh) * -1em), 0);
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(1) {
+      transition-delay: calc(0 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(2) {
+      transition-delay: calc(1 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(3) {
+      transition-delay: calc(2 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(4) {
+      transition-delay: calc(3 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(5) {
+      transition-delay: calc(4 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(6) {
+      transition-delay: calc(5 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(7) {
+      transition-delay: calc(6 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(8) {
+      transition-delay: calc(7 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(9) {
+      transition-delay: calc(8 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(10) {
+      transition-delay: calc(9 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(11) {
+      transition-delay: calc(10 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(12) {
+      transition-delay: calc(11 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(13) {
+      transition-delay: calc(12 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(14) {
+      transition-delay: calc(13 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(15) {
+      transition-delay: calc(14 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(16) {
+      transition-delay: calc(15 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(17) {
+      transition-delay: calc(16 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(18) {
+      transition-delay: calc(17 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(19) {
+      transition-delay: calc(18 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(20) {
+      transition-delay: calc(19 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(21) {
+      transition-delay: calc(20 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(22) {
+      transition-delay: calc(21 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(23) {
+      transition-delay: calc(22 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(24) {
+      transition-delay: calc(23 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(25) {
+      transition-delay: calc(24 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(26) {
+      transition-delay: calc(25 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(27) {
+      transition-delay: calc(26 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(28) {
+      transition-delay: calc(27 * var(--delay));
+  }
+  .tt-button:hover .tt-button-text > *:nth-child(29) {
+      transition-delay: calc(28 * var(--delay));
+  }
+}
+
+.btn-arrow::after {
+    content: '';
+    position: absolute;
+    left: -1em;
+    height: 0.75em;
+    width: 0.75em;
+    margin-top: -0.2em;
+    display: inline-block;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 7.38197L15.4495 7.10674L15.4484 7.10617L15.4455 7.10464L15.4188 7.09062C15.393 7.07688 15.3516 7.05437 15.2965 7.02295C15.1862 6.96006 15.0213 6.86173 14.8166 6.72686C14.4066 6.4566 13.8417 6.0427 13.2383 5.47698C12.029 4.34323 10.6931 2.62751 10.1006 0.257462L8.16032 0.742528C8.87215 3.58987 10.4711 5.62416 11.8704 6.93605C11.8933 6.95755 11.9162 6.97887 11.9391 6.99999H0V8.99999H11.9391C11.9162 9.02112 11.8933 9.04243 11.8704 9.06393C10.4711 10.3758 8.87215 12.4101 8.16032 15.2575L10.1006 15.7425C10.6931 13.3725 12.029 11.6568 13.2383 10.523C13.8417 9.95729 14.4066 9.54338 14.8166 9.27313C15.0213 9.13826 15.1862 9.03993 15.2965 8.97704C15.3516 8.94562 15.393 8.92311 15.4188 8.90937L15.4455 8.89535L15.4484 8.89382L15.4495 8.89325L16 8.61803V7.38197Z' fill='white'/%3E%3C/svg%3E%0A");
+}
+.dark.btn-arrow::after,
+.btn-text.btn-arrow::after {
+    background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 7.38197L15.4495 7.10674L15.4484 7.10617L15.4455 7.10464L15.4188 7.09062C15.393 7.07688 15.3516 7.05437 15.2965 7.02295C15.1862 6.96006 15.0213 6.86173 14.8166 6.72686C14.4066 6.4566 13.8417 6.0427 13.2383 5.47698C12.029 4.34323 10.6931 2.62751 10.1006 0.257462L8.16032 0.742528C8.87215 3.58987 10.4711 5.62416 11.8704 6.93605C11.8933 6.95755 11.9162 6.97887 11.9391 6.99999H0V8.99999H11.9391C11.9162 9.02112 11.8933 9.04243 11.8704 9.06393C10.4711 10.3758 8.87215 12.4101 8.16032 15.2575L10.1006 15.7425C10.6931 13.3725 12.029 11.6568 13.2383 10.523C13.8417 9.95729 14.4066 9.54338 14.8166 9.27313C15.0213 9.13826 15.1862 9.03993 15.2965 8.97704C15.3516 8.94562 15.393 8.92311 15.4188 8.90937L15.4455 8.89535L15.4484 8.89382L15.4495 8.89325L16 8.61803V7.38197Z' fill='black'/%3E%3C/svg%3E%0A");    
+}
+
+.btn-arrow:hover:after {
+    transform: translateX(2em);
+}
+.btn-text.btn-arrow:hover:after,
+.tt-two-col-card:hover .btn-text.btn-arrow::after,
+.tt-product-card:hover .btn-text.btn-arrow::after,
+.tt-card:hover .btn-text.btn-arrow::after,
+.tt-blog-card:hover .btn-text.btn-arrow::after {
+	transform: translateX(1em);
+}
+.btn-arrow:hover .btn-content,
+.tt-two-col-card:hover .btn-arrow .btn-content,
+.tt-product-card:hover .btn-arrow .btn-content,
+.tt-card:hover .btn-arrow .btn-content,
+.tt-blog-card:hover .btn-arrow .btn-content {
+    transform: translateX(1.2em);
+}
+.btn-arrow:hover .btn-primary-arrow,
+.tt-two-col-card:hover .btn-arrow .btn-primary-arrow,
+.tt-product-card:hover .btn-arrow .btn-primary-arrow,
+.tt-card:hover .btn-arrow .btn-primary-arrow,
+.tt-blog-card:hover .btn-arrow .btn-primary-arrow {
+    transform: translateX(2em);
+}
+
+.button-tertiary::before {
+    content: '';
+    height: .9rem;
+    width: .9rem;
+    margin-right: .4rem;
+    display: inline-block;
+    opacity: .8;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.707 2.293a1 1 0 0 0-1.414 1.414L12.586 8H2a1 1 0 0 0 0 2h10.586l-4.293 4.293a1 1 0 1 0 1.414 1.414l6-6a1 1 0 0 0 0-1.414l-6-6Z' fill='%23EFE9FB'/%3E%3C/svg%3E");
+    -webkit-transition: 400ms cubic-bezier(0.65, 0, 0.35, 1);
+    transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1); 
+}
+.button-tertiary.external::before {
+    content: none;
+}
+
+.button-tertiary.external::after {
+    content: '';
+    height: .9rem;
+    width: .9rem;
+    margin-left: .4rem;
+    display: inline-block;
+    opacity: .8;
+    background-size: contain;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 18 18' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M4.61092 3.40381C4.05863 3.40381 3.61092 3.85152 3.61092 4.40381C3.61092 4.95609 4.05863 5.40381 4.61092 5.40381L10.682 5.40381L3.1967 12.8891C2.80618 13.2796 2.80618 13.9128 3.1967 14.3033C3.58723 14.6938 4.22039 14.6938 4.61092 14.3033L12.0962 6.81803V12.8891C12.0962 13.4414 12.5439 13.8891 13.0962 13.8891C13.6485 13.8891 14.0962 13.4414 14.0962 12.8891V4.40381C14.0962 3.85152 13.6485 3.40381 13.0962 3.40381L4.61092 3.40381Z' fill='white'/%3E%3C/svg%3E%0A");    
+    transition: 0.4s cubic-bezier(0.65, 0, 0.35, 1); 
+}
+
+.button-tertiary:hover:before  {
+    opacity: 1;
+    transform: translate3d(.25rem, 0px, 0px) 
+}
+
+.button-tertiary.external:hover:after  {
+    opacity: 1;
+    transform: translate3d(.1rem, -.1rem, 0px) 
+}
+
+.button-tertiary.small::before {
+    height: .8rem;
+    width: .8rem;
+}
+.button-tertiary.small::after {
+    height: .8rem;
+    width: .8rem;
+}
+
+.button-group .button-tertiary.small:only-child {
+    transform: translate3d(-.7rem, 0px, 0px) 
+}
+
+.button-mastermind.w--open .icon-small .close {
+    opacity: 0;
+}
+
+.bg-black .tt-button {
+  &.btn-primary {
+    &.btn-arrow {
+      border-color: var(--white-a-100);
+      background-color: var(--white-a-100);
+      color: var(--black-a-100);
+      
+      &::after {
+        background-image: url("data:image/svg+xml,%3Csvg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16 7.38197L15.4495 7.10674L15.4484 7.10617L15.4455 7.10464L15.4188 7.09062C15.393 7.07688 15.3516 7.05437 15.2965 7.02295C15.1862 6.96006 15.0213 6.86173 14.8166 6.72686C14.4066 6.4566 13.8417 6.0427 13.2383 5.47698C12.029 4.34323 10.6931 2.62751 10.1006 0.257462L8.16032 0.742528C8.87215 3.58987 10.4711 5.62416 11.8704 6.93605C11.8933 6.95755 11.9162 6.97887 11.9391 6.99999H0V8.99999H11.9391C11.9162 9.02112 11.8933 9.04243 11.8704 9.06393C10.4711 10.3758 8.87215 12.4101 8.16032 15.2575L10.1006 15.7425C10.6931 13.3725 12.029 11.6568 13.2383 10.523C13.8417 9.95729 14.4066 9.54338 14.8166 9.27313C15.0213 9.13826 15.1862 9.03993 15.2965 8.97704C15.3516 8.94562 15.393 8.92311 15.4188 8.90937L15.4455 8.89535L15.4484 8.89382L15.4495 8.89325L16 8.61803V7.38197Z' fill='black'/%3E%3C/svg%3E%0A");
+      }
+
+      &:hover {
+        box-shadow: 3px 3px #fff9;
+      }
+    }
+  }
+} 
+
+/* Toggle Menu (Buttons-like tabs) */
+.bg-black .tt-toggle-menu {
+  border-color: var(--white-a-10);
+  background-color: unset;
+  color: var(--white-a-100);
+
+  .tt-toggle-tab-btn:hover {
+    background-color: var(--white-a-10);
+  }
+  .tt-toggle-tab-btn.active:hover {
+    background-color: var(--purple-600);
+  }
+
+  &.subdued {
+    .tt-toggle-tab-btn.active {
+      color: var(--black-a-100);
+      background-color: var(--white-a-100);
+    }
+    .tt-toggle-tab-btn.active:hover {
+      color: var(--black-a-100);
+      background-color: var(--white-a-100);
+    }
+  }
+}
+

@@ -1727,6 +1727,22 @@ tbody th {
   background: var(--white-a-60);
 }
 
+.tt-accordion-slider-nav .swiper-slide .heading-default {
+  opacity: 0.6;
+}
+.tt-accordion-slider-nav .swiper-slide .accordion-text-wrap {
+  opacity: 0;
+  height: 0;
+  overflow: hidden;
+}
+.tt-accordion-slider-nav .swiper-slide.is-active .heading-default {
+  opacity: 1;
+}
+.tt-accordion-slider-nav .swiper-slide.is-active .accordion-text-wrap {
+  opacity: 1;
+  height: auto;
+}
+
 /* Forms */
 .tt-form-wrap > div:not(.tt-form-fields) {
   display: none !important;

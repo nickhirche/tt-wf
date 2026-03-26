@@ -1,0 +1,130 @@
+/* Cost calculator */
+
+.tt-cost-calculator {
+  .range-slider {
+    input[type="range" i] {
+      background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(var(--range-value) * 1%), #000 calc(var(--range-value) * 1%));
+    }
+  }
+
+  .calculator-cost-item {
+    &[data-cost-type="maintenance"] {
+      display: none;
+
+      &.active {
+        display: flex;
+      }
+    }
+  }
+
+  .calculator-value {
+    &#editable-value {
+      &:hover {
+        background-color: var(--black-a-6);
+      }
+
+      &[data-custom-value="true"] {
+        background-color: var(--white-a-100);
+
+        &:hover {
+          background-color: var(--white-a-100);
+        }
+      } 
+    }
+  }
+
+  .calculator-value-item:has(.calculator-value#editable-value) {
+    &:hover {
+      .calculator-value#editable-value {
+        background-color: var(--black-a-6);
+
+        &[data-custom-value="true"] {
+            background-color: var(--white-a-100);
+        }
+      }
+    }
+  
+    &:has([data-custom-value="true"]) {
+      .value-edit {
+        display: none;
+      }
+    
+      .value-reset {
+        display: flex;
+      }
+    }
+  }
+
+  .range-description {
+    color: var(--black-a-60);
+    
+    strong {
+      color: var(--black-a-100);
+    }
+  }
+  
+  &.dark {
+    .range-description {
+      color: var(--white-a-60);
+
+      strong {
+        color: var(--white-a-100);
+      }
+    }
+
+    .range-slider {
+      input[type="range" i] {
+        background: linear-gradient(90deg, #0DF28F 0%, #8B33FF calc(var(--range-value) * 1%), #fff calc(var(--range-value) * 1%));
+
+        &::-webkit-slider-thumb {
+          background: var(--black-a-100);
+          box-shadow: 0px 0px 0px 2px var(--white-a-100);
+
+        }
+        &::-moz-range-thumb {
+          background: var(--black-a-100);
+          box-shadow: 0px 0px 0px 2px var(--white-a-100);
+        }
+      }
+    }
+
+    .calculator-value-item {
+      background-color: var(--white-a-5);
+
+      .value-reset, .value-edit { 
+        &:hover {
+          background-color: var(--white-a-10);
+        }
+      }
+
+      .calculator-value#editable-value {
+        &[data-custom-value=true] {
+          background-color: var(--black-a-96);
+
+          &:hover {
+            background-color: var(--black-a-96);
+          }
+        }
+
+        &:focus {
+          background-color: var(--black-a-96);
+        }
+      }
+
+      &:has(.calculator-value#editable-value):hover {
+        .calculator-value#editable-value {
+          background-color: var(--white-a-5);
+
+          &[data-custom-value=true] {
+            background-color: var(--black-a-96);
+          }
+        }
+      }
+    }
+
+    .range-description-wrap {
+      border-color: var(--white-a-10);
+    }
+  }
+}
+

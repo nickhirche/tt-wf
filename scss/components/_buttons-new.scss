@@ -1,0 +1,307 @@
+/* =========================
+   TT Button (new)
+   ========================= */
+
+/* =========================
+   Base / tokens
+   ========================= */
+
+.tt-btn-root{
+    --tt-btn-bg-grow: 0px; /* default off */
+    --tt-btn-hover-shadow: 0 0 0 var(--tt-btn-bg-grow) var(--tt-btn-ring);
+
+    --tt-btn-icon-hover-x: 0;
+    --tt-btn-text-hover-x: 0;
+
+    --tt-btn-transition: var(--transition-base, 0.25s cubic-bezier(0.65, 0, 0.35, 1));
+    --tt-btn-transition-press: 0.08s cubic-bezier(0.3, 0, 0.7, 1);
+    --tt-btn-press-scale: 0.95;
+
+    /* reveal vars set by JS */
+    --tt-reveal-r: 0px;
+    --tt-reveal-x: 50%;
+    --tt-reveal-y: 50%;
+}
+
+/* =========================
+   Transitions (declare once)
+   ========================= */
+
+.tt-btn-root{
+    transition: transform var(--tt-btn-transition);
+}
+
+.tt-btn-bg{
+    transition:
+        inset var(--tt-btn-transition),
+        border-radius var(--tt-btn-transition),
+        box-shadow var(--tt-btn-transition);
+}
+
+.tt-btn-icon,
+.tt-btn-text{
+    transition: transform var(--tt-btn-transition);
+}
+
+/* =========================
+   Presets
+   ========================= */
+
+.tt-btn-root[data-bg-grow="scale"]{
+    --tt-btn-bg-grow: 0.1em;
+  }
+
+/* Alte Lösung nur auskommentieren
+// .tt-btn-root[data-bg-grow="scale"][data-wf--button-root--size="sm"] { --tt-btn-bg-grow: 4px; }
+// .tt-btn-root[data-bg-grow="scale"][data-wf--button-root--size="md"] { --tt-btn-bg-grow: 6px; }
+// .tt-btn-root[data-bg-grow="scale"][data-wf--button-root--size="lg"] { --tt-btn-bg-grow: 8px; }
+*/
+
+/* =========================
+   Variants
+   ========================= */
+
+/* Button type -> shadow presets (used by ::before/::after) */
+.tt-btn[data-wf--button--type="glass-outline-white"],
+.tt-btn[data-wf--button--type="glass-outline-black"],
+.tt-btn[data-wf--button--type="solid-white"],
+.tt-btn[data-wf--button--type="solid-black"]{
+    --tt-btn-shadow-rest: 0 3.562px 5.386px 0 rgba(0, 0, 0, 0.06), 0 1.408px 2.13px 0 rgba(142, 105, 192, 0.04);
+    --tt-btn-hover-shadow: 0 20px 52px 0 rgba(79, 29, 229, 0.13), 0 14.966px 22.631px 0 rgba(0, 0, 0, 0.09), 0 7.266px 10.987px 0 rgba(0, 0, 0, 0.07), 0 3.562px 5.386px 0 rgba(0, 0, 0, 0.06), 0 1.408px 2.13px 0 rgba(142, 105, 192, 0.04);
+}
+  
+/* Hover behavior variant (data-btn-hover=...) */
+.tt-btn-root[data-btn-hover="arrow"] {
+    /* Default Arrow-Shift (solid/glass Varianten) */
+    --tt-btn-icon-hover-x: 1.8rem;
+    --tt-btn-text-hover-x: 0.8rem;
+}
+
+/* Spezielle Arrow-Shift-Werte für Text-Buttons */
+.tt-btn-root[data-btn-hover="arrow"] .tt-btn[data-wf--button--type="text-white"],
+.tt-btn-root[data-btn-hover="arrow"] .tt-btn[data-wf--button--type="text-black"] {
+    --tt-btn-icon-hover-x: 1rem;
+    --tt-btn-text-hover-x: 0.8rem;
+}
+
+.tt-btn-root[data-btn-hover="external"] {
+    --tt-btn-icon-hover-x: 0.1em;
+    /* evtl. noch --tt-btn-icon-hover-y: -0.1em; */
+}
+
+
+/* =========================
+   States
+   ========================= */
+
+:is(
+  .tt-btn-root:hover,
+  .tt-btn-root:active,
+  .tt-btn-root:focus-visible,
+  .tt-btn-root.is-touch-hover,
+  a[data-tt-hover="btn"]:hover .tt-btn-root,
+  a[data-tt-hover="btn"]:active .tt-btn-root
+) .tt-btn-bg {
+    inset: calc(var(--tt-btn-bg-grow) * -1);
+    border-radius: var(--_button-sizes---tt-btn-radius-hover);
+}
+
+.tt-btn[data-wf--button--type="glass-outline-white"],
+.tt-btn[data-wf--button--type="glass-outline-black"],
+.tt-btn[data-wf--button--type="solid-white"],
+.tt-btn[data-wf--button--type="solid-black"]{
+    position: relative;
+    isolation: isolate;
+}
+
+.tt-btn[data-wf--button--type="glass-outline-white"]::before,
+.tt-btn[data-wf--button--type="glass-outline-black"]::before,
+.tt-btn[data-wf--button--type="solid-white"]::before,
+.tt-btn[data-wf--button--type="solid-black"]::before{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    border-radius: var(--_button-sizes---tt-btn-radius-hover);
+    box-shadow: var(--tt-btn-shadow-rest);
+
+    opacity: 1;
+}
+
+.tt-btn[data-wf--button--type="glass-outline-white"]::after,
+.tt-btn[data-wf--button--type="glass-outline-black"]::after,
+.tt-btn[data-wf--button--type="solid-white"]::after,
+.tt-btn[data-wf--button--type="solid-black"]::after{
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+
+    border-radius: var(--_button-sizes---tt-btn-radius-hover);
+    box-shadow: var(--tt-btn-hover-shadow);
+
+    opacity: 0;
+    transform: translateY(0);
+    transition:
+      opacity var(--tt-btn-transition),
+      transform var(--tt-btn-transition);
+}
+
+/* shadow behind bg + content */
+.tt-btn[data-wf--button--type="glass-outline-white"] .tt-btn-bg,
+.tt-btn[data-wf--button--type="glass-outline-black"] .tt-btn-bg,
+.tt-btn[data-wf--button--type="solid-white"] .tt-btn-bg,
+.tt-btn[data-wf--button--type="solid-black"] .tt-btn-bg{
+    z-index: 1;
+}
+.tt-btn[data-wf--button--type="glass-outline-white"] .tt-btn-inner,
+.tt-btn[data-wf--button--type="glass-outline-black"] .tt-btn-inner,
+.tt-btn[data-wf--button--type="solid-white"] .tt-btn-inner,
+.tt-btn[data-wf--button--type="solid-black"] .tt-btn-inner{
+    position: relative;
+    z-index: 2;
+}
+
+:is(
+  .tt-btn-root:hover:not(:active),
+  .tt-btn-root:focus-visible:not(:active),
+  a[data-tt-hover="btn"]:hover .tt-btn-root:not(:active),
+  .tt-btn-root.is-touch-hover:not(.is-touch-active)
+) .tt-btn[data-wf--button--type="glass-outline-white"]::after,
+:is(
+  .tt-btn-root:hover:not(:active),
+  .tt-btn-root:focus-visible:not(:active),
+  a[data-tt-hover="btn"]:hover .tt-btn-root:not(:active),
+  .tt-btn-root.is-touch-hover:not(.is-touch-active)
+) .tt-btn[data-wf--button--type="glass-outline-black"]::after,
+:is(
+  .tt-btn-root:hover:not(:active),
+  .tt-btn-root:focus-visible:not(:active),
+  a[data-tt-hover="btn"]:hover .tt-btn-root:not(:active),
+  .tt-btn-root.is-touch-hover:not(.is-touch-active)
+) .tt-btn[data-wf--button--type="solid-white"]::after,
+:is(
+  .tt-btn-root:hover:not(:active),
+  .tt-btn-root:focus-visible:not(:active),
+  a[data-tt-hover="btn"]:hover .tt-btn-root:not(:active),
+  .tt-btn-root.is-touch-hover:not(.is-touch-active)
+) .tt-btn[data-wf--button--type="solid-black"]::after{
+    opacity: 1;
+    transform: translateY(2px);
+}
+
+/* Press: Hover-Shadow kurz "wegdrücken" */
+.tt-btn-root:active .tt-btn[data-wf--button--type="glass-outline-white"]::after,
+.tt-btn-root:active .tt-btn[data-wf--button--type="glass-outline-black"]::after,
+.tt-btn-root:active .tt-btn[data-wf--button--type="solid-white"]::after,
+.tt-btn-root:active .tt-btn[data-wf--button--type="solid-black"]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type="glass-outline-white"]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type="glass-outline-black"]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type="solid-white"]::after,
+.tt-btn-root.is-touch-active .tt-btn[data-wf--button--type="solid-black"]::after{
+    opacity: 0;
+    transform: translateY(0);
+}
+
+/* optional blend mode for pseudo shadow layer */
+.tt-btn[data-shadow-blend="multiply"]::after { mix-blend-mode: multiply; }
+.tt-btn[data-shadow-blend="overlay"]::after { mix-blend-mode: overlay; }
+.tt-btn[data-shadow-blend="screen"]::after { mix-blend-mode: screen; }
+.tt-btn[data-shadow-blend="soft-light"]::after { mix-blend-mode: soft-light; }
+
+:is(
+  .tt-btn-root:hover,
+  .tt-btn-root:active,
+  .tt-btn-root:focus-visible,
+  .tt-btn-root.is-touch-hover,
+  a[data-tt-hover="btn"]:hover .tt-btn-root,
+  a[data-tt-hover="btn"]:active .tt-btn-root
+) .tt-btn-icon {
+    transform: translateX(var(--tt-btn-icon-hover-x));
+}
+:is(
+  .tt-btn-root:hover,
+  .tt-btn-root:active,
+  .tt-btn-root:focus-visible,
+  .tt-btn-root.is-touch-hover,
+  a[data-tt-hover="btn"]:hover .tt-btn-root,
+  a[data-tt-hover="btn"]:active .tt-btn-root
+) .tt-btn-text {
+    transform: translateX(var(--tt-btn-text-hover-x));
+}
+
+.tt-btn-root:active,
+.tt-btn-root.is-touch-active{
+    transform: scale(var(--tt-btn-press-scale));
+}
+
+.tt-btn-root:active .tt-btn-bg,
+.tt-btn-root:active .tt-btn-icon,
+.tt-btn-root:active .tt-btn-text,
+.tt-btn-root.is-touch-active .tt-btn-bg,
+.tt-btn-root.is-touch-active .tt-btn-icon,
+.tt-btn-root.is-touch-active .tt-btn-text{
+    transition-duration: var(--tt-btn-transition-press);
+}
+
+.tt-btn-root:focus-visible{
+    outline: 3px solid rgba(59,130,246,0.55);
+    outline-offset: 3px;
+}
+
+
+/* =========================
+   Reveal (inside bg layer)
+   ========================= */
+
+.tt-btn-reveal{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+
+  opacity: 0;
+  clip-path: circle(0px at var(--tt-reveal-x, 50%) var(--tt-reveal-y, 50%));
+
+  transition:
+    clip-path 380ms cubic-bezier(0.55, 0, 0.2, 1),
+    opacity 220ms ease 80ms;
+
+  will-change: clip-path, opacity;
+}
+
+/* resetting: hard reset, no transition */
+.tt-btn[data-reveal-state="resetting"] .tt-btn-reveal{
+  transition: none !important;
+  opacity: 0;
+  clip-path: circle(0px at var(--tt-reveal-x, 50%) var(--tt-reveal-y, 50%));
+}
+
+/* armed: small visible circle */
+.tt-btn[data-reveal-state="armed"] .tt-btn-reveal{
+    opacity: 0.45;
+    clip-path: circle(0.55em at var(--tt-reveal-x, 50%) var(--tt-reveal-y, 50%));
+}
+
+/* revealing: expand */
+.tt-btn[data-reveal-state="revealing"] .tt-btn-reveal{
+  opacity: 1;
+  clip-path: circle(var(--tt-reveal-r, 0px) at var(--tt-reveal-x, 50%) var(--tt-reveal-y, 50%));
+}
+
+/* fadeout: only fade opacity */
+.tt-btn[data-reveal-state="fadeout"] .tt-btn-reveal{
+  opacity: 0;
+}
+
+/* Test shader */
+.tt-btn-shader{
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(140px 90px at 25% 30%, rgba(255,255,255,0.35), rgba(255,255,255,0) 70%),
+    radial-gradient(120px 120px at 80% 70%, rgba(0,255,255,0.22), rgba(0,255,255,0) 65%),
+    linear-gradient(135deg, rgba(255,0,200,0.18), rgba(0,120,255,0.18));
+  opacity: 0.95;
+  mix-blend-mode: overlay;
+}
