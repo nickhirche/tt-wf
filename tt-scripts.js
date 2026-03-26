@@ -222,8 +222,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 updateOnMove: true,
                 autoScroll: false,
                 autoplay: 'pause',
-                pauseOnHover: true, // Pause on hover
-                pauseOnFocus: true, // Pause on focus
+                // Hover/Focus: gemeinsamer Parent (.tt-feature-accordion) steuert Autoplay (siehe syncPairs)
+                pauseOnHover: false,
+                pauseOnFocus: false,
                 intersection: {
                   rootMargin: '200px',
                   inView: {
@@ -441,7 +442,12 @@ document.addEventListener('DOMContentLoaded', function() {
     var syncPairs = [
       { parent: '.tt-features-slider', primary: '.tt-feature-nav-slider', secondary: '.tt-feauture-content-slider' },
       { parent: '.tt-usecases-slider', primary: '.tt-usecase-slider', secondary: '.tt-category-slider' },
-      { parent: '.tt-feature-accordion', primary: '.tt-accordion-media-slider', secondary: '.tt-accordion-content-slider' },
+      {
+        parent: '.tt-feature-accordion',
+        primary: '.tt-accordion-media-slider',
+        secondary: '.tt-accordion-content-slider',
+        pauseAutoplayOnParentHover: true,
+      },
       // Weitere Sync-Paar-Objekte können hier hinzugefügt werden
     ];
   
@@ -478,6 +484,27 @@ document.addEventListener('DOMContentLoaded', function() {
           // Stelle sicher, dass ein korrespondierender secondary Slider existiert
           if (secondarySliders[i]) {
             primarySlider.sync(secondarySliders[i]);
+            if (pair.pauseAutoplayOnParentHover) {
+              var host =
+                (primarySlider.root && primarySlider.root.closest(pair.parent)) || parentElement;
+              var autoplay = primarySlider.Components && primarySlider.Components.Autoplay;
+              if (host && autoplay) {
+                host.addEventListener('mouseenter', function () {
+                  autoplay.pause();
+                });
+                host.addEventListener('mouseleave', function () {
+                  autoplay.play();
+                });
+                host.addEventListener('focusin', function () {
+                  autoplay.pause();
+                });
+                host.addEventListener('focusout', function (e) {
+                  if (!host.contains(e.relatedTarget)) {
+                    autoplay.play();
+                  }
+                });
+              }
+            }
           }
         });
       }
