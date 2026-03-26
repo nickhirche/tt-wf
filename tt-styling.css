@@ -1747,6 +1747,7 @@ tbody th {
 .tt-slider-pagination-item {
   padding: 0.5rem 0.2rem;
   background: none;
+  display: flex;
 }
 .tt-slider-pagination-item .tt-slider-pagination-chip {
   width: 1rem;
