@@ -1746,6 +1746,7 @@ tbody th {
 /* Pagination */
 .tt-slider-pagination-item {
   padding: 0.5rem 0.2rem;
+  background: none;
 }
 .tt-slider-pagination-item .tt-slider-pagination-chip {
   width: 1rem;
@@ -1753,6 +1754,7 @@ tbody th {
   background-color: currentColor;
   opacity: 0.2;
   transition: opacity var(--transition-base);
+  border-radius: 2rem;
 }
 .tt-slider-pagination-item.is-active .tt-slider-pagination-chip {
   opacity: 1;
