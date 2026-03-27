@@ -1765,56 +1765,56 @@ tbody th {
 }
 
 /* Accordion Slider (Splide) */
-.tt-accordion-content-slider, .tt-accordion-content-slider *, .accordion-content-wrap::before {
+.tt-accordion-slider-nav, .tt-accordion-slider-nav *, .accordion-content-wrap::before {
   -webkit-transition: all var(--transition-base);
   transition: all var(--transition-base);
 }
 @media screen and (max-width: 991px) {
-  .tt-accordion-content-slider, .tt-accordion-content-slider *, .accordion-content-wrap::before {
+  .tt-accordion-slider-nav, .tt-accordion-slider-nav *, .accordion-content-wrap::before {
     -webkit-transition: none;
     transition: none;
   }
 }
 
-.tt-accordion-content-slider .splide__slide .accordion-content-wrap {
+.tt-accordion-slider-nav .splide__slide .accordion-content-wrap {
   opacity: 0.4;
   cursor: pointer;
 }
-.tt-accordion-content-slider .splide__slide .accordion-text-wrap {
+.tt-accordion-slider-nav .splide__slide .accordion-text-wrap {
   height: 0px;
   padding-top: 0px;
   opacity: 0;
 }
 @media screen and (max-width: 991px) {
-  .tt-accordion-content-slider .splide__slide .accordion-text-wrap {
+  .tt-accordion-slider-nav .splide__slide .accordion-text-wrap {
     height: auto;
     padding-top: 0.6rem;
   }
 }
-.tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
+.tt-accordion-slider-nav .splide__slide.is-active .accordion-text-wrap {
   height: auto;
   padding-top: 0.6rem;
   opacity: 0.6;
 }
 @media screen and (max-width: 991px) {
-  .tt-accordion-content-slider .splide__slide.is-active .accordion-text-wrap {
+  .tt-accordion-slider-nav .splide__slide.is-active .accordion-text-wrap {
     opacity: 1;
   }
 }
-.tt-accordion-content-slider .splide__slide.is-active .accordion-content-wrap, .tt-accordion-content-slider .splide__slide:hover .accordion-content-wrap {
+.tt-accordion-slider-nav .splide__slide.is-active .accordion-content-wrap, .tt-accordion-slider-nav .splide__slide:hover .accordion-content-wrap {
   opacity: 1;
 }
-.tt-accordion-content-slider .splide__slide:not(:last-child) {
-  border-bottom: solid 1px color-mix(in srgb, currentColor 20%, transparent);
+.tt-accordion-slider-nav .splide__slide:not(:last-child) {
+  border-bottom: solid 1px color-mix(in srgb, currentColor 15%, transparent);
 }
 @media screen and (max-width: 991px) {
-  .tt-accordion-content-slider .splide__slide:not(:last-child) {
+  .tt-accordion-slider-nav .splide__slide:not(:last-child) {
     border-bottom: none;
   }
 }
 
-/* Pagination */
-.ul.splide__pagination {
+/* Pagination (Splide, alle Slider mit Bullets) */
+ul.splide__pagination {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -1822,25 +1822,28 @@ tbody th {
   display: flex;
   gap: 0;
 }
-.ul.splide__pagination button.splide__pagination__page {
+ul.splide__pagination button.splide__pagination__page {
   padding: 0.5rem 0.2rem;
   background: none;
   display: flex;
 }
-.ul.splide__pagination button.splide__pagination__page::before {
-  -webkit-transition: opacity var(--transition-base);
-  transition: opacity var(--transition-base);
+ul.splide__pagination button.splide__pagination__page::before {
   content: "";
   display: block;
   width: 1rem;
   height: 0.2rem;
   background-color: currentColor;
   opacity: 0.2;
-  transition: opacity var(--transition-base);
   border-radius: 2rem;
+  -webkit-transition: opacity var(--transition-base), width var(--transition-base);
+  transition: opacity var(--transition-base), width var(--transition-base);
 }
-.ul.splide__pagination button.splide__pagination__page.is-active::before {
+ul.splide__pagination button.splide__pagination__page.is-active::before {
   width: 2rem;
+  opacity: 1;
+}
+ul.splide__pagination button.splide__pagination__page:hover::before {
+  opacity: 0.5;
 }
 
 /* Forms */
