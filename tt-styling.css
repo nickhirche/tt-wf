@@ -1805,7 +1805,7 @@ tbody th {
   opacity: 1;
 }
 .tt-accordion-slider-nav .splide__slide:not(:last-child) {
-  border-bottom: solid 1px color-mix(in srgb, currentColor 15%, transparent);
+  border-bottom: solid 1px color-mix(in srgb, currentColor 7%, transparent);
 }
 @media screen and (max-width: 991px) {
   .tt-accordion-slider-nav .splide__slide:not(:last-child) {
@@ -1831,7 +1831,7 @@ ul.splide__pagination button.splide__pagination__page::before {
   content: "";
   display: block;
   width: 1rem;
-  height: 0.2rem;
+  height: 0.15rem;
   background-color: currentColor;
   opacity: 0.2;
   border-radius: 2rem;
@@ -1839,7 +1839,7 @@ ul.splide__pagination button.splide__pagination__page::before {
   transition: opacity var(--transition-base), width var(--transition-base);
 }
 ul.splide__pagination button.splide__pagination__page.is-active::before {
-  width: 2rem;
+  width: 1.2rem;
   opacity: 1;
 }
 ul.splide__pagination button.splide__pagination__page:hover::before {
