@@ -50,7 +50,14 @@
 
 /* Splide Slider Product Slider */
 
-.tt-product-slider .splide__sr, .tt-usecase-card-slider .splide__sr, .tt-usecase-slider .splide__sr, .splide__sr, .tt-accordion-media-slider .splide__sr, .splide__sr { 
+.tt-product-slider .splide__sr,
+.tt-card-slider .splide__sr,
+.tt-card-carousel .splide__sr,
+.tt-usecase-card-slider .splide__sr,
+.tt-usecase-slider .splide__sr,
+.splide__sr,
+.tt-accordion-media-slider .splide__sr,
+.splide__sr {
     display: none!important;
 }
 

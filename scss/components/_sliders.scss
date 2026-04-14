@@ -1,0 +1,172 @@
+.tt-accordion-slider-nav {
+    .swiper-slide {
+
+      .heading-default {
+        opacity: 0.6;
+      }
+      .accordion-text-wrap {
+        opacity: 0;
+        height: 0;
+        overflow: hidden;
+      }
+
+      &.is-active {
+        .heading-default {
+          opacity: 1;
+        }
+        .accordion-text-wrap {
+          opacity: 1;
+          height: auto;
+        }
+      }
+    }
+}
+
+/* Pagination */
+.tt-slider-pagination-item {
+  padding: 0.5rem 0.2rem;
+  background: none;
+  display: flex;
+
+  .tt-slider-pagination-chip {
+    width: 1rem;
+    height: 0.2rem;
+    background-color: currentColor;
+    opacity: 0.2;
+    transition: opacity var(--transition-base);
+    border-radius: 2rem;
+  }
+
+  &.is-active {
+    .tt-slider-pagination-chip {
+      opacity: 1;
+    }
+  }
+
+  &:hover {
+    .tt-slider-pagination-chip {
+      opacity: 0.5;
+    }
+  }
+
+}
+
+
+
+/* Accordion Slider (Splide) */
+
+.tt-accordion-slider-nav, .tt-accordion-slider-nav *, .accordion-content-wrap::before  {
+  -webkit-transition: all var(--transition-base);
+  transition: all var(--transition-base);
+
+  @media screen and (max-width: 991px) {
+    -webkit-transition: none;
+    transition: none;
+  }
+}
+
+.tt-accordion-slider-nav {
+  .splide__slide {
+    .accordion-content-wrap {
+      opacity: 0.4;
+      cursor: pointer;
+    }
+
+    .accordion-text-wrap {
+      height: 0px;
+      padding-top: 0px;
+      opacity: 0;
+
+      @media screen and (max-width: 991px) {
+        height: auto;
+        padding-top: 0.6rem;
+      }
+    }
+
+    &.is-active {
+      .accordion-text-wrap {
+        height: auto;
+        padding-top: 0.6rem;
+        opacity: 0.6;
+
+        @media screen and (max-width: 991px) {
+          opacity: 1;
+        }
+      }
+    }
+
+    &.is-active,
+    &:hover {
+      .accordion-content-wrap {
+        opacity: 1;
+      }
+    }
+
+    &:not(:last-child) {
+      border-bottom: solid 1px color-mix(in srgb, currentColor 7%, transparent);
+
+      @media screen and (max-width: 991px) {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+
+/* Pagination (Splide, alle Slider mit Bullets) */
+ul.splide__pagination {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: unset;
+  display: flex;
+  gap: 0;
+
+  button.splide__pagination__page {
+    padding: 0.5rem 0.2rem;
+    background: none;
+    display: flex;
+  }
+
+  button.splide__pagination__page::before {
+    content: "";
+    display: block;
+    width: 1rem;
+    height: 0.15rem;
+    background-color: currentColor;
+    opacity: 0.2;
+    border-radius: 2rem;
+    -webkit-transition: opacity var(--transition-base), width var(--transition-base);
+    transition: opacity var(--transition-base), width var(--transition-base);
+  }
+
+  button.splide__pagination__page.is-active::before {
+    width: 1.2rem;
+    opacity: 1;
+  }
+
+  button.splide__pagination__page:hover::before {
+    opacity: 0.5;
+  }
+}
+
+/* Card / Carousel (Splide, data-gesteuert): kein Mount bei „alles sichtbar“ oder Breakpoint-Skip */
+.tt-card-slider.tt-card-slider--static,
+.tt-card-carousel.tt-card-slider--static,
+.tt-product-slider.tt-card-slider--static,
+.tt-blog-card-slider.tt-card-slider--static,
+.tt-usecase-card-slider.tt-card-slider--static,
+.tt-card-slider.tt-card-slider--breakpoint-skip,
+.tt-card-carousel.tt-card-slider--breakpoint-skip,
+.tt-product-slider.tt-card-slider--breakpoint-skip,
+.tt-blog-card-slider.tt-card-slider--breakpoint-skip,
+.tt-usecase-card-slider.tt-card-slider--breakpoint-skip {
+  .splide__track {
+    overflow: visible;
+  }
+
+  .splide__list {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}

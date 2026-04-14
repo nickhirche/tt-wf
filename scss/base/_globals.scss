@@ -1,0 +1,75 @@
+/* Global resets & variables */
+
+* {
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+  -webkit-touch-callout: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --color-enterprise-grading-1: #0df28f;
+  --color-enterprise-grading-2: #8b33ff;
+  --black-8: hsla(0, 0%, 0%, 0.1);
+  --black-9: hsla(0, 0%, 0%, 0.06);
+  --transition-base: 0.25s cubic-bezier(0.65, 0, 0.35, 1);
+  --shadow-dark: 0px 2rem 1.5rem 0px rgba(0, 0, 0, 0.10), 0px 0.25rem 0.25rem 0px rgba(0, 0, 0, 0.07), 0px 0.125rem 0.1rem 0px rgba(0, 0, 0, 0.05);
+  --radius-medium: 2rem;
+  --radius-default: 1.5rem;
+  --radius-small: 1rem;
+
+  z-index: 3;
+  font-size: 20px;
+
+  @media (max-width: 992px) {
+    font-size: 19px;
+  }
+  @media (max-width: 568px) {
+    font-size: 18px;
+  }
+}
+
+/* Global typography */
+
+a {
+  color: currentColor;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  word-break: break-word;
+}
+
+/* Spacing utilities */
+
+.top-x-large { margin-top: 8rem; }
+.top-large   { margin-top: 6rem; }
+.top-medium  { margin-top: 4rem; }
+.top-normal  { margin-top: 3rem; }
+.top-small   { margin-top: 2rem; }
+.top-x-small { margin-top: 1.5rem; }
+.top-xx-small{ margin-top: 1rem; }
+
+@media screen and (max-width: 479px) {
+  .top-x-large { margin-top: 6rem; } 
+  .top-large   { margin-top: 5rem; }
+  .top-medium  { margin-top: 3rem; }
+  .top-normal  { margin-top: 2.5rem; }
+}
+
+/* Layout helpers */
+
+.tt-view,
+.tt-section.section-overflow.bg-black { 
+  overflow: clip; 
+}  
+
+.bg-black + .bg-black {
+  border-radius: unset;
+}
+
+/* Paragraph tweaks */
+
+.bg-black .label a { 
+  color: rgba(239, 233, 251, .6);
+}
+

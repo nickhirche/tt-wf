@@ -1,0 +1,10 @@
+/* Global mixins */
+
+@mixin transition($duration, $timing-function, $properties...) {
+  $transitions: ();
+  @each $property in $properties {
+      $transitions: #{$transitions}, #{$property} #{$duration} #{$timing-function};
+  }
+  transition: #{$transitions};
+}
+

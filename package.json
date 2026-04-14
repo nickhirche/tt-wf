@@ -1,0 +1,24 @@
+{
+  "name": "tt-wf",
+  "private": true,
+  "scripts": {
+    "js:build": "npm run js:build:vendor && npm run js:build:main && npm run js:build:contact",
+    "js:build:vendor": "node scripts/build-vendor.mjs",
+    "js:build:main": "esbuild js/tt-main.js --bundle --minify --sourcemap --target=es2018 --outfile=dist/tt-main.min.js",
+    "js:build:contact": "esbuild js/pages/contact.js --bundle --minify --sourcemap --target=es2018 --outfile=dist/contact-page.min.js",
+    "js:watch": "npm run js:watch:main",
+    "js:watch:vendor": "node scripts/build-vendor.mjs --watch",
+    "js:watch:main": "esbuild js/tt-main.js --bundle --sourcemap --target=es2018 --outfile=dist/tt-main.min.js --watch",
+    "js:watch:contact": "esbuild js/pages/contact.js --bundle --sourcemap --target=es2018 --outfile=dist/contact-page.min.js --watch"
+  },
+  "devDependencies": {
+    "esbuild": "latest"
+  },
+  "dependencies": {
+    "@rive-app/webgl2": "^2.32.0",
+    "@splidejs/splide": "^4.1.4",
+    "@splidejs/splide-extension-auto-scroll": "^0.5.3",
+    "@splidejs/splide-extension-intersection": "^0.2.0",
+    "accordion-js": "^3.3.4"
+  }
+}
