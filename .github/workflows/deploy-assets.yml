@@ -26,6 +26,10 @@ on:
 permissions:
   contents: read
 
+# Actions-Runtime: Node 24 (GitHub-Empfehlung ab 2026); siehe Changelog GitHub Actions
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 concurrency:
   group: deploy-assets
   cancel-in-progress: true
@@ -38,11 +42,23 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: '22'
 
       - name: Install and build JS
-        run: npm ci && npm run js:build
+        run: |
+          set -euo pipefail
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            echo "package-lock.json fehlt — nutze npm install (bitte Lockfile committen für reproduzierbare CI)."
+            npm install
+          fi
+          npm run js:build
+
+      - name: List files to upload
+        run: |
+          ls -la dist/vendor.min.js dist/tt-main.min.js cookiebot.css || true
+          ls -la dist/rive-*.wasm 2>/dev/null || true
 
       - name: Configure SSH
         env:
