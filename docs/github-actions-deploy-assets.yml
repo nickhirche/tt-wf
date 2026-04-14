@@ -1,6 +1,8 @@
 # Baut JS und lädt nur die wichtigsten Artefakte per SSH/rsync auf den Server
 # (Ziel = ASSETS_REMOTE_PATH, z. B. Verzeichnis hinter https://assets.tiptap.dev/tt-wf/static/).
 #
+# Aktivierung: nach .github/workflows/deploy-assets.yml kopieren und Secrets setzen.
+#
 # Secrets (Repo → Settings → Secrets and variables → Actions):
 #   ASSETS_SSH_HOST      z. B. assets.tiptap.dev
 #   ASSETS_SSH_USER      SSH-Login
