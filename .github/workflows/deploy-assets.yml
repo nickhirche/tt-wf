@@ -1,0 +1,80 @@
+# Baut JS und lädt nur die wichtigsten Artefakte per SSH/rsync auf den Server
+# (Ziel = ASSETS_REMOTE_PATH, z. B. Verzeichnis hinter https://assets.tiptap.dev/tt-wf/static/).
+#
+# Secrets (Repo → Settings → Secrets and variables → Actions):
+#   ASSETS_SSH_HOST      z. B. assets.tiptap.dev
+#   ASSETS_SSH_USER      SSH-Login
+#   ASSETS_SSH_KEY       privater Deploy-Key (kompletter PEM-Inhalt)
+#   ASSETS_REMOTE_PATH   absoluter Pfad auf dem Server, mit / am Ende, z. B. /var/www/.../tt-wf/static/
+# Optional:
+#   ASSETS_SSH_PORT      Standard 22
+
+name: Deploy core assets (SSH/rsync)
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'js/**'
+      - 'scripts/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'cookiebot.css'
+      - '.github/workflows/deploy-assets.yml'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-assets
+  cancel-in-progress: true
+
+jobs:
+  build-and-upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install and build JS
+        run: npm ci && npm run js:build
+
+      - name: Configure SSH
+        env:
+          ASSETS_SSH_KEY: ${{ secrets.ASSETS_SSH_KEY }}
+          ASSETS_SSH_HOST: ${{ secrets.ASSETS_SSH_HOST }}
+          ASSETS_SSH_PORT: ${{ secrets.ASSETS_SSH_PORT }}
+        run: |
+          set -euo pipefail
+          test -n "${ASSETS_SSH_KEY:-}" && test -n "${ASSETS_SSH_HOST:-}" || { echo "Missing ASSETS_SSH_KEY or ASSETS_SSH_HOST secrets"; exit 1; }
+          mkdir -p ~/.ssh
+          printf '%s\n' "$ASSETS_SSH_KEY" > ~/.ssh/assets_deploy
+          chmod 600 ~/.ssh/assets_deploy
+          PORT="${ASSETS_SSH_PORT:-22}"
+          ssh-keyscan -p "$PORT" -H "$ASSETS_SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+
+      - name: rsync vendor, main, wasm, cookiebot.css
+        env:
+          ASSETS_SSH_HOST: ${{ secrets.ASSETS_SSH_HOST }}
+          ASSETS_SSH_USER: ${{ secrets.ASSETS_SSH_USER }}
+          ASSETS_REMOTE_PATH: ${{ secrets.ASSETS_REMOTE_PATH }}
+          ASSETS_SSH_PORT: ${{ secrets.ASSETS_SSH_PORT }}
+        run: |
+          set -euo pipefail
+          test -n "${ASSETS_REMOTE_PATH:-}" && test -n "${ASSETS_SSH_USER:-}" || { echo "Missing ASSETS_REMOTE_PATH or ASSETS_SSH_USER secrets"; exit 1; }
+          PORT="${ASSETS_SSH_PORT:-22}"
+          REMOTE="${ASSETS_SSH_USER}@${ASSETS_SSH_HOST}:${ASSETS_REMOTE_PATH}"
+          RSYNC_SSH="ssh -i $HOME/.ssh/assets_deploy -p $PORT -o StrictHostKeyChecking=yes"
+
+          FILES=(dist/vendor.min.js dist/tt-main.min.js cookiebot.css)
+          for w in dist/rive-*.wasm; do
+            if [ -f "$w" ]; then FILES+=("$w"); fi
+          done
+
+          echo "Uploading: ${FILES[*]} → $REMOTE"
+          rsync -avz "${FILES[@]}" -e "$RSYNC_SSH" "$REMOTE"
